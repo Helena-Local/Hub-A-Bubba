@@ -1,6 +1,7 @@
 package org.helenalocal.base.test;
 
 import android.content.Context;
+import org.helenalocal.base.Hub;
 import org.helenalocal.base.Product;
 import org.helenalocal.base.IHub;
 
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Created by abbie on 1/24/14.
  */
-public class MockHub implements IHub {
+public class MockHub extends Hub implements IHub {
     @Override
     public List<Product> getProductList(Context context) {
         // CSV from spreadsheet

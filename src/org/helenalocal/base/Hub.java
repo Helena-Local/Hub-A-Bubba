@@ -7,6 +7,7 @@ import android.util.Log;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Iterator;
  */
 public abstract class Hub implements IHub {
     private String filename ="hl-out.txt";
-    protected String fileTS = "";
+    protected Calendar lastRefreshTS;
     public static final int CSA = 1;
     public static final int GROWER = 2;
     public static final int SALES = 3;
@@ -81,8 +82,9 @@ public abstract class Hub implements IHub {
             // get the time the file was last changed here
             File myFile = new File(context.getFilesDir() +"/" + filename);
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-            fileTS = sdf.format(myFile.lastModified());
-            Log.w(Hub.BACKEND, "Using file (" + filename + ") last modified on : " + fileTS);
+            String lastRefreshTSStr = sdf.format(myFile.lastModified());
+            Log.w(Hub.BACKEND, "Using file (" + filename + ") last modified on : " + lastRefreshTSStr);
+            lastRefreshTS = sdf.getCalendar();
 
             // create products from the file here
             InputStream inputStream = context.openFileInput(filename);
@@ -109,5 +111,9 @@ public abstract class Hub implements IHub {
         }
         Log.w(Hub.BACKEND, "Number of products loaded: " + myProducts.size());
         return myProducts;
+    }
+
+    public Calendar getLastRefreshTS() {
+        return lastRefreshTS;
     }
 }
