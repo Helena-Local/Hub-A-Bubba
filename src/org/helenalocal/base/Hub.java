@@ -1,9 +1,8 @@
-package org.helenalocal.base.fetch;
+package org.helenalocal.base;
 
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
-import org.helenalocal.base.Product;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -13,13 +12,15 @@ import java.util.Iterator;
 /**
  * Created by abbie on 1/24/14.
  */
-public abstract class HubFetch implements IHubFetch {
+public abstract class Hub implements IHub {
     private String filename ="hl-out.txt";
     protected String fileTS = "";
     public static final int CSA = 1;
     public static final int GROWER = 2;
     public static final int SALES = 3;
     public static final int MOCK = 4;
+    public static final String BACKEND = "BACKEND";
+    public static final String FRONTEND = "FRONTEND";
 
     private Product createProduct(String receiveString) {
         Product out = new Product();
@@ -57,7 +58,7 @@ public abstract class HubFetch implements IHubFetch {
             outputStreamWriter.write(data);
             outputStreamWriter.close();
         } catch (IOException e) {
-            Log.e("Exception", "File (" + filename + ") write failed: " + e.toString());
+            Log.e(Hub.BACKEND, "File (" + filename + ") write failed: " + e.toString());
         }
     }
 
@@ -70,7 +71,7 @@ public abstract class HubFetch implements IHubFetch {
             }
             outputStreamWriter.close();
         } catch (IOException e) {
-            Log.e("Exception", "File (" + filename + ") write failed: " + e.toString());
+            Log.e(Hub.BACKEND, "File (" + filename + ") write failed: " + e.toString());
         }
     }
 
@@ -81,7 +82,7 @@ public abstract class HubFetch implements IHubFetch {
             File myFile = new File(context.getFilesDir() +"/" + filename);
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
             fileTS = sdf.format(myFile.lastModified());
-            System.out.println("using file (" + filename + ") last modified on : " + fileTS);
+            Log.w(Hub.BACKEND, "Using file (" + filename + ") last modified on : " + fileTS);
 
             // create products from the file here
             InputStream inputStream = context.openFileInput(filename);
@@ -102,11 +103,11 @@ public abstract class HubFetch implements IHubFetch {
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
-            Log.e("login activity", "File  (" + filename + ") not found: " + e.toString());
+            Log.e(Hub.BACKEND, "File  (" + filename + ") not found: " + e.toString());
         } catch (IOException e) {
-            Log.e("login activity", "Can not read file  (" + filename + ") : " + e.toString());
+            Log.e(Hub.BACKEND, "Can not read file  (" + filename + ") : " + e.toString());
         }
-        System.out.println("Number of products loaded: " + myProducts.size());
+        Log.w(Hub.BACKEND, "Number of products loaded: " + myProducts.size());
         return myProducts;
     }
 }
