@@ -14,11 +14,8 @@
     <option name="TOOL_WINDOW_LOG_LEVEL" value="WARN" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="051624bb-9a7b-4b7b-b71e-ac2903e03f59" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/helenalocal/base/Hub.java" afterPath="$PROJECT_DIR$/src/org/helenalocal/base/Hub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/helenalocal/base/IHub.java" afterPath="$PROJECT_DIR$/src/org/helenalocal/base/IHub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/helenalocal/base/test/MockHub.java" afterPath="$PROJECT_DIR$/src/org/helenalocal/base/test/MockHub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/helenalocal/app/MyActivity.java" afterPath="$PROJECT_DIR$/src/org/helenalocal/app/MyActivity.java" />
+    <list default="true" id="051624bb-9a7b-4b7b-b71e-ac2903e03f59" name="Default" comment="Added getLastRefreshTS to Hub so frontend knows how fresh the data is...&#10;">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/helenalocal/base/post/GrowerHub.java" afterPath="$PROJECT_DIR$/src/org/helenalocal/base/post/GrowerHub.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Helena Local Hub.iws" />
@@ -86,16 +83,34 @@
       <file leaf-file-name="MyActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/helenalocal/app/MyActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="95" selection-start="1198" selection-end="1198" vertical-scroll-proportion="0.63126254" vertical-offset="0" max-vertical-offset="555">
+            <state line="54" column="0" selection-start="2128" selection-end="2128" vertical-scroll-proportion="0.9282297" vertical-offset="78" max-vertical-offset="780">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IHub.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/IHub.java">
+      <file leaf-file-name="GrowerHub.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/post/GrowerHub.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="35" selection-start="339" selection-end="355" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+            <state line="16" column="0" selection-start="335" selection-end="358" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Product.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/Product.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="38" selection-start="203" selection-end="203" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="915">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CSAHub.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/get/CSAHub.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="5" selection-start="780" selection-end="780" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
               <folding />
             </state>
           </provider>
@@ -104,21 +119,8 @@
       <file leaf-file-name="SalesHub.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/get/SalesHub.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="13" selection-start="1123" selection-end="1123" vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="690">
+            <state line="26" column="137" selection-start="821" selection-end="821" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Hub.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/Hub.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="116" column="28" selection-start="4639" selection-end="4639" vertical-scroll-proportion="0.0" vertical-offset="1311" max-vertical-offset="1725">
-              <folding>
-                <element signature="e#2868#2877#0" expanded="true" />
-                <element signature="e#4609#4610#0" expanded="true" />
-                <element signature="e#4645#4646#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -153,7 +155,6 @@
         <option value="$PROJECT_DIR$/src/org/helenalocal/base/fetch/GrowerHubFetch.java" />
         <option value="$PROJECT_DIR$/src/org/helenalocal/base/fetch/CSAHubFetch.java" />
         <option value="$PROJECT_DIR$/src/org/helenalocal/base/fetch/SalesHubFetch.java" />
-        <option value="$PROJECT_DIR$/src/org/helenalocal/base/Product.java" />
         <option value="$PROJECT_DIR$/src/org/helenalocal/hub/app/MyActivity.java" />
         <option value="$PROJECT_DIR$/src/org/helenalocal/base/fetch/HubFetch.java" />
         <option value="$PROJECT_DIR$/src/org/helenalocal/base/fetch/Hub.java" />
@@ -161,11 +162,14 @@
         <option value="$PROJECT_DIR$/src/org/helenalocal/base/fetch/IHub.java" />
         <option value="$PROJECT_DIR$/src/org/helenalocal/base/test/Main.java" />
         <option value="$PROJECT_DIR$/src/org/helenalocal/base/HubFactory.java" />
-        <option value="$PROJECT_DIR$/src/org/helenalocal/base/get/SalesHub.java" />
         <option value="$PROJECT_DIR$/src/org/helenalocal/base/IHub.java" />
-        <option value="$PROJECT_DIR$/src/org/helenalocal/base/Hub.java" />
-        <option value="$PROJECT_DIR$/src/org/helenalocal/app/MyActivity.java" />
         <option value="$PROJECT_DIR$/src/org/helenalocal/base/test/MockHub.java" />
+        <option value="$PROJECT_DIR$/src/org/helenalocal/base/post/GrowerHub.java" />
+        <option value="$PROJECT_DIR$/src/org/helenalocal/app/MyActivity.java" />
+        <option value="$PROJECT_DIR$/src/org/helenalocal/base/get/SalesHub.java" />
+        <option value="$PROJECT_DIR$/src/org/helenalocal/base/get/CSAHub.java" />
+        <option value="$PROJECT_DIR$/src/org/helenalocal/base/Product.java" />
+        <option value="$PROJECT_DIR$/src/org/helenalocal/base/Hub.java" />
       </list>
     </option>
   </component>
@@ -270,6 +274,62 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="helenalocal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="base" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="post" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Helena Local Hub" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Helena Local Hub" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="helenalocal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="base" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="get" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Helena Local Hub" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Helena Local Hub" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="helenalocal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -544,7 +604,35 @@
       <created>1390845615080</created>
       <updated>1390845615080</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added getLastRefreshTS to Hub so frontend knows how fresh the data is... &#10;">
+      <created>1390846770122</created>
+      <updated>1390846770122</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added category to the bean...">
+      <created>1390880150540</created>
+      <updated>1390880150540</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Refactored to allow for csv and xml... Then ditched the idea of xml... just overly complicated here.... I'll pull the code after this is pushed...">
+      <created>1390880239008</created>
+      <updated>1390880239008</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Cleaned of all xml example... &#10;">
+      <created>1390880367908</created>
+      <updated>1390880367908</updated>
+    </task>
+    <task id="LOCAL-00008" summary="This is now loading from spreadsheet diff. tab... All good and ready to roll... &#10;">
+      <created>1390880740788</created>
+      <updated>1390880740788</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Change to URL and working!&#10;">
+      <created>1390880766921</created>
+      <updated>1390880766921</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added CSA Hub call.. All working!&#10;">
+      <created>1390881005100</created>
+      <updated>1390881005100</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -576,15 +664,15 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32849604" sideWeight="0.49966866" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32842687" sideWeight="0.49900597" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32842687" sideWeight="0.26308814" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39841688" sideWeight="0.30102697" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39834407" sideWeight="0.21935056" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.3998195" sideWeight="0.5003224" order="8" side_tool="true" content_ui="tabs" x="739" y="597" width="861" height="333" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934684" sideWeight="0.49966866" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934684" sideWeight="0.16699801" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.51609933" sideWeight="0.19218025" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.51609933" sideWeight="0.8078197" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39834407" sideWeight="0.77998674" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32849604" sideWeight="0.49935815" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24850895" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -616,7 +704,14 @@
     <MESSAGE value="Initial commit failed... Trying again!" />
     <MESSAGE value="Added file that allows git to ignore directories / files" />
     <MESSAGE value="Package refactoring based on discussion and Log added... Hub.FRONTEND and Hub.BACKEND us accordingly." />
-    <option name="LAST_COMMIT_MESSAGE" value="Package refactoring based on discussion and Log added... Hub.FRONTEND and Hub.BACKEND us accordingly." />
+    <MESSAGE value="Added getLastRefreshTS to Hub so frontend knows how fresh the data is... &#10;" />
+    <MESSAGE value="Added category to the bean..." />
+    <MESSAGE value="Refactored to allow for csv and xml... Then ditched the idea of xml... just overly complicated here.... I'll pull the code after this is pushed..." />
+    <MESSAGE value="Cleaned of all xml example... &#10;" />
+    <MESSAGE value="This is now loading from spreadsheet diff. tab... All good and ready to roll... &#10;" />
+    <MESSAGE value="Change to URL and working!&#10;" />
+    <MESSAGE value="Added CSA Hub call.. All working!&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added CSA Hub call.. All working!&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -809,13 +904,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/Product.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="84" selection-end="84" vertical-scroll-proportion="0.19788918" vertical-offset="0" max-vertical-offset="840">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/HubFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="28" selection-start="643" selection-end="643" vertical-scroll-proportion="0.5739796" vertical-offset="75" max-vertical-offset="540">
@@ -830,38 +918,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/post/GrowerHub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="1" selection-start="467" selection-end="467" vertical-scroll-proportion="0.615942" vertical-offset="0" max-vertical-offset="414">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/get/CSAHub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="5" selection-start="292" selection-end="292" vertical-scroll-proportion="0.36231884" vertical-offset="0" max-vertical-offset="414">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/get/SalesHub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="13" selection-start="1123" selection-end="1123" vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="690">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/Hub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="28" selection-start="4639" selection-end="4639" vertical-scroll-proportion="0.0" vertical-offset="1311" max-vertical-offset="1725">
-          <folding>
-            <element signature="e#2868#2877#0" expanded="true" />
-            <element signature="e#4609#4610#0" expanded="true" />
-            <element signature="e#4645#4646#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/test/MockHub.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="32" selection-start="297" selection-end="297" vertical-scroll-proportion="0.21042085" vertical-offset="0" max-vertical-offset="499">
@@ -871,14 +927,66 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/IHub.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="35" selection-start="339" selection-end="355" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+        <state line="14" column="35" selection-start="339" selection-end="355" vertical-scroll-proportion="0.27054107" vertical-offset="0" max-vertical-offset="499">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///opt/sdk/android-sdk-linux/sources/android-19/android/app/Instrumentation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1048" column="0" selection-start="40015" selection-end="40015" vertical-scroll-proportion="0.33224756" vertical-offset="14601" max-vertical-offset="26025">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/get/CSAHub.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="5" selection-start="780" selection-end="780" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/Product.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="38" selection-start="203" selection-end="203" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="915">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/Hub.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="151" column="5" selection-start="6006" selection-end="6006" vertical-scroll-proportion="0.78175896" vertical-offset="1620" max-vertical-offset="2280">
+          <folding>
+            <element signature="e#3536#3537#0" expanded="true" />
+            <element signature="e#3576#3577#0" expanded="true" />
+            <element signature="e#3613#3614#0" expanded="true" />
+            <element signature="e#3643#3644#0" expanded="true" />
+            <element signature="e#3692#3693#0" expanded="true" />
+            <element signature="e#3730#3731#0" expanded="true" />
+            <element signature="e#4841#4850#0" expanded="true" />
+            <element signature="e#6047#6048#0" expanded="true" />
+            <element signature="e#6083#6084#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/get/SalesHub.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="137" selection-start="821" selection-end="821" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/post/GrowerHub.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="335" selection-end="358" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/helenalocal/app/MyActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="95" selection-start="1198" selection-end="1198" vertical-scroll-proportion="0.63126254" vertical-offset="0" max-vertical-offset="555">
+        <state line="54" column="0" selection-start="2128" selection-end="2128" vertical-scroll-proportion="0.9282297" vertical-offset="78" max-vertical-offset="780">
           <folding />
         </state>
       </provider>

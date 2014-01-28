@@ -13,7 +13,8 @@ import java.util.List;
 public class GrowerHub extends Hub {
 
     public GrowerHub() {
-        this.setFilename("HL-GrowerHub.csv");
+        setFilename("HL-GrowerHub.csv");
+        setDataUrl("");
     }
 
     @Override
