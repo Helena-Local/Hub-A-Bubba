@@ -21,19 +21,16 @@ import java.util.List;
 public class SalesHub extends Hub {
 
     public SalesHub() {
-        this.setFilename("HL-SalesHub.csv");
+        setFilename("HL-SalesHub.csv");
+
+        // CSV file direct from spreadsheet
+        setDataUrl("https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdHg5OVZmRVdoSWJ4NU92ekppNDl0dEE&single=true&gid=1&output=csv");
     }
 
     @Override
     public List<Product> getProductList(Context context) throws IOException {
         HttpClient client = new DefaultHttpClient();
-
-        // Actual Hub page
-        // String url = "http://hub.helenalocal.org/";
-
-        // CSV file direct from spreadsheet
-        String url = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdHg5OVZmRVdoSWJ4NU92ekppNDl0dEE&single=true&gid=1&output=csv";
-        HttpGet request = new HttpGet(url);
+        HttpGet request = new HttpGet(dataUrl);
         try {
             // first try the net
             HttpResponse response = client.execute(request);
@@ -48,6 +45,6 @@ public class SalesHub extends Hub {
         }
 
         // regardless of net work with file
-        return readFromFile(context);
+        return readFromFile(context,Hub.CSV);
     }
 }
