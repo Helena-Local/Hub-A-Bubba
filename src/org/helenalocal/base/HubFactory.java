@@ -1,11 +1,9 @@
 package org.helenalocal.base;
 
 import org.helenalocal.base.get.CSAHub;
+import org.helenalocal.base.get.UnitHub;
 import org.helenalocal.base.post.GrowerHub;
-import org.helenalocal.base.get.SalesHub;
 import org.helenalocal.base.test.MockHub;
-
-import java.util.logging.Logger;
 
 /**
  * Created by abbie on 1/24/14.
@@ -18,7 +16,7 @@ public abstract class HubFactory {
         IHub out = new MockHub();  // default to test
         switch (itype) {
             case Hub.SALES:
-                out = new SalesHub();
+                out = new UnitHub();
                 break;
             case Hub.CSA:
                 out = new CSAHub();

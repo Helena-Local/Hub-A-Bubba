@@ -18,10 +18,10 @@ import java.util.List;
 /**
  * Created by abbie on 1/24/14.
  */
-public class SalesHub extends Hub {
+public class UnitHub extends Hub {
 
-    public SalesHub() {
-        setFilename("HL-SalesHub.csv");
+    public UnitHub() {
+        setFilename("HL-UnitHub.csv");
 
         // CSV file direct from spreadsheet
         setDataUrl("https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdHg5OVZmRVdoSWJ4NU92ekppNDl0dEE&single=true&gid=1&output=csv");

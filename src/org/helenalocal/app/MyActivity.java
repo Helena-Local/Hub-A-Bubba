@@ -20,7 +20,7 @@ public class MyActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Context context = getApplicationContext();
-        Log.w(Hub.FRONTEND, "**** Starting fetch test for SALES....");
+        Log.w(Hub.FRONTEND, "**** Starting fetch test for UNIT....");
         try {
             IHub myHub = HubFactory.buildHubFetch(Hub.SALES);
             List<Product> myProducts = myHub.getProductList(context);
@@ -33,7 +33,7 @@ public class MyActivity extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.w(Hub.FRONTEND, "**** Ending fetch test for SALES....");
+        Log.w(Hub.FRONTEND, "**** Ending fetch test for UNIT....");
 
         Log.w(Hub.FRONTEND, "**** Starting fetch test for CSA....");
         try {
