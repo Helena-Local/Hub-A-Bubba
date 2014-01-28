@@ -88,100 +88,6 @@ public abstract class Hub implements IHub {
         }
     }
 
-    /* decided not to use XML... Overly complicated for this requirement.
-    private void parseRSS(ArrayList<Product> myProducts, InputStream inputStream) throws IOException,XmlPullParserException {
-        XmlPullParser parser = Xml.newPullParser();
-        parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-        parser.setInput(inputStream, null);
-        parser.nextTag();
-        parser.require(XmlPullParser.START_TAG, null, "feed");
-        while (parser.next() != XmlPullParser.END_TAG) {
-            if (parser.getEventType() != XmlPullParser.START_TAG) {
-                continue;
-            }
-            String name = parser.getName();
-            // Starts by looking for the entry tag
-            if (name.equals("entry")) {
-                // myProducts.add(readEntry(parser));
-                Object o;
-                String lastUpdated = "";
-                String title = "";
-                String link = "";
-                while (parser.next() != XmlPullParser.END_TAG) {
-                    if (parser.getEventType() != XmlPullParser.START_TAG) {
-                        continue;
-                    }
-                    String name2 = parser.getName();
-                    if (name2.equals("title")) {
-                        title = readText(parser);
-                    } else if (name2.equals("lastUpdated")) {
-                        lastUpdated = readText(parser);
-                    } else if (name2.equals("sites-layout-tile sites-tile-name-content-1")) {
-                        link = readText(parser);
-                    } else {
-                        skip(parser);
-                    }
-                }
-            } else {
-                skip(parser);
-            }
-        }
-        //// STOPPED!
-        while ( (receiveString = bufferedReader.readLine()) != null ) {
-            // build products
-            Product out = new Product();
-            simpleStringSplitter.setString(receiveString);
-            Iterator<String> iterator = simpleStringSplitter.iterator();
-
-            // String productDesc, Integer unitsAvailable, Double unitPrice, String unitDesc, String note
-            if (iterator.hasNext()) {
-                out.setProductDesc(iterator.next());
-            }
-            if (iterator.hasNext()) {
-                out.setUnitsAvailable(Integer.valueOf(iterator.next()));
-            }
-            if (iterator.hasNext()) {
-                Object o = iterator.next().replace("$", "");
-                out.setUnitPrice(Double.parseDouble(o.toString()));
-            }
-            if (iterator.hasNext()) {
-                out.setUnitDesc(iterator.next());
-            }
-            if (iterator.hasNext()) {
-                out.setNote(iterator.next());
-            }
-            myProducts.add(out);
-        }
-
-    }
-    // For the tags title and summary, extracts their text values.
-    private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
-        String result = "";
-        if (parser.next() == XmlPullParser.TEXT) {
-            result = parser.getText();
-            parser.nextTag();
-        }
-        return result;
-    }
-
-    private void skip(XmlPullParser parser) throws XmlPullParserException, IOException {
-        if (parser.getEventType() != XmlPullParser.START_TAG) {
-            throw new IllegalStateException();
-        }
-        int depth = 1;
-        while (depth != 0) {
-            switch (parser.next()) {
-                case XmlPullParser.END_TAG:
-                    depth--;
-                    break;
-                case XmlPullParser.START_TAG:
-                    depth++;
-                    break;
-            }
-        }
-    }
-    */
-
     protected void setFilename(String filename) {
         this.filename = filename;
     }
@@ -234,19 +140,12 @@ public abstract class Hub implements IHub {
                 if (itype == CSV) {
                     parseCSV(myProducts, inputStream);
                 }
-                /*
-                else if (itype == RSS) {
-                    parseRSS(myProducts, inputStream);
-                }
-                */
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
             Log.e(Hub.BACKEND, "File  (" + filename + ") not found: " + e.toString());
         } catch (IOException e) {
             Log.e(Hub.BACKEND, "Can not read file  (" + filename + ") : " + e.toString());
-        // } catch (XmlPullParserException e) {
-        //    Log.e(Hub.BACKEND, "Can not parse XML file  (" + filename + ") : " + e.toString());
         }
         Log.w(Hub.BACKEND, "Number of products loaded: " + myProducts.size());
         return myProducts;
