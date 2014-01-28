@@ -35,7 +35,22 @@ public class MyActivity extends Activity {
         }
         Log.w(Hub.FRONTEND, "**** Ending fetch test for SALES....");
 
+        Log.w(Hub.FRONTEND, "**** Starting fetch test for CSA....");
+        try {
+            IHub myHub = HubFactory.buildHubFetch(Hub.CSA);
+            List<Product> myProducts = myHub.getProductList(context);
+            for (int i = 0; i < myProducts.size(); i++) {
+                Product product = myProducts.get(i);
+                // Shane @ this point you can display each product from here!
+                Log.w(Hub.FRONTEND, product.toString());
+            }
+            Log.w(Hub.FRONTEND,"Data last refreshed on : " + myHub.getLastRefreshTS().getTime());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.w(Hub.FRONTEND, "**** Ending fetch test for CSA....");
+
         // draw the display!
         setContentView(R.layout.main);
-    }
+  }
 }
