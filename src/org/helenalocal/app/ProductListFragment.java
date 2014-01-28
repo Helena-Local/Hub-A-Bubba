@@ -1,4 +1,4 @@
-package org.helenalocal.hub.app;
+package org.helenalocal.app;
 
 import android.support.v4.app.ListFragment;
 

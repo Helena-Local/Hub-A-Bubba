@@ -12,7 +12,7 @@
             android:text="@string/welcome"
             android:id="@+id/textView" android:paddingBottom="16dp"/>
 
-    <fragment android:name="org.helenalocal.hub.app.ProductListFragment"
+    <fragment android:name="org.helenalocal.app.ProductListFragment"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:id="@+id/productListFragment"/>
