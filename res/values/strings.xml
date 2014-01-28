@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Helena Local Hub</string>
+    <string name="app_name">Helena Local Hub</string><string name="welcome">Welcome... Below you will find our most recent local sustainable product availability.  Call us now to order 406.219.1414</string>
 </resources>
