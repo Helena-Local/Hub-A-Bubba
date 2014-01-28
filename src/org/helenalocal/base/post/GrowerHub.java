@@ -1,6 +1,7 @@
-package org.helenalocal.base.fetch;
+package org.helenalocal.base.post;
 
 import android.content.Context;
+import org.helenalocal.base.Hub;
 import org.helenalocal.base.Product;
 
 import java.io.IOException;
@@ -9,10 +10,11 @@ import java.util.List;
 /**
  * Created by abbie on 1/24/14.
  */
-public class GrowerHubFetch extends HubFetch {
+public class GrowerHub extends Hub {
 
-    public GrowerHubFetch() {
-        this.setFilename("HL-GrowerHubFetch.csv");
+    public GrowerHub() {
+        setFilename("HL-GrowerHub.csv");
+        setDataUrl("");
     }
 
     @Override

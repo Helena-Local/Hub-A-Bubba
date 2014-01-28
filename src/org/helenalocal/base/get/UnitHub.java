@@ -1,10 +1,12 @@
-package org.helenalocal.base.fetch;
+package org.helenalocal.base.get;
 
 import android.content.Context;
+import android.util.Log;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.helenalocal.base.Hub;
 import org.helenalocal.base.Product;
 
 import java.io.BufferedReader;
@@ -16,36 +18,33 @@ import java.util.List;
 /**
  * Created by abbie on 1/24/14.
  */
-public class SalesHubFetch extends HubFetch {
+public class UnitHub extends Hub {
 
-    public SalesHubFetch() {
-        this.setFilename("HL-SalesHubFetch.csv");
+    public UnitHub() {
+        setFilename("HL-UnitHub.csv");
+
+        // CSV file direct from spreadsheet
+        setDataUrl("https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdHg5OVZmRVdoSWJ4NU92ekppNDl0dEE&single=true&gid=1&output=csv");
     }
 
     @Override
     public List<Product> getProductList(Context context) throws IOException {
         HttpClient client = new DefaultHttpClient();
-
-        // Actual Hub page
-        // String url = "http://hub.helenalocal.org/";
-
-        // CSV file direct from spreadsheet
-        String url = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdHg5OVZmRVdoSWJ4NU92ekppNDl0dEE&single=true&gid=1&output=csv";
-        HttpGet request = new HttpGet(url);
+        HttpGet request = new HttpGet(dataUrl);
         try {
             // first try the net
             HttpResponse response = client.execute(request);
-            System.out.println("response.getStatusLine() = " + response.getStatusLine());
+            Log.w(Hub.BACKEND, "HTTP execute Response.getStatusLine() = " + response.getStatusLine());
 
             // make net version local
             BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             writeToFile(context, rd);
-            System.out.println("wrote file from the net...");
+            Log.w(Hub.BACKEND, "Wrote file from the net to device...");
         } catch (UnknownHostException e) {
-            System.out.println("couldn't get the file from the net... ");
+            Log.w(Hub.BACKEND, "Couldn't get the file from the net just using file from device... ");
         }
 
         // regardless of net work with file
-        return readFromFile(context);
+        return readFromFile(context,Hub.CSV);
     }
 }
