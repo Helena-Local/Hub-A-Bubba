@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("**** Starting fetch test for MOCK....");
         try {
-            List<Product> myProducts = HubFactory.buildHubFetch(Hub.MOCK).getProductList(null);
+            List<Product> myProducts = HubFactory.buildHubFetch(Hub.Type.MOCK).getProductList(null);
             for (int i = 0; i < myProducts.size(); i++) {
                 Product product = myProducts.get(i);
                 System.out.println(product.toString());

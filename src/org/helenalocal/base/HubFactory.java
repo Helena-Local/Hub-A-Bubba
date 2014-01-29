@@ -12,19 +12,19 @@ import org.helenalocal.base.test.MockHub;
 
 
 public abstract class HubFactory {
-    public static IHub buildHubFetch(int itype) {
+    public static IHub buildHubFetch(Hub.Type itype) {
         IHub out = new MockHub();  // default to test
         switch (itype) {
-            case Hub.SALES:
+            case SALES:
                 out = new UnitHub();
                 break;
-            case Hub.CSA:
+            case CSA:
                 out = new CSAHub();
                 break;
-            case Hub.GROWER:
+            case GROWER:
                 out = new GrowerHub();
                 break;
-            case Hub.MOCK:
+            case MOCK:
                 out = new MockHub();
                 break;
         }

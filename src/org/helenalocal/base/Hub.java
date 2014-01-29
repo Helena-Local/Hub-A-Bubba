@@ -22,10 +22,11 @@ public abstract class Hub implements IHub {
     protected Calendar lastRefreshTS;
     protected static final int CSV = 1;
     protected static final int RSS = 2;
-    public static final int CSA = 1;
-    public static final int GROWER = 2;
-    public static final int SALES = 3;
-    public static final int MOCK = 4;
+
+    public enum Type {
+        CSA, GROWER, SALES, MOCK
+    }
+
     public static final String BACKEND = "BACKEND";
     public static final String FRONTEND = "FRONTEND";
 
