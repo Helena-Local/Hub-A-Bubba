@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidConfiguredLogFilters">
+    <filters>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="ProductListFragment" />
+        <option name="name" value="ProductListFragment" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+    </filters>
+  </component>
   <component name="AndroidLayoutPreviewToolWindow">
     <option name="state">
       <GlobalState>
@@ -13,17 +25,11 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="INFO" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="WARN" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="051624bb-9a7b-4b7b-b71e-ac2903e03f59" name="Default" comment="Added v4 support library&#10;">
-      <change type="DELETED" beforePath="C:\Users\shane\Dev\Android\HelenaLocal\Hub-A-Bubba\src\org\helenalocal\app\MyActivity.java" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\shane\Dev\Android\HelenaLocal\Hub-A-Bubba\src\org\helenalocal\hub\app\MainActivity.java" afterPath="$PROJECT_DIR$/src/org/helenalocal/app/MainActivity.java" />
-      <change type="MOVED" beforePath="C:\Users\shane\Dev\Android\HelenaLocal\Hub-A-Bubba\src\org\helenalocal\hub\app\ProductItemAdapter.java" afterPath="$PROJECT_DIR$/src/org/helenalocal/app/ProductItemAdapter.java" />
-      <change type="MOVED" beforePath="C:\Users\shane\Dev\Android\HelenaLocal\Hub-A-Bubba\src\org\helenalocal\hub\app\ProductListFragment.java" afterPath="$PROJECT_DIR$/src/org/helenalocal/app/ProductListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main_activity.xml" afterPath="$PROJECT_DIR$/res/layout/main_activity.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    <list default="true" id="051624bb-9a7b-4b7b-b71e-ac2903e03f59" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <ignored path="Helena Local Hub.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -120,14 +126,23 @@
         <option value="$PROJECT_DIR$/src/org/helenalocal/hub/app/MyActivity.java" />
         <option value="$PROJECT_DIR$/src/org/helenalocal/hub/app/ProductListFragment.java" />
         <option value="$PROJECT_DIR$/src/org/helenalocal/hub/app/ProductItemAdapter.java" />
-        <option value="$PROJECT_DIR$/res/layout/product_view.xml" />
         <option value="$PROJECT_DIR$/src/org/helenalocal/base/fetch/HubFetch.java" />
         <option value="$PROJECT_DIR$/src/org/helenalocal/hub/app/MainActivity.java" />
-        <option value="$PROJECT_DIR$/src/org/helenalocal/app/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/org/helenalocal/app/ProductItemAdapter.java" />
-        <option value="$PROJECT_DIR$/src/org/helenalocal/app/ProductListFragment.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/org/helenalocal/base/HubFactory.java" />
+        <option value="$PROJECT_DIR$/src/org/helenalocal/base/Hub.java" />
+        <option value="$PROJECT_DIR$/src/org/helenalocal/base/test/Main.java" />
+        <option value="$PROJECT_DIR$/src/org/helenalocal/app/AsyncProductLoader.java" />
+        <option value="$PROJECT_DIR$/src/org/helenalocal/app/ProductListFragment.java" />
+        <option value="$PROJECT_DIR$/src/org/helenalocal/utils/ViewServer.java" />
+        <option value="$PROJECT_DIR$/src/org/helenalocal/app/MainActivity.java" />
+        <option value="$PROJECT_DIR$/res/drawable/border.xml" />
         <option value="$PROJECT_DIR$/res/layout/main_activity.xml" />
+        <option value="$PROJECT_DIR$/res/layout/product_listview.xml" />
+        <option value="$PROJECT_DIR$/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/res/drawable/big_card.xml" />
+        <option value="$PROJECT_DIR$/res/layout/product_view.xml" />
       </list>
     </option>
   </component>
@@ -163,6 +178,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -177,7 +193,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -213,6 +228,10 @@
               <option name="myItemId" value="helenalocal" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -229,10 +248,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="helenalocal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -286,6 +301,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Helena Local Hub" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Hub-A-Bubba" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -304,12 +337,12 @@
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="dynamic.classpath" value="false" />
     <property name="LayoutCode.rearrangeEntries" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/android-support-v4.jar!/" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Galaxy_Nexus" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="options.lastSelected" value="preferences.customizations" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -319,7 +352,8 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.STATE" value="left" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.STATE" value="right" />
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
-    <property name="SearchEverywhereHistory" value="HubFet" />
+    <property name="SearchEverywhereHistory" value="android&#10;ListView&#10;productli&#10;HubFet" />
+    <property name="restartRequiresConfirmation" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -570,7 +604,27 @@
       <created>1390928403405</created>
       <updated>1390928403405</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="More merging with master">
+      <created>1390929865989</created>
+      <updated>1390929865989</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Testing commit.">
+      <created>1390931211336</created>
+      <updated>1390931211336</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Testing another commit.&#10;">
+      <created>1390931386846</created>
+      <updated>1390931386846</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added the AsyncProductLoader. It is now used to load product lists asynchronously.">
+      <created>1391027172819</created>
+      <updated>1391027172819</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Added some styling to the list of products. Not final and still need to fix it on the N1.">
+      <created>1391194593276</created>
+      <updated>1391194593276</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -598,32 +652,35 @@
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46124762" sideWeight="0.49935815" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43667296" sideWeight="0.47603834" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32849604" sideWeight="0.49966866" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38657844" sideWeight="0.30102697" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3752363" sideWeight="0.30085197" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.3998195" sideWeight="0.5003224" order="8" side_tool="true" content_ui="tabs" x="891" y="597" width="861" height="333" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289225" sideWeight="0.49966866" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289225" sideWeight="0.49946752" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28827977" sideWeight="0.19218025" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32849604" sideWeight="0.5006418" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28827977" sideWeight="0.37220448" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43667296" sideWeight="0.52396166" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32849604" sideWeight="0.49935815" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21512248" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.55607474" sideWeight="0.3833193" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34877127" sideWeight="0.43343982" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32880846" sideWeight="0.49959317" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="Vcs.Log.Settings">
+    <option name="SHOW_BRANCHES_PANEL" value="true" />
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USERS">
@@ -639,13 +696,19 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="false" />
     <MESSAGE value="Initial commit failed... Trying again!" />
     <MESSAGE value="Added file that allows git to ignore directories / files" />
     <MESSAGE value="Added v4 support library" />
     <MESSAGE value="Added MainActivity and wired up the product list with some basic formatting.&#10;" />
     <MESSAGE value="Removed workspace.xml from tracking.&#10;" />
     <MESSAGE value="Merged with master" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merged with master" />
+    <MESSAGE value="More merging with master" />
+    <MESSAGE value="Testing commit." />
+    <MESSAGE value="Testing another commit.&#10;" />
+    <MESSAGE value="Added the AsyncProductLoader. It is now used to load product lists asynchronously." />
+    <MESSAGE value="Added some styling to the list of products. Not final and still need to fix it on the N1." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added some styling to the list of products. Not final and still need to fix it on the N1." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -659,6 +722,26 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/res/layout/product_view.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="52" selection-start="219" selection-end="219" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="555">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/app/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="0" selection-start="3282" selection-end="3282" vertical-scroll-proportion="0.0" vertical-offset="933" max-vertical-offset="1815" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/app/AsyncProductLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="5" selection-start="1467" selection-end="1467" vertical-scroll-proportion="0.0" vertical-offset="303" max-vertical-offset="1335" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="69" selection-start="683" selection-end="683" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="480">
@@ -669,11 +752,6 @@
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="50" selection-start="321" selection-end="321" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="418" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project.properties">
@@ -736,13 +814,6 @@
         <state line="157" column="0" selection-start="4147" selection-end="4147" vertical-scroll-proportion="0.0" vertical-offset="1507" max-vertical-offset="9540" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1007">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/DevTools/android-sdk/sources/android-19/android/app/ActivityThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1644" column="0" selection-start="69861" selection-end="69861" vertical-scroll-proportion="0.0" vertical-offset="22627" max-vertical-offset="73380" />
@@ -773,16 +844,6 @@
         <state line="33" column="0" selection-start="869" selection-end="869" vertical-scroll-proportion="0.3397524" vertical-offset="188" max-vertical-offset="915" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/IHub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="17" selection-start="237" selection-end="237" vertical-scroll-proportion="0.14442916" vertical-offset="0" max-vertical-offset="727" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/HubFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="22" selection-start="264" selection-end="264" vertical-scroll-proportion="0.20632738" vertical-offset="0" max-vertical-offset="727" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/get/UnitHub.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="26" column="135" selection-start="701" selection-end="818" vertical-scroll-proportion="0.26822558" vertical-offset="0" max-vertical-offset="727" />
@@ -793,34 +854,95 @@
         <state line="20" column="13" selection-start="551" selection-end="551" vertical-scroll-proportion="0.14442916" vertical-offset="0" max-vertical-offset="727" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/Hub.java">
+    <entry file="file://$USER_HOME$/DevTools/android-sdk/sources/android-19/android/content/AsyncTaskLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="31" selection-start="881" selection-end="881" vertical-scroll-proportion="0.33287483" vertical-offset="28" max-vertical-offset="2160">
-          <folding />
-        </state>
+        <state line="212" column="16" selection-start="7764" selection-end="7764" vertical-scroll-proportion="1.1797752" vertical-offset="2085" max-vertical-offset="5385" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/app/MainActivity.java">
+    <entry file="jar://$PROJECT_DIR$/libs/android-support-v4.jar!/android/support/v4/app/FragmentActivity.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="50" selection-start="759" selection-end="759" vertical-scroll-proportion="0.3633721" vertical-offset="0" max-vertical-offset="1032">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="6" column="13" selection-start="165" selection-end="165" vertical-scroll-proportion="-0.77759194" vertical-offset="540" max-vertical-offset="1875" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/DevTools/android-sdk/sources/android-19/android/content/Loader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="297" column="19" selection-start="11040" selection-end="11040" vertical-scroll-proportion="0.33226323" vertical-offset="3813" max-vertical-offset="7920" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/android-support-v4.jar!/android/support/v4/app/LoaderManager.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="62" selection-start="304" selection-end="304" vertical-scroll-proportion="0.17216642" vertical-offset="0" max-vertical-offset="697" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/IHub.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="17" selection-start="237" selection-end="237" vertical-scroll-proportion="0.14542936" vertical-offset="0" max-vertical-offset="722" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/HubFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="29" selection-start="29" selection-end="29" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="722" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/test/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="820" selection-end="820" vertical-scroll-proportion="0.52969503" vertical-offset="0" max-vertical-offset="623" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/base/Hub.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="0" selection-start="707" selection-end="707" vertical-scroll-proportion="0.4093098" vertical-offset="0" max-vertical-offset="2175" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/DevTools/android-sdk/sources/android-19/java/util/Calendar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1019" column="22" selection-start="37153" selection-end="37153" vertical-scroll-proportion="0.33226323" vertical-offset="14688" max-vertical-offset="20475" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/android-support-v4.jar!/android/support/v4/content/Loader.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="19" selection-start="1095" selection-end="1095" vertical-scroll-proportion="0.34615386" vertical-offset="258" max-vertical-offset="1260" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/helenalocal/app/ProductItemAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="24" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="15" column="13" selection-start="378" selection-end="378" vertical-scroll-proportion="0.12038523" vertical-offset="0" max-vertical-offset="750" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/android-support-v4.jar!/android/support/v4/app/LoaderManagerImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="13" selection-start="3963" selection-end="3963" vertical-scroll-proportion="0.6923077" vertical-offset="900" max-vertical-offset="1485" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/utils/ViewServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="8" selection-start="2244" selection-end="2244" vertical-scroll-proportion="-3.3779528" vertical-offset="2475" max-vertical-offset="12150">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/app/ProductListFragment.java">
+    <entry file="file://$PROJECT_DIR$/../../HierarchyViewer/src/com/abt12/HierarchyViewer/MyActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="24" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+        <state line="28" column="0" selection-start="406" selection-end="661" vertical-scroll-proportion="0.63779527" vertical-offset="0" max-vertical-offset="635" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="986" selection-end="986" vertical-scroll-proportion="0.61417323" vertical-offset="0" max-vertical-offset="635">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="0" selection-end="51" vertical-scroll-proportion="0.048" vertical-offset="0" max-vertical-offset="625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1007">
           <folding />
         </state>
       </provider>
@@ -830,26 +952,65 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="44" selection-start="622" selection-end="622" vertical-scroll-proportion="0.36649215" vertical-offset="0" max-vertical-offset="573">
+        <state line="5" column="49" selection-start="256" selection-end="256" vertical-scroll-proportion="0.122349106" vertical-offset="0" max-vertical-offset="613">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="12" selection-start="340" selection-end="340" vertical-scroll-proportion="-6.0" vertical-offset="0" max-vertical-offset="255">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable/product_card.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="28" selection-start="653" selection-end="653" vertical-scroll-proportion="0.5409836" vertical-offset="0" max-vertical-offset="610">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/product_view.xml">
-      <provider selected="true" editor-type-id="android-designer">
+      <provider editor-type-id="android-designer">
         <state />
       </provider>
-      <provider editor-type-id="text-editor">
-        <state line="11" column="41" selection-start="480" selection-end="480" vertical-scroll-proportion="-6.6" vertical-offset="0" max-vertical-offset="540">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="44" selection-start="1472" selection-end="1472" vertical-scroll-proportion="-9.6" vertical-offset="0" max-vertical-offset="645">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/res/drawable/border.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="986" selection-end="986" vertical-scroll-proportion="0.6260032" vertical-offset="0" max-vertical-offset="623">
+        <state line="9" column="8" selection-start="301" selection-end="301" vertical-scroll-proportion="0.24770643" vertical-offset="0" max-vertical-offset="545">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/product_listview.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="48" selection-start="706" selection-end="706" vertical-scroll-proportion="0.5192308" vertical-offset="0" max-vertical-offset="520">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/app/ProductListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="69" selection-start="1333" selection-end="1333" vertical-scroll-proportion="-0.34210527" vertical-offset="645" max-vertical-offset="1380" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/app/AsyncProductLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="0" selection-start="2066" selection-end="2066" vertical-scroll-proportion="0.7368421" vertical-offset="675" max-vertical-offset="1245" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/helenalocal/app/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="56" selection-start="690" selection-end="690" vertical-scroll-proportion="0.18421052" vertical-offset="0" max-vertical-offset="870" />
       </provider>
     </entry>
   </component>
@@ -909,7 +1070,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
