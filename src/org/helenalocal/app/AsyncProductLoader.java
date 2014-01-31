@@ -48,8 +48,6 @@ public class AsyncProductLoader extends AsyncTaskLoader<List<Product>> {
 
     @Override
     public void deliverResult(List<Product> data) {
-        Log.w(LogTag, "deliverResult");
-
         if (isReset()) {
             // ignore the results. Release resources as needed.
             return;
@@ -65,9 +63,8 @@ public class AsyncProductLoader extends AsyncTaskLoader<List<Product>> {
 
     @Override
     protected void onStartLoading() {
-        Log.w(LogTag, "onStartLoading");
         if (_productList != null) {
-            // we already have data so send it off
+            // we already have data so send it off.
             deliverResult(_productList);
         }
         else {
@@ -77,13 +74,11 @@ public class AsyncProductLoader extends AsyncTaskLoader<List<Product>> {
 
     @Override
     protected void onStopLoading() {
-        Log.w(LogTag, "onStopLoading");
         cancelLoad();
     }
 
     @Override
     protected void onReset() {
-        Log.w(LogTag, "onReset");
         onStopLoading();
         _productList = null;
     }

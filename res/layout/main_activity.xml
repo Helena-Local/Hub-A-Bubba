@@ -3,14 +3,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent" android:padding="16dp">
+              android:layout_height="fill_parent">
 
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/welcome"
-            android:id="@+id/textView" android:paddingBottom="16dp"/>
+            android:id="@+id/textView"
+            android:padding="16dp"/>
 
     <fragment android:name="org.helenalocal.app.ProductListFragment"
               android:layout_width="match_parent"
