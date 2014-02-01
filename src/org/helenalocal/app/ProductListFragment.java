@@ -17,8 +17,7 @@ import java.util.List;
 
 
 public class ProductListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<Product>> {
-
-    private static final String Tag = "ProductListFragment";
+    private static String logTag = "ProductListFragment";
     private static final int LoaderId = 0;
     public static final String HUB_TYPE_KEY = "hubType";
 
@@ -27,12 +26,12 @@ public class ProductListFragment extends ListFragment implements LoaderManager.L
 
 
     public ProductListFragment() {
-        Log.w(Tag, "Constructor");
+        Log.w(logTag, "Constructor");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.w(Tag, "onCreateView");
+        Log.w(logTag, "onCreateView");
 
         View v = inflater.inflate(R.layout.product_listview, container, true);
         return v;
@@ -44,14 +43,14 @@ public class ProductListFragment extends ListFragment implements LoaderManager.L
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Log.w(Tag, "onViewCreated");
+        Log.w(logTag, "onViewCreated");
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Log.w(Tag, "onActivityCreated");
+        Log.w(logTag, "onActivityCreated");
 
         _productList = new ArrayList<Product>();
         _arrayAdapter = new ProductItemAdapter(getActivity(), R.layout.product_view, _productList);

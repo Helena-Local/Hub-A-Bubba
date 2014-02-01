@@ -11,8 +11,7 @@ import org.helenalocal.base.Product;
 import java.util.List;
 
 public class AsyncProductLoader extends AsyncTaskLoader<List<Product>> {
-
-    private final String LogTag;
+    private final String logTag;
     private List<Product> _productList;
     private Hub.Type _type;
 
@@ -21,27 +20,27 @@ public class AsyncProductLoader extends AsyncTaskLoader<List<Product>> {
 
         _type = type;
 
-        LogTag = new StringBuilder("AsyncProductLoader ").append(_type).toString();
+        logTag = new StringBuilder("AsyncProductLoader ").append(_type).toString();
     }
 
     @Override
     public List<Product> loadInBackground() {
 
-        Log.w(LogTag, String.format("**** Starting fetch for %s....", _type));
+        Log.w(logTag, String.format("**** Starting fetch for %s....", _type));
         try {
             IHub myHub = HubFactory.buildHubFetch(_type);
             _productList = myHub.getProductList(getContext());
 
-            Log.w(LogTag, "Data last refreshed on " + myHub.getLastRefreshTS().getTime());
+            Log.w(logTag, "Data last refreshed on " + myHub.getLastRefreshTS().getTime());
 
             for (Product p : _productList) {
-                Log.w(LogTag, p.toString());
+                Log.w(logTag, p.toString());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.w(LogTag, String.format("**** Ending fetch for %s....", _type));
+        Log.w(logTag, String.format("**** Ending fetch for %s....", _type));
 
         return _productList;
     }

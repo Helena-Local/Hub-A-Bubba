@@ -14,7 +14,7 @@ import org.helenalocal.Helena_Local_Hub.R;
 import java.util.List;
 
 public class ProductItemAdapter extends ArrayAdapter<Product> {
-
+    private static String logTag = "ProductItemAdapter";
     private int _resource;
 
     public ProductItemAdapter(Context context, int resource, List<Product> items) {
