@@ -8,10 +8,13 @@ import android.support.v4.content.Loader;
 import android.util.Log;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Hub;
+import org.helenalocal.base.HubFactory;
+import org.helenalocal.base.IHub;
 import org.helenalocal.base.Product;
 import org.helenalocal.utils.ViewServer;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends FragmentActivity implements LoaderManager.LoaderCallbacks<List<Product>> {
@@ -50,6 +53,16 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
     public Loader onCreateLoader(int i, Bundle bundle) {
         Hub.Type type = Hub.Type.valueOf(bundle.getString(HUB_TYPE_KEY));
         AsyncProductLoader loader = new AsyncProductLoader(this, type);
+
+        //TODO kevin -- just trying to make my form post work... sorry for the pollution...
+        Product product = new Product("Kevin's Farm","foo@home.com", "http://my.farm.com", "Produce", "Onion","N/A",20,"lbs", Calendar.getInstance(),10.01,"note 1");
+        IHub myHub = HubFactory.buildHubFetch(Hub.Type.GROWER);
+        try {
+            myHub.setProduct(this.getApplicationContext(),product);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return loader;
     }
 

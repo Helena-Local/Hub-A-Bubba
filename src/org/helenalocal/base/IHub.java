@@ -11,6 +11,7 @@ import java.util.List;
  * Created by abbie on 1/24/14.
  */
 public interface IHub {
-   public List<Product> getProductList(Context context) throws IOException;
-   public Calendar getLastRefreshTS();
+    public List<Product> getProductList(Context context) throws IOException;
+    public void setProduct(Context context, Product product) throws IOException;
+    public Calendar getLastRefreshTS();
 }

@@ -47,4 +47,9 @@ public class UnitHub extends Hub {
         // regardless of net work with file
         return readFromFile(context,Hub.CSV);
     }
+
+    @Override
+    public void setProduct(Context context, Product product) throws IOException {
+
+    }
 }
