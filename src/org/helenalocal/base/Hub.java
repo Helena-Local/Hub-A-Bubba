@@ -3,9 +3,6 @@ package org.helenalocal.base;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Xml;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -22,13 +19,13 @@ public abstract class Hub implements IHub {
     protected Calendar lastRefreshTS;
     protected static final int CSV = 1;
     protected static final int RSS = 2;
+    protected static String logTag = "Hub ";
+    public static final String HUB_EMAIL_TO = "info@helenalocal.org";
+    public static final String HUB_EMAIL_SUBJECT = "HL Hub - Request email...";
 
     public enum Type {
         CSA, GROWER, SALES, MOCK
     }
-
-    public static final String BACKEND = "BACKEND";
-    public static final String FRONTEND = "FRONTEND";
 
     private void parseCSV(ArrayList<Product> myProducts, InputStream inputStream) throws IOException {
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -108,7 +105,7 @@ public abstract class Hub implements IHub {
             outputStreamWriter.write(data);
             outputStreamWriter.close();
         } catch (IOException e) {
-            Log.e(Hub.BACKEND, "File (" + filename + ") write failed: " + e.toString());
+            Log.e(Hub.logTag, "File (" + filename + ") write failed: " + e.toString());
         }
     }
 
@@ -121,7 +118,7 @@ public abstract class Hub implements IHub {
             }
             outputStreamWriter.close();
         } catch (IOException e) {
-            Log.e(Hub.BACKEND, "File (" + filename + ") write failed: " + e.toString());
+            Log.e(Hub.logTag, "File (" + filename + ") write failed: " + e.toString());
         }
     }
 
@@ -132,7 +129,7 @@ public abstract class Hub implements IHub {
             File myFile = new File(context.getFilesDir() +"/" + filename);
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
             String lastRefreshTSStr = sdf.format(myFile.lastModified());
-            Log.w(Hub.BACKEND, "Using file (" + filename + ") last modified on : " + lastRefreshTSStr);
+            Log.w(Hub.logTag, "Using file (" + filename + ") last modified on : " + lastRefreshTSStr);
             lastRefreshTS = sdf.getCalendar();
 
             // create products from the file here
@@ -144,11 +141,11 @@ public abstract class Hub implements IHub {
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
-            Log.e(Hub.BACKEND, "File  (" + filename + ") not found: " + e.toString());
+            Log.e(Hub.logTag, "File  (" + filename + ") not found: " + e.toString());
         } catch (IOException e) {
-            Log.e(Hub.BACKEND, "Can not read file  (" + filename + ") : " + e.toString());
+            Log.e(Hub.logTag, "Can not read file  (" + filename + ") : " + e.toString());
         }
-        Log.w(Hub.BACKEND, "Number of products loaded: " + myProducts.size());
+        Log.w(Hub.logTag, "Number of products loaded: " + myProducts.size());
         return myProducts;
     }
 

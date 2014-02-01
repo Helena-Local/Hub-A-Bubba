@@ -12,8 +12,8 @@ public class Product {
     private String farmUrl = "";
     private String category = "";
     private String productDesc = "";
+    private String productUrl = "";
     private String growerAgreementId = "";
-
     private Integer unitsAvailable = 1;
     private String unitDesc = "";
     private Calendar deliveryDate;
@@ -25,7 +25,7 @@ public class Product {
         setDeliveryDate(null);
     }
 
-    public Product(String farmName, String farmEmailAddress, String farmUrl, String category, String productDesc, String growerAgreementId, Integer unitsAvailable,
+    public Product(String farmName, String farmEmailAddress, String farmUrl, String category, String productDesc, String productUrl, String growerAgreementId, Integer unitsAvailable,
                    String unitDesc, Calendar deliveryDate, Double unitPrice, String note) {
         setDeliveryDate(null);
         this.farmName = farmName;
@@ -33,6 +33,7 @@ public class Product {
         this.farmUrl = farmUrl;
         this.category = category;
         this.productDesc = productDesc;
+        this.productUrl = productUrl;
         this.growerAgreementId = growerAgreementId;
         this.unitsAvailable = unitsAvailable;
         this.unitDesc = unitDesc;
@@ -78,6 +79,10 @@ public class Product {
 
     public String getProductDesc() {
         return productDesc;
+    }
+
+    public String getProductUrl() {
+        return productUrl;
     }
 
     public Integer getUnitsAvailable() {
@@ -137,19 +142,41 @@ public class Product {
         this.note = note;
     }
 
+    public void setProductUrl(String productUrl) {
+        this.productUrl = productUrl;
+    }
+
+
     @Override
     public String toString() {
         dateFormat.setCalendar(deliveryDate);
-        return " farmName = " + this.farmName + "; farmEmailAddress = " +
+        return "farmName = " + this.farmName + "; farmEmailAddress = " +
                 this.farmEmailAddress + "; farmUrl = " +
                 this.farmUrl + "; category = " +
                 this.category + "; productDesc = " +
-                this.productDesc + "; growerAgreementId = " +
+                this.productDesc + "; productUrl = " +
+                this.productUrl + "; growerAgreementId = " +
                 this.growerAgreementId + "; unitsAvailable = " +
                 this.unitsAvailable + "; unitDesc = " +
                 this.unitDesc + "; deliveryDate = " +
                 dateFormat.format(deliveryDate.getTime()) + "; unitPrice = " +
                 this.unitPrice + "; note =" +
+                this.note;
+    }
+
+    public String toEmail() {
+        dateFormat.setCalendar(deliveryDate);
+        return "farmName = " + this.farmName + "; \nfarmEmailAddress = " +
+                this.farmEmailAddress + "; \nfarmUrl = " +
+                this.farmUrl + "; \ncategory = " +
+                this.category + "; \nproductDesc = " +
+                this.productDesc + "; \nproductUrl = " +
+                this.productUrl + "; \ngrowerAgreementId = " +
+                this.growerAgreementId + "; \nunitsAvailable = " +
+                this.unitsAvailable + "; \nunitDesc = " +
+                this.unitDesc + "; \ndeliveryDate = " +
+                dateFormat.format(deliveryDate.getTime()) + "; \nunitPrice = " +
+                this.unitPrice + "; \nnote =" +
                 this.note;
     }
 
@@ -160,6 +187,7 @@ public class Product {
                 this.farmUrl + "," +
                 this.category + "," +
                 this.productDesc + "," +
+                this.productUrl + "," +
                 this.growerAgreementId + "," +
                 this.unitsAvailable + "," +
                 this.unitDesc + "," +
