@@ -6,54 +6,54 @@ import android.util.Log;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubFactory;
 import org.helenalocal.base.IHub;
-import org.helenalocal.base.Product;
+import org.helenalocal.base.Item;
 
 import java.util.List;
 
-public class AsyncProductLoader extends AsyncTaskLoader<List<Product>> {
+public class AsyncProductLoader extends AsyncTaskLoader<List<Item>> {
     private final String logTag;
-    private List<Product> _productList;
-    private Hub.Type _type;
+    private List<Item> _itemList;
+    private Hub.HubType _Hub_type;
 
-    public AsyncProductLoader(Context context, Hub.Type type) {
+    public AsyncProductLoader(Context context, Hub.HubType hubType) {
         super(context);
 
-        _type = type;
+        _Hub_type = hubType;
 
-        logTag = new StringBuilder("AsyncProductLoader ").append(_type).toString();
+        logTag = new StringBuilder("AsyncProductLoader ").append(_Hub_type).toString();
     }
 
     @Override
-    public List<Product> loadInBackground() {
+    public List<Item> loadInBackground() {
 
-        Log.w(logTag, String.format("**** Starting fetch for %s....", _type));
+        Log.w(logTag, String.format("**** Starting fetch for %s....", _Hub_type));
         try {
-            IHub myHub = HubFactory.buildHubFetch(_type);
-            _productList = myHub.getProductList(getContext());
+            IHub myHub = HubFactory.buildHubFetch(_Hub_type);
+            _itemList = myHub.getProduct(getContext());
 
             Log.w(logTag, "Data last refreshed on " + myHub.getLastRefreshTS().getTime());
 
-            for (Product p : _productList) {
+            for (Item p : _itemList) {
                 Log.w(logTag, p.toString());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.w(logTag, String.format("**** Ending fetch for %s....", _type));
+        Log.w(logTag, String.format("**** Ending fetch for %s....", _Hub_type));
 
-        return _productList;
+        return _itemList;
     }
 
     @Override
-    public void deliverResult(List<Product> data) {
+    public void deliverResult(List<Item> data) {
         if (isReset()) {
             // ignore the results. Release resources as needed.
             return;
         }
 
-        List<Product> oldList = _productList;
-        _productList = data;
+        List<Item> oldList = _itemList;
+        _itemList = data;
 
         if (isStarted()) {
             super.deliverResult(data);
@@ -62,9 +62,9 @@ public class AsyncProductLoader extends AsyncTaskLoader<List<Product>> {
 
     @Override
     protected void onStartLoading() {
-        if (_productList != null) {
+        if (_itemList != null) {
             // we already have data so send it off.
-            deliverResult(_productList);
+            deliverResult(_itemList);
         }
         else {
             forceLoad();
@@ -79,6 +79,6 @@ public class AsyncProductLoader extends AsyncTaskLoader<List<Product>> {
     @Override
     protected void onReset() {
         onStopLoading();
-        _productList = null;
+        _itemList = null;
     }
 }

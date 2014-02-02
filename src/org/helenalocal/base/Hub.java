@@ -17,17 +17,19 @@ public abstract class Hub implements IHub {
     private String filename ="hl-out.txt";
     protected String dataUrl = "";
     protected Calendar lastRefreshTS;
-    protected static final int CSV = 1;
-    protected static final int RSS = 2;
     protected static String logTag = "Hub ";
     public static final String HUB_EMAIL_TO = "info@helenalocal.org";
     public static final String HUB_EMAIL_SUBJECT = "HL Hub - Request email...";
 
-    public enum Type {
-        CSA, GROWER, SALES, MOCK
+    public enum HubType {
+        GROWER, ITEM, RESTAURANT, FARM, ORDER, MOCK
     }
 
-    private void parseCSV(ArrayList<Product> myProducts, InputStream inputStream) throws IOException {
+    public enum FileType {
+        CSV, RSS
+    }
+
+    private void parseCSV(ArrayList<Item> myItems, InputStream inputStream) throws IOException {
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(',');
@@ -39,7 +41,7 @@ public abstract class Hub implements IHub {
                 firstTime = false;
             } else {
                 // build products
-                Product out = new Product();
+                Item out = new Item();
                 simpleStringSplitter.setString(receiveString);
                 Iterator<String> iterator = simpleStringSplitter.iterator();
 
@@ -81,7 +83,7 @@ public abstract class Hub implements IHub {
                         out.setNote(note);
                     }
                 }
-                myProducts.add(out);
+                myItems.add(out);
             }
         }
     }
@@ -122,8 +124,8 @@ public abstract class Hub implements IHub {
         }
     }
 
-    protected ArrayList<Product> readFromFile(Context context, int itype) {
-        ArrayList<Product> myProducts = new ArrayList<Product>();
+    protected ArrayList<Item> readFromFile(Context context, Hub.FileType ftype) {
+        ArrayList<Item> myItems = new ArrayList<Item>();
         try {
             // get the time the file was last changed here
             File myFile = new File(context.getFilesDir() +"/" + filename);
@@ -135,8 +137,10 @@ public abstract class Hub implements IHub {
             // create products from the file here
             InputStream inputStream = context.openFileInput(filename);
             if ( inputStream != null ) {
-                if (itype == CSV) {
-                    parseCSV(myProducts, inputStream);
+                switch (ftype) {
+                    case CSV:
+                        parseCSV(myItems, inputStream);
+                        break;
                 }
                 inputStream.close();
             }
@@ -145,8 +149,8 @@ public abstract class Hub implements IHub {
         } catch (IOException e) {
             Log.e(Hub.logTag, "Can not read file  (" + filename + ") : " + e.toString());
         }
-        Log.w(Hub.logTag, "Number of products loaded: " + myProducts.size());
-        return myProducts;
+        Log.w(Hub.logTag, "Number of products loaded: " + myItems.size());
+        return myItems;
     }
 
     public Calendar getLastRefreshTS() {

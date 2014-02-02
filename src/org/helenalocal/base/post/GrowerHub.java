@@ -11,7 +11,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.helenalocal.base.Hub;
-import org.helenalocal.base.Product;
+import org.helenalocal.base.Item;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -30,42 +30,43 @@ public class GrowerHub extends Hub {
     }
 
     @Override
-    public List<Product> getProductList(Context context) throws IOException {
+    public List<Item> getProduct(Context context) throws IOException {
         return null;
     }
 
     @Override
-    public void setProduct(Context context, Product product) throws Exception {
+    public void setProduct(Context context, Item item) throws Exception {
 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(getDataUrl());
 
         List<BasicNameValuePair> nvp = new ArrayList<BasicNameValuePair>();
-        // Farm Name
-        nvp.add(new BasicNameValuePair("entry.614024895", product.getFarmName()));
-        // Farm/Response Email Address
-        nvp.add(new BasicNameValuePair("entry.125556965", product.getFarmEmailAddress()));
-        // Product Category
-        nvp.add(new BasicNameValuePair("entry.445217294", product.getCategory()));
-        // Product Description
-        nvp.add(new BasicNameValuePair("entry.1031627276", product.getProductDesc()));
+        // Producer Name
+        nvp.add(new BasicNameValuePair("entry.614024895", item.getProducer().getName()));
+        // Producer/Response Email Address
+        nvp.add(new BasicNameValuePair("entry.125556965", item.getProducer().getContactEmail()));
+        // Item Category
+        nvp.add(new BasicNameValuePair("entry.445217294", item.getCategory()));
+        // Item Description
+        nvp.add(new BasicNameValuePair("entry.1031627276", item.getProductDesc()));
         // Grower Agreement ID
-        nvp.add(new BasicNameValuePair("entry.2052032218", product.getGrowerAgreementId()));
+        nvp.add(new BasicNameValuePair("entry.2052032218", item.getGrowerAgreementId()));
         // Unit Description
-        nvp.add(new BasicNameValuePair("entry.365352229", product.getUnitDesc()));
+        nvp.add(new BasicNameValuePair("entry.365352229", item.getUnitDesc()));
         // Units Available
-        nvp.add(new BasicNameValuePair("entry.1533229608", product.getUnitsAvailable().toString()));
+        nvp.add(new BasicNameValuePair("entry.1533229608", item.getUnitsAvailable().toString()));
 
         // Delivery Date
-        // single digit
-        nvp.add(new BasicNameValuePair("entry.1142116839_month", new SimpleDateFormat("M").format(product.getDeliveryDate().getTime()).trim()));
-        // 1,2
-        nvp.add(new BasicNameValuePair("entry.1142116839_day",new SimpleDateFormat("d").format(product.getDeliveryDate().getTime()).trim()));
-        // 2014
-        nvp.add(new BasicNameValuePair("entry.1142116839_year",new SimpleDateFormat("y").format(product.getDeliveryDate().getTime()).trim()));
 
-        // Product Notes
-        nvp.add(new BasicNameValuePair("entry.508863227", product.getNote()));
+        // single digit
+        nvp.add(new BasicNameValuePair("entry.1142116839_month", new SimpleDateFormat("M").format(item.getDeliveryDate().getTime()).trim()));
+        // 1,2
+        nvp.add(new BasicNameValuePair("entry.1142116839_day",new SimpleDateFormat("d").format(item.getDeliveryDate().getTime()).trim()));
+        // 2014
+        nvp.add(new BasicNameValuePair("entry.1142116839_year",new SimpleDateFormat("y").format(item.getDeliveryDate().getTime()).trim()));
+
+        // Item Notes
+        nvp.add(new BasicNameValuePair("entry.508863227", item.getNote()));
 
         // just some extras
         nvp.add(new BasicNameValuePair("pageHistory", "0"));
@@ -83,5 +84,4 @@ public class GrowerHub extends Hub {
             throw new Exception ("Record failed data validation on the server side...");
         }
     }
-
 }

@@ -8,16 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import org.helenalocal.base.Product;
+import org.helenalocal.base.Item;
 import org.helenalocal.Helena_Local_Hub.R;
 
 import java.util.List;
 
-public class ProductItemAdapter extends ArrayAdapter<Product> {
+public class ProductItemAdapter extends ArrayAdapter<Item> {
     private static String logTag = "ProductItemAdapter";
     private int _resource;
 
-    public ProductItemAdapter(Context context, int resource, List<Product> items) {
+    public ProductItemAdapter(Context context, int resource, List<Item> items) {
         super(context, resource, items);
         _resource = resource;
     }
@@ -26,7 +26,7 @@ public class ProductItemAdapter extends ArrayAdapter<Product> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Product p = getItem(position);
+        Item p = getItem(position);
 
         LinearLayout productView;
 

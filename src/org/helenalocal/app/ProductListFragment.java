@@ -10,18 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Hub;
-import org.helenalocal.base.Product;
+import org.helenalocal.base.Item;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ProductListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<Product>> {
+public class ProductListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<List<Item>> {
     private static String logTag = "ProductListFragment";
     private static final int LoaderId = 0;
     public static final String HUB_TYPE_KEY = "hubType";
 
-    private List<Product> _productList;
+    private List<Item> _itemList;
     private ProductItemAdapter _arrayAdapter;
 
 
@@ -52,12 +52,12 @@ public class ProductListFragment extends ListFragment implements LoaderManager.L
 
         Log.w(logTag, "onActivityCreated");
 
-        _productList = new ArrayList<Product>();
-        _arrayAdapter = new ProductItemAdapter(getActivity(), R.layout.product_view, _productList);
+        _itemList = new ArrayList<Item>();
+        _arrayAdapter = new ProductItemAdapter(getActivity(), R.layout.product_view, _itemList);
         setListAdapter(_arrayAdapter);
 
         Bundle b = new Bundle();
-        b.putString(HUB_TYPE_KEY, Hub.Type.SALES.name());
+        b.putString(HUB_TYPE_KEY, Hub.HubType.ITEM.name());
         getActivity().getSupportLoaderManager().initLoader(LoaderId, b, this);
     }
 
@@ -69,7 +69,7 @@ public class ProductListFragment extends ListFragment implements LoaderManager.L
 //        Log.w(Tag, "onResume");
 //
 //        Bundle b = new Bundle();
-//        b.putString(HUB_TYPE_KEY, Hub.Type.SALES.name());
+//        b.putString(HUB_TYPE_KEY, Hub.HubType.SALES.name());
 //        getActivity().getSupportLoaderManager().restartLoader(LoaderId, b, this);
 //    }
 
@@ -79,21 +79,21 @@ public class ProductListFragment extends ListFragment implements LoaderManager.L
     // ***
 
     @Override
-    public Loader<List<Product>> onCreateLoader(int i, Bundle bundle) {
-        Hub.Type type = Hub.Type.valueOf(bundle.getString(HUB_TYPE_KEY));
-        AsyncProductLoader loader = new AsyncProductLoader(getActivity(), type);
+    public Loader<List<Item>> onCreateLoader(int i, Bundle bundle) {
+        Hub.HubType hubType = Hub.HubType.valueOf(bundle.getString(HUB_TYPE_KEY));
+        AsyncProductLoader loader = new AsyncProductLoader(getActivity(), hubType);
         return loader;
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Product>> listLoader, List<Product> products) {
-        _productList.clear();
-        _productList.addAll(products);
+    public void onLoadFinished(Loader<List<Item>> listLoader, List<Item> items) {
+        _itemList.clear();
+        _itemList.addAll(items);
         _arrayAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onLoaderReset(Loader<List<Product>> listLoader) {
+    public void onLoaderReset(Loader<List<Item>> listLoader) {
 
     }
 }

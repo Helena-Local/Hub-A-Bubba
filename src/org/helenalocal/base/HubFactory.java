@@ -1,7 +1,6 @@
 package org.helenalocal.base;
 
-import org.helenalocal.base.get.CSAHub;
-import org.helenalocal.base.get.UnitHub;
+import org.helenalocal.base.get.ItemHub;
 import org.helenalocal.base.post.GrowerHub;
 import org.helenalocal.base.test.MockHub;
 
@@ -12,14 +11,11 @@ import org.helenalocal.base.test.MockHub;
 
 
 public abstract class HubFactory {
-    public static IHub buildHubFetch(Hub.Type itype) {
+    public static IHub buildHubFetch(Hub.HubType itype) {
         IHub out = new MockHub();  // default to test
         switch (itype) {
-            case SALES:
-                out = new UnitHub();
-                break;
-            case CSA:
-                out = new CSAHub();
+            case ITEM:
+                out = new ItemHub();
                 break;
             case GROWER:
                 out = new GrowerHub();

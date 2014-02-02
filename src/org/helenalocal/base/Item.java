@@ -6,31 +6,28 @@ import java.util.Calendar;
 /**
  * Created by abbie on 1/24/14.
  */
-public class Product {
-    private String farmName = "";
-    private String farmEmailAddress = "";
-    private String farmUrl = "";
+public class Item {
+    private String IID = "";
+    private Producer producer;
+    private boolean inCsaThisWeek = false;
     private String category = "";
     private String productDesc = "";
     private String productUrl = "";
-    private String growerAgreementId = "";
+    private String productImageUrl = "";
     private Integer unitsAvailable = 1;
-    private String unitDesc = "";
-    private Calendar deliveryDate;
     private Double unitPrice = 0.0;
+    private String unitDesc = "";
     private String note = "";
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-    public Product() {
+    public Item() {
         setDeliveryDate(null);
     }
 
-    public Product(String farmName, String farmEmailAddress, String farmUrl, String category, String productDesc, String productUrl, String growerAgreementId, Integer unitsAvailable,
-                   String unitDesc, Calendar deliveryDate, Double unitPrice, String note) {
+    public Item(boolean inCSA, String category, String productDesc, String productUrl, String growerAgreementId, Integer unitsAvailable,
+                String unitDesc, Calendar deliveryDate, Double unitPrice, String note) {
         setDeliveryDate(null);
-        this.farmName = farmName;
-        this.farmEmailAddress = farmEmailAddress;
-        this.farmUrl = farmUrl;
+        this.inCSA = inCSA;
         this.category = category;
         this.productDesc = productDesc;
         this.productUrl = productUrl;
@@ -43,18 +40,14 @@ public class Product {
     }
 
     // CSV from spreadsheet
-    //Timestamp,Farm Name,Farm/Response Email Address,Product Category,Product Description,Grower Agreement ID,Unit Description,Units Available,Delivery Date,Product Notes
+    //Timestamp,Producer Name,Producer/Response Email Address,Item Category,Item Description,Grower Agreement ID,Unit Description,Units Available,Delivery Date,Item Notes
 
-    public String getFarmName() {
-        return farmName;
+    public boolean isInCSA() {
+        return inCSA;
     }
 
-    public String getFarmEmailAddress() {
-        return farmEmailAddress;
-    }
-
-    public String getFarmUrl() {
-        return farmUrl;
+    public String getProductImageUrl() {
+        return productImageUrl;
     }
 
     public String getGrowerAgreementId() {
@@ -97,12 +90,12 @@ public class Product {
         return unitDesc;
     }
 
-    public void setFarmEmailAddress(String farmEmailAddress) {
-        this.farmEmailAddress = farmEmailAddress;
+    public Producer getProducer() {
+        return producer;
     }
 
-    public void setFarmUrl(String farmUrl) {
-        this.farmUrl = farmUrl;
+    public void setProducer(Producer producer) {
+        this.producer = producer;
     }
 
     public void setDeliveryDate(Calendar deliveryDate) {
@@ -114,8 +107,8 @@ public class Product {
         this.deliveryDate = deliveryDate;
     }
 
-    public void setFarmName(String farmName) {
-        this.farmName = farmName;
+    public void setInCSA(boolean inCSA) {
+        this.inCSA = inCSA;
     }
 
     public void setCategory(String category) {
@@ -146,13 +139,18 @@ public class Product {
         this.productUrl = productUrl;
     }
 
+    public void setProductImageUrl(String productImageUrl) {
+        this.productImageUrl = productImageUrl;
+    }
 
     @Override
     public String toString() {
         dateFormat.setCalendar(deliveryDate);
-        return "farmName = " + this.farmName + "; farmEmailAddress = " +
-                this.farmEmailAddress + "; farmUrl = " +
-                this.farmUrl + "; category = " +
+        return "pid = " + producer.getPID() + "; pName = " +
+                this.producer.getName() + "; pContactEmail = " +
+                this.producer.getContactEmail() + "; pPhotoUrl = " +
+                this.producer.getPhotoUrl() + "; isInCSA = " +
+                this.isInCSA() + "; category = " +
                 this.category + "; productDesc = " +
                 this.productDesc + "; productUrl = " +
                 this.productUrl + "; growerAgreementId = " +
@@ -166,9 +164,9 @@ public class Product {
 
     public String toEmail() {
         dateFormat.setCalendar(deliveryDate);
-        return "farmName = " + this.farmName + "; \nfarmEmailAddress = " +
-                this.farmEmailAddress + "; \nfarmUrl = " +
-                this.farmUrl + "; \ncategory = " +
+        return "farmName = " + producer.getFarmName() + "; \nfarmEmailAddress = " +
+                producer.getFarmEmailAddress() + "; \nfarmUrl = " +
+                producer.getFarmUrl() + "; \ncategory = " +
                 this.category + "; \nproductDesc = " +
                 this.productDesc + "; \nproductUrl = " +
                 this.productUrl + "; \ngrowerAgreementId = " +
@@ -182,9 +180,9 @@ public class Product {
 
     public String toCSV() {
         dateFormat.setCalendar(deliveryDate);
-        return this.farmName + "," +
-                this.farmEmailAddress + "," +
-                this.farmUrl + "," +
+        return producer.getFarmName() + "," +
+                producer.getFarmEmailAddress() + "," +
+                this.producer.getFarmUrl() + "," +
                 this.category + "," +
                 this.productDesc + "," +
                 this.productUrl + "," +

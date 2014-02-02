@@ -6,29 +6,37 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.helenalocal.base.Item;
+import org.helenalocal.base.Producer;
 import org.helenalocal.base.Hub;
-import org.helenalocal.base.Product;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by abbie on 1/24/14.
  */
-public class CSAHub extends Hub {
+public class ItemHub extends Hub {
 
-    public CSAHub() {
-        logTag = "CSAHub ";
-        setFilename("HL-CSAHub.csv");
+    private void loadFarms() {
+        List<Producer> producerArr = new ArrayList<Producer>();
+        producerArr.add(new Producer("1","Kevin's Producer","kevin@farm.com","http://my.farm.com"));
+
+    }
+
+    public ItemHub() {
+        logTag = "ItemHub ";
+        setFilename("HL-ItemHub.csv");
         setDataUrl("https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdHg5OVZmRVdoSWJ4NU92ekppNDl0dEE&single=true&gid=2&output=csv");
 
     }
 
     @Override
-    public List<Product> getProductList(Context context) throws IOException {
+    public List<Item> getProduct(Context context) throws IOException {
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet(dataUrl);
         try {
@@ -44,13 +52,16 @@ public class CSAHub extends Hub {
             Log.w(Hub.logTag, "Couldn't get the file from the net just using file from device... ");
         }
 
+        //TODO kevin load farms here!
+        loadFarms();
+
         // regardless of net work with file
-        return readFromFile(context,Hub.CSV);
+        return readFromFile(context, FileType.CSV);
 
     }
 
     @Override
-    public void setProduct(Context context, Product product) throws Exception {
+    public void setProduct(Context context, Item item) throws Exception {
 
     }
 

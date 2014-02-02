@@ -1,6 +1,6 @@
 package org.helenalocal.base.test;
 
-import org.helenalocal.base.Product;
+import org.helenalocal.base.Item;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubFactory;
 
@@ -13,10 +13,10 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("**** Starting fetch test for MOCK....");
         try {
-            List<Product> myProducts = HubFactory.buildHubFetch(Hub.Type.MOCK).getProductList(null);
-            for (int i = 0; i < myProducts.size(); i++) {
-                Product product = myProducts.get(i);
-                System.out.println(product.toString());
+            List<Item> myItems = HubFactory.buildHubFetch(Hub.HubType.MOCK).getProduct(null);
+            for (int i = 0; i < myItems.size(); i++) {
+                Item item = myItems.get(i);
+                System.out.println(item.toString());
             }
         } catch (Exception e) {
             System.out.println("No MOCK products found....");
