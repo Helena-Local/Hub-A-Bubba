@@ -12,6 +12,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.Item;
+import org.helenalocal.base.Producer;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -22,35 +23,29 @@ import java.util.List;
  * Created by abbie on 1/24/14.
  */
 public class GrowerHub extends Hub {
+    String fileName = "HL-GrowerHub.csv";
+    protected String dataUrl = "https://docs.google.com/forms/d/14aZGVPlxgr6-9wH6OLyZfuSH-mF6vVJjzAbFxyRaqRc/formResponse";
 
     public GrowerHub() {
         logTag = "GrowerHub ";
-        setFilename("HL-GrowerHub.csv");
-        setDataUrl("https://docs.google.com/forms/d/14aZGVPlxgr6-9wH6OLyZfuSH-mF6vVJjzAbFxyRaqRc/formResponse");
     }
 
-    @Override
-    public List<Item> getProduct(Context context) throws IOException {
-        return null;
-    }
-
-    @Override
-    public void setProduct(Context context, Item item) throws Exception {
+    public void setItem(Context context, Producer producer, Item item, String growerAgreementId) throws Exception {
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost(getDataUrl());
+        HttpPost post = new HttpPost(dataUrl);
 
         List<BasicNameValuePair> nvp = new ArrayList<BasicNameValuePair>();
         // Producer Name
-        nvp.add(new BasicNameValuePair("entry.614024895", item.getProducer().getName()));
+        nvp.add(new BasicNameValuePair("entry.614024895", producer.getName()));
         // Producer/Response Email Address
-        nvp.add(new BasicNameValuePair("entry.125556965", item.getProducer().getContactEmail()));
+        nvp.add(new BasicNameValuePair("entry.125556965", producer.getContactEmail()));
         // Item Category
         nvp.add(new BasicNameValuePair("entry.445217294", item.getCategory()));
         // Item Description
         nvp.add(new BasicNameValuePair("entry.1031627276", item.getProductDesc()));
         // Grower Agreement ID
-        nvp.add(new BasicNameValuePair("entry.2052032218", item.getGrowerAgreementId()));
+        nvp.add(new BasicNameValuePair("entry.2052032218", growerAgreementId));
         // Unit Description
         nvp.add(new BasicNameValuePair("entry.365352229", item.getUnitDesc()));
         // Units Available

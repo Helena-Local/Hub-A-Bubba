@@ -7,28 +7,29 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.helenalocal.base.Item;
+import org.helenalocal.base.Buyer;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.Producer;
 
 import java.io.*;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Created by abbie on 1/24/14.
  */
-public class ItemHub extends Hub {
-    String fileName = "HL-ItemHub.csv";
-    protected String dataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=1&output=csv";
+public class BuyerHub extends Hub {
+    String fileName = "HL-BuyerHub.csv";
+    protected String dataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=4&output=csv";
 
 
-    public ItemHub() {
-        logTag = "ItemHub ";
+    public BuyerHub() {
+        logTag = "BuyerHub ";
     }
 
-    private void parseCSV(HashMap<String, Item> myItemMap, InputStream inputStream) throws IOException {
+    private void parseCSV(HashMap<String, Buyer> myBuyerMap, InputStream inputStream) throws IOException {
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(',');
@@ -40,85 +41,72 @@ public class ItemHub extends Hub {
                 firstTime = false;
             } else {
                 // build item
-                Item item = new Item();
+                Buyer buyer = new Buyer();
                 simpleStringSplitter.setString(receiveString);
                 Iterator<String> iterator = simpleStringSplitter.iterator();
 
-                // IID (Item ID)	PID (Producer ID)	InCsaThisWeek	Category	Product Description	Product Url	Product Image Url	Units Available	Units Desc	Unit Price	Notes
+                // BID (Buyer ID)	Name	ContactEmail	Hours	Phone	WebsiteUrl	PhotoUrl	Location	Service Level (0-off, 1-on, 2-premium)
                 if (iterator.hasNext()) {
-                    String itemId = iterator.next();
-                    if (! itemId.equals("")) {
-                        item.setIID(itemId);
+                    String buyerId = iterator.next();
+                    if (! buyerId.equals("")) {
+                        buyer.setBID(buyerId);
                     }
                 }
                 if (iterator.hasNext()) {
-                    String producerId = iterator.next();
-                    if (! producerId.equals("")) {
-                        item.setPID(producerId);
+                    String name = iterator.next();
+                    if (! name.equals("")) {
+                        buyer.setName(name);
                     }
                 }
                 if (iterator.hasNext()) {
-                    String inCsaThisWeek = iterator.next();
-                    if ((! inCsaThisWeek.equals("")) && (inCsaThisWeek.equals("Y"))) {
-                        item.setInCsaThisWeek(true);
+                    String contactEmail = iterator.next();
+                    if (! contactEmail.equals("")) {
+                        buyer.setContactEmail(contactEmail);
                     }
                 }
                 if (iterator.hasNext()) {
-                    String category = iterator.next();
-                    if (! category.equals("")) {
-                        item.setCategory(category);
+                    String hours = iterator.next();
+                    if (! hours.equals("")) {
+                        buyer.setHours(hours);
                     }
                 }
                 if (iterator.hasNext()) {
-                    String productDesc = iterator.next();
-                    if (! productDesc.equals("")) {
-                        item.setProductDesc(productDesc);
+                    String phone = iterator.next();
+                    if (! phone.equals("")) {
+                        buyer.setPhone(phone);
                     }
                 }
                 if (iterator.hasNext()) {
-                    String productUrl = iterator.next();
-                    if (! productUrl.equals("")) {
-                        item.setProductUrl(productUrl);
+                    String websiteUrl = iterator.next();
+                    if (! websiteUrl.equals("")) {
+                        buyer.setWebsiteUrl(websiteUrl);
                     }
                 }
                 if (iterator.hasNext()) {
-                    String productImageUrl = iterator.next();
-                    if (! productImageUrl.equals("")) {
-                        item.setProductImageUrl(productImageUrl);
+                    String photoUrl = iterator.next();
+                    if (! photoUrl.equals("")) {
+                        buyer.setPhotoUrl(photoUrl);
                     }
                 }
                 if (iterator.hasNext()) {
-                    String unitsAvailable = iterator.next();
-                    if (! unitsAvailable.equals("")) {
-                        item.setUnitsAvailable(Integer.valueOf(unitsAvailable));
+                    String location = iterator.next();
+                    if (! location.equals("")) {
+                        buyer.setLocation(location);
                     }
                 }
                 if (iterator.hasNext()) {
-                    String unitDesc = iterator.next();
-                    if (! unitDesc.equals("")) {
-                        item.setUnitDesc(unitDesc);
+                    String serviceLevel = iterator.next();
+                    if (! serviceLevel.equals("")) {
+                        buyer.setServiceLevel(serviceLevel);
                     }
                 }
-                if (iterator.hasNext()) {
-                    String unitPrice = iterator.next();
-                    if (! unitPrice.equals("")) {
-                        Object o = unitPrice.replace("$", "");
-                        item.setUnitPrice(Double.parseDouble(o.toString()));
-                    }
-                }
-                if (iterator.hasNext()) {
-                    String note = iterator.next();
-                    if (! note.equals("")) {
-                        item.setNote(note);
-                    }
-                }
-                myItemMap.put(item.getIID(),item);
+                myBuyerMap.put(buyer.getBID(), buyer);
             }
         }
     }
 
-    protected HashMap<String, Item> readFromFile(Context context) {
-        HashMap<String, Item> myItemMap = new HashMap<String, Item>();
+    protected HashMap<String, Buyer> readFromFile(Context context) {
+        HashMap<String, Buyer> myBuyerMap = new HashMap<String, Buyer>();
         try {
             // getItem the time the file was last changed here
             File myFile = new File(context.getFilesDir() +"/" + fileName);
@@ -130,7 +118,7 @@ public class ItemHub extends Hub {
             // create products from the file here
             InputStream inputStream = context.openFileInput(fileName);
             if ( inputStream != null ) {
-                parseCSV(myItemMap, inputStream);
+                parseCSV(myBuyerMap, inputStream);
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
@@ -138,11 +126,11 @@ public class ItemHub extends Hub {
         } catch (IOException e) {
             Log.e(Hub.logTag, "Can not read file  (" + fileName + ") : " + e.toString());
         }
-        Log.w(Hub.logTag, "Number of items loaded: " + myItemMap.size());
-        return myItemMap;
+        Log.w(Hub.logTag, "Number of producers loaded: " + myBuyerMap.size());
+        return myBuyerMap;
     }
 
-    public HashMap<String, Item> getItemMap(Context context) throws IOException {
+    public HashMap<String, Buyer> getBuyerMap(Context context) throws IOException {
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet(dataUrl);
         try {

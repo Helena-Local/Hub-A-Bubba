@@ -3,7 +3,7 @@ package org.helenalocal.base;
 /**
  * Created by abbie on 2/2/14.
  */
-public abstract class Buyer {
+public class Buyer {
     private String BID = "";
     private String name = "";
     private String contactEmail = "";
@@ -12,7 +12,12 @@ public abstract class Buyer {
     private String websiteUrl = "";
     private String photoUrl = "";
     private String location = "";
+    private String serviceLevel = "";
     private String lastOrderDate = "";
+
+    public Buyer() {
+
+    }
 
     public Buyer(String BID, String name, String contactEmail, String hours, String phone, String websiteUrl, String photoUrl, String location, String lastOrderDate) {
         this.BID = BID;
@@ -96,5 +101,19 @@ public abstract class Buyer {
 
     public void setLastOrderDate(String lastOrderDate) {
         this.lastOrderDate = lastOrderDate;
+    }
+
+    public String getServiceLevel() {
+        return serviceLevel;
+    }
+
+    public void setServiceLevel(String serviceLevel) {
+        this.serviceLevel = serviceLevel;
+    }
+
+    public String toString() {
+        return "BID = " + BID + "; name = " + name + "; contactEmail = " + contactEmail
+                + "; hours = " + hours + "; phone = " + phone + "; websiteUrl = " + websiteUrl + "; photoUrl = "
+                + photoUrl + "; location = " + location + "; lastOrderDate = " + lastOrderDate;
     }
 }

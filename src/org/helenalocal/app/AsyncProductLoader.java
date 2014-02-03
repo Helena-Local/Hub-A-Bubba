@@ -3,35 +3,32 @@ package org.helenalocal.app;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
-import org.helenalocal.base.Hub;
-import org.helenalocal.base.HubFactory;
-import org.helenalocal.base.IHub;
 import org.helenalocal.base.Item;
+import org.helenalocal.base.get.ItemHub;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AsyncProductLoader extends AsyncTaskLoader<List<Item>> {
     private final String logTag;
     private List<Item> _itemList;
-    private Hub.HubType _Hub_type;
 
-    public AsyncProductLoader(Context context, Hub.HubType hubType) {
+    public AsyncProductLoader(Context context) {
         super(context);
-
-        _Hub_type = hubType;
-
-        logTag = new StringBuilder("AsyncProductLoader ").append(_Hub_type).toString();
+        logTag = "AsyncProductLoader - Item ";
     }
 
     @Override
     public List<Item> loadInBackground() {
 
-        Log.w(logTag, String.format("**** Starting fetch for %s....", _Hub_type));
+        Log.w(logTag, "**** Starting fetch for items....");
         try {
-            IHub myHub = HubFactory.buildHubFetch(_Hub_type);
-            _itemList = myHub.getProduct(getContext());
+            ItemHub itemHub = new ItemHub();
+            HashMap<String, Item> itemMap = itemHub.getItemMap(getContext());
+            _itemList = new ArrayList<Item>(itemMap.values());
 
-            Log.w(logTag, "Data last refreshed on " + myHub.getLastRefreshTS().getTime());
+            Log.w(logTag, "Data last refreshed on " + itemHub.getLastRefreshTS().getTime());
 
             for (Item p : _itemList) {
                 Log.w(logTag, p.toString());
@@ -40,7 +37,7 @@ public class AsyncProductLoader extends AsyncTaskLoader<List<Item>> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.w(logTag, String.format("**** Ending fetch for %s....", _Hub_type));
+        Log.w(logTag,"**** Ending fetch for items");
 
         return _itemList;
     }

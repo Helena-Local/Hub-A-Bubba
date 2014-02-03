@@ -57,7 +57,6 @@ public class ProductListFragment extends ListFragment implements LoaderManager.L
         setListAdapter(_arrayAdapter);
 
         Bundle b = new Bundle();
-        b.putString(HUB_TYPE_KEY, Hub.HubType.ITEM.name());
         getActivity().getSupportLoaderManager().initLoader(LoaderId, b, this);
     }
 
@@ -80,8 +79,7 @@ public class ProductListFragment extends ListFragment implements LoaderManager.L
 
     @Override
     public Loader<List<Item>> onCreateLoader(int i, Bundle bundle) {
-        Hub.HubType hubType = Hub.HubType.valueOf(bundle.getString(HUB_TYPE_KEY));
-        AsyncProductLoader loader = new AsyncProductLoader(getActivity(), hubType);
+        AsyncProductLoader loader = new AsyncProductLoader(getActivity());
         return loader;
     }
 

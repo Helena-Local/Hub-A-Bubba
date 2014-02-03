@@ -4,18 +4,19 @@ package org.helenalocal.base;
  * Created by abbie on 2/2/14.
  */
 public class Order {
-    private String timeStamp = "";
+    private String date = "";
     private String OID = "";
     private String IID = "";
     private String PID = "";
     private String BID = "";
+    private String buyerUrl = "";
 
-    public String getTimeStamp() {
-        return timeStamp;
+    public String getDate() {
+        return date;
     }
 
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getOrderID() {
@@ -49,4 +50,17 @@ public class Order {
     public void setBuyerID(String BID) {
         this.BID = BID;
     }
+
+    public String getBuyerUrl() {
+        return buyerUrl;
+    }
+
+    public void setBuyerUrl(String buyerUrl) {
+        this.buyerUrl = buyerUrl;
+    }
+
+    public String toString() {
+        return "date = " + date + "; OID = " + OID + "; IID = " + IID + "; PID = " + PID + "; BID = " + BID + "; buyerUrl = " + buyerUrl;
+    }
+
 }

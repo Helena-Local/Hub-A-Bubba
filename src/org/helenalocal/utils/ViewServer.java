@@ -57,24 +57,24 @@ import android.view.ViewDebug;
  * permission.</p>
  *
  * <p>The recommended way to use this API is to register activities when
- * they are created, and to unregister them when they get destroyed:</p>
+ * they are created, and to unregister them when they getItem destroyed:</p>
  *
  * <pre>
  * public class MyActivity extends Activity {
  *     public void onCreate(Bundle savedInstanceState) {
  *         super.onCreate(savedInstanceState);
  *         // Set content view, etc.
- *         ViewServer.get(this).addWindow(this);
+ *         ViewServer.getItem(this).addWindow(this);
  *     }
  *
  *     public void onDestroy() {
  *         super.onDestroy();
- *         ViewServer.get(this).removeWindow(this);
+ *         ViewServer.getItem(this).removeWindow(this);
  *     }
  *
  *     public void onResume() {
  *         super.onResume();
- *         ViewServer.get(this).setFocusedWindow(this);
+ *         ViewServer.getItem(this).setFocusedWindow(this);
  *     }
  * }
  * </pre>
@@ -89,19 +89,19 @@ import android.view.ViewDebug;
  *         super.onCreate();
  *         View decorView = getWindow().getWindow().getDecorView();
  *         String name = "MyInputMethodService";
- *         ViewServer.get(this).addWindow(decorView, name);
+ *         ViewServer.getItem(this).addWindow(decorView, name);
  *     }
  *
  *     public void onDestroy() {
  *         super.onDestroy();
  *         View decorView = getWindow().getWindow().getDecorView();
- *         ViewServer.get(this).removeWindow(decorView);
+ *         ViewServer.getItem(this).removeWindow(decorView);
  *     }
  *
  *     public void onStartInput(EditorInfo attribute, boolean restarting) {
  *         super.onStartInput(attribute, restarting);
  *         View decorView = getWindow().getWindow().getDecorView();
- *         ViewServer.get(this).setFocusedWindow(decorView);
+ *         ViewServer.getItem(this).setFocusedWindow(decorView);
  *     }
  * }
  * </pre>
@@ -155,7 +155,7 @@ public class ViewServer implements Runnable {
      * the same lifetime as your process.
      *
      * If your application does not have the <code>android:debuggable</code>
-     * flag set in its manifest, the server returned by this method will
+     * flag setItem in its manifest, the server returned by this method will
      * be a dummy object that does not do anything. This allows you to use
      * the same code in debug and release versions of your application.
      *

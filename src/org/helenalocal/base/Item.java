@@ -8,15 +8,16 @@ import java.util.Calendar;
  */
 public class Item {
     private String IID = "";
-    private Producer producer;
+    private String PID = "";
     private boolean inCsaThisWeek = false;
     private String category = "";
     private String productDesc = "";
     private String productUrl = "";
     private String productImageUrl = "";
     private Integer unitsAvailable = 1;
-    private Double unitPrice = 0.0;
     private String unitDesc = "";
+    private Double unitPrice = 0.0;
+    private Calendar deliveryDate;
     private String note = "";
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -24,78 +25,108 @@ public class Item {
         setDeliveryDate(null);
     }
 
-    public Item(boolean inCSA, String category, String productDesc, String productUrl, String growerAgreementId, Integer unitsAvailable,
-                String unitDesc, Calendar deliveryDate, Double unitPrice, String note) {
-        setDeliveryDate(null);
-        this.inCSA = inCSA;
+    public Item(String IID, String PID, boolean inCsaThisWeek, String category, String productDesc, String productUrl, String productImageUrl, Integer unitsAvailable,
+            String unitDesc, Double unitPrice, Calendar deliveryDate, String note) {
+        this.IID = IID;
+        this.PID = PID;
+        this.inCsaThisWeek = inCsaThisWeek;
         this.category = category;
         this.productDesc = productDesc;
         this.productUrl = productUrl;
-        this.growerAgreementId = growerAgreementId;
+        this.productImageUrl = productImageUrl;
         this.unitsAvailable = unitsAvailable;
-        this.unitDesc = unitDesc;
-        this.deliveryDate = deliveryDate;
         this.unitPrice = unitPrice;
+        this.unitDesc = unitDesc;
+        setDeliveryDate(deliveryDate);
         this.note = note;
     }
 
-    // CSV from spreadsheet
-    //Timestamp,Producer Name,Producer/Response Email Address,Item Category,Item Description,Grower Agreement ID,Unit Description,Units Available,Delivery Date,Item Notes
-
-    public boolean isInCSA() {
-        return inCSA;
+    public String getIID() {
+        return IID;
     }
 
-    public String getProductImageUrl() {
-        return productImageUrl;
+    public void setIID(String IID) {
+        this.IID = IID;
     }
 
-    public String getGrowerAgreementId() {
-        return growerAgreementId;
+    public String getPID() {
+        return PID;
     }
 
-    public Calendar getDeliveryDate() {
-        return deliveryDate;
+    public void setPID(String PID) {
+        this.PID = PID;
     }
 
-    public String getNote() {
-        return note;
+    public boolean isInCsaThisWeek() {
+        return inCsaThisWeek;
     }
 
-    public void setGrowerAgreementId(String growerAgreementId) {
-        this.growerAgreementId = growerAgreementId;
+    public void setInCsaThisWeek(boolean inCsaThisWeek) {
+        this.inCsaThisWeek = inCsaThisWeek;
     }
 
     public String getCategory() {
         return category;
     }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public String getProductDesc() {
         return productDesc;
+    }
+
+    public void setProductDesc(String productDesc) {
+        this.productDesc = productDesc;
     }
 
     public String getProductUrl() {
         return productUrl;
     }
 
+    public void setProductUrl(String productUrl) {
+        this.productUrl = productUrl;
+    }
+
+    public String getProductImageUrl() {
+        return productImageUrl;
+    }
+
+    public void setProductImageUrl(String productImageUrl) {
+        this.productImageUrl = productImageUrl;
+    }
+
     public Integer getUnitsAvailable() {
         return unitsAvailable;
+    }
+
+    public void setUnitsAvailable(Integer unitsAvailable) {
+        this.unitsAvailable = unitsAvailable;
     }
 
     public Double getUnitPrice() {
         return unitPrice;
     }
 
+    public void setUnitPrice(Double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
     public String getUnitDesc() {
         return unitDesc;
     }
 
-    public Producer getProducer() {
-        return producer;
+    public void setUnitDesc(String unitDesc) {
+        this.unitDesc = unitDesc;
     }
 
-    public void setProducer(Producer producer) {
-        this.producer = producer;
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public void setDeliveryDate(Calendar deliveryDate) {
@@ -107,90 +138,50 @@ public class Item {
         this.deliveryDate = deliveryDate;
     }
 
-    public void setInCSA(boolean inCSA) {
-        this.inCSA = inCSA;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public void setProductDesc(String productDesc) {
-        this.productDesc = productDesc;
-    }
-
-    public void setUnitsAvailable(Integer unitsAvailable) {
-        this.unitsAvailable = unitsAvailable;
-    }
-
-    public void setUnitPrice(Double unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public void setUnitDesc(String unitDesc) {
-        this.unitDesc = unitDesc;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public void setProductUrl(String productUrl) {
-        this.productUrl = productUrl;
-    }
-
-    public void setProductImageUrl(String productImageUrl) {
-        this.productImageUrl = productImageUrl;
+    public Calendar getDeliveryDate() {
+        return deliveryDate;
     }
 
     @Override
     public String toString() {
         dateFormat.setCalendar(deliveryDate);
-        return "pid = " + producer.getPID() + "; pName = " +
-                this.producer.getName() + "; pContactEmail = " +
-                this.producer.getContactEmail() + "; pPhotoUrl = " +
-                this.producer.getPhotoUrl() + "; isInCSA = " +
-                this.isInCSA() + "; category = " +
+        return "IID = " + IID + "; PID = " + PID +
+                "; inCsaThisWeek = " + this.inCsaThisWeek + "; category = " +
                 this.category + "; productDesc = " +
                 this.productDesc + "; productUrl = " +
-                this.productUrl + "; growerAgreementId = " +
-                this.growerAgreementId + "; unitsAvailable = " +
+                this.productUrl + "; productImageUrl = " +
+                this.productImageUrl + "; unitsAvailable = " +
                 this.unitsAvailable + "; unitDesc = " +
-                this.unitDesc + "; deliveryDate = " +
-                dateFormat.format(deliveryDate.getTime()) + "; unitPrice = " +
-                this.unitPrice + "; note =" +
+                this.unitDesc + "; unitPrice = " +
+                this.unitPrice + "; deliveryDate = " +
+                dateFormat.format(deliveryDate.getTime()) + "; note =" +
                 this.note;
     }
 
-    public String toEmail() {
+    public String toEmail(String growerAgreementId) {
         dateFormat.setCalendar(deliveryDate);
-        return "farmName = " + producer.getFarmName() + "; \nfarmEmailAddress = " +
-                producer.getFarmEmailAddress() + "; \nfarmUrl = " +
-                producer.getFarmUrl() + "; \ncategory = " +
-                this.category + "; \nproductDesc = " +
-                this.productDesc + "; \nproductUrl = " +
-                this.productUrl + "; \ngrowerAgreementId = " +
-                this.growerAgreementId + "; \nunitsAvailable = " +
+        return "\nIID = " + IID + "; \nPID = " + PID +
+                "; \ncategory = " + this.category + "; \nproductDesc = " +
+                this.productDesc + "; \nunitsAvailable = " +
                 this.unitsAvailable + "; \nunitDesc = " +
                 this.unitDesc + "; \ndeliveryDate = " +
-                dateFormat.format(deliveryDate.getTime()) + "; \nunitPrice = " +
-                this.unitPrice + "; \nnote =" +
-                this.note;
+                dateFormat.format(deliveryDate.getTime()) + "; \nnote = " +
+                this.note + "; \ngrowerAgreementId = " +
+                growerAgreementId + ";";
     }
 
     public String toCSV() {
         dateFormat.setCalendar(deliveryDate);
-        return producer.getFarmName() + "," +
-                producer.getFarmEmailAddress() + "," +
-                this.producer.getFarmUrl() + "," +
+        return IID + "," + PID +
+                "," + this.inCsaThisWeek + "," +
                 this.category + "," +
                 this.productDesc + "," +
                 this.productUrl + "," +
-                this.growerAgreementId + "," +
+                this.productImageUrl + "," +
                 this.unitsAvailable + "," +
                 this.unitDesc + "," +
-                dateFormat.format(deliveryDate.getTime()) + "," +
                 this.unitPrice + "," +
+                dateFormat.format(deliveryDate.getTime()) + "," +
                 this.note;
     }
 }

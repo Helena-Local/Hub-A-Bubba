@@ -7,28 +7,29 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.helenalocal.base.Item;
 import org.helenalocal.base.Hub;
+import org.helenalocal.base.Item;
 import org.helenalocal.base.Producer;
 
 import java.io.*;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Created by abbie on 1/24/14.
  */
-public class ItemHub extends Hub {
-    String fileName = "HL-ItemHub.csv";
-    protected String dataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=1&output=csv";
+public class ProducerHub extends Hub {
+    String fileName = "HL-ProducerHub.csv";
+    protected String dataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=3&output=csv";
 
 
-    public ItemHub() {
-        logTag = "ItemHub ";
+    public ProducerHub() {
+        logTag = "ProducerHub ";
     }
 
-    private void parseCSV(HashMap<String, Item> myItemMap, InputStream inputStream) throws IOException {
+    private void parseCSV(HashMap<String, Producer> myProducerMap, InputStream inputStream) throws IOException {
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(',');
@@ -40,85 +41,54 @@ public class ItemHub extends Hub {
                 firstTime = false;
             } else {
                 // build item
-                Item item = new Item();
+                Producer producer = new Producer();
                 simpleStringSplitter.setString(receiveString);
                 Iterator<String> iterator = simpleStringSplitter.iterator();
 
-                // IID (Item ID)	PID (Producer ID)	InCsaThisWeek	Category	Product Description	Product Url	Product Image Url	Units Available	Units Desc	Unit Price	Notes
-                if (iterator.hasNext()) {
-                    String itemId = iterator.next();
-                    if (! itemId.equals("")) {
-                        item.setIID(itemId);
-                    }
-                }
+                // PID (Producer ID)	Name	ContactEmail	WebsiteUrl	PhotoUrl	Location
                 if (iterator.hasNext()) {
                     String producerId = iterator.next();
                     if (! producerId.equals("")) {
-                        item.setPID(producerId);
+                        producer.setPID(producerId);
                     }
                 }
                 if (iterator.hasNext()) {
-                    String inCsaThisWeek = iterator.next();
-                    if ((! inCsaThisWeek.equals("")) && (inCsaThisWeek.equals("Y"))) {
-                        item.setInCsaThisWeek(true);
+                    String name = iterator.next();
+                    if (! name.equals("")) {
+                        producer.setName(name);
                     }
                 }
                 if (iterator.hasNext()) {
-                    String category = iterator.next();
-                    if (! category.equals("")) {
-                        item.setCategory(category);
+                    String contactEmail = iterator.next();
+                    if (! contactEmail.equals("")) {
+                        producer.setContactEmail(contactEmail);
                     }
                 }
                 if (iterator.hasNext()) {
-                    String productDesc = iterator.next();
-                    if (! productDesc.equals("")) {
-                        item.setProductDesc(productDesc);
+                    String websiteUrl = iterator.next();
+                    if (! websiteUrl.equals("")) {
+                        producer.setWebsiteUrl(websiteUrl);
                     }
                 }
                 if (iterator.hasNext()) {
-                    String productUrl = iterator.next();
-                    if (! productUrl.equals("")) {
-                        item.setProductUrl(productUrl);
+                    String photoUrl = iterator.next();
+                    if (! photoUrl.equals("")) {
+                        producer.setPhotoUrl(photoUrl);
                     }
                 }
                 if (iterator.hasNext()) {
-                    String productImageUrl = iterator.next();
-                    if (! productImageUrl.equals("")) {
-                        item.setProductImageUrl(productImageUrl);
+                    String location = iterator.next();
+                    if (! location.equals("")) {
+                        producer.setLocation(location);
                     }
                 }
-                if (iterator.hasNext()) {
-                    String unitsAvailable = iterator.next();
-                    if (! unitsAvailable.equals("")) {
-                        item.setUnitsAvailable(Integer.valueOf(unitsAvailable));
-                    }
-                }
-                if (iterator.hasNext()) {
-                    String unitDesc = iterator.next();
-                    if (! unitDesc.equals("")) {
-                        item.setUnitDesc(unitDesc);
-                    }
-                }
-                if (iterator.hasNext()) {
-                    String unitPrice = iterator.next();
-                    if (! unitPrice.equals("")) {
-                        Object o = unitPrice.replace("$", "");
-                        item.setUnitPrice(Double.parseDouble(o.toString()));
-                    }
-                }
-                if (iterator.hasNext()) {
-                    String note = iterator.next();
-                    if (! note.equals("")) {
-                        item.setNote(note);
-                    }
-                }
-                myItemMap.put(item.getIID(),item);
+                myProducerMap.put(producer.getPID(), producer);
             }
         }
     }
 
-    protected HashMap<String, Item> readFromFile(Context context) {
-        HashMap<String, Item> myItemMap = new HashMap<String, Item>();
+    protected HashMap<String, Producer> readFromFile(Context context) {
+        HashMap<String, Producer> myProducerMap = new HashMap<String, Producer>();
         try {
             // getItem the time the file was last changed here
             File myFile = new File(context.getFilesDir() +"/" + fileName);
@@ -130,7 +100,7 @@ public class ItemHub extends Hub {
             // create products from the file here
             InputStream inputStream = context.openFileInput(fileName);
             if ( inputStream != null ) {
-                parseCSV(myItemMap, inputStream);
+                parseCSV(myProducerMap, inputStream);
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
@@ -138,11 +108,11 @@ public class ItemHub extends Hub {
         } catch (IOException e) {
             Log.e(Hub.logTag, "Can not read file  (" + fileName + ") : " + e.toString());
         }
-        Log.w(Hub.logTag, "Number of items loaded: " + myItemMap.size());
-        return myItemMap;
+        Log.w(Hub.logTag, "Number of producers loaded: " + myProducerMap.size());
+        return myProducerMap;
     }
 
-    public HashMap<String, Item> getItemMap(Context context) throws IOException {
+    public HashMap<String, Producer> getProducerMap(Context context) throws IOException {
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet(dataUrl);
         try {

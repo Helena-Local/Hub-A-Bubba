@@ -12,6 +12,9 @@ public class Producer {
     private String photoUrl = "";
     private String location = "";
 
+    public Producer() {
+    }
+
     public Producer(String PID, String name, String contactEmail, String websiteUrl, String photoUrl, String location) {
         this.PID = PID;
         this.name = name;
@@ -37,6 +40,14 @@ public class Producer {
         return websiteUrl;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     public void setWebsiteUrl(String websiteUrl) {
         this.websiteUrl = websiteUrl;
     }
@@ -59,5 +70,20 @@ public class Producer {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public String toString() {
+        return "producer.PID = " + this.PID + "; producer.name = " + this.name + "; producer.contactEmail = " +
+                this.contactEmail + "; producer.websiteUrl = " + this.websiteUrl + "; producer.photoUrl = " +
+                this.photoUrl + "; producer.location = " + this.location;
+    }
+
+    public String toEmail() {
+        return "\nproducer.PID = " + this.PID + "; \nproducer.name = " + this.name + "; \nproducer.contactEmail = " + this.contactEmail + ";";
+    }
+
+    public String toCSV() {
+        return this.PID + "," + this.name + "," + this.contactEmail + "," + this.websiteUrl + "," +
+                this.photoUrl + "," + this.location;
     }
 }
