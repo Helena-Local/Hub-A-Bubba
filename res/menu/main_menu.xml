@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:helenaLocal="http://schemas.android.com/apk/res/org.helenalocal.Helena_Local_Hub">
+
+    <item android:id="@+id/refresh"
+          android:title="Refresh"
+          helenaLocal:showAsAction="ifRoom"
+          android:icon="@drawable/ic_action_refresh"/>
+
+</menu>
