@@ -2,9 +2,9 @@ package org.helenalocal.app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.*;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends FragmentActivity implements LoaderManager.LoaderCallbacks<List<Item>> {
+public class MainActivity extends ActionBarActivity implements LoaderManager.LoaderCallbacks<List<Item>> {
     private final String logTag = "MainActivity";
     public static final String HUB_TYPE_KEY = "hubType";
 
