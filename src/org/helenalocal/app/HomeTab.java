@@ -18,5 +18,4 @@ public class HomeTab extends Fragment {
         View v = inflater.inflate(R.layout.home_tab, container, false);
         return v;
     }
-
 }

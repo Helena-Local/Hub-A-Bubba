@@ -7,6 +7,7 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.View;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.*;
 import org.helenalocal.base.get.BuyerHub;
@@ -19,20 +20,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends ActionBarActivity implements LoaderManager.LoaderCallbacks<List<Item>> {
-    private final String Tag = "MainActivity";
+public class MainActivity extends ActionBarActivity {
 
-    private static final int LoaderId = 1;
+    private static final String Tag = "MainActivity";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 //        setContentView(R.layout.main_activity);
-
-//        Bundle b = new Bundle();
-//        b.putString(HUB_TYPE_KEY, "Item");
-//        getSupportLoaderManager().initLoader(LoaderId, b, this);
-
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -69,27 +64,7 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
         ViewServer.get(this).setFocusedWindow(this);
     }
 
-
-    @Override
-    public Loader onCreateLoader(int i, Bundle bundle) {
-        AsyncProductLoader loader = new AsyncProductLoader(this);
-
-//        DoThis();
-
-       return loader;
-    }
-
-    @Override
-    public void onLoadFinished(Loader<List<Item>> listLoader, List<Item> items) {
-    }
-
-
-    @Override
-    public void onLoaderReset(Loader loader) {
-
-    }
-
-    private void DoThis() {
+    public void onClick(View view) {
 
         //TODO shane -- This is a working example... Let me know if you have questions about it... :)
         // public Producer(String PID, String name, String contactEmail, String websiteUrl, String photoUrl, String location) {
