@@ -35,6 +35,7 @@ public class MainActivity extends ActionBarActivity {
         addTab(HomeTab.class, R.string.home_tab_text);
         addTab(MemberTab.class, R.string.member_tab_text);
         addTab(ProductTab.class, R.string.product_tab_text);
+        addTab(GrowerTab.class, R.string.grower_tab_text);
         addTab(RestaurantTab.class, R.string.restaurant_tab_text);
 
         ViewServer.get(this).addWindow(this);

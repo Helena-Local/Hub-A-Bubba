@@ -5,5 +5,5 @@
     <string name="home_tab_text">Home</string>
     <string name="member_tab_text">Member</string>
     <string name="product_tab_text">Products</string>
-    <string name="restaurant_tab_text">Restaurants</string>
+    <string name="restaurant_tab_text">Restaurants</string><string name="grower_tab_text">Grower</string>
 </resources>
