@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import org.helenalocal.Helena_Local_Hub.R;
@@ -19,21 +20,41 @@ import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends ActionBarActivity implements LoaderManager.LoaderCallbacks<List<Item>> {
-    private final String logTag = "MainActivity";
-    public static final String HUB_TYPE_KEY = "hubType";
+    private final String Tag = "MainActivity";
 
     private static final int LoaderId = 1;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.main_activity);
+//        setContentView(R.layout.main_activity);
 
-        Bundle b = new Bundle();
-        b.putString(HUB_TYPE_KEY, "Item");
-        getSupportLoaderManager().initLoader(LoaderId, b, this);
+//        Bundle b = new Bundle();
+//        b.putString(HUB_TYPE_KEY, "Item");
+//        getSupportLoaderManager().initLoader(LoaderId, b, this);
+
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        addTab(HomeTab.class, R.string.home_tab_text);
+        addTab(MemberTab.class, R.string.member_tab_text);
+        addTab(ProductTab.class, R.string.product_tab_text);
+        addTab(RestaurantTab.class, R.string.restaurant_tab_text);
 
         ViewServer.get(this).addWindow(this);
+    }
+
+    private void addTab(Class tabClass, int stringId) {
+
+        ActionBar actionBar = getSupportActionBar();
+
+        ActionBar.TabListener tabListener = new TabListener(this, tabClass);
+        ActionBar.Tab tab = actionBar.newTab();
+
+        tab.setText(stringId);
+        tab.setTabListener(tabListener);
+        actionBar.addTab(tab);
     }
 
     @Override
@@ -53,6 +74,23 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
     public Loader onCreateLoader(int i, Bundle bundle) {
         AsyncProductLoader loader = new AsyncProductLoader(this);
 
+//        DoThis();
+
+       return loader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Item>> listLoader, List<Item> items) {
+    }
+
+
+    @Override
+    public void onLoaderReset(Loader loader) {
+
+    }
+
+    private void DoThis() {
+
         //TODO shane -- This is a working example... Let me know if you have questions about it... :)
         // public Producer(String PID, String name, String contactEmail, String websiteUrl, String photoUrl, String location) {
         Producer producer = new Producer("P-2013-0","Western Montana Growers’ Cooperative","grower@wmgcoop.com","http://www.wmgcoop.com/","http://g.virbcdn.com/_f2/images/58/PageImage-524372-4680215-WMGC_WebBanner.jpg","Arlee, MT 59821");
@@ -71,36 +109,36 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
             ArrayList<Producer> producerArrayList = new ArrayList<Producer>(producerHub.getProducerMap(this.getApplicationContext()).values());
             for (int j = 0; j < producerArrayList.size(); j++) {
                 Producer producer2 = producerArrayList.get(j);
-                Log.w(logTag, producer2.toString());
+                Log.w(Tag, producer2.toString());
             }
 
             // get specific producer from the hash
             Producer p1 = producerHub.getProducerMap(this.getApplicationContext()).get("P-2013-1");
-            Log.w(logTag,"**** Found Newman Farm? => " + p1);
+            Log.w(Tag,"**** Found Newman Farm? => " + p1);
 
             // test orderhub...
             OrderHub orderHub = new OrderHub();
             ArrayList<Order> orderArrayList = new ArrayList<Order>(orderHub.getOrderMap(this.getApplicationContext()).values());
             for (int j = 0; j < orderArrayList.size(); j++) {
                 Order order = orderArrayList.get(j);
-                Log.w(logTag, order.toString());
+                Log.w(Tag, order.toString());
             }
 
             // get specific oder from the hash
             Order order = orderHub.getOrderMap(this.getApplicationContext()).get("O-2014-2-2-7");
-            Log.w(logTag,"**** Found Order? => " + order);
+            Log.w(Tag,"**** Found Order? => " + order);
 
             // test buyerhub...
             BuyerHub buyerHub = new BuyerHub();
             ArrayList<Buyer> buyerArrayList = new ArrayList<Buyer>(buyerHub.getBuyerMap(this.getApplicationContext()).values());
             for (int j = 0; j < buyerArrayList.size(); j++) {
                 Buyer buyer = buyerArrayList.get(j);
-                Log.w(logTag, buyer.toString());
+                Log.w(Tag, buyer.toString());
             }
 
             // get specific oder from the hash
             Buyer buyer = buyerHub.getBuyerMap(this.getApplicationContext()).get("B-2014-02");
-            Log.w(logTag,"**** Found Benny's Bistro Buyer? => " + buyer);
+            Log.w(Tag,"**** Found Benny's Bistro Buyer? => " + buyer);
 
             // test growerhub...
             // succeed
@@ -110,7 +148,7 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
             growerHub.setItem(this.getApplicationContext(), producer, item, growerAgreementId);
         } catch (Exception e) {
             // use email which will use smtp, so no need to retry, clean up, etc.
-            Log.w(logTag, "e = " + e.toString());
+            Log.w(Tag, "e = " + e.toString());
 
             Intent email = new Intent(Intent.ACTION_SEND);
             email.putExtra(Intent.EXTRA_EMAIL, new String[]{ Hub.HUB_EMAIL_TO });
@@ -124,16 +162,5 @@ public class MainActivity extends ActionBarActivity implements LoaderManager.Loa
             email.setType("message/rfc822");
             startActivity(Intent.createChooser(email, "Choose an Email client :"));
         }
-        return loader;
-    }
-
-    @Override
-    public void onLoadFinished(Loader<List<Item>> listLoader, List<Item> items) {
-    }
-
-
-    @Override
-    public void onLoaderReset(Loader loader) {
-
     }
 }
