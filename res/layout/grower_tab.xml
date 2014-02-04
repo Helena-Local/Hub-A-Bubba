@@ -9,7 +9,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/grower_tab_text"
-            android:id="@+id/textView" android:layout_gravity="center_horizontal"/>
+            android:text="@string/grower_tab_welcome"
+            android:id="@+id/textView" android:layout_gravity="center_horizontal"
+            android:layout_margin="15dp"/>
+
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/growerListView"/>
 
 </LinearLayout>

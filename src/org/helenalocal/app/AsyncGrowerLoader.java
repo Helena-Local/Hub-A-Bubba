@@ -3,53 +3,54 @@ package org.helenalocal.app;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
-import org.helenalocal.base.Item;
-import org.helenalocal.base.get.ItemHub;
+import org.helenalocal.base.Producer;
+import org.helenalocal.base.get.ProducerHub;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class AsyncProductLoader extends AsyncTaskLoader<List<Item>> {
-    private static final String Tag = "AsyncProductLoader";
-    private List<Item> _itemList;
 
-    public AsyncProductLoader(Context context) {
+public class AsyncGrowerLoader extends AsyncTaskLoader<List<Producer>> {
+
+    private final String Tag = "AsyncGrowerLoader";
+    private List<Producer> _growerList;
+
+    public AsyncGrowerLoader(Context context) {
         super(context);
     }
 
     @Override
-    public List<Item> loadInBackground() {
+    public List<Producer> loadInBackground() {
 
         Log.w(Tag, "**** Starting fetch for items....");
+
         try {
-            ItemHub itemHub = new ItemHub();
-            HashMap<String, Item> itemMap = itemHub.getItemMap(getContext());
-            _itemList = new ArrayList<Item>(itemMap.values());
+            ProducerHub producerHub = new ProducerHub();
+            _growerList = new ArrayList<Producer>(producerHub.getProducerMap(getContext()).values());
 
-            Log.w(Tag, "Data last refreshed on " + itemHub.getLastRefreshTS().getTime());
+            Log.w(Tag, "Data last refreshed on " + producerHub.getLastRefreshTS().getTime());
 
-            for (Item p : _itemList) {
+            for (Producer p : _growerList) {
                 Log.w(Tag, p.toString());
-            }
+        }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         Log.w(Tag,"**** Ending fetch for items");
 
-        return _itemList;
+        return _growerList;
     }
 
     @Override
-    public void deliverResult(List<Item> data) {
+    public void deliverResult(List<Producer> data) {
         if (isReset()) {
             // ignore the results. Release resources as needed.
             return;
         }
 
-        List<Item> oldList = _itemList;
-        _itemList = data;
+        List<Producer> oldList = _growerList;
+        _growerList = data;
 
         if (isStarted()) {
             super.deliverResult(data);
@@ -58,9 +59,9 @@ public class AsyncProductLoader extends AsyncTaskLoader<List<Item>> {
 
     @Override
     protected void onStartLoading() {
-        if (_itemList != null) {
+        if (_growerList != null) {
             // we already have data so send it off.
-            deliverResult(_itemList);
+            deliverResult(_growerList);
         }
         else {
             forceLoad();
@@ -75,6 +76,6 @@ public class AsyncProductLoader extends AsyncTaskLoader<List<Item>> {
     @Override
     protected void onReset() {
         onStopLoading();
-        _itemList = null;
+        _growerList = null;
     }
 }

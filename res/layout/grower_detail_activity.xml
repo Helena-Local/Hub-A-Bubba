@@ -8,10 +8,10 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/restaurant_tab_welcome"
-            android:id="@+id/textView"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/grower_detail_welcome"
+            android:id="@+id/welcomeTextView"
             android:layout_gravity="center_horizontal"
+            android:typeface="serif"
             android:layout_margin="15dp"/>
-
 </LinearLayout>

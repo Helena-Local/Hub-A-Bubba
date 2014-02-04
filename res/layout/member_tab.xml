@@ -9,6 +9,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/member_tab_text"
-            android:id="@+id/textView" android:layout_gravity="center_horizontal"/>
+            android:text="@string/member_tab_welcome"
+            android:id="@+id/textView" android:layout_gravity="center_horizontal" android:layout_margin="15dp"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Click for grower details"
+            android:id="@+id/growerButton" android:layout_gravity="center_horizontal"/>
 </LinearLayout>

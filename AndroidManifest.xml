@@ -22,5 +22,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="org.helenalocal.app.GrowerDetailActivity"/>
+        <activity android:name="org.helenalocal.app.GrowerListArrayAdapter"/>
+
     </application>
 </manifest> 
