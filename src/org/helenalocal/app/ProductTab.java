@@ -25,15 +25,12 @@ public class ProductTab extends Fragment implements LoaderManager.LoaderCallback
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.w(Tag, "onCreateView");
         return inflater.inflate(R.layout.product_tab, container, false);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        Log.w(Tag, "onActivityCreated");
 
         _itemList = new ArrayList<Item>();
         _arrayAdapter = new ProductItemAdapter(getActivity(), R.layout.product_view, _itemList);
