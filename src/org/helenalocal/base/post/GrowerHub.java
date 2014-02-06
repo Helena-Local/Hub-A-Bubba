@@ -23,7 +23,6 @@ import java.util.List;
  * Created by abbie on 1/24/14.
  */
 public class GrowerHub extends Hub {
-    String fileName = "HL-GrowerHub.csv";
     protected String dataUrl = "https://docs.google.com/forms/d/14aZGVPlxgr6-9wH6OLyZfuSH-mF6vVJjzAbFxyRaqRc/formResponse";
 
     public GrowerHub() {
