@@ -1,5 +1,6 @@
 package org.helenalocal.app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -11,6 +12,7 @@ import android.view.View;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.*;
 import org.helenalocal.base.get.BuyerHub;
+import org.helenalocal.base.get.ItemHub;
 import org.helenalocal.base.get.OrderHub;
 import org.helenalocal.base.get.ProducerHub;
 import org.helenalocal.base.post.GrowerHub;
@@ -19,13 +21,27 @@ import org.helenalocal.utils.ViewServer;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends ActionBarActivity {
 
     private static final String Tag = "MainActivity";
 
+    private static void initGetHubs(Context _context) {
+        // schedule hub refreshes...
+        ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(4);
+        exec.scheduleWithFixedDelay(new BuyerHub(_context), 0, Hub.buyerDelay, TimeUnit.MINUTES);
+        exec.scheduleWithFixedDelay(new ItemHub(_context), 0, Hub.itemDelay, TimeUnit.MINUTES);
+        exec.scheduleWithFixedDelay(new OrderHub(_context), 0, Hub.orderDelay, TimeUnit.MINUTES);
+        exec.scheduleWithFixedDelay(new ProducerHub(_context), 0, Hub.producerDelay, TimeUnit.MINUTES);
+    }
+
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+         super.onCreate(savedInstanceState);
+
+        // init all hubs which are all individual scheduled threads
+        initGetHubs(this.getApplicationContext());
 
 //        setContentView(R.layout.main_activity);
 

@@ -3,6 +3,7 @@ package org.helenalocal.app;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
+import org.helenalocal.base.Hub;
 import org.helenalocal.base.Producer;
 import org.helenalocal.base.get.ProducerHub;
 
@@ -21,25 +22,7 @@ public class AsyncGrowerLoader extends AsyncTaskLoader<List<Producer>> {
 
     @Override
     public List<Producer> loadInBackground() {
-
-        Log.w(Tag, "**** Starting fetch for items....");
-
-        try {
-            ProducerHub producerHub = new ProducerHub();
-            _growerList = new ArrayList<Producer>(producerHub.getProducerMap(getContext()).values());
-
-            Log.w(Tag, "Data last refreshed on " + producerHub.getLastRefreshTS().getTime());
-
-            for (Producer p : _growerList) {
-                Log.w(Tag, p.toString());
-        }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Log.w(Tag,"**** Ending fetch for items");
-
-        return _growerList;
+        return new ArrayList<Producer>(Hub.producerMap.values());
     }
 
     @Override
