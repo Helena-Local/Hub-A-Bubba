@@ -2,6 +2,7 @@ package org.helenalocal.base;
 
 /**
  * Created by abbie on 2/2/14.
+ *
  */
 public class Buyer {
     private String BID = "";
