@@ -19,12 +19,15 @@ import java.util.*;
 /**
  * Created by abbie on 1/24/14.
  */
-public class ItemHub extends Hub {
-    String fileName = "HL-ItemHub.csv";
+public class ItemHub extends Hub implements Runnable {
+    private static Context context;
+    private static Calendar lastRefreshTS;
+    private String fileName = "HL-ItemHub.csv";
     protected String dataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=1&output=csv";
 
 
-    public ItemHub() {
+    public ItemHub(Context context) {
+        this.context = context;
         logTag = "ItemHub ";
     }
 
@@ -142,7 +145,7 @@ public class ItemHub extends Hub {
         return myItemMap;
     }
 
-    public HashMap<String, Item> getItemMap(Context context) throws IOException {
+    public HashMap<String, Item> getItemMap() throws IOException {
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet(dataUrl);
         try {
@@ -161,4 +164,20 @@ public class ItemHub extends Hub {
         // regardless of net work with file
         return readFromFile(context);
     }
+
+    public static Calendar getLastRefreshTS() {
+        return lastRefreshTS;
+    }
+
+    @Override
+    public void run() {
+        try {
+            Hub.itemMap = new ItemHub(context).getItemMap();
+            Log.w(logTag,"ItemHub().getItemMap loaded...");
+        } catch (IOException e) {
+            Log.w(logTag,"ItemHub().getItemMap couldn't be loaded...");
+        }
+
+    }
+
 }

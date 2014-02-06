@@ -14,18 +14,22 @@ import org.helenalocal.base.Producer;
 import java.io.*;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 
 /**
  * Created by abbie on 1/24/14.
  */
-public class BuyerHub extends Hub {
-    String fileName = "HL-BuyerHub.csv";
+public class BuyerHub extends Hub implements Runnable {
+    private static Context context;
+    private static Calendar lastRefreshTS;
+    private String fileName = "HL-BuyerHub.csv";
     protected String dataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=4&output=csv";
 
 
-    public BuyerHub() {
+    public BuyerHub(Context context) {
+        this.context = context;
         logTag = "BuyerHub ";
     }
 
@@ -130,7 +134,7 @@ public class BuyerHub extends Hub {
         return myBuyerMap;
     }
 
-    public HashMap<String, Buyer> getBuyerMap(Context context) throws IOException {
+    public HashMap<String, Buyer> getBuyerMap() throws IOException {
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet(dataUrl);
         try {
@@ -148,5 +152,20 @@ public class BuyerHub extends Hub {
 
         // regardless of net work with file
         return readFromFile(context);
+    }
+
+    public static Calendar getLastRefreshTS() {
+        return lastRefreshTS;
+    }
+
+    @Override
+    public void run() {
+        try {
+            Hub.buyerMap = new BuyerHub(context).getBuyerMap();
+            Log.w(logTag,"BuyerHub().getBuyerMap loaded...");
+        } catch (IOException e) {
+            Log.w(logTag,"BuyerHub().getBuyerMap couldn't be loaded...");
+        }
+
     }
 }

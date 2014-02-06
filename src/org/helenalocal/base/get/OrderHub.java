@@ -14,18 +14,22 @@ import org.helenalocal.base.Producer;
 import java.io.*;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 
 /**
  * Created by abbie on 1/24/14.
  */
-public class OrderHub extends Hub {
-    String fileName = "HL-OrderHub.csv";
+public class OrderHub extends Hub implements Runnable {
+    private static Context context;
+    private static Calendar lastRefreshTS;
+    private String fileName = "HL-OrderHub.csv";
     protected String dataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=2&output=csv";
 
 
-    public OrderHub() {
+    public OrderHub(Context context) {
+        this.context = context;
         logTag = "OrderHub ";
     }
 
@@ -111,7 +115,7 @@ public class OrderHub extends Hub {
         return myOrderMap;
     }
 
-    public HashMap<String, Order> getOrderMap(Context context) throws IOException {
+    public HashMap<String, Order> getOrderMap() throws IOException {
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet(dataUrl);
         try {
@@ -130,4 +134,20 @@ public class OrderHub extends Hub {
         // regardless of net work with file
         return readFromFile(context);
     }
+
+    public static Calendar getLastRefreshTS() {
+        return lastRefreshTS;
+    }
+
+    @Override
+    public void run() {
+        try {
+            Hub.orderMap = new OrderHub(context).getOrderMap();
+            Log.w(logTag,"OrderHub().getOrderMap loaded...");
+        } catch (IOException e) {
+            Log.w(logTag,"OrderHub().getOrderMap couldn't be loaded...");
+        }
+
+    }
+
 }

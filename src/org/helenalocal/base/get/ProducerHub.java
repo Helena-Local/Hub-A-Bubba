@@ -14,18 +14,22 @@ import org.helenalocal.base.Producer;
 import java.io.*;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 
 /**
  * Created by abbie on 1/24/14.
  */
-public class ProducerHub extends Hub {
-    String fileName = "HL-ProducerHub.csv";
+public class ProducerHub extends Hub implements Runnable {
+    private static Context context;
+    private static Calendar lastRefreshTS;
+    private String fileName = "HL-ProducerHub.csv";
     protected String dataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=3&output=csv";
 
 
-    public ProducerHub() {
+    public ProducerHub(Context context) {
+        this.context = context;
         logTag = "ProducerHub ";
     }
 
@@ -112,7 +116,7 @@ public class ProducerHub extends Hub {
         return myProducerMap;
     }
 
-    public HashMap<String, Producer> getProducerMap(Context context) throws IOException {
+    public HashMap<String, Producer> getProducerMap() throws IOException {
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet(dataUrl);
         try {
@@ -130,5 +134,20 @@ public class ProducerHub extends Hub {
 
         // regardless of net work with file
         return readFromFile(context);
+    }
+
+    public static Calendar getLastRefreshTS() {
+        return lastRefreshTS;
+    }
+
+    @Override
+    public void run() {
+        try {
+            Hub.producerMap = new ProducerHub(context).getProducerMap();
+            Log.w(logTag,"ProducerHub().getProducerMap loaded...");
+        } catch (IOException e) {
+            Log.w(logTag,"ProducerHub().getProducerMap couldn't be loaded...");
+        }
+
     }
 }
