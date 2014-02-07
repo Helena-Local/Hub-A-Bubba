@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import org.helenalocal.Helena_Local_Hub.R;
+import org.helenalocal.app.service.HubUpdateService;
 import org.helenalocal.base.*;
 import org.helenalocal.base.get.BuyerHub;
 import org.helenalocal.base.get.OrderHub;
@@ -37,6 +38,8 @@ public class MainActivity extends ActionBarActivity {
         addTab(ProductTab.class, R.string.product_tab_text);
         addTab(GrowerTab.class, R.string.grower_tab_text);
         addTab(RestaurantTab.class, R.string.restaurant_tab_text);
+
+//        startService(new Intent(this, HubUpdateService.class));
 
         ViewServer.get(this).addWindow(this);
     }
