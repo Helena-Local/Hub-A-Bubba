@@ -27,7 +27,10 @@ public class MainActivity extends ActionBarActivity {
     private static ScheduledFuture<?> producerHubScheduledFuture;
     private static ScheduledFuture<?> certificationHubScheduledFuture;
 
+    private static final String LAST_SELECTED_TAB = "LastSelectedTab";
     private static final String Tag = "MainActivity";
+
+    private int _lastSelectedTab = 0;
 
     private void addTab(Class tabClass, int stringId) {
         ActionBar actionBar = getSupportActionBar();
@@ -76,39 +79,42 @@ public class MainActivity extends ActionBarActivity {
         addTab(GrowerTab.class, R.string.grower_tab_text);
         addTab(RestaurantTab.class, R.string.restaurant_tab_text);
 
+        if (savedInstanceState != null) {
+            _lastSelectedTab = savedInstanceState.getInt(LAST_SELECTED_TAB);
+        }
+
 //        startService(new Intent(this, HubUpdateService.class));
 
         ViewServer.get(this).addWindow(this);
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-    }
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
+        outState.putInt(LAST_SELECTED_TAB, _lastSelectedTab);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        getSupportActionBar().getTabAt(_lastSelectedTab).select();
+
         startHubThreads(this);
         Log.w(Tag, "Scheduled hub refreshes...");
+
         ViewServer.get(this).setFocusedWindow(this);
     }
 
     @Override
     protected void onPause() {
+        super.onPause();
+
+        _lastSelectedTab = getSupportActionBar().getSelectedTab().getPosition();
+
         stopHubThreads();
         Log.w(Tag, "Stopped hub refreshes...");
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 
     @Override
