@@ -1,7 +1,12 @@
+/*
+ * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+ */
+
 package org.helenalocal.base.test;
 
 import org.helenalocal.base.Item;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -20,5 +25,7 @@ public class Main {
             System.out.println("No MOCK products found....");
         }
         System.out.println("**** Ending fetch test for MOCK....");
+
+        System.out.println("Calendar.getInstance().get(Calendar.DAY_OF_WEEK) = " + Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
     }
 }

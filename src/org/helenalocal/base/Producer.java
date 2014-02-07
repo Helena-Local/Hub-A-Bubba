@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+ */
+
 package org.helenalocal.base;
 
 
@@ -11,17 +15,21 @@ public class Producer {
     private String websiteUrl = "";
     private String photoUrl = "";
     private String location = "";
+    private String certificationID = "";
+    private String quote = "";
 
     public Producer() {
     }
 
-    public Producer(String PID, String name, String contactEmail, String websiteUrl, String photoUrl, String location) {
+    public Producer(String PID, String name, String contactEmail, String websiteUrl, String photoUrl, String location, String certificationID, String quote) {
         this.PID = PID;
         this.name = name;
         this.contactEmail = contactEmail;
         this.websiteUrl = websiteUrl;
         this.photoUrl = photoUrl;
         this.location = location;
+        this.certificationID = certificationID;
+        this.quote = quote;
     }
 
     public String getPhotoUrl() {
@@ -42,6 +50,22 @@ public class Producer {
 
     public String getLocation() {
         return location;
+    }
+
+    public String getCertificationID() {
+        return certificationID;
+    }
+
+    public String getQuote() {
+        return quote;
+    }
+
+    public void setQuote(String quote) {
+        this.quote = quote;
+    }
+
+    public void setCertificationID(String certificationID) {
+        this.certificationID = certificationID;
     }
 
     public void setLocation(String location) {
@@ -75,7 +99,8 @@ public class Producer {
     public String toString() {
         return "producer.PID = " + this.PID + "; producer.name = " + this.name + "; producer.contactEmail = " +
                 this.contactEmail + "; producer.websiteUrl = " + this.websiteUrl + "; producer.photoUrl = " +
-                this.photoUrl + "; producer.location = " + this.location;
+                this.photoUrl + "; producer.location = " + this.location + "; producer.certificationID" + certificationID
+                + "; quote = " + quote;
     }
 
     public String toEmail() {
@@ -84,6 +109,6 @@ public class Producer {
 
     public String toCSV() {
         return this.PID + "," + this.name + "," + this.contactEmail + "," + this.websiteUrl + "," +
-                this.photoUrl + "," + this.location;
+                this.photoUrl + "," + this.location + "," + certificationID + "," + quote;
     }
 }

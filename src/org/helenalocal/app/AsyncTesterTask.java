@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+ */
+
 package org.helenalocal.app;
 
 import android.content.Context;
@@ -5,17 +9,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import org.helenalocal.base.*;
-import org.helenalocal.base.get.BuyerHub;
-import org.helenalocal.base.get.ItemHub;
-import org.helenalocal.base.get.OrderHub;
-import org.helenalocal.base.get.ProducerHub;
-import org.helenalocal.base.post.GrowerHub;
+import org.helenalocal.base.get.InitHub;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
 
@@ -32,7 +29,7 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
 
         //TODO shane -- This is a working example... Let me know if you have questions about it... :)
         // public Producer(String PID, String name, String contactEmail, String websiteUrl, String photoUrl, String location) {
-        Producer producer = new Producer("P-2013-0","Western Montana Growers’ Cooperative","grower@wmgcoop.com","http://www.wmgcoop.com/","http://g.virbcdn.com/_f2/images/58/PageImage-524372-4680215-WMGC_WebBanner.jpg","Arlee, MT 59821");
+        Producer producer = new Producer("P-2013-0", "Western Montana Growers’ Cooperative", "grower@wmgcoop.com", "http://www.wmgcoop.com/", "http://g.virbcdn.com/_f2/images/58/PageImage-524372-4680215-WMGC_WebBanner.jpg", "Arlee, MT 59821", "C-0", "This day...");
 
         // public Item(String IID,Producer producer,boolean inCsaThisWeek, String category, String productDesc, String productUrl, String productImageUrl, Integer unitsAvailable,
         //        String unitDesc, Double unitPrice, Calendar deliveryDate, String note) {
@@ -42,6 +39,13 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
         // growerAgreementId only needed from UI submit... Not part of the item object.
         String growerAgreementId = "N/A";
         try {
+            //TODO shane - set this from a button click for sample data or real data -- Only sample exists for now...
+            HubInit.setInitHubDataUrl("https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=5&output=csv");
+            // after init hub runs all other hubs need to reload!
+            new InitHub(_context).run();
+            MainActivity.stopHubThreads();
+            MainActivity.startHubThreads(_context);
+
             // test producerhub...
             ArrayList<Producer> producerArrayList = new ArrayList<Producer>(Hub.producerMap.values());
             for (int j = 0; j < producerArrayList.size(); j++) {
@@ -60,7 +64,15 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
                 Log.w(Tag, order.toString());
             }
 
+            // test orderhub...
+            ArrayList<Certification> certificationArrayList = new ArrayList<Certification>(Hub.certificationMap.values());
+            for (int j = 0; j < certificationArrayList.size(); j++) {
+                Certification certification = certificationArrayList.get(j);
+                Log.w(Tag, certification.toString());
+            }
+
             // get specific oder from the hash
+            //TODO kevin the order key is the buyerID change this.
             Order order = Hub.orderMap.get("O-2014-2-2-7");
             Log.w(Tag,"**** Found Order? => " + order);
 
@@ -86,8 +98,8 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
             Log.w(Tag, "e = " + e.toString());
 
             email = new Intent(Intent.ACTION_SEND);
-            email.putExtra(Intent.EXTRA_EMAIL, new String[]{ Hub.HUB_EMAIL_TO });
-            email.putExtra(Intent.EXTRA_SUBJECT, Hub.HUB_EMAIL_SUBJECT);
+            email.putExtra(Intent.EXTRA_EMAIL, new String[]{HubInit.getHubEmailTo()});
+            email.putExtra(Intent.EXTRA_SUBJECT, HubInit.getHubEmailSubject());
             email.putExtra(Intent.EXTRA_TEXT, "We found a problem submitting your data to the Helena Local Hub... Click the send button for this email and we'll send the request to Helena Local for you... Next time you have a good network " +
                     "connection synchronize your email, then check your sent folder to make sure it went out.  Call us @ 406-219-1414 if you have questions or concerns.  " +
                     "\n\nDetails follow: \n-----------------" + producer.toEmail() + "\n+++++++++" + item.toEmail(growerAgreementId) + "\n-----------------");

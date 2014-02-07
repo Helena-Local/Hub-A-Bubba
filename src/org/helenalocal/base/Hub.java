@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+ */
+
 package org.helenalocal.base;
 
 import android.content.Context;
@@ -12,24 +16,17 @@ import java.util.HashMap;
 /**
  * Created by abbie on 1/24/14.
  */
-public abstract class Hub {
-    protected static String logTag = "Hub ";
-    public static final String HUB_EMAIL_TO = "info@helenalocal.org";
-    public static final String HUB_EMAIL_SUBJECT = "HL Hub - Request email...";
+public abstract class Hub extends HubInit {
 
-    // the delay between the termination of one execution and the commencement of the next
-    // defaults set below
-    public static long buyerDelay = 2;
     public static HashMap<String, Buyer> buyerMap = new HashMap<String, Buyer>();
 
-    public static long itemDelay = 1;
     public static HashMap<String, Item> itemMap = new HashMap<String, Item>();
 
-    public static long orderDelay = 2;
     public static HashMap<String, Order> orderMap = new HashMap<String, Order>();
 
-    public static long producerDelay = 2;
     public static HashMap<String, Producer> producerMap = new HashMap<String, Producer>();
+
+    public static HashMap<String, Certification> certificationMap = new HashMap<String, Certification>();
 
     public static GrowerHub growerHub = new GrowerHub();
 
@@ -40,37 +37,21 @@ public abstract class Hub {
             outputStreamWriter.write(data);
             outputStreamWriter.close();
         } catch (IOException e) {
-            Log.e(Hub.logTag, "File (" + fileName + ") write failed: " + e.toString());
+            Log.e(HubInit.logTag, "File (" + fileName + ") write failed: " + e.toString());
         }
     }
 
-    protected void writeToFile(Context context,BufferedReader rd, String fileName) {
+    protected void writeToFile(Context context, BufferedReader rd, String fileName) {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_PRIVATE));
             String line = "";
             while ((line = rd.readLine()) != null) {
-                outputStreamWriter.write(line +'\n');
+                outputStreamWriter.write(line + '\n');
             }
             outputStreamWriter.close();
         } catch (IOException e) {
-            Log.e(Hub.logTag, "File (" + fileName + ") write failed: " + e.toString());
+            Log.e(HubInit.logTag, "File (" + fileName + ") write failed: " + e.toString());
         }
-    }
-
-    public static void setItemDelay(long itemDelay) {
-        Hub.itemDelay = itemDelay;
-    }
-
-    public static void setBuyerDelay(long buyerDelay) {
-        Hub.buyerDelay = buyerDelay;
-    }
-
-    public static void setOrderDelay(long orderDelay) {
-        Hub.orderDelay = orderDelay;
-    }
-
-    public static void setProducerDelay(long producerDelay) {
-        Hub.producerDelay = producerDelay;
     }
 
 }

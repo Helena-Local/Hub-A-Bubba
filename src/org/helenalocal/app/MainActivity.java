@@ -4,17 +4,15 @@
 
 package org.helenalocal.app;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import org.helenalocal.Helena_Local_Hub.R;
-import org.helenalocal.base.Hub;
-import org.helenalocal.base.get.BuyerHub;
-import org.helenalocal.base.get.ItemHub;
-import org.helenalocal.base.get.OrderHub;
-import org.helenalocal.base.get.ProducerHub;
+import org.helenalocal.base.HubInit;
+import org.helenalocal.base.get.*;
 import org.helenalocal.utils.ViewServer;
 
 import java.util.concurrent.ScheduledFuture;
@@ -22,37 +20,14 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends ActionBarActivity {
-    private static ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(4);
-    ScheduledFuture buyerHubScheduledFuture;
-    ScheduledFuture<?> itemHubScheduledFuture;
-    ScheduledFuture<?> orderHubScheduledFuture;
-    ScheduledFuture<?> producerHubScheduledFuture;
+    private static ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(5);
+    private static ScheduledFuture buyerHubScheduledFuture;
+    private static ScheduledFuture<?> itemHubScheduledFuture;
+    private static ScheduledFuture<?> orderHubScheduledFuture;
+    private static ScheduledFuture<?> producerHubScheduledFuture;
+    private static ScheduledFuture<?> certificationHubScheduledFuture;
 
     private static final String Tag = "MainActivity";
-
-    private void startHubThreads() {
-        Log.w(Tag, "startHubThreads exec.getQueue().size() = " + exec.getQueue().size());
-        // schedule hub refreshes...
-        buyerHubScheduledFuture = exec.scheduleWithFixedDelay(new BuyerHub(this), 0, Hub.buyerDelay, TimeUnit.MINUTES);
-        itemHubScheduledFuture = exec.scheduleWithFixedDelay(new ItemHub(this), 0, Hub.itemDelay, TimeUnit.MINUTES);
-        orderHubScheduledFuture = exec.scheduleWithFixedDelay(new OrderHub(this), 0, Hub.orderDelay, TimeUnit.MINUTES);
-        producerHubScheduledFuture = exec.scheduleWithFixedDelay(new ProducerHub(this), 0, Hub.producerDelay, TimeUnit.MINUTES);
-        Log.w(Tag, "startHubThreads exec.getQueue().size() = " + exec.getQueue().size());
-    }
-
-    private void stopHubThreads() {
-        Log.w(Tag, "stopHubThreads exec.getQueue().size() = " + exec.getQueue().size());
-        if (exec.getQueue().size() != 0) {
-            buyerHubScheduledFuture.cancel(false);
-            itemHubScheduledFuture.cancel(false);
-            orderHubScheduledFuture.cancel(false);
-            producerHubScheduledFuture.cancel(false);
-        }
-        exec.shutdownNow();
-        exec = null;
-        exec = new ScheduledThreadPoolExecutor(4);
-        Log.w(Tag, "stopHubThreads exec.getQueue().size() = " + exec.getQueue().size());
-    }
 
     private void addTab(Class tabClass, int stringId) {
         ActionBar actionBar = getSupportActionBar();
@@ -61,6 +36,32 @@ public class MainActivity extends ActionBarActivity {
         tab.setText(stringId);
         tab.setTabListener(tabListener);
         actionBar.addTab(tab);
+    }
+
+    public static void startHubThreads(Context context) {
+        Log.w(Tag, "startHubThreads exec.getQueue().size() = " + exec.getQueue().size());
+        // schedule hub refreshes...
+        buyerHubScheduledFuture = exec.scheduleWithFixedDelay(new BuyerHub(context), 0, HubInit.getBuyerDelay(), TimeUnit.MINUTES);
+        itemHubScheduledFuture = exec.scheduleWithFixedDelay(new ItemHub(context), 0, HubInit.getItemDelay(), TimeUnit.MINUTES);
+        orderHubScheduledFuture = exec.scheduleWithFixedDelay(new OrderHub(context), 0, HubInit.getOrderDelay(), TimeUnit.MINUTES);
+        producerHubScheduledFuture = exec.scheduleWithFixedDelay(new ProducerHub(context), 0, HubInit.getProducerDelay(), TimeUnit.MINUTES);
+        certificationHubScheduledFuture = exec.scheduleWithFixedDelay(new CertificationHub(context), 0, HubInit.getCertificateDelay(), TimeUnit.MINUTES);
+        Log.w(Tag, "startHubThreads exec.getQueue().size() = " + exec.getQueue().size());
+    }
+
+    public static void stopHubThreads() {
+        Log.w(Tag, "stopHubThreads exec.getQueue().size() = " + exec.getQueue().size());
+        if (exec.getQueue().size() != 0) {
+            buyerHubScheduledFuture.cancel(false);
+            itemHubScheduledFuture.cancel(false);
+            orderHubScheduledFuture.cancel(false);
+            producerHubScheduledFuture.cancel(false);
+            certificationHubScheduledFuture.cancel(false);
+        }
+        exec.shutdownNow();
+        exec = null;
+        exec = new ScheduledThreadPoolExecutor(4);
+        Log.w(Tag, "stopHubThreads exec.getQueue().size() = " + exec.getQueue().size());
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -91,7 +92,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onResume() {
         super.onResume();
-        startHubThreads();
+        startHubThreads(this);
         Log.w(Tag, "Scheduled hub refreshes...");
         ViewServer.get(this).setFocusedWindow(this);
     }
