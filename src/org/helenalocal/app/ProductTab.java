@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import org.helenalocal.Helena_Local_Hub.R;
+import org.helenalocal.base.Hub;
 import org.helenalocal.base.Item;
 
 import java.util.ArrayList;
@@ -37,12 +38,18 @@ public class ProductTab extends Fragment implements LoaderManager.LoaderCallback
         ListView listView = (ListView)getActivity().findViewById(R.id.productListView);
         listView.setAdapter(_arrayAdapter);
 
-        getActivity().getSupportLoaderManager().initLoader(LoaderId, null, this);
+//        getActivity().getSupportLoaderManager().initLoader(LoaderId, null, this);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        _itemList.addAll(Hub.itemMap.values());
+        _arrayAdapter.notifyDataSetChanged();
+    }
 
-    // ***
+// ***
     // LoaderManager callbacks
     // ***
 
