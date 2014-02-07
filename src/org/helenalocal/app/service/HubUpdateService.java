@@ -66,8 +66,8 @@ public class HubUpdateService extends IntentService {
         Log.w(Tag, "**** Starting fetch for items....");
 
         try {
-            ItemHub itemHub = new ItemHub();
-            _itemMap = itemHub.getItemMap(context);
+            ItemHub itemHub = new ItemHub(context);
+            _itemMap = itemHub.getItemMap();
             List<Item> itemList = new ArrayList<Item>(_itemMap.values());
 
             Log.w(Tag, "Data last refreshed on " + itemHub.getLastRefreshTS().getTime());
@@ -88,8 +88,8 @@ public class HubUpdateService extends IntentService {
         Log.w(Tag, "**** Starting fetch for producers....");
 
         try {
-            ProducerHub producerHub = new ProducerHub();
-            _producerMap = producerHub.getProducerMap(context);
+            ProducerHub producerHub = new ProducerHub(context);
+            _producerMap = producerHub.getProducerMap();
             List<Producer> producerList = new ArrayList<Producer>(_producerMap.values());
 
             Log.w(Tag, "Data last refreshed on " + producerHub.getLastRefreshTS().getTime());
@@ -110,8 +110,8 @@ public class HubUpdateService extends IntentService {
         Log.w(Tag, "**** Starting fetch for buyers....");
 
         try {
-            BuyerHub buyerHub = new BuyerHub();
-            _buyerMap = buyerHub.getBuyerMap(context);
+            BuyerHub buyerHub = new BuyerHub(context);
+            _buyerMap = buyerHub.getBuyerMap();
             ArrayList<Buyer> buyerList = new ArrayList<Buyer>(_buyerMap.values());
 
             for (Buyer b : buyerList) {

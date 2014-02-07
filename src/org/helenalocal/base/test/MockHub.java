@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+ */
+
 package org.helenalocal.base.test;
 
 import android.content.Context;
@@ -16,7 +20,7 @@ public class MockHub extends Hub {
     public List<Item> getItems(Context context) {
         ArrayList<Item> myItems = new ArrayList<Item>();
         // public Producer(String PID, String name, String contactEmail, String websiteUrl, String photoUrl, String location) {
-        Producer producer = new Producer("P-2013-0","Western Montana Growers’ Cooperative","grower@wmgcoop.com","http://www.wmgcoop.com/","http://g.virbcdn.com/_f2/images/58/PageImage-524372-4680215-WMGC_WebBanner.jpg","Arlee, MT 59821");
+        Producer producer = new Producer("P-2013-0", "Western Montana Growers’ Cooperative", "grower@wmgcoop.com", "http://www.wmgcoop.com/", "http://g.virbcdn.com/_f2/images/58/PageImage-524372-4680215-WMGC_WebBanner.jpg", "Arlee, MT 59821", "C-0", "This day..");
         // public Item(String IID,Producer producer,boolean inCsaThisWeek, String category, String productDesc, String productUrl, String productImageUrl, Integer unitsAvailable,
         //        String unitDesc, Double unitPrice, Calendar deliveryDate, String note) {
         myItems.add(new Item("I-2014-2-2-3","P-2013-0", true, "Produce", "Leeks","http://en.wikipedia.org/wiki/Leek‎",

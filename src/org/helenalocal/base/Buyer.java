@@ -1,7 +1,12 @@
+/*
+ * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+ */
+
 package org.helenalocal.base;
 
 /**
  * Created by abbie on 2/2/14.
+ *
  */
 public class Buyer {
     private String BID = "";
@@ -13,13 +18,14 @@ public class Buyer {
     private String photoUrl = "";
     private String location = "";
     private String serviceLevel = "";
+    private String certificationID = "";
     private String lastOrderDate = "";
 
     public Buyer() {
 
     }
 
-    public Buyer(String BID, String name, String contactEmail, String hours, String phone, String websiteUrl, String photoUrl, String location, String lastOrderDate) {
+    public Buyer(String BID, String name, String contactEmail, String hours, String phone, String websiteUrl, String photoUrl, String location, String certificationID, String lastOrderDate) {
         this.BID = BID;
         this.name = name;
         this.contactEmail = contactEmail;
@@ -28,6 +34,7 @@ public class Buyer {
         this.websiteUrl = websiteUrl;
         this.photoUrl = photoUrl;
         this.location = location;
+        this.certificationID = certificationID;
         this.lastOrderDate = lastOrderDate;
     }
 
@@ -65,6 +72,14 @@ public class Buyer {
 
     public String getHours() {
         return hours;
+    }
+
+    public String getCertificationID() {
+        return certificationID;
+    }
+
+    public void setCertificationID(String certificationID) {
+        this.certificationID = certificationID;
     }
 
     public void setHours(String hours) {
@@ -114,6 +129,6 @@ public class Buyer {
     public String toString() {
         return "BID = " + BID + "; name = " + name + "; contactEmail = " + contactEmail
                 + "; hours = " + hours + "; phone = " + phone + "; websiteUrl = " + websiteUrl + "; photoUrl = "
-                + photoUrl + "; location = " + location + "; lastOrderDate = " + lastOrderDate;
+                + photoUrl + "; location = " + location + "; lastOrderDate = " + lastOrderDate + "; certificationID = " + certificationID;
     }
 }

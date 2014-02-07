@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+ */
+
 package org.helenalocal.base.get;
 
 import android.content.Context;
@@ -9,23 +13,26 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.helenalocal.base.Buyer;
 import org.helenalocal.base.Hub;
-import org.helenalocal.base.Producer;
+import org.helenalocal.base.HubInit;
 
 import java.io.*;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 
 /**
  * Created by abbie on 1/24/14.
  */
-public class BuyerHub extends Hub {
-    String fileName = "HL-BuyerHub.csv";
-    protected String dataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=4&output=csv";
+public class BuyerHub extends Hub implements Runnable {
+    private static Context context;
+    private static Calendar lastRefreshTS;
+    private String fileName = "HL-BuyerHub.csv";
 
 
-    public BuyerHub() {
+    public BuyerHub(Context context) {
+        this.context = context;
         logTag = "BuyerHub ";
     }
 
@@ -35,7 +42,7 @@ public class BuyerHub extends Hub {
         TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(',');
         String receiveString = "";
         boolean firstTime = true;
-        while ( (receiveString = bufferedReader.readLine()) != null ) {
+        while ((receiveString = bufferedReader.readLine()) != null) {
             if (firstTime) {
                 // remove header
                 firstTime = false;
@@ -45,59 +52,66 @@ public class BuyerHub extends Hub {
                 simpleStringSplitter.setString(receiveString);
                 Iterator<String> iterator = simpleStringSplitter.iterator();
 
-                // BID (Buyer ID)	Name	ContactEmail	Hours	Phone	WebsiteUrl	PhotoUrl	Location	Service Level (0-off, 1-on, 2-premium)
+                // BID (Buyer ID)	Name	ContactEmail	Hours	Phone	WebsiteUrl	PhotoUrl	Location	Service Level (0-off, 1-on, 2-premium)	Certification ID List
                 if (iterator.hasNext()) {
                     String buyerId = iterator.next();
-                    if (! buyerId.equals("")) {
+                    if (!buyerId.equals("")) {
                         buyer.setBID(buyerId);
                     }
                 }
                 if (iterator.hasNext()) {
                     String name = iterator.next();
-                    if (! name.equals("")) {
+                    if (!name.equals("")) {
                         buyer.setName(name);
                     }
                 }
                 if (iterator.hasNext()) {
                     String contactEmail = iterator.next();
-                    if (! contactEmail.equals("")) {
+                    if (!contactEmail.equals("")) {
                         buyer.setContactEmail(contactEmail);
                     }
                 }
                 if (iterator.hasNext()) {
                     String hours = iterator.next();
-                    if (! hours.equals("")) {
+                    if (!hours.equals("")) {
                         buyer.setHours(hours);
                     }
                 }
                 if (iterator.hasNext()) {
                     String phone = iterator.next();
-                    if (! phone.equals("")) {
+                    if (!phone.equals("")) {
                         buyer.setPhone(phone);
                     }
                 }
                 if (iterator.hasNext()) {
                     String websiteUrl = iterator.next();
-                    if (! websiteUrl.equals("")) {
+                    if (!websiteUrl.equals("")) {
                         buyer.setWebsiteUrl(websiteUrl);
                     }
                 }
                 if (iterator.hasNext()) {
                     String photoUrl = iterator.next();
-                    if (! photoUrl.equals("")) {
+                    if (!photoUrl.equals("")) {
                         buyer.setPhotoUrl(photoUrl);
                     }
                 }
                 if (iterator.hasNext()) {
                     String location = iterator.next();
-                    if (! location.equals("")) {
+                    if (!location.equals("")) {
                         buyer.setLocation(location);
                     }
                 }
                 if (iterator.hasNext()) {
                     String serviceLevel = iterator.next();
-                    if (! serviceLevel.equals("")) {
+                    if (!serviceLevel.equals("")) {
                         buyer.setServiceLevel(serviceLevel);
+                    }
+                }
+                //TODO Kevin this needs to parse out the ';' and '~'
+                if (iterator.hasNext()) {
+                    String cid = iterator.next();
+                    if (!cid.equals("")) {
+                        buyer.setCertificationID(cid);
                     }
                 }
                 myBuyerMap.put(buyer.getBID(), buyer);
@@ -109,44 +123,59 @@ public class BuyerHub extends Hub {
         HashMap<String, Buyer> myBuyerMap = new HashMap<String, Buyer>();
         try {
             // getItem the time the file was last changed here
-            File myFile = new File(context.getFilesDir() +"/" + fileName);
+            File myFile = new File(context.getFilesDir() + "/" + fileName);
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
             String lastRefreshTSStr = sdf.format(myFile.lastModified());
-            Log.w(Hub.logTag, "Using file (" + fileName + ") last modified on : " + lastRefreshTSStr);
+            Log.w(HubInit.logTag, "Using file (" + fileName + ") last modified on : " + lastRefreshTSStr);
             lastRefreshTS = sdf.getCalendar();
 
             // create products from the file here
             InputStream inputStream = context.openFileInput(fileName);
-            if ( inputStream != null ) {
+            if (inputStream != null) {
                 parseCSV(myBuyerMap, inputStream);
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
-            Log.e(Hub.logTag, "File  (" + fileName + ") not found: " + e.toString());
+            Log.e(HubInit.logTag, "File  (" + fileName + ") not found: " + e.toString());
         } catch (IOException e) {
-            Log.e(Hub.logTag, "Can not read file  (" + fileName + ") : " + e.toString());
+            Log.e(HubInit.logTag, "Can not read file  (" + fileName + ") : " + e.toString());
         }
-        Log.w(Hub.logTag, "Number of producers loaded: " + myBuyerMap.size());
+        Log.w(HubInit.logTag, "Number of buyers loaded: " + myBuyerMap.size());
         return myBuyerMap;
     }
 
-    public HashMap<String, Buyer> getBuyerMap(Context context) throws IOException {
+    public HashMap<String, Buyer> getBuyerMap() throws IOException {
         HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet(dataUrl);
+        HttpGet request = new HttpGet(buyerHubDataUrl);
         try {
             // first try the net
             HttpResponse response = client.execute(request);
-            Log.w(Hub.logTag, "HTTP execute Response.getStatusLine() = " + response.getStatusLine());
+            Log.w(HubInit.logTag, "HTTP execute Response.getStatusLine() = " + response.getStatusLine());
 
             // make net version local
             BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             writeToFile(context, rd, fileName);
-            Log.w(Hub.logTag, "Wrote file from the net to device...");
+            Log.w(HubInit.logTag, "Wrote file from the net to device...");
         } catch (UnknownHostException e) {
-            Log.w(Hub.logTag, "Couldn't getItem the file from the net just using file from device... ");
+            Log.w(HubInit.logTag, "Couldn't getItem the file from the net just using file from device... ");
         }
 
         // regardless of net work with file
         return readFromFile(context);
+    }
+
+    public static Calendar getLastRefreshTS() {
+        return lastRefreshTS;
+    }
+
+    @Override
+    public void run() {
+        try {
+            Hub.buyerMap = new BuyerHub(context).getBuyerMap();
+            Log.w(logTag, "BuyerHub().getBuyerMap loaded...");
+        } catch (IOException e) {
+            Log.w(logTag, "BuyerHub().getBuyerMap couldn't be loaded...");
+        }
+
     }
 }

@@ -1,5 +1,11 @@
 <component name="CopyrightManager">
   <settings default="">
-    <module2copyright />
+    <module2copyright>
+      <element module="cc-scope" copyright="cc" />
+    </module2copyright>
+    <LanguageOptions name="__TEMPLATE__">
+      <option name="lenBefore" value="8080" />
+      <option name="lenAfter" value="8080" />
+    </LanguageOptions>
   </settings>
 </component>

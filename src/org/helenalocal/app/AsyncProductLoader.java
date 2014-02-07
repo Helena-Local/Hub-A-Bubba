@@ -3,12 +3,17 @@ package org.helenalocal.app;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
+import org.helenalocal.base.Hub;
 import org.helenalocal.base.Item;
+import org.helenalocal.base.get.BuyerHub;
 import org.helenalocal.base.get.ItemHub;
+import org.helenalocal.base.get.OrderHub;
+import org.helenalocal.base.get.ProducerHub;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class AsyncProductLoader extends AsyncTaskLoader<List<Item>> {
     private static final String Tag = "AsyncProductLoader";
@@ -20,25 +25,7 @@ public class AsyncProductLoader extends AsyncTaskLoader<List<Item>> {
 
     @Override
     public List<Item> loadInBackground() {
-
-        Log.w(Tag, "**** Starting fetch for items....");
-        try {
-            ItemHub itemHub = new ItemHub();
-            HashMap<String, Item> itemMap = itemHub.getItemMap(getContext());
-            _itemList = new ArrayList<Item>(itemMap.values());
-
-            Log.w(Tag, "Data last refreshed on " + itemHub.getLastRefreshTS().getTime());
-
-            for (Item p : _itemList) {
-                Log.w(Tag, p.toString());
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Log.w(Tag,"**** Ending fetch for items");
-
-        return _itemList;
+            return new ArrayList<Item>(Hub.itemMap.values());
     }
 
     @Override
