@@ -13,9 +13,10 @@ import org.helenalocal.base.Hub;
 import org.helenalocal.base.Item;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class ProductTab extends Fragment implements LoaderManager.LoaderCallbacks<List<Item>> {
+public class ProductTab extends Fragment {
 
     private static String Tag = "ProductTab";
     private static final int LoaderId = 0;
@@ -37,38 +38,20 @@ public class ProductTab extends Fragment implements LoaderManager.LoaderCallback
 
         ListView listView = (ListView)getActivity().findViewById(R.id.productListView);
         listView.setAdapter(_arrayAdapter);
-
-//        getActivity().getSupportLoaderManager().initLoader(LoaderId, null, this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        _itemList.addAll(Hub.itemMap.values());
+        Collection<Item> tempList = Hub.itemMap.values();
+        for (Item i : tempList) {
+            if (i.isInCsaThisWeek() == false) {
+                _itemList.add(i);
+            }
+        }
+
         _arrayAdapter.notifyDataSetChanged();
-    }
-
-// ***
-    // LoaderManager callbacks
-    // ***
-
-    @Override
-    public Loader<List<Item>> onCreateLoader(int i, Bundle bundle) {
-        AsyncProductLoader loader = new AsyncProductLoader(getActivity());
-        return loader;
-    }
-
-    @Override
-    public void onLoadFinished(Loader<List<Item>> listLoader, List<Item> items) {
-        _itemList.clear();
-        _itemList.addAll(items);
-        _arrayAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onLoaderReset(Loader<List<Item>> listLoader) {
-
     }
 }
 
