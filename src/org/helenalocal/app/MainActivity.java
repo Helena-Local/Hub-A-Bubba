@@ -77,6 +77,8 @@ public class MainActivity extends ActionBarActivity {
         addTab(GrowerTab.class, R.string.grower_tab_text);
         addTab(RestaurantTab.class, R.string.restaurant_tab_text);
 
+//        startService(new Intent(this, HubUpdateService.class));
+
         ViewServer.get(this).addWindow(this);
     }
 
