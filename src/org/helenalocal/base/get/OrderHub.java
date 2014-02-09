@@ -33,7 +33,7 @@ public class OrderHub extends Hub implements Runnable {
 
     public OrderHub(Context context) {
         this.context = context;
-        logTag = "OrderHub ";
+        logTag = HubType.ORDER_HUB.name();
     }
 
     private void parseCSV(HashMap<String, Order> myOrderMap, InputStream inputStream) throws IOException {

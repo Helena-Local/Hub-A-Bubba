@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import org.helenalocal.Helena_Local_Hub.R;
+import org.helenalocal.app.test.AsyncTesterTask;
 import org.helenalocal.base.HubInit;
 import org.helenalocal.base.get.*;
 import org.helenalocal.utils.ViewServer;

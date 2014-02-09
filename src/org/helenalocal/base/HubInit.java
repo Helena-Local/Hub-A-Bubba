@@ -8,6 +8,8 @@ package org.helenalocal.base;
  * Created by abbie on 2/6/14.
  */
 public abstract class HubInit {
+    public enum HubType {BUYER_HUB, CERTIFICATION_HUB, INIT_HUB, ITEM_HUB, ORDER_HUB, PRODUCER_HUB, GROWER_HUB}
+
     // defaults set below
     protected static String logTag = "Hub ";
 

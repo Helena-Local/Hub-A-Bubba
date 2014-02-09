@@ -33,7 +33,7 @@ public class BuyerHub extends Hub implements Runnable {
 
     public BuyerHub(Context context) {
         this.context = context;
-        logTag = "BuyerHub ";
+        logTag = HubType.BUYER_HUB.name();
     }
 
     private void parseCSV(HashMap<String, Buyer> myBuyerMap, InputStream inputStream) throws IOException {
