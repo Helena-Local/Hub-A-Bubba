@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import org.helenalocal.app.MainActivity;
 import org.helenalocal.base.*;
+import org.helenalocal.base.get.CertificationHub;
 import org.helenalocal.base.get.InitHub;
 
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
             HubInit.setInitHubDataUrl("https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=5&output=csv");
             // after init hub runs all other hubs need to reload!
             new InitHub(_context).run();
+            new CertificationHub(_context).run();
             MainActivity.stopHubThreads();
             MainActivity.startHubThreads(_context);
 
@@ -79,7 +81,6 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
             }
 
             // get specific oder from the hash
-            //TODO kevin the order key is the buyerID change this.
             Order order = Hub.orderMap.get("B-2014-02");
             Log.w(Tag,"**** Found Order? => " + order);
 
