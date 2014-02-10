@@ -12,12 +12,14 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.helenalocal.base.Buyer;
+import org.helenalocal.base.Certification;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
 
 import java.io.*;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -111,7 +113,7 @@ public class BuyerHub extends Hub implements Runnable {
                 if (iterator.hasNext()) {
                     String cid = iterator.next();
                     if (!cid.equals("")) {
-                        buyer.setCertificationID(cid);
+                        buyer.setCertificationID(new ArrayList<Certification>());
                     }
                 }
                 myBuyerMap.put(buyer.getBID(), buyer);

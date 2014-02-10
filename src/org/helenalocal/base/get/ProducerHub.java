@@ -11,6 +11,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.helenalocal.base.Certification;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
 import org.helenalocal.base.Producer;
@@ -18,6 +19,7 @@ import org.helenalocal.base.Producer;
 import java.io.*;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -93,7 +95,7 @@ public class ProducerHub extends Hub implements Runnable {
                 if (iterator.hasNext()) {
                     String cid = iterator.next();
                     if (!cid.equals("")) {
-                        producer.setCertificationID(cid);
+                        producer.setCertificationID(new ArrayList<Certification>());
                     }
                 }
                 if (iterator.hasNext()) {
