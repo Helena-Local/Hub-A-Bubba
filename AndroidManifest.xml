@@ -23,6 +23,7 @@
         </activity>
 
         <activity android:name="org.helenalocal.app.GrowerDetailActivity"/>
+        <activity android:name="org.helenalocal.app.RestaurantDetailActivity"/>
 
         <!--<provider android:name="org.helenalocal.app.provider.ItemProvider"-->
                   <!--android:authorities="org.helenalocal.provider.itemprovider"-->

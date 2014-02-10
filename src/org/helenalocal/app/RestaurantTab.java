@@ -4,11 +4,14 @@
 
 package org.helenalocal.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Buyer;
@@ -17,7 +20,9 @@ import org.helenalocal.base.Hub;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantTab extends Fragment {
+public class RestaurantTab extends Fragment implements AdapterView.OnItemClickListener {
+
+    public static final String BUYER_ID_KEY = "buyerIdKey";
 
     private static final String Tag = "RestaurantTab";
 
@@ -38,13 +43,32 @@ public class RestaurantTab extends Fragment {
 
         ListView listView = (ListView)getActivity().findViewById(R.id.restaurantListView);
         listView.setAdapter(_arrayAdapter);
-    }
+
+        listView.setClickable(true);
+        listView.setOnItemClickListener(this);
+   }
 
     @Override
     public void onResume() {
         super.onResume();
 
+        _restaurantList.clear();
         _restaurantList.addAll(Hub.buyerMap.values());
         _arrayAdapter.notifyDataSetChanged();
+    }
+
+
+    /***
+     * OnItemClickListener methods
+     ***/
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.w(Tag, "onItemClick");
+        ListView listView = (ListView)getActivity().findViewById(R.id.restaurantListView);
+        Buyer buyer = (Buyer)listView.getItemAtPosition(position);
+
+        Intent i = new Intent(getActivity(), RestaurantDetailActivity.class);
+        i.putExtra(BUYER_ID_KEY, buyer.getBID());
+        startActivity(i);
     }
 }
