@@ -11,7 +11,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.helenalocal.base.Certification;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
 import org.helenalocal.base.Producer;
@@ -19,7 +18,6 @@ import org.helenalocal.base.Producer;
 import java.io.*;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -54,7 +52,7 @@ public class ProducerHub extends Hub implements Runnable {
                 simpleStringSplitter.setString(receiveString);
                 Iterator<String> iterator = simpleStringSplitter.iterator();
 
-                // PID (Producer ID)	Name	ContactEmail	WebsiteUrl	PhotoUrl	Location	Certification ID List Quote
+                // PID (Producer ID)	Name	ContactEmail	WebsiteUrl	PhotoUrl	Location	Certification String List Quote
                 if (iterator.hasNext()) {
                     String producerId = iterator.next();
                     if (!producerId.equals("")) {
@@ -91,11 +89,10 @@ public class ProducerHub extends Hub implements Runnable {
                         producer.setLocation(location);
                     }
                 }
-                //TODO Kevin this needs to parse out the ';' and '~'
                 if (iterator.hasNext()) {
-                    String cid = iterator.next();
-                    if (!cid.equals("")) {
-                        producer.setCertificationID(new ArrayList<Certification>());
+                    String certificationStr = iterator.next();
+                    if (!certificationStr.equals("")) {
+                        producer.setCertifications(CertificationHub.buildCertificationList(certificationStr));
                     }
                 }
                 if (iterator.hasNext()) {

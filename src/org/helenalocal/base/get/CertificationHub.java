@@ -18,9 +18,7 @@ import org.helenalocal.base.HubInit;
 import java.io.*;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * Created by abbie on 1/24/14.
@@ -123,6 +121,43 @@ public class CertificationHub extends Hub implements Runnable {
     public static Calendar getLastRefreshTS() {
         return lastRefreshTS;
     }
+
+    //TODO Kevin this needs to parse out the ';' and '~'
+    public static List<Certification> buildCertificationList(String certificationStr) {
+        ArrayList<Certification> certifications = new ArrayList<Certification>();
+        // parse each certificate out
+        TextUtils.SimpleStringSplitter certStringSplitter = new TextUtils.SimpleStringSplitter(';');
+        certStringSplitter.setString(certificationStr);
+        Iterator<String> certIterator = certStringSplitter.iterator();
+        // loop over certifications
+        while (certIterator.hasNext()) {
+            String certLine = certIterator.next();
+            if (!certLine.equals("")) {
+                TextUtils.SimpleStringSplitter certUrlStringSplitter = new TextUtils.SimpleStringSplitter('~');
+                certUrlStringSplitter.setString(certLine);
+                Iterator<String> certPartIterator = certUrlStringSplitter.iterator();
+                if (certPartIterator.hasNext()) {
+                    String cid = certPartIterator.next();
+                    Certification aCert = new Certification();
+                    if (!cid.equals("")) {
+                        // loads all template values
+                        aCert = Hub.certificationMap.get(cid);
+                    }
+                    // check for optional url suffix
+                    if (certPartIterator.hasNext()) {
+                        String urlSuffix = certPartIterator.next();
+                        if (!urlSuffix.equals("")) {
+                            // append suffix
+                            aCert.setWebsiteUrl(aCert.getWebsiteUrl() + urlSuffix);
+                        }
+                    }
+                    certifications.add(aCert);
+                }
+            }
+        }
+        return certifications;
+    }
+
 
     @Override
     public void run() {

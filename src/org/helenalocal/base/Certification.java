@@ -13,6 +13,16 @@ public class Certification {
     private String displayName = "";
     private String websiteUrl = "";
 
+    public Certification() {
+
+    }
+
+    public Certification(String cid, String displayName, String websiteUrl) {
+        this.CID = cid;
+        this.displayName = displayName;
+        this.websiteUrl = websiteUrl;
+    }
+
     public String getCID() {
         return CID;
     }

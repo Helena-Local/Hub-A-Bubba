@@ -79,14 +79,6 @@ public class Buyer {
         return hours;
     }
 
-    public List<Certification> getCertificationID() {
-        return certifications;
-    }
-
-    public void setCertificationID(List<Certification> certifications) {
-        this.certifications = certifications;
-    }
-
     public void setHours(String hours) {
         this.hours = hours;
     }
@@ -129,6 +121,14 @@ public class Buyer {
 
     public void setServiceLevel(String serviceLevel) {
         this.serviceLevel = serviceLevel;
+    }
+
+    public List<Certification> getCertifications() {
+        return certifications;
+    }
+
+    public void setCertifications(List<Certification> certifications) {
+        this.certifications = certifications;
     }
 
     public String toString() {

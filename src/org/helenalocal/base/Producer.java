@@ -101,6 +101,14 @@ public class Producer {
         this.contactEmail = contactEmail;
     }
 
+    public List<Certification> getCertifications() {
+        return certifications;
+    }
+
+    public void setCertifications(List<Certification> certifications) {
+        this.certifications = certifications;
+    }
+
     public String toString() {
         return "producer.PID = " + this.PID + "; producer.name = " + this.name + "; producer.contactEmail = " +
                 this.contactEmail + "; producer.websiteUrl = " + this.websiteUrl + "; producer.photoUrl = " +
