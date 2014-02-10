@@ -33,7 +33,7 @@ public class ProducerHub extends Hub implements Runnable {
 
     public ProducerHub(Context context) {
         this.context = context;
-        logTag = "ProducerHub ";
+        logTag = HubType.PRODUCER_HUB.name();
     }
 
     private void parseCSV(HashMap<String, Producer> myProducerMap, InputStream inputStream) throws IOException {
@@ -52,7 +52,7 @@ public class ProducerHub extends Hub implements Runnable {
                 simpleStringSplitter.setString(receiveString);
                 Iterator<String> iterator = simpleStringSplitter.iterator();
 
-                // PID (Producer ID)	Name	ContactEmail	WebsiteUrl	PhotoUrl	Location	Certification ID List Quote
+                // PID (Producer ID)	Name	ContactEmail	WebsiteUrl	PhotoUrl	Location	Certification String List Quote
                 if (iterator.hasNext()) {
                     String producerId = iterator.next();
                     if (!producerId.equals("")) {
@@ -89,11 +89,10 @@ public class ProducerHub extends Hub implements Runnable {
                         producer.setLocation(location);
                     }
                 }
-                //TODO Kevin this needs to parse out the ';' and '~'
                 if (iterator.hasNext()) {
-                    String cid = iterator.next();
-                    if (!cid.equals("")) {
-                        producer.setCertificationID(cid);
+                    String certificationStr = iterator.next();
+                    if (!certificationStr.equals("")) {
+                        producer.setCertifications(CertificationHub.buildCertificationList(certificationStr));
                     }
                 }
                 if (iterator.hasNext()) {

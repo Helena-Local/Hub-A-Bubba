@@ -2,13 +2,15 @@
  * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
  */
 
-package org.helenalocal.app;
+package org.helenalocal.app.test;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import org.helenalocal.app.MainActivity;
 import org.helenalocal.base.*;
+import org.helenalocal.base.get.CertificationHub;
 import org.helenalocal.base.get.InitHub;
 
 import java.util.ArrayList;
@@ -25,11 +27,17 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
 
     @Override
     protected Intent doInBackground(Void... params) {
+        /*Intent intent = new Intent(HubInit.HubType.PRODUCER_HUB.name());
+        // intent.setType(HubInit.HubType.PRODUCER_HUB.name());
+        _context.sendBroadcast(intent);
+        Log.e(Tag, "broadcast sent");
+        */
+
         Intent email = null;
 
         //TODO shane -- This is a working example... Let me know if you have questions about it... :)
         // public Producer(String PID, String name, String contactEmail, String websiteUrl, String photoUrl, String location) {
-        Producer producer = new Producer("P-2013-0", "Western Montana Growers’ Cooperative", "grower@wmgcoop.com", "http://www.wmgcoop.com/", "http://g.virbcdn.com/_f2/images/58/PageImage-524372-4680215-WMGC_WebBanner.jpg", "Arlee, MT 59821", "C-0", "This day...");
+        Producer producer = new Producer("P-2013-0", "Western Montana Growers’ Cooperative", "grower@wmgcoop.com", "http://www.wmgcoop.com/", "http://g.virbcdn.com/_f2/images/58/PageImage-524372-4680215-WMGC_WebBanner.jpg", "Arlee, MT 59821", new ArrayList<Certification>(), "This day...");
 
         // public Item(String IID,Producer producer,boolean inCsaThisWeek, String category, String productDesc, String productUrl, String productImageUrl, Integer unitsAvailable,
         //        String unitDesc, Double unitPrice, Calendar deliveryDate, String note) {
@@ -43,6 +51,7 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
             HubInit.setInitHubDataUrl("https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=5&output=csv");
             // after init hub runs all other hubs need to reload!
             new InitHub(_context).run();
+            new CertificationHub(_context).run();
             MainActivity.stopHubThreads();
             MainActivity.startHubThreads(_context);
 
@@ -72,8 +81,7 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
             }
 
             // get specific oder from the hash
-            //TODO kevin the order key is the buyerID change this.
-            Order order = Hub.orderMap.get("O-2014-2-2-7");
+            Order order = Hub.orderMap.get("B-2014-02");
             Log.w(Tag,"**** Found Order? => " + order);
 
             // test buyerhub...

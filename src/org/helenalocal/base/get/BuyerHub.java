@@ -33,7 +33,7 @@ public class BuyerHub extends Hub implements Runnable {
 
     public BuyerHub(Context context) {
         this.context = context;
-        logTag = "BuyerHub ";
+        logTag = HubType.BUYER_HUB.name();
     }
 
     private void parseCSV(HashMap<String, Buyer> myBuyerMap, InputStream inputStream) throws IOException {
@@ -107,11 +107,10 @@ public class BuyerHub extends Hub implements Runnable {
                         buyer.setServiceLevel(serviceLevel);
                     }
                 }
-                //TODO Kevin this needs to parse out the ';' and '~'
                 if (iterator.hasNext()) {
-                    String cid = iterator.next();
-                    if (!cid.equals("")) {
-                        buyer.setCertificationID(cid);
+                    String certificationStr = iterator.next();
+                    if (!certificationStr.equals("")) {
+                        buyer.setCertifications(CertificationHub.buildCertificationList(certificationStr));
                     }
                 }
                 myBuyerMap.put(buyer.getBID(), buyer);

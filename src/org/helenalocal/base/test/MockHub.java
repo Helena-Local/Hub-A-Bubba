@@ -5,6 +5,7 @@
 package org.helenalocal.base.test;
 
 import android.content.Context;
+import org.helenalocal.base.Certification;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.Item;
 import org.helenalocal.base.Producer;
@@ -20,7 +21,7 @@ public class MockHub extends Hub {
     public List<Item> getItems(Context context) {
         ArrayList<Item> myItems = new ArrayList<Item>();
         // public Producer(String PID, String name, String contactEmail, String websiteUrl, String photoUrl, String location) {
-        Producer producer = new Producer("P-2013-0", "Western Montana Growers’ Cooperative", "grower@wmgcoop.com", "http://www.wmgcoop.com/", "http://g.virbcdn.com/_f2/images/58/PageImage-524372-4680215-WMGC_WebBanner.jpg", "Arlee, MT 59821", "C-0", "This day..");
+        Producer producer = new Producer("P-2013-0", "Western Montana Growers’ Cooperative", "grower@wmgcoop.com", "http://www.wmgcoop.com/", "http://g.virbcdn.com/_f2/images/58/PageImage-524372-4680215-WMGC_WebBanner.jpg", "Arlee, MT 59821", new ArrayList<Certification>(), "This day..");
         // public Item(String IID,Producer producer,boolean inCsaThisWeek, String category, String productDesc, String productUrl, String productImageUrl, Integer unitsAvailable,
         //        String unitDesc, Double unitPrice, Calendar deliveryDate, String note) {
         myItems.add(new Item("I-2014-2-2-3","P-2013-0", true, "Produce", "Leeks","http://en.wikipedia.org/wiki/Leek‎",

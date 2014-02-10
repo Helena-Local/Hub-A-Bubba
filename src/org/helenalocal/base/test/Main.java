@@ -4,9 +4,10 @@
 
 package org.helenalocal.base.test;
 
+import org.helenalocal.base.Certification;
 import org.helenalocal.base.Item;
+import org.helenalocal.base.get.CertificationHub;
 
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -26,6 +27,15 @@ public class Main {
         }
         System.out.println("**** Ending fetch test for MOCK....");
 
-        System.out.println("Calendar.getInstance().get(Calendar.DAY_OF_WEEK) = " + Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+        try {
+            List<Certification> myCertArr = CertificationHub.buildCertificationList("C-1~99;C-0~55;C-2");
+            for (int i = 0; i < myCertArr.size(); i++) {
+                Certification certification = myCertArr.get(i);
+                System.out.println(certification.toString());
+            }
+        } catch (Exception e) {
+            System.out.println("No MOCK products found....");
+        }
+
     }
 }

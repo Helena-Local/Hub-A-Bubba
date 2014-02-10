@@ -29,7 +29,7 @@ import java.util.List;
 public class GrowerHub extends Hub {
 
     public GrowerHub() {
-        logTag = "GrowerHub ";
+        logTag = HubType.GROWER_HUB.name();
     }
 
     public void setItem(Context context, Producer producer, Item item, String growerAgreementId) throws Exception {

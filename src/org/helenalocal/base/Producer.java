@@ -5,6 +5,11 @@
 package org.helenalocal.base;
 
 
+import android.text.TextUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by abbie on 2/2/14.
  */
@@ -15,20 +20,20 @@ public class Producer {
     private String websiteUrl = "";
     private String photoUrl = "";
     private String location = "";
-    private String certificationID = "";
+    private List<Certification> certifications = new ArrayList<Certification>();
     private String quote = "";
 
     public Producer() {
     }
 
-    public Producer(String PID, String name, String contactEmail, String websiteUrl, String photoUrl, String location, String certificationID, String quote) {
+    public Producer(String PID, String name, String contactEmail, String websiteUrl, String photoUrl, String location, List<Certification> certifications, String quote) {
         this.PID = PID;
         this.name = name;
         this.contactEmail = contactEmail;
         this.websiteUrl = websiteUrl;
         this.photoUrl = photoUrl;
         this.location = location;
-        this.certificationID = certificationID;
+        this.certifications = certifications;
         this.quote = quote;
     }
 
@@ -52,8 +57,8 @@ public class Producer {
         return location;
     }
 
-    public String getCertificationID() {
-        return certificationID;
+    public List<Certification> getCertificationID() {
+        return certifications;
     }
 
     public String getQuote() {
@@ -64,8 +69,8 @@ public class Producer {
         this.quote = quote;
     }
 
-    public void setCertificationID(String certificationID) {
-        this.certificationID = certificationID;
+    public void setCertificationID(List<Certification> certifications) {
+        this.certifications = certifications;
     }
 
     public void setLocation(String location) {
@@ -96,10 +101,18 @@ public class Producer {
         this.contactEmail = contactEmail;
     }
 
+    public List<Certification> getCertifications() {
+        return certifications;
+    }
+
+    public void setCertifications(List<Certification> certifications) {
+        this.certifications = certifications;
+    }
+
     public String toString() {
         return "producer.PID = " + this.PID + "; producer.name = " + this.name + "; producer.contactEmail = " +
                 this.contactEmail + "; producer.websiteUrl = " + this.websiteUrl + "; producer.photoUrl = " +
-                this.photoUrl + "; producer.location = " + this.location + "; producer.certificationID" + certificationID
+                this.photoUrl + "; producer.location = " + this.location + "; certifications = " + TextUtils.join("~", certifications)
                 + "; quote = " + quote;
     }
 
@@ -109,6 +122,6 @@ public class Producer {
 
     public String toCSV() {
         return this.PID + "," + this.name + "," + this.contactEmail + "," + this.websiteUrl + "," +
-                this.photoUrl + "," + this.location + "," + certificationID + "," + quote;
+                this.photoUrl + "," + this.location + "," + TextUtils.join(",", certifications) + "," + quote;
     }
 }

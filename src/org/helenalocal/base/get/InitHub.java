@@ -31,7 +31,7 @@ public class InitHub extends Hub implements Runnable {
 
     public InitHub(Context context) {
         this.context = context;
-        logTag = "InitHub ";
+        logTag = HubType.INIT_HUB.name();
     }
 
     private void parseCSV(InputStream inputStream) throws IOException {

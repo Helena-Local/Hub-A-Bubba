@@ -5,6 +5,7 @@
 package org.helenalocal.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import org.helenalocal.base.post.GrowerHub;
 
@@ -18,6 +19,13 @@ import java.util.HashMap;
  */
 public abstract class Hub extends HubInit {
 
+    private void broadcastActionView(Context context) {
+        Intent intent = new Intent();
+        intent.setType(HubType.PRODUCER_HUB.name());
+        context.sendBroadcast(intent);
+        Log.e(HubInit.logTag, "broadcast sent");
+    }
+
     public static HashMap<String, Buyer> buyerMap = new HashMap<String, Buyer>();
 
     public static HashMap<String, Item> itemMap = new HashMap<String, Item>();
@@ -30,12 +38,12 @@ public abstract class Hub extends HubInit {
 
     public static GrowerHub growerHub = new GrowerHub();
 
-
     protected void writeToFile(Context context, String data, String fileName) {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
+            //broadcastActionView(context);
         } catch (IOException e) {
             Log.e(HubInit.logTag, "File (" + fileName + ") write failed: " + e.toString());
         }
@@ -49,6 +57,7 @@ public abstract class Hub extends HubInit {
                 outputStreamWriter.write(line + '\n');
             }
             outputStreamWriter.close();
+            //broadcastActionView(context);
         } catch (IOException e) {
             Log.e(HubInit.logTag, "File (" + fileName + ") write failed: " + e.toString());
         }
