@@ -6,10 +6,12 @@ package org.helenalocal.app;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.Item;
@@ -17,6 +19,8 @@ import org.helenalocal.base.Item;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ProductTab extends Fragment {
 
@@ -34,6 +38,15 @@ public class ProductTab extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        TextView textView = (TextView)getActivity().findViewById(R.id.welcomeText);
+        Linkify.addLinks(textView, Linkify.PHONE_NUMBERS);
+        Linkify.addLinks(textView, Pattern.compile("HelenaLocal.org"), "http://", null, new Linkify.TransformFilter() {
+            @Override
+            public String transformUrl(Matcher match, String url) {
+                return "www.helenalocal.org";
+            }
+        });
 
         _itemList = new ArrayList<Item>();
         _arrayAdapter = new ProductItemAdapter(getActivity(), R.layout.product_view, _itemList);
