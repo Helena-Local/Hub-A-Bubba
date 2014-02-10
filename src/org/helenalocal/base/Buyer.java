@@ -4,6 +4,11 @@
 
 package org.helenalocal.base;
 
+import android.text.TextUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by abbie on 2/2/14.
  *
@@ -18,14 +23,14 @@ public class Buyer {
     private String photoUrl = "";
     private String location = "";
     private String serviceLevel = "";
-    private String certificationID = "";
+    private List<Certification> certifications = new ArrayList<Certification>();
     private String lastOrderDate = "";
 
     public Buyer() {
 
     }
 
-    public Buyer(String BID, String name, String contactEmail, String hours, String phone, String websiteUrl, String photoUrl, String location, String certificationID, String lastOrderDate) {
+    public Buyer(String BID, String name, String contactEmail, String hours, String phone, String websiteUrl, String photoUrl, String location, List certifications, String lastOrderDate) {
         this.BID = BID;
         this.name = name;
         this.contactEmail = contactEmail;
@@ -34,7 +39,7 @@ public class Buyer {
         this.websiteUrl = websiteUrl;
         this.photoUrl = photoUrl;
         this.location = location;
-        this.certificationID = certificationID;
+        this.certifications = certifications;
         this.lastOrderDate = lastOrderDate;
     }
 
@@ -74,12 +79,12 @@ public class Buyer {
         return hours;
     }
 
-    public String getCertificationID() {
-        return certificationID;
+    public List<Certification> getCertificationID() {
+        return certifications;
     }
 
-    public void setCertificationID(String certificationID) {
-        this.certificationID = certificationID;
+    public void setCertificationID(List<Certification> certifications) {
+        this.certifications = certifications;
     }
 
     public void setHours(String hours) {
@@ -129,6 +134,6 @@ public class Buyer {
     public String toString() {
         return "BID = " + BID + "; name = " + name + "; contactEmail = " + contactEmail
                 + "; hours = " + hours + "; phone = " + phone + "; websiteUrl = " + websiteUrl + "; photoUrl = "
-                + photoUrl + "; location = " + location + "; lastOrderDate = " + lastOrderDate + "; certificationID = " + certificationID;
+                + photoUrl + "; location = " + location + "; lastOrderDate = " + lastOrderDate + "; certifications = " + TextUtils.join("~", certifications);
     }
 }
