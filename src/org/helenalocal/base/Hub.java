@@ -7,7 +7,7 @@ package org.helenalocal.base;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import org.helenalocal.base.post.GrowerHub;
+import org.helenalocal.base.get.GrowerHub;
 
 import java.io.BufferedReader;
 import java.io.IOException;
