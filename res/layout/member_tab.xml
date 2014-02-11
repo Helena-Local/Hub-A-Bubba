@@ -18,10 +18,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/tab_welcome_text_margin"/>
 
-    <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/memberListView"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="0dip"/>
+    <ListView style="@style/cardListView"
+                android:id="@+id/memberListView">
+    </ListView>
+
 </LinearLayout>

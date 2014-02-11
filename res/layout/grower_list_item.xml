@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--
+~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:paddingTop="@dimen/default_list_item_padding_top"
+              android:paddingBottom="@dimen/default_list_item_padding_bottom"
+              android:paddingLeft="@dimen/default_list_item_padding_left"
+              android:paddingRight="@dimen/default_list_item_padding_right"
+              android:background="@drawable/product_card">
 
     <TextView
             android:layout_width="wrap_content"
