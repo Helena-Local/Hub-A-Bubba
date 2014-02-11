@@ -1,20 +1,28 @@
+/*
+ * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+ */
+
 package org.helenalocal.app;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
+import org.helenalocal.base.Hub;
 import org.helenalocal.base.Item;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class ProductTab extends Fragment implements LoaderManager.LoaderCallbacks<List<Item>> {
+public class ProductTab extends Fragment {
 
     private static String Tag = "ProductTab";
     private static final int LoaderId = 0;
@@ -31,37 +39,35 @@ public class ProductTab extends Fragment implements LoaderManager.LoaderCallback
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        TextView textView = (TextView)getActivity().findViewById(R.id.welcomeText);
+        Linkify.addLinks(textView, Linkify.PHONE_NUMBERS);
+        Linkify.addLinks(textView, Pattern.compile("HelenaLocal.org"), "http://", null, new Linkify.TransformFilter() {
+            @Override
+            public String transformUrl(Matcher match, String url) {
+                return "www.helenalocal.org";
+            }
+        });
+
         _itemList = new ArrayList<Item>();
-        _arrayAdapter = new ProductItemAdapter(getActivity(), R.layout.product_view, _itemList);
+        _arrayAdapter = new ProductItemAdapter(getActivity(), R.layout.product_listview_item, _itemList);
 
         ListView listView = (ListView)getActivity().findViewById(R.id.productListView);
         listView.setAdapter(_arrayAdapter);
-
-        getActivity().getSupportLoaderManager().initLoader(LoaderId, null, this);
-    }
-
-
-
-    // ***
-    // LoaderManager callbacks
-    // ***
-
-    @Override
-    public Loader<List<Item>> onCreateLoader(int i, Bundle bundle) {
-        AsyncProductLoader loader = new AsyncProductLoader(getActivity());
-        return loader;
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Item>> listLoader, List<Item> items) {
+    public void onResume() {
+        super.onResume();
+
         _itemList.clear();
-        _itemList.addAll(items);
+        Collection<Item> tempList = Hub.itemMap.values();
+        for (Item i : tempList) {
+            if (i.isInCsaThisWeek() == false) {
+                _itemList.add(i);
+            }
+        }
+
         _arrayAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onLoaderReset(Loader<List<Item>> listLoader) {
-
     }
 }
 

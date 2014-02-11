@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--
+~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
@@ -8,10 +12,14 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/restaurant_tab_welcome"
             android:id="@+id/textView"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="15dp"/>
+            android:layout_margin="@dimen/tab_welcome_text_margin"/>
+
+    <ListView style="@style/cardListView"
+              android:id="@+id/restaurantListView">
+    </ListView>
 
 </LinearLayout>

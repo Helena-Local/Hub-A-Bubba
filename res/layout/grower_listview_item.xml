@@ -7,19 +7,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:paddingTop="@dimen/default_list_item_padding_top"
+              android:paddingBottom="@dimen/default_list_item_padding_bottom"
+              android:paddingLeft="@dimen/default_list_item_padding_left"
+              android:paddingRight="@dimen/default_list_item_padding_right"
+              android:background="@drawable/product_card">
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/product_tab_welcome"
-            android:id="@+id/welcomeText"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/tab_welcome_text_margin"/>
-
-    <ListView style="@style/cardListView"
-              android:id="@+id/productListView">
-    </ListView>
-
+            android:id="@+id/growerNameTextView"
+            android:text="Grower Name Goes Here"/>
 </LinearLayout>
