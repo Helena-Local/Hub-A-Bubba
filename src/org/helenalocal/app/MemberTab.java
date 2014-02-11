@@ -36,7 +36,7 @@ public class MemberTab extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         _itemList = new ArrayList<Item>();
-        _arrayAdapter = new MemberItemAdapter(getActivity(), R.layout.member_product_view, _itemList);
+        _arrayAdapter = new MemberItemAdapter(getActivity(), R.layout.member_product_listview_item, _itemList);
 
         ListView listView = (ListView)getActivity().findViewById(R.id.memberListView);
         listView.setAdapter(_arrayAdapter);

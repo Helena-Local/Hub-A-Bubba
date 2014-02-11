@@ -39,7 +39,7 @@ public class RestaurantTab extends Fragment implements AdapterView.OnItemClickLi
         super.onActivityCreated(savedInstanceState);
 
         _restaurantList = new ArrayList<Buyer>();
-        _arrayAdapter = new RestaurantItemAdapter(getActivity(), R.layout.restautant_item_view, _restaurantList);
+        _arrayAdapter = new RestaurantItemAdapter(getActivity(), R.layout.restautant_listview_item, _restaurantList);
 
         ListView listView = (ListView)getActivity().findViewById(R.id.restaurantListView);
         listView.setAdapter(_arrayAdapter);

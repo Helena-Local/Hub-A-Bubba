@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,7 @@ public class GrowerTab extends Fragment implements LoaderManager.LoaderCallbacks
     private static String Tag = "GrowerTab";
     private static int LoaderId = 1;
     private List<Producer> _growerList;
-    private GrowerListArrayAdapter _arrayAdapter;
+    private GrowerListAdapter _arrayAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,7 +33,7 @@ public class GrowerTab extends Fragment implements LoaderManager.LoaderCallbacks
         super.onActivityCreated(savedInstanceState);
 
         _growerList = new ArrayList<Producer>();
-        _arrayAdapter = new GrowerListArrayAdapter(getActivity(), R.layout.grower_list_item, _growerList);
+        _arrayAdapter = new GrowerListAdapter(getActivity(), R.layout.grower_listview_item, _growerList);
 
         final ListView lv = (ListView) getActivity().findViewById(R.id.growerListView);
         lv.setAdapter(_arrayAdapter);

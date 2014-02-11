@@ -49,7 +49,7 @@ public class ProductTab extends Fragment {
         });
 
         _itemList = new ArrayList<Item>();
-        _arrayAdapter = new ProductItemAdapter(getActivity(), R.layout.product_view, _itemList);
+        _arrayAdapter = new ProductItemAdapter(getActivity(), R.layout.product_listview_item, _itemList);
 
         ListView listView = (ListView)getActivity().findViewById(R.id.productListView);
         listView.setAdapter(_arrayAdapter);

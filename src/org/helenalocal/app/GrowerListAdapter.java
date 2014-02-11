@@ -12,11 +12,11 @@ import org.helenalocal.base.Producer;
 
 import java.util.List;
 
-public class GrowerListArrayAdapter extends ArrayAdapter<Producer> {
-    private static String logTag = "GrowerListArrayAdapter";
+public class GrowerListAdapter extends ArrayAdapter<Producer> {
+    private static String logTag = "GrowerListAdapter";
     private int _resourceId;
 
-    public GrowerListArrayAdapter(Context context, int resource, List<Producer> items) {
+    public GrowerListAdapter(Context context, int resource, List<Producer> items) {
         super(context, resource, items);
         _resourceId = resource;
     }
