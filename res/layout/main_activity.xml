@@ -17,10 +17,5 @@
             android:id="@+id/textView"
             android:padding="16dp"/>
 
-    <!--<fragment android:name="org.helenalocal.app.ProductListFragment"-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="match_parent"-->
-              <!--android:id="@+id/productListFragment"/>-->
-
 </LinearLayout>
 
