@@ -11,15 +11,17 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import org.helenalocal.Helena_Local_Hub.R;
+import org.helenalocal.base.Hub;
+import org.helenalocal.base.Item;
 import org.helenalocal.base.Producer;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class GrowerTab extends Fragment implements LoaderManager.LoaderCallbacks<List<Producer>> {
+public class GrowerTab extends Fragment {
 
     private static String Tag = "GrowerTab";
-    private static int LoaderId = 1;
     private List<Producer> _growerList;
     private GrowerListAdapter _arrayAdapter;
 
@@ -44,39 +46,19 @@ public class GrowerTab extends Fragment implements LoaderManager.LoaderCallbacks
 
                 Producer p = (Producer)lv.getItemAtPosition(position);
 
-                // TODO - pass the name for now. Evenutally will pass grower id or something.
                 Intent i = new Intent(getActivity(), GrowerDetailActivity.class);
                 i.putExtra("growerNameKey", p.getName());
                 startActivity(i);
             }
         });
-
-        getActivity().getSupportLoaderManager().initLoader(LoaderId, null, this);
-    }
-
-    private void loadList() {
-
-    }
-
-    // ***
-    // LoaderManager callbacks
-    // ***
-
-    @Override
-    public Loader<List<Producer>> onCreateLoader(int i, Bundle bundle) {
-        AsyncGrowerLoader loader = new AsyncGrowerLoader(getActivity());
-        return loader;
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Producer>> listLoader, List<Producer> producers) {
+    public void onResume() {
+        super.onResume();
+
         _growerList.clear();
-        _growerList.addAll(producers);
+        _growerList.addAll(Hub.producerMap.values());
         _arrayAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onLoaderReset(Loader<List<Producer>> listLoader) {
-
     }
 }

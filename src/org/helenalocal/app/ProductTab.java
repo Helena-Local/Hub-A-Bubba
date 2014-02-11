@@ -59,6 +59,7 @@ public class ProductTab extends Fragment {
     public void onResume() {
         super.onResume();
 
+        _itemList.clear();
         Collection<Item> tempList = Hub.itemMap.values();
         for (Item i : tempList) {
             if (i.isInCsaThisWeek() == false) {
