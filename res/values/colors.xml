@@ -8,4 +8,7 @@
     <color name="darkGray">#ff444444</color>
     <color name="gray">#ff888888</color>
     <color name="lightGray">#ffcccccc</color>
+
+    <color name="helena_local_blue">#1674BA</color>
+    <color name="helena_local_green">#8CC540</color>
 </resources>

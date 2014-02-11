@@ -4,17 +4,80 @@
   ~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:id="@+id/restaurantImageView"
+            android:src="@drawable/default_restaurant_image"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="25dp"
+            android:adjustViewBounds="false"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"/>
+
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Benny's Bistro"
             android:id="@+id/nameTextView"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="15dp"/>
-</LinearLayout>
+            android:layout_alignTop="@+id/restaurantImageView"
+            android:layout_toRightOf="@+id/restaurantImageView"
+            android:singleLine="false"
+            android:layout_marginTop="5dp"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="108 East 6th Avenue Helena"
+            android:id="@+id/addressTextView"
+            android:layout_below="@+id/nameTextView"
+            android:layout_alignLeft="@+id/nameTextView"
+            android:textSize="12sp"/>
+
+    <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/restaurantImageView"
+            android:layout_below="@+id/restaurantImageView"
+            android:layout_marginRight="25dp"
+            android:stretchColumns="0,1,2">
+
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Call"
+                    android:id="@+id/callTextView"
+                    android:layout_below="@+id/restaurantImageView"
+                    android:layout_alignLeft="@+id/restaurantImageView"
+                    android:textColor="@color/helena_local_blue"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Directions"
+                    android:id="@+id/directionsTextView"
+                    android:gravity="center"
+                    android:textColor="@color/helena_local_blue"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Website"
+                    android:id="@+id/urlTextView"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:textColor="@color/helena_local_blue"/>
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>
