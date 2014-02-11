@@ -67,6 +67,10 @@ public class MainActivity extends ActionBarActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // These 2 hubs must init on create!
+        new InitHub(this).run();
+        new CertificationHub(this).run();
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

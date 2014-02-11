@@ -4,8 +4,6 @@
 
 package org.helenalocal.base;
 
-import android.text.TextUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,6 +132,6 @@ public class Buyer {
     public String toString() {
         return "BID = " + BID + "; name = " + name + "; contactEmail = " + contactEmail
                 + "; hours = " + hours + "; phone = " + phone + "; websiteUrl = " + websiteUrl + "; photoUrl = "
-                + photoUrl + "; location = " + location + "; lastOrderDate = " + lastOrderDate + "; certifications = " + TextUtils.join("~", certifications);
+                + photoUrl + "; location = " + location + "; lastOrderDate = " + lastOrderDate;
     }
 }

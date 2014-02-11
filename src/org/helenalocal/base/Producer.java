@@ -110,10 +110,16 @@ public class Producer {
     }
 
     public String toString() {
+        String certOut = "";
+        for (int j = 0; j < certifications.size(); j++) {
+            Certification cert = certifications.get(j);
+            certOut = " ~ " + cert.toString();
+        }
+
         return "producer.PID = " + this.PID + "; producer.name = " + this.name + "; producer.contactEmail = " +
                 this.contactEmail + "; producer.websiteUrl = " + this.websiteUrl + "; producer.photoUrl = " +
-                this.photoUrl + "; producer.location = " + this.location + "; certifications = " + TextUtils.join("~", certifications)
-                + "; quote = " + quote;
+                this.photoUrl + "; producer.location = " + this.location + "; quote = " + quote;
+
     }
 
     public String toEmail() {

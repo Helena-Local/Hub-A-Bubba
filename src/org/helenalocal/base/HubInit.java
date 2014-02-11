@@ -18,12 +18,19 @@ public abstract class HubInit {
     protected static String dataVersionNotes = "Uninitialized...";
 
     protected static String initHubDataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=5&output=csv";
-    protected static String growerHubDataUrl = "https://docs.google.com/forms/d/14aZGVPlxgr6-9wH6OLyZfuSH-mF6vVJjzAbFxyRaqRc/formResponse";
-    protected static String producerHubDataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=3&output=csv";
-    protected static String orderHubDataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=2&output=csv";
-    protected static String itemHubDataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=1&output=csv";
-    protected static String buyerHubDataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=4&output=csv";
-    protected static String certificationHubDataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=6&output=csv";
+    //protected static String growerHubDataUrl = "https://docs.google.com/forms/d/14aZGVPlxgr6-9wH6OLyZfuSH-mF6vVJjzAbFxyRaqRc/formResponse";
+    //protected static String producerHubDataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=3&output=csv";
+    //protected static String orderHubDataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=2&output=csv";
+    //protected static String itemHubDataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=1&output=csv";
+    //protected static String buyerHubDataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=4&output=csv";
+    //protected static String certificationHubDataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=6&output=csv";
+
+    protected static String growerHubDataUrl = "";
+    protected static String producerHubDataUrl = "";
+    protected static String orderHubDataUrl = "";
+    protected static String itemHubDataUrl = "";
+    protected static String buyerHubDataUrl = "";
+    protected static String certificationHubDataUrl = "";
 
     protected static String hubEmailTo = "info@helenalocal.org";
     protected static String hubEmailSubject = "HL Hub - Request email...";

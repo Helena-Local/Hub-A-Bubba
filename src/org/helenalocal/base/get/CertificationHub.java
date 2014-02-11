@@ -122,7 +122,6 @@ public class CertificationHub extends Hub implements Runnable {
         return lastRefreshTS;
     }
 
-    //TODO Kevin this needs to parse out the ';' and '~'
     public static List<Certification> buildCertificationList(String certificationStr) {
         ArrayList<Certification> certifications = new ArrayList<Certification>();
         // parse each certificate out
@@ -139,16 +138,18 @@ public class CertificationHub extends Hub implements Runnable {
                 if (certPartIterator.hasNext()) {
                     String cid = certPartIterator.next();
                     Certification aCert = new Certification();
-                    if (!cid.equals("")) {
+                    if (!cid.equals("") && Hub.certificationMap.containsKey(cid)) {
                         // loads all template values
-                        aCert = Hub.certificationMap.get(cid);
-                    }
-                    // check for optional url suffix
-                    if (certPartIterator.hasNext()) {
-                        String urlSuffix = certPartIterator.next();
-                        if (!urlSuffix.equals("")) {
-                            // append suffix
-                            aCert.setWebsiteUrl(aCert.getWebsiteUrl() + urlSuffix);
+                        aCert.setCID(Hub.certificationMap.get(cid).getCID());
+                        aCert.setDisplayName(Hub.certificationMap.get(cid).getDisplayName());
+                        aCert.setWebsiteUrl(Hub.certificationMap.get(cid).getWebsiteUrl());
+                        // check for optional url suffix
+                        if (certPartIterator.hasNext()) {
+                            String urlSuffix = certPartIterator.next();
+                            if (!urlSuffix.equals("")) {
+                                // append suffix
+                                aCert.setWebsiteUrl(aCert.getWebsiteUrl() + urlSuffix);
+                            }
                         }
                     }
                     certifications.add(aCert);
@@ -157,7 +158,6 @@ public class CertificationHub extends Hub implements Runnable {
         }
         return certifications;
     }
-
 
     @Override
     public void run() {

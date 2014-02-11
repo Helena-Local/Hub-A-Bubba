@@ -21,18 +21,7 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
     private static final String Tag = "AsyncTesterTask";
     private static Context _context;
 
-    public AsyncTesterTask(Context context) {
-        _context = context;
-    }
-
-    @Override
-    protected Intent doInBackground(Void... params) {
-        /*Intent intent = new Intent(HubInit.HubType.PRODUCER_HUB.name());
-        // intent.setType(HubInit.HubType.PRODUCER_HUB.name());
-        _context.sendBroadcast(intent);
-        Log.e(Tag, "broadcast sent");
-        */
-
+    private Intent bigTest() {
         Intent email = null;
 
         //TODO shane -- This is a working example... Let me know if you have questions about it... :)
@@ -116,6 +105,52 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
         }
         return email;
     }
+
+    public AsyncTesterTask(Context context) {
+        _context = context;
+    }
+
+    @Override
+    protected Intent doInBackground(Void... params) {
+        /*Intent intent = new Intent(HubInit.HubType.PRODUCER_HUB.name());
+        // intent.setType(HubInit.HubType.PRODUCER_HUB.name());
+        _context.sendBroadcast(intent);
+        Log.e(Tag, "broadcast sent");
+        */
+
+        // test buyerhub...
+        ArrayList<Buyer> buyerArrayList = new ArrayList<Buyer>(Hub.buyerMap.values());
+        for (int j = 0; j < buyerArrayList.size(); j++) {
+            Log.w(Tag, buyerArrayList.get(j).toString());
+            ArrayList<Certification> certificationsArrayList = new ArrayList<Certification>(buyerArrayList.get(j).getCertifications());
+            Log.w(Tag, " \n     certifications -- ");
+            for (int k = 0; k < certificationsArrayList.size(); k++) {
+                Certification certification = certificationsArrayList.get(k);
+                Log.w(Tag, " \n          " + certification.toString());
+            }
+        }
+
+        // test buyerhub...
+        ArrayList<Producer> producerArrayList = new ArrayList<Producer>(Hub.producerMap.values());
+        for (int j = 0; j < producerArrayList.size(); j++) {
+            Log.w(Tag, producerArrayList.get(j).toString());
+            ArrayList<Certification> certificationsArrayList = new ArrayList<Certification>(producerArrayList.get(j).getCertifications());
+            Log.w(Tag, " \n     certifications -- ");
+            for (int k = 0; k < certificationsArrayList.size(); k++) {
+                Certification certification = certificationsArrayList.get(k);
+                Log.w(Tag, " \n          " + certification.toString());
+            }
+        }
+
+        Intent email = new Intent(Intent.ACTION_SEND);
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{HubInit.getHubEmailTo()});
+        email.putExtra(Intent.EXTRA_SUBJECT, HubInit.getHubEmailSubject());
+        email.putExtra(Intent.EXTRA_TEXT, "boo\n-----------------");
+        //need this to prompts email client only
+        email.setType("message/rfc822");
+        return email;
+    }
+
 
     @Override
     protected void onPostExecute(Intent intent) {
