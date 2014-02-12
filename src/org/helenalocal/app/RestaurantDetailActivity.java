@@ -99,6 +99,10 @@ public class RestaurantDetailActivity extends Activity {
             if (bitmap != null) {
                 _imageView.setImageBitmap(bitmap);
             }
+            else {
+                // set the default image
+                _imageView.setImageResource(R.drawable.default_restaurant);
+            }
         }
     }
 }

@@ -15,7 +15,6 @@
             android:maxHeight="75dp"
             android:maxWidth="75dp"
             android:id="@+id/restaurantImageView"
-            android:src="@drawable/default_restaurant_image"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="25dp"
             android:adjustViewBounds="false"
