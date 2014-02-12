@@ -113,6 +113,12 @@ public class BuyerHub extends Hub implements Runnable {
                         buyer.setCertifications(CertificationHub.buildCertificationList(certificationStr));
                     }
                 }
+                if (iterator.hasNext()) {
+                    String quote = iterator.next();
+                    if (!quote.equals("")) {
+                        buyer.setQuote(quote);
+                    }
+                }
                 myBuyerMap.put(buyer.getBID(), buyer);
             }
         }

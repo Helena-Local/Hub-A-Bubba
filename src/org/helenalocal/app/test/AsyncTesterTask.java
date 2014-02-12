@@ -122,6 +122,18 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
         Log.e(Tag, "broadcast sent");
         */
 
+        // test buyerhub...
+        ArrayList<Buyer> buyerArrayList = new ArrayList<Buyer>(Hub.buyerMap.values());
+        for (int j = 0; j < buyerArrayList.size(); j++) {
+            Log.w(Tag, buyerArrayList.get(j).toString());
+            ArrayList<Certification> certificationsArrayList = new ArrayList<Certification>(buyerArrayList.get(j).getCertifications());
+            Log.w(Tag, " \n     certifications -- ");
+            for (int k = 0; k < certificationsArrayList.size(); k++) {
+                Certification certification = certificationsArrayList.get(k);
+                Log.w(Tag, " \n          " + certification.toString());
+            }
+        }
+
         // test growerhub...
         Intent email = new Intent(Intent.ACTION_SEND);
         Producer producer = new Producer("P-2013-0", "Western Montana Growers’ Cooperative", "grower@wmgcoop.com", "http://www.wmgcoop.com/", "http://g.virbcdn.com/_f2/images/58/PageImage-524372-4680215-WMGC_WebBanner.jpg", "Arlee, MT 59821", new ArrayList<Certification>(), "This day...");
