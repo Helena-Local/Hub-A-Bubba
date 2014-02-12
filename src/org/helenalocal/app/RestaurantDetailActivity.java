@@ -5,12 +5,20 @@
 package org.helenalocal.app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.Spanned;
+import android.text.style.ClickableSpan;
 import android.text.util.Linkify;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Buyer;
@@ -18,6 +26,7 @@ import org.helenalocal.base.Hub;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,48 +34,54 @@ public class RestaurantDetailActivity extends Activity {
 
     private static final String LogTag = "RestaurantDetailActivity";
 
+    private Buyer _buyer;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.restaurant_detail_activity);
 
         String buyerId = getIntent().getStringExtra(RestaurantTab.BUYER_ID_KEY);
-        final Buyer b = Hub.buyerMap.get(buyerId);
+        _buyer = Hub.buyerMap.get(buyerId);
 
-        // restaurant name
-        TextView tv = (TextView) findViewById(R.id.nameTextView);
-        tv.setText(b.getName());
-
-        // restaurant address
-        tv = (TextView)findViewById(R.id.addressTextView);
-        tv.setText(b.getLocation());
-
-        // set clickable link for phone number
-        tv = (TextView)findViewById(R.id.callTextView);
-        Linkify.addLinks(tv, Pattern.compile(tv.getText().toString()), "tel:", null, new Linkify.TransformFilter() {
-            @Override
-            public String transformUrl(Matcher match, String url) {
-                return b.getPhone();
-            }
-        });
-
-        // setup clickable link for web address
-        tv = (TextView)findViewById(R.id.urlTextView);
-        Linkify.addLinks(tv, Pattern.compile(tv.getText().toString()), "http://", null, new Linkify.TransformFilter() {
-            @Override
-            public String transformUrl(Matcher match, String url) {
-                String website = b.getWebsiteUrl();
-                if (website.startsWith("http://") == true) {
-                    website = website.substring("http://".length(), website.length());
-                }
-
-                return website;
-            }
-        });
 
         // load image
         ImageView iv = (ImageView)findViewById(R.id.restaurantImageView);
-        new ImageAsyncTask(iv).execute(b.getPhotoUrl());
+        new ImageAsyncTask(iv).execute(_buyer.getPhotoUrl());
+
+        // restaurant name
+        TextView tv = (TextView) findViewById(R.id.nameTextView);
+        tv.setText(_buyer.getName());
+
+        // restaurant address
+        tv = (TextView)findViewById(R.id.addressTextView);
+        tv.setText(_buyer.getLocation());
+    }
+
+    public void onClickCall(View view) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + _buyer.getPhone()));
+        startActivity(intent);
+    }
+
+    public void onClickMap(View view) {
+        // todo - verify that the maps application is installed (apparently it is not on a kindle)
+
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            String address = String.format("%s %s", _buyer.getName(), _buyer.getLocation());
+            String data = String.format("geo:0,0?q=%s", URLEncoder.encode(address, "UTF-8"));
+
+            intent.setData(Uri.parse(data));
+            startActivity(intent);
+        } catch (Exception e) {
+        }
+    }
+
+    public void onClickUrl(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(_buyer.getWebsiteUrl()));
+        startActivity(intent);
     }
 
     private class ImageAsyncTask extends AsyncTask<String, Void, Bitmap> {

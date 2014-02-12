@@ -31,4 +31,8 @@
         <item name="android:layout_marginRight">10dp</item>
     </style>
 
+    <style name="selectableItem">
+        <item name="android:background">@android:drawable/list_selector_background</item>
+    </style>
+
 </resources>

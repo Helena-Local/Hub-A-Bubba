@@ -16,5 +16,5 @@
     <string name="restaurant_tab_welcome">All these restaurants buy local sustainable food from Helena Local.</string>
     <string name="grower_tab_text">Grower</string>
     <string name="grower_tab_welcome">Welcome to our grower list. All these producers have been vetted for sustainability by Helena Local.</string>
-    <string name="grower_detail_welcome">Welcome to Acme Farms</string>
+    <string name="grower_detail_welcome">Welcome to Acme Farms</string><string name="restaurant_call_action">Call</string><string name="restaurant_map_action">Map</string><string name="restaurant_website_action">Website</string>
 </resources>
