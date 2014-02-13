@@ -22,13 +22,14 @@ public class Buyer {
     private String location = "";
     private String serviceLevel = "";
     private List<Certification> certifications = new ArrayList<Certification>();
+    private String quote = "";
     private String lastOrderDate = "";
 
     public Buyer() {
 
     }
 
-    public Buyer(String BID, String name, String contactEmail, String hours, String phone, String websiteUrl, String photoUrl, String location, List certifications, String lastOrderDate) {
+    public Buyer(String BID, String name, String contactEmail, String hours, String phone, String websiteUrl, String photoUrl, String location, List certifications, String quote, String lastOrderDate) {
         this.BID = BID;
         this.name = name;
         this.contactEmail = contactEmail;
@@ -38,7 +39,16 @@ public class Buyer {
         this.photoUrl = photoUrl;
         this.location = location;
         this.certifications = certifications;
+        this.quote = quote;
         this.lastOrderDate = lastOrderDate;
+    }
+
+    public String getQuote() {
+        return quote;
+    }
+
+    public void setQuote(String quote) {
+        this.quote = quote;
     }
 
     public String getBID() {
@@ -132,6 +142,6 @@ public class Buyer {
     public String toString() {
         return "BID = " + BID + "; name = " + name + "; contactEmail = " + contactEmail
                 + "; hours = " + hours + "; phone = " + phone + "; websiteUrl = " + websiteUrl + "; photoUrl = "
-                + photoUrl + "; location = " + location + "; lastOrderDate = " + lastOrderDate;
+                + photoUrl + "; location = " + location + "; quote = " + quote + "; lastOrderDate = " + lastOrderDate;
     }
 }
