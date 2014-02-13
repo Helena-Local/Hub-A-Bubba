@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -52,6 +53,15 @@ public class RestaurantDetailActivity extends Activity {
         tv = (TextView)findViewById(R.id.addressTextView);
         tv.setText(_buyer.getLocation());
 
+        // quote
+        tv = (TextView)findViewById(R.id.quoteTextView);
+        if (_buyer.getQuote().isEmpty() == false) {
+            tv.setText(String.format("\"%s\"", _buyer.getQuote()));
+        }
+        else {
+            tv.setVisibility(View.GONE);
+        }
+
         loadCertifications();
         loadProducts();
     }
@@ -61,8 +71,11 @@ public class RestaurantDetailActivity extends Activity {
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.certificationLayout);
         linearLayout.removeAllViews();
 
+        CertItemClickListener clickListener = new CertItemClickListener();
+
         for (Certification cert : _buyer.getCertifications()) {
             RelativeLayout relativeLayout = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.certification, null);
+            relativeLayout.setOnClickListener(clickListener);
 
             ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
             imageView.setImageResource(getImageResId(cert));
@@ -99,20 +112,25 @@ public class RestaurantDetailActivity extends Activity {
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.productsLayout);
         linearLayout.removeAllViews();
 
-        for (Map.Entry entry : Hub.orderMap.entrySet()) {
-            if (entry.getKey().equals(_buyer.getBID())) {
+        ProductItemClickListener clickListener = new ProductItemClickListener();
+
+        for (Map.Entry entry : Hub.orderMap.entrySet())
+        {
+            if (entry.getKey().equals(_buyer.getBID()))
+            {
 
                 Order order = (Order)entry.getValue();
 
                 Producer producer = Hub.producerMap.get(order.getProducerID());
                 Item item = Hub.itemMap.get(order.getItemID());
 
-                RelativeLayout rl = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.certification, null);
+                RelativeLayout relativeLayout = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.certification, null);
+                relativeLayout.setOnClickListener(clickListener);
 
-                TextView tv = (TextView)rl.findViewById(R.id.textView);
-                tv.setText(item.getProductDesc());
+                TextView textView = (TextView)relativeLayout.findViewById(R.id.textView);
+                textView.setText(item.getProductDesc());
 
-                linearLayout.addView(rl);
+                linearLayout.addView(relativeLayout);
             }
         }
     }
@@ -141,6 +159,22 @@ public class RestaurantDetailActivity extends Activity {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(_buyer.getWebsiteUrl()));
         startActivity(intent);
+    }
+
+    private class CertItemClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            Log.w(LogTag, "CertItemClickListener: onClick");
+        }
+    }
+
+    private class ProductItemClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            Log.w(LogTag, "ProductItemClickListener: onClick");
+        }
     }
 
     private class ImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
