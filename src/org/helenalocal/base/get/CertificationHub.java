@@ -68,6 +68,12 @@ public class CertificationHub extends Hub implements Runnable {
                         certification.setWebsiteUrl(websiteUrl);
                     }
                 }
+                if (iterator.hasNext()) {
+                    String iconUrl = iterator.next();
+                    if (!iconUrl.equals("")) {
+                        certification.setIconUrl(iconUrl);
+                    }
+                }
                 myCertificationMap.put(certification.getCID(), certification);
             }
         }
@@ -143,6 +149,7 @@ public class CertificationHub extends Hub implements Runnable {
                         aCert.setCID(Hub.certificationMap.get(cid).getCID());
                         aCert.setDisplayName(Hub.certificationMap.get(cid).getDisplayName());
                         aCert.setWebsiteUrl(Hub.certificationMap.get(cid).getWebsiteUrl());
+                        aCert.setIconUrl(Hub.certificationMap.get(cid).getIconUrl());
                         // check for optional url suffix
                         if (certPartIterator.hasNext()) {
                             String urlSuffix = certPartIterator.next();

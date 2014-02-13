@@ -12,15 +12,25 @@ public class Certification {
     private String CID = "";
     private String displayName = "";
     private String websiteUrl = "";
+    private String iconUrl = "";
 
     public Certification() {
 
     }
 
-    public Certification(String cid, String displayName, String websiteUrl) {
+    public Certification(String cid, String displayName, String websiteUrl, String iconUrl) {
         this.CID = cid;
         this.displayName = displayName;
         this.websiteUrl = websiteUrl;
+        this.iconUrl = iconUrl;
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 
     public String getCID() {
@@ -48,6 +58,6 @@ public class Certification {
     }
 
     public String toString() {
-        return "CID = " + CID + "; displayName = " + displayName + "; websiteUrl = " + websiteUrl;
+        return "CID = " + CID + "; displayName = " + displayName + "; websiteUrl = " + websiteUrl + "; iconUrl = " + iconUrl;
     }
 }

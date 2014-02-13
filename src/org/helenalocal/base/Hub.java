@@ -7,7 +7,7 @@ package org.helenalocal.base;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import org.helenalocal.base.get.GrowerHub;
+import org.helenalocal.base.get.ProducerHub;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public abstract class Hub extends HubInit {
 
     public static HashMap<String, Certification> certificationMap = new HashMap<String, Certification>();
 
-    public static GrowerHub growerHub = new GrowerHub();
+    public static ProducerHub producerHub = new ProducerHub(null);
 
     protected void writeToFile(Context context, String data, String fileName) {
         try {

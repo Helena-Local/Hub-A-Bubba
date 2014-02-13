@@ -22,11 +22,12 @@ public class Producer {
     private String location = "";
     private List<Certification> certifications = new ArrayList<Certification>();
     private String quote = "";
+    private String iconUrl = "";
 
     public Producer() {
     }
 
-    public Producer(String PID, String name, String contactEmail, String websiteUrl, String photoUrl, String location, List<Certification> certifications, String quote) {
+    public Producer(String PID, String name, String contactEmail, String websiteUrl, String photoUrl, String location, List<Certification> certifications, String quote, String iconUrl) {
         this.PID = PID;
         this.name = name;
         this.contactEmail = contactEmail;
@@ -35,6 +36,15 @@ public class Producer {
         this.location = location;
         this.certifications = certifications;
         this.quote = quote;
+        this.iconUrl = iconUrl;
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 
     public String getPhotoUrl() {
@@ -118,7 +128,7 @@ public class Producer {
 
         return "producer.PID = " + this.PID + "; producer.name = " + this.name + "; producer.contactEmail = " +
                 this.contactEmail + "; producer.websiteUrl = " + this.websiteUrl + "; producer.photoUrl = " +
-                this.photoUrl + "; producer.location = " + this.location + "; quote = " + quote;
+                this.photoUrl + "; producer.location = " + this.location + "; quote = " + quote + "; iconUrl = " + iconUrl;
 
     }
 

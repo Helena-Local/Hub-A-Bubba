@@ -119,6 +119,12 @@ public class BuyerHub extends Hub implements Runnable {
                         buyer.setQuote(quote);
                     }
                 }
+                if (iterator.hasNext()) {
+                    String iconUrl = iterator.next();
+                    if (!iconUrl.equals("")) {
+                        buyer.setIconUrl(iconUrl);
+                    }
+                }
                 myBuyerMap.put(buyer.getBID(), buyer);
             }
         }
