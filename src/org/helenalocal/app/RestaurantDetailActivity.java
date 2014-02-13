@@ -78,7 +78,7 @@ public class RestaurantDetailActivity extends Activity {
             relativeLayout.setOnClickListener(clickListener);
 
             ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
-            imageView.setImageResource(getImageResId(cert));
+            new ImageAsyncTask(imageView).execute(cert.getIconUrl());
 
             TextView textView = (TextView)relativeLayout.findViewById(R.id.textView);
             textView.setText(cert.getDisplayName());
@@ -87,25 +87,25 @@ public class RestaurantDetailActivity extends Activity {
         }
     }
 
-    private int getImageResId(Certification c) {
-
-        int resId = 0;
-
-        if (c.getCID().equals("C-0")) {
-            resId = R.drawable.hl_certification;
-        }
-        else if (c.getCID().equals("C-1")) {
-            resId = R.drawable.ccof_certification;
-        }
-        else if (c.getCID().equals("C-3")) {
-            resId = R.drawable.tri_county_certification;
-        }
-        else if (c.getCID().equals("C-4")) {
-            resId = R.drawable.wse_certification;
-        }
-
-        return resId;
-    }
+//    private int getImageResId(Certification c) {
+//
+//        int resId = 0;
+//
+//        if (c.getCID().equals("C-0")) {
+//            resId = R.drawable.hl_certification;
+//        }
+//        else if (c.getCID().equals("C-1")) {
+//            resId = R.drawable.ccof_certification;
+//        }
+//        else if (c.getCID().equals("C-3")) {
+//            resId = R.drawable.tri_county_certification;
+//        }
+//        else if (c.getCID().equals("C-4")) {
+//            resId = R.drawable.wse_certification;
+//        }
+//
+//        return resId;
+//    }
 
     private void loadProducts() {
 

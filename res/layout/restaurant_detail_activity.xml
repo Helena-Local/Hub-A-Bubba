@@ -204,7 +204,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:id="@+id/imageView"
-                            android:src="@drawable/tri_county_certification"
+                            android:src="@drawable/default_certification"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentTop="true"
                             android:layout_marginRight="5dp"/>
@@ -227,7 +227,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:id="@+id/imageView"
-                            android:src="@drawable/ccof_certification"
+                            android:src="@drawable/default_certification"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentTop="true"
                             android:layout_marginRight="5dp"/>
