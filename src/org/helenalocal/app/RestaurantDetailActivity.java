@@ -76,6 +76,7 @@ public class RestaurantDetailActivity extends Activity {
         for (Certification cert : _buyer.getCertifications()) {
             RelativeLayout relativeLayout = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.certification, null);
             relativeLayout.setOnClickListener(clickListener);
+            relativeLayout.setTag(cert);
 
             ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
             new ImageAsyncTask(imageView).execute(cert.getIconUrl());
@@ -86,26 +87,6 @@ public class RestaurantDetailActivity extends Activity {
             linearLayout.addView(relativeLayout);
         }
     }
-
-//    private int getImageResId(Certification c) {
-//
-//        int resId = 0;
-//
-//        if (c.getCID().equals("C-0")) {
-//            resId = R.drawable.hl_certification;
-//        }
-//        else if (c.getCID().equals("C-1")) {
-//            resId = R.drawable.ccof_certification;
-//        }
-//        else if (c.getCID().equals("C-3")) {
-//            resId = R.drawable.tri_county_certification;
-//        }
-//        else if (c.getCID().equals("C-4")) {
-//            resId = R.drawable.wse_certification;
-//        }
-//
-//        return resId;
-//    }
 
     private void loadProducts() {
 
@@ -165,7 +146,12 @@ public class RestaurantDetailActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            Log.w(LogTag, "CertItemClickListener: onClick");
+
+            Certification cert = (Certification)v.getTag();
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(cert.getWebsiteUrl()));
+            startActivity(intent);
         }
     }
 
