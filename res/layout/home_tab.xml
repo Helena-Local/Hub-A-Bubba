@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
--->
+  ~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+  -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
@@ -26,4 +26,13 @@
             android:id="@+id/button"
             android:onClick="onClick"
             android:layout_gravity="center_horizontal"/>
+    <ImageSwitcher
+            android:layout_width="fill_parent"
+            android:layout_height="62dp"
+            android:id="@+id/imageSwitcher" android:layout_gravity="center_horizontal"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="next"
+            android:id="@+id/nextButton" android:layout_gravity="center_horizontal"/>
 </LinearLayout>
