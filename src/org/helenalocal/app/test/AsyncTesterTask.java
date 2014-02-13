@@ -11,8 +11,8 @@ import android.util.Log;
 import org.helenalocal.app.MainActivity;
 import org.helenalocal.base.*;
 import org.helenalocal.base.get.CertificationHub;
-import org.helenalocal.base.get.GrowerHub;
 import org.helenalocal.base.get.InitHub;
+import org.helenalocal.base.get.ProducerHub;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,7 +26,7 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
         Intent email = null;
 
         // public Producer(String PID, String name, String contactEmail, String websiteUrl, String photoUrl, String location) {
-        Producer producer = new Producer("P-2013-0", "Western Montana Growers’ Cooperative", "grower@wmgcoop.com", "http://www.wmgcoop.com/", "http://g.virbcdn.com/_f2/images/58/PageImage-524372-4680215-WMGC_WebBanner.jpg", "Arlee, MT 59821", new ArrayList<Certification>(), "This day...");
+        Producer producer = new Producer("P-2013-0", "Western Montana Growers’ Cooperative", "grower@wmgcoop.com", "http://www.wmgcoop.com/", "http://g.virbcdn.com/_f2/images/58/PageImage-524372-4680215-WMGC_WebBanner.jpg", "Arlee, MT 59821", new ArrayList<Certification>(), "This day...", "icon-1");
 
         // public Item(String IID,Producer producer,boolean inCsaThisWeek, String category, String productDesc, String productUrl, String productImageUrl, Integer unitsAvailable,
         //        String unitDesc, Double unitPrice, Calendar deliveryDate, String note) {
@@ -122,6 +122,18 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
         Log.e(Tag, "broadcast sent");
         */
 
+        // test producerhub...
+        ArrayList<Producer> producerArrayList = new ArrayList<Producer>(Hub.producerMap.values());
+        for (int j = 0; j < producerArrayList.size(); j++) {
+            Log.w(Tag, producerArrayList.get(j).toString());
+            ArrayList<Certification> certificationsArrayList = new ArrayList<Certification>(producerArrayList.get(j).getCertifications());
+            Log.w(Tag, " \n     certifications -- ");
+            for (int k = 0; k < certificationsArrayList.size(); k++) {
+                Certification certification = certificationsArrayList.get(k);
+                Log.w(Tag, " \n          " + certification.toString());
+            }
+        }
+
         // test buyerhub...
         ArrayList<Buyer> buyerArrayList = new ArrayList<Buyer>(Hub.buyerMap.values());
         for (int j = 0; j < buyerArrayList.size(); j++) {
@@ -134,17 +146,17 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
             }
         }
 
-        // test growerhub...
+        // test producerhub send data...
         Intent email = new Intent(Intent.ACTION_SEND);
-        Producer producer = new Producer("P-2013-0", "Western Montana Growers’ Cooperative", "grower@wmgcoop.com", "http://www.wmgcoop.com/", "http://g.virbcdn.com/_f2/images/58/PageImage-524372-4680215-WMGC_WebBanner.jpg", "Arlee, MT 59821", new ArrayList<Certification>(), "This day...");
+        Producer producer = new Producer("P-2013-0", "Western Montana Growers’ Cooperative", "grower@wmgcoop.com", "http://www.wmgcoop.com/", "http://g.virbcdn.com/_f2/images/58/PageImage-524372-4680215-WMGC_WebBanner.jpg", "Arlee, MT 59821", new ArrayList<Certification>(), "This day...", "icon-2");
         Item item = new Item("I-2014-2-2-3", "P-2013-0", true, "Produce", "Beets", "http://en.wikipedia.org/wiki/Leek‎", "http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Leek.jpg/160px-Leek.jpg", 20, "10 lbs", 10.01, Calendar.getInstance(), "note 1");
         String growerAgreementId = "N/A";
         try {
             // succeed
-            new GrowerHub().setItem(_context, producer, item, growerAgreementId);
+            new ProducerHub(null).setItem(_context, producer, item, growerAgreementId);
             // fail with invalid category...
             item.setCategory("Foo");
-            new GrowerHub().setItem(_context, producer, item, growerAgreementId);
+            new ProducerHub(null).setItem(_context, producer, item, growerAgreementId);
         } catch (Exception e) {
             // use email which will use smtp, so no need to retry, clean up, etc.
             Log.w(Tag, "e = " + e.toString());

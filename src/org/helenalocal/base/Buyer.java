@@ -9,7 +9,6 @@ import java.util.List;
 
 /**
  * Created by abbie on 2/2/14.
- *
  */
 public class Buyer {
     private String BID = "";
@@ -23,13 +22,14 @@ public class Buyer {
     private String serviceLevel = "";
     private List<Certification> certifications = new ArrayList<Certification>();
     private String quote = "";
+    private String iconUrl = "";
     private String lastOrderDate = "";
 
     public Buyer() {
 
     }
 
-    public Buyer(String BID, String name, String contactEmail, String hours, String phone, String websiteUrl, String photoUrl, String location, List certifications, String quote, String lastOrderDate) {
+    public Buyer(String BID, String name, String contactEmail, String hours, String phone, String websiteUrl, String photoUrl, String location, List certifications, String quote, String iconUrl, String lastOrderDate) {
         this.BID = BID;
         this.name = name;
         this.contactEmail = contactEmail;
@@ -40,7 +40,16 @@ public class Buyer {
         this.location = location;
         this.certifications = certifications;
         this.quote = quote;
+        this.iconUrl = iconUrl;
         this.lastOrderDate = lastOrderDate;
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 
     public String getQuote() {
@@ -142,6 +151,6 @@ public class Buyer {
     public String toString() {
         return "BID = " + BID + "; name = " + name + "; contactEmail = " + contactEmail
                 + "; hours = " + hours + "; phone = " + phone + "; websiteUrl = " + websiteUrl + "; photoUrl = "
-                + photoUrl + "; location = " + location + "; quote = " + quote + "; lastOrderDate = " + lastOrderDate;
+                + photoUrl + "; location = " + location + "; quote = " + quote + "; iconUrl = " + iconUrl + "; lastOrderDate = " + lastOrderDate;
     }
 }
