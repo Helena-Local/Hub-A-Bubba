@@ -39,7 +39,11 @@ public class MemberTab extends Fragment {
         _arrayAdapter = new MemberItemAdapter(getActivity(), R.layout.member_product_listview_item, _itemList);
 
         ListView listView = (ListView)getActivity().findViewById(R.id.memberListView);
+        listView.addHeaderView(new View(getActivity()));
+        listView.addFooterView(new View(getActivity()));
         listView.setAdapter(_arrayAdapter);
+
+
 
 //        Button b = (Button) getActivity().findViewById(R.id.growerButton);
 //        b.setOnClickListener(new View.OnClickListener() {

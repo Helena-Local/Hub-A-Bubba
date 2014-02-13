@@ -4,21 +4,29 @@
   ~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:paddingTop="@dimen/default_list_item_padding_top"
-              android:paddingBottom="@dimen/default_list_item_padding_bottom"
-              android:paddingLeft="@dimen/default_list_item_padding_left"
-              android:paddingRight="@dimen/default_list_item_padding_right"
-              android:background="@drawable/product_card">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:paddingLeft="@dimen/card_list_item_padding_left"
+             android:paddingRight="@dimen/card_list_item_padding_right"
+             android:descendantFocusability="beforeDescendants">
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:paddingTop="@dimen/default_list_item_padding_top"
+                  android:paddingBottom="@dimen/default_list_item_padding_bottom"
+                  android:paddingLeft="@dimen/default_list_item_padding_left"
+                  android:paddingRight="@dimen/default_list_item_padding_right"
+                  android:background="@drawable/selector_card_background">
 
-<TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/restaurantNameTextView"/>
-</LinearLayout>
+    <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/restaurantNameTextView"/>
+    </LinearLayout>
+
+</FrameLayout>

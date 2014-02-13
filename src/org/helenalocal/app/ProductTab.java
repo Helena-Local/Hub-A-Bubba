@@ -52,6 +52,8 @@ public class ProductTab extends Fragment {
         _arrayAdapter = new ProductItemAdapter(getActivity(), R.layout.product_listview_item, _itemList);
 
         ListView listView = (ListView)getActivity().findViewById(R.id.productListView);
+        listView.addHeaderView(new View(getActivity()));
+        listView.addFooterView(new View(getActivity()));
         listView.setAdapter(_arrayAdapter);
     }
 
