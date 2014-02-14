@@ -38,6 +38,7 @@ public class MainActivity extends ActionBarActivity {
     private static ScheduledFuture<?> orderHubScheduledFuture;
     private static ScheduledFuture<?> producerHubScheduledFuture;
     private static ScheduledFuture<?> certificationHubScheduledFuture;
+    private static ScheduledFuture<?> adHubScheduledFuture;
 
     private static final String LAST_SELECTED_TAB = "LastSelectedTab";
     private static final String Tag = "MainActivity";
@@ -60,11 +61,12 @@ public class MainActivity extends ActionBarActivity {
     public static void startHubThreads(Context context) {
         Log.w(Tag, "startHubThreads exec.getQueue().size() = " + exec.getQueue().size());
         // schedule hub refreshes...
-        certificationHubScheduledFuture = exec.scheduleWithFixedDelay(new CertificationHub(context), 0, HubInit.getCertificateDelay(), TimeUnit.MINUTES);
         itemHubScheduledFuture = exec.scheduleWithFixedDelay(new ItemHub(context), 0, HubInit.getItemDelay(), TimeUnit.MINUTES);
         orderHubScheduledFuture = exec.scheduleWithFixedDelay(new OrderHub(context), 0, HubInit.getOrderDelay(), TimeUnit.MINUTES);
         buyerHubScheduledFuture = exec.scheduleWithFixedDelay(new BuyerHub(context), 0, HubInit.getBuyerDelay(), TimeUnit.MINUTES);
         producerHubScheduledFuture = exec.scheduleWithFixedDelay(new ProducerHub(context), 0, HubInit.getProducerDelay(), TimeUnit.MINUTES);
+        certificationHubScheduledFuture = exec.scheduleWithFixedDelay(new CertificationHub(context), 0, HubInit.getCertificateDelay(), TimeUnit.MINUTES);
+        adHubScheduledFuture = exec.scheduleWithFixedDelay(new AdHub(context), 0, HubInit.getAdDelay(), TimeUnit.MINUTES);
         Log.w(Tag, "startHubThreads exec.getQueue().size() = " + exec.getQueue().size());
     }
 
@@ -76,6 +78,7 @@ public class MainActivity extends ActionBarActivity {
             orderHubScheduledFuture.cancel(false);
             producerHubScheduledFuture.cancel(false);
             certificationHubScheduledFuture.cancel(false);
+            adHubScheduledFuture.cancel(false);
         }
         exec.shutdownNow();
         exec = null;

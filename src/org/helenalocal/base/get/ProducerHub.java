@@ -36,7 +36,6 @@ public class ProducerHub extends Hub implements Runnable {
 
     public ProducerHub(Context context) {
         this.context = context;
-        logTag = HubType.PRODUCER_HUB.name();
     }
 
     private void parseCSV(HashMap<String, Producer> myProducerMap, InputStream inputStream) throws IOException {

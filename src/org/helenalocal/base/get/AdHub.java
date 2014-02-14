@@ -11,9 +11,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.helenalocal.base.Ad;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
-import org.helenalocal.base.Order;
 
 import java.io.*;
 import java.net.UnknownHostException;
@@ -25,76 +25,53 @@ import java.util.Iterator;
 /**
  * Created by abbie on 1/24/14.
  */
-public class OrderHub extends Hub implements Runnable {
+public class AdHub extends Hub implements Runnable {
     private static Context context;
     private static Calendar lastRefreshTS;
-    private String fileName = "HL-OrderHub.csv";
+    private String fileName = "HL-AdHub.csv";
 
 
-    public OrderHub(Context context) {
+    public AdHub(Context context) {
         this.context = context;
     }
 
-    private void parseCSV(HashMap<String, Order> myOrderMap, InputStream inputStream) throws IOException {
+    private void parseCSV(HashMap<String, Ad> myAdMap, InputStream inputStream) throws IOException {
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(',');
         String receiveString = "";
         boolean firstTime = true;
+        int pos = 0;
         while ((receiveString = bufferedReader.readLine()) != null) {
             if (firstTime) {
                 // remove header
                 firstTime = false;
             } else {
-                // build Order
-                Order order = new Order();
+                // build item
+                Ad ad = new Ad();
                 simpleStringSplitter.setString(receiveString);
                 Iterator<String> iterator = simpleStringSplitter.iterator();
 
-                // Date	OID (Order ID)	IID (Item ID)	PID (Producer ID)	BID (Buyer ID)	Buyer Url
+                // Image URL	BID
                 if (iterator.hasNext()) {
-                    String date = iterator.next();
-                    if (!date.equals("")) {
-                        order.setDate(date);
+                    String imageUrl = iterator.next();
+                    if (!imageUrl.equals("")) {
+                        ad.setImageUrl(imageUrl);
                     }
                 }
                 if (iterator.hasNext()) {
-                    String orderId = iterator.next();
-                    if (!orderId.equals("")) {
-                        order.setOrderID(orderId);
+                    String bid = iterator.next();
+                    if (!bid.equals("")) {
+                        ad.setBID(bid);
                     }
                 }
-                if (iterator.hasNext()) {
-                    String itemId = iterator.next();
-                    if (!itemId.equals("")) {
-                        order.setItemID(itemId);
-                    }
-                }
-                if (iterator.hasNext()) {
-                    String producerId = iterator.next();
-                    if (!producerId.equals("")) {
-                        order.setProducerID(producerId);
-                    }
-                }
-                if (iterator.hasNext()) {
-                    String buyerId = iterator.next();
-                    if (!buyerId.equals("")) {
-                        order.setBuyerID(buyerId);
-                    }
-                }
-                if (iterator.hasNext()) {
-                    String buyerUrl = iterator.next();
-                    if (!buyerUrl.equals("")) {
-                        order.setBuyerUrl(buyerUrl);
-                    }
-                }
-                myOrderMap.put(order.getBuyerID(), order);
+                myAdMap.put(String.valueOf(pos++), ad);
             }
         }
     }
 
-    protected HashMap<String, Order> readFromFile(Context context) {
-        HashMap<String, Order> myOrderMap = new HashMap<String, Order>();
+    protected HashMap<String, Ad> readFromFile(Context context) {
+        HashMap<String, Ad> myAdMap = new HashMap<String, Ad>();
         try {
             // getItem the time the file was last changed here
             File myFile = new File(context.getFilesDir() + "/" + fileName);
@@ -106,7 +83,7 @@ public class OrderHub extends Hub implements Runnable {
             // create products from the file here
             InputStream inputStream = context.openFileInput(fileName);
             if (inputStream != null) {
-                parseCSV(myOrderMap, inputStream);
+                parseCSV(myAdMap, inputStream);
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
@@ -114,13 +91,13 @@ public class OrderHub extends Hub implements Runnable {
         } catch (IOException e) {
             Log.e(HubInit.logTag, "Can not read file  (" + fileName + ") : " + e.toString());
         }
-        Log.w(HubInit.logTag, "Number of orders loaded: " + myOrderMap.size());
-        return myOrderMap;
+        Log.w(HubInit.logTag, "Number of Ad loaded: " + myAdMap.size());
+        return myAdMap;
     }
 
-    public HashMap<String, Order> getOrderMap() throws IOException {
+    public HashMap<String, Ad> getBuyerMap() throws IOException {
         HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet(orderHubDataUrl);
+        HttpGet request = new HttpGet(adHubDataUrl);
         try {
             // first try the net
             HttpResponse response = client.execute(request);
@@ -145,12 +122,11 @@ public class OrderHub extends Hub implements Runnable {
     @Override
     public void run() {
         try {
-            Hub.orderMap = new OrderHub(context).getOrderMap();
-            Log.w(logTag, "OrderHub().getOrderMap loaded...");
+            Hub.adMap = new AdHub(context).getBuyerMap();
+            Log.w(logTag, "AdHub().getAdMap loaded...");
         } catch (IOException e) {
-            Log.w(logTag, "OrderHub().getOrderMap couldn't be loaded...");
+            Log.w(logTag, "AdHub().getAdMap couldn't be loaded...");
         }
 
     }
-
 }

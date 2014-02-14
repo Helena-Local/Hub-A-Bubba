@@ -33,7 +33,6 @@ public class ItemHub extends Hub implements Runnable {
 
     public ItemHub(Context context) {
         this.context = context;
-        logTag = HubType.ITEM_HUB.name();
     }
 
     private void parseCSV(HashMap<String, Item> myItemMap, InputStream inputStream) throws IOException {

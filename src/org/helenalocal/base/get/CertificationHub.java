@@ -31,7 +31,6 @@ public class CertificationHub extends Hub implements Runnable {
 
     public CertificationHub(Context context) {
         this.context = context;
-        logTag = HubType.CERTIFICATION_HUB.name();
     }
 
     private void parseCSV(HashMap<String, Certification> myCertificationMap, InputStream inputStream) throws IOException {

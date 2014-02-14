@@ -8,7 +8,7 @@ package org.helenalocal.base;
  * Created by abbie on 2/6/14.
  */
 public abstract class HubInit {
-    public enum HubType {BUYER_HUB, CERTIFICATION_HUB, INIT_HUB, ITEM_HUB, ORDER_HUB, PRODUCER_HUB, GROWER_HUB}
+    public enum HubType {BUYER_HUB, CERTIFICATION_HUB, INIT_HUB, ITEM_HUB, ORDER_HUB, PRODUCER_HUB, AD_HUB}
 
     // defaults set below
     protected static String logTag = "Hub ";
@@ -25,6 +25,7 @@ public abstract class HubInit {
     protected static String itemHubDataUrl = "";
     protected static String buyerHubDataUrl = "";
     protected static String certificationHubDataUrl = "";
+    protected static String adHubDataUrl = "";
 
     protected static String hubEmailTo = "info@helenalocal.org";
     protected static String hubEmailSubject = "HL Hub - Request email...";
@@ -34,6 +35,8 @@ public abstract class HubInit {
     protected static long orderDelay = 1;
     protected static long producerDelay = 5;
     protected static long certificateDelay = 5;
+    protected static long adDelay = 1;
+    protected static long adPlayRate = 1;
 
     public static long getBuyerDelay() {
         return buyerDelay;
@@ -99,8 +102,28 @@ public abstract class HubInit {
         return certificationHubDataUrl;
     }
 
+    public static String getAdHubDataUrl() {
+        return adHubDataUrl;
+    }
+
     public static long getCertificateDelay() {
         return certificateDelay;
+    }
+
+    public static long getAdDelay() {
+        return adDelay;
+    }
+
+    public static long getAdPlayRate() {
+        return adPlayRate;
+    }
+
+    public static void setAdPlayRate(long adPlayRate) {
+        HubInit.adPlayRate = adPlayRate;
+    }
+
+    public static void setAdDelay(long adDelay) {
+        HubInit.adDelay = adDelay;
     }
 
     public static void setCertificateDelay(long certificateDelay) {
@@ -109,6 +132,10 @@ public abstract class HubInit {
 
     public static void setCertificationHubDataUrl(String certificationHubDataUrl) {
         HubInit.certificationHubDataUrl = certificationHubDataUrl;
+    }
+
+    public static void setAdHubDataUrl(String adHubDataUrl) {
+        HubInit.adHubDataUrl = adHubDataUrl;
     }
 
     public static void setDataVersionNotes(String dataVersionNotes) {

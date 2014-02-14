@@ -30,8 +30,8 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
 
         // public Item(String IID,Producer producer,boolean inCsaThisWeek, String category, String productDesc, String productUrl, String productImageUrl, Integer unitsAvailable,
         //        String unitDesc, Double unitPrice, Calendar deliveryDate, String note) {
-        Item item = new Item("I-2014-2-2-3","P-2013-0", true, "Produce", "Leeks","http://en.wikipedia.org/wiki/Leek‎",
-                "http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Leek.jpg/160px-Leek.jpg",20,"10 lbs",10.01, Calendar.getInstance(),"note 1");
+        Item item = new Item("I-2014-2-2-3", "P-2013-0", true, "Produce", "Leeks", "http://en.wikipedia.org/wiki/Leek‎",
+                "http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Leek.jpg/160px-Leek.jpg", 20, "10 lbs", 10.01, Calendar.getInstance(), "note 1");
 
         // growerAgreementId only needed from UI submit... Not part of the item object.
         String growerAgreementId = "N/A";
@@ -73,7 +73,7 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
 
             // get specific producer from the hash
             Producer p1 = Hub.producerMap.get("P-2013-1");
-            Log.w(Tag,"**** Found Newman Farm? => " + p1);
+            Log.w(Tag, "**** Found Newman Farm? => " + p1);
 
             // test orderhub...
             ArrayList<Order> orderArrayList = new ArrayList<Order>(Hub.orderMap.values());
@@ -91,7 +91,7 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
 
             // get specific oder from the hash
             Order order = Hub.orderMap.get("B-2014-02");
-            Log.w(Tag,"**** Found Order? => " + order);
+            Log.w(Tag, "**** Found Order? => " + order);
 
 
         } catch (Exception e) {
@@ -121,6 +121,12 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
         _context.sendBroadcast(intent);
         Log.e(Tag, "broadcast sent");
         */
+
+        // test adhub...
+        ArrayList<Ad> adArrayList = new ArrayList<Ad>(Hub.adMap.values());
+        for (int j = 0; j < adArrayList.size(); j++) {
+            Log.w(Tag, adArrayList.get(j).toString());
+        }
 
         // test producerhub...
         ArrayList<Producer> producerArrayList = new ArrayList<Producer>(Hub.producerMap.values());

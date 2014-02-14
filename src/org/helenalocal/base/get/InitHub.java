@@ -31,7 +31,6 @@ public class InitHub extends Hub implements Runnable {
 
     public InitHub(Context context) {
         this.context = context;
-        logTag = HubType.INIT_HUB.name();
     }
 
     private void parseCSV(InputStream inputStream) throws IOException {
@@ -111,6 +110,13 @@ public class InitHub extends Hub implements Runnable {
                     Log.w(HubInit.logTag, "certificationHubDataUrl = " + HubInit.getCertificationHubDataUrl());
                 }
                 if (iterator.hasNext()) {
+                    String adHubDataUrl = iterator.next();
+                    if (!adHubDataUrl.equals("")) {
+                        HubInit.setAdHubDataUrl(adHubDataUrl);
+                    }
+                    Log.w(HubInit.logTag, "adHubDataUrl = " + HubInit.getAdHubDataUrl());
+                }
+                if (iterator.hasNext()) {
                     String hubEmailTo = iterator.next();
                     if (!hubEmailTo.equals("")) {
                         HubInit.setHubEmailTo(hubEmailTo);
@@ -158,6 +164,20 @@ public class InitHub extends Hub implements Runnable {
                         HubInit.setCertificateDelay(Long.parseLong(certificateDelay.trim()));
                     }
                     Log.w(HubInit.logTag, "certificateDelay = " + HubInit.getCertificateDelay());
+                }
+                if (iterator.hasNext()) {
+                    String adDelay = iterator.next();
+                    if (!adDelay.equals("")) {
+                        HubInit.setAdDelay(Long.parseLong(adDelay.trim()));
+                    }
+                    Log.w(HubInit.logTag, "adDelay = " + HubInit.getAdDelay());
+                }
+                if (iterator.hasNext()) {
+                    String adPlayRate = iterator.next();
+                    if (!adPlayRate.equals("")) {
+                        HubInit.setAdPlayRate(Long.parseLong(adPlayRate.trim()));
+                    }
+                    Log.w(HubInit.logTag, "adPlayRate = " + HubInit.getAdDelay());
                 }
                 if (iterator.hasNext()) {
                     String dataVersionNotes = iterator.next();

@@ -36,6 +36,8 @@ public abstract class Hub extends HubInit {
 
     public static HashMap<String, Certification> certificationMap = new HashMap<String, Certification>();
 
+    public static HashMap<String, Ad> adMap = new HashMap<String, Ad>();
+
     public static ProducerHub producerHub = new ProducerHub(null);
 
     protected void writeToFile(Context context, String data, String fileName) {

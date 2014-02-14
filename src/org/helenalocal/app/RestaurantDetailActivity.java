@@ -41,7 +41,7 @@ public class RestaurantDetailActivity extends Activity {
 
 
         // load image
-        ImageView iv = (ImageView)findViewById(R.id.restaurantImageView);
+        ImageView iv = (ImageView) findViewById(R.id.restaurantImageView);
         new ImageAsyncTask(iv).execute(_buyer.getPhotoUrl());
 
         // restaurant name
@@ -49,7 +49,7 @@ public class RestaurantDetailActivity extends Activity {
         tv.setText(_buyer.getName());
 
         // restaurant address
-        tv = (TextView)findViewById(R.id.addressTextView);
+        tv = (TextView) findViewById(R.id.addressTextView);
         tv.setText(_buyer.getLocation());
 
         loadCertifications();
@@ -58,7 +58,7 @@ public class RestaurantDetailActivity extends Activity {
 
     private void loadCertifications() {
 
-        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.certificationLayout);
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.certificationLayout);
         linearLayout.removeAllViews();
 
         for (Certification cert : _buyer.getCertifications()) {
@@ -67,7 +67,7 @@ public class RestaurantDetailActivity extends Activity {
             ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
             imageView.setImageResource(getImageResId(cert));
 
-            TextView textView = (TextView)relativeLayout.findViewById(R.id.textView);
+            TextView textView = (TextView) relativeLayout.findViewById(R.id.textView);
             textView.setText(cert.getDisplayName());
 
             linearLayout.addView(relativeLayout);
@@ -78,38 +78,26 @@ public class RestaurantDetailActivity extends Activity {
 
         int resId = 0;
 
-        if (c.getCID().equals("C-0")) {
-            resId = R.drawable.hl_certification;
-        }
-        else if (c.getCID().equals("C-1")) {
-            resId = R.drawable.ccof_certification;
-        }
-        else if (c.getCID().equals("C-3")) {
-            resId = R.drawable.tri_county_certification;
-        }
-        else if (c.getCID().equals("C-4")) {
-            resId = R.drawable.wse_certification;
-        }
 
         return resId;
     }
 
     private void loadProducts() {
 
-        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.productsLayout);
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.productsLayout);
         linearLayout.removeAllViews();
 
         for (Map.Entry entry : Hub.orderMap.entrySet()) {
             if (entry.getKey().equals(_buyer.getBID())) {
 
-                Order order = (Order)entry.getValue();
+                Order order = (Order) entry.getValue();
 
                 Producer producer = Hub.producerMap.get(order.getProducerID());
                 Item item = Hub.itemMap.get(order.getItemID());
 
                 RelativeLayout rl = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.certification, null);
 
-                TextView tv = (TextView)rl.findViewById(R.id.textView);
+                TextView tv = (TextView) rl.findViewById(R.id.textView);
                 tv.setText(item.getProductDesc());
 
                 linearLayout.addView(rl);
@@ -172,8 +160,7 @@ public class RestaurantDetailActivity extends Activity {
             super.onPostExecute(bitmap);
             if (bitmap != null) {
                 _imageView.setImageBitmap(bitmap);
-            }
-            else {
+            } else {
                 // set the default image
                 _imageView.setImageResource(R.drawable.default_restaurant);
             }
