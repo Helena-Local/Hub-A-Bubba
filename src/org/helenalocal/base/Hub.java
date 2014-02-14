@@ -12,7 +12,9 @@ import org.helenalocal.base.get.ProducerHub;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by abbie on 1/24/14.
@@ -30,13 +32,13 @@ public abstract class Hub extends HubInit {
 
     public static HashMap<String, Item> itemMap = new HashMap<String, Item>();
 
-    public static HashMap<String, Order> orderMap = new HashMap<String, Order>();
+    public static List<Order> orderArr = new ArrayList<Order>();
 
     public static HashMap<String, Producer> producerMap = new HashMap<String, Producer>();
 
     public static HashMap<String, Certification> certificationMap = new HashMap<String, Certification>();
 
-    public static HashMap<String, Ad> adMap = new HashMap<String, Ad>();
+    public static List<Ad> adArr = new ArrayList<Ad>();
 
     public static ProducerHub producerHub = new ProducerHub(null);
 

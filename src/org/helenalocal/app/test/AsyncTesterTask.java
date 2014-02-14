@@ -76,9 +76,8 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
             Log.w(Tag, "**** Found Newman Farm? => " + p1);
 
             // test orderhub...
-            ArrayList<Order> orderArrayList = new ArrayList<Order>(Hub.orderMap.values());
-            for (int j = 0; j < orderArrayList.size(); j++) {
-                Order order = orderArrayList.get(j);
+            for (int j = 0; j < Hub.orderArr.size(); j++) {
+                Order order = Hub.orderArr.get(j);
                 Log.w(Tag, order.toString());
             }
 
@@ -88,12 +87,6 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
                 Certification certification = certificationArrayList.get(j);
                 Log.w(Tag, certification.toString());
             }
-
-            // get specific oder from the hash
-            Order order = Hub.orderMap.get("B-2014-02");
-            Log.w(Tag, "**** Found Order? => " + order);
-
-
         } catch (Exception e) {
             // use email which will use smtp, so no need to retry, clean up, etc.
             Log.w(Tag, "e = " + e.toString());
@@ -123,9 +116,8 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
         */
 
         // test adhub...
-        ArrayList<Ad> adArrayList = new ArrayList<Ad>(Hub.adMap.values());
-        for (int j = 0; j < adArrayList.size(); j++) {
-            Log.w(Tag, adArrayList.get(j).toString());
+        for (int j = 0; j < Hub.adArr.size(); j++) {
+            Log.w(Tag, Hub.adArr.get(j).toString());
         }
 
         // test producerhub...

@@ -18,9 +18,10 @@ import org.helenalocal.base.HubInit;
 import java.io.*;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by abbie on 1/24/14.
@@ -35,13 +36,12 @@ public class AdHub extends Hub implements Runnable {
         this.context = context;
     }
 
-    private void parseCSV(HashMap<String, Ad> myAdMap, InputStream inputStream) throws IOException {
+    private void parseCSV(List<Ad> myAdArr, InputStream inputStream) throws IOException {
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(',');
         String receiveString = "";
         boolean firstTime = true;
-        int pos = 0;
         while ((receiveString = bufferedReader.readLine()) != null) {
             if (firstTime) {
                 // remove header
@@ -65,13 +65,13 @@ public class AdHub extends Hub implements Runnable {
                         ad.setBID(bid);
                     }
                 }
-                myAdMap.put(String.valueOf(pos++), ad);
+                myAdArr.add(ad);
             }
         }
     }
 
-    protected HashMap<String, Ad> readFromFile(Context context) {
-        HashMap<String, Ad> myAdMap = new HashMap<String, Ad>();
+    protected List<Ad> readFromFile(Context context) {
+        List<Ad> myAdArr = new ArrayList<Ad>();
         try {
             // getItem the time the file was last changed here
             File myFile = new File(context.getFilesDir() + "/" + fileName);
@@ -83,7 +83,7 @@ public class AdHub extends Hub implements Runnable {
             // create products from the file here
             InputStream inputStream = context.openFileInput(fileName);
             if (inputStream != null) {
-                parseCSV(myAdMap, inputStream);
+                parseCSV(myAdArr, inputStream);
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
@@ -91,11 +91,11 @@ public class AdHub extends Hub implements Runnable {
         } catch (IOException e) {
             Log.e(HubInit.logTag, "Can not read file  (" + fileName + ") : " + e.toString());
         }
-        Log.w(HubInit.logTag, "Number of Ad loaded: " + myAdMap.size());
-        return myAdMap;
+        Log.w(HubInit.logTag, "Number of Ad loaded: " + myAdArr.size());
+        return myAdArr;
     }
 
-    public HashMap<String, Ad> getBuyerMap() throws IOException {
+    public List<Ad> getAdArr() throws IOException {
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet(adHubDataUrl);
         try {
@@ -122,7 +122,7 @@ public class AdHub extends Hub implements Runnable {
     @Override
     public void run() {
         try {
-            Hub.adMap = new AdHub(context).getBuyerMap();
+            Hub.adArr = new AdHub(context).getAdArr();
             Log.w(logTag, "AdHub().getAdMap loaded...");
         } catch (IOException e) {
             Log.w(logTag, "AdHub().getAdMap couldn't be loaded...");
