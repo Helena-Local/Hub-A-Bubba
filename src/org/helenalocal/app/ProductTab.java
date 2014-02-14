@@ -5,7 +5,6 @@
 package org.helenalocal.app;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Hub;
+import org.helenalocal.base.HubInit;
 import org.helenalocal.base.Item;
 
 import java.util.ArrayList;
@@ -22,13 +22,18 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ProductTab extends Fragment {
+public class ProductTab extends TabBase {
 
-    private static String Tag = "ProductTab";
-    private static final int LoaderId = 0;
+    private static String LogTag = "ProductTab";
 
     private List<Item> _itemList;
     private ProductItemAdapter _arrayAdapter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initializeReceiver(HubInit.HubType.ITEM_HUB);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,8 +63,8 @@ public class ProductTab extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onRefresh() {
+        super.onRefresh();
 
         _itemList.clear();
         Collection<Item> tempList = Hub.itemMap.values();

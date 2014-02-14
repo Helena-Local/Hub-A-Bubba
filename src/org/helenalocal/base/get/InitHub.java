@@ -242,6 +242,7 @@ public class InitHub extends Hub implements Runnable {
     public void run() {
         try {
             new InitHub(context).getInitHub();
+            broadcastRefresh(context, HubType.INIT_HUB);
             Log.w(logTag, "InitHub().getInitHub loaded...");
         } catch (IOException e) {
             Log.w(logTag, "InitHub().getInitHub couldn't be loaded...");

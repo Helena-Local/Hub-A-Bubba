@@ -123,6 +123,7 @@ public class AdHub extends Hub implements Runnable {
     public void run() {
         try {
             Hub.adMap = new AdHub(context).getBuyerMap();
+            broadcastRefresh(context, HubType.AD_HUB);
             Log.w(logTag, "AdHub().getAdMap loaded...");
         } catch (IOException e) {
             Log.w(logTag, "AdHub().getAdMap couldn't be loaded...");

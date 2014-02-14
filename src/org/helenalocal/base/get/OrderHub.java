@@ -146,6 +146,7 @@ public class OrderHub extends Hub implements Runnable {
     public void run() {
         try {
             Hub.orderMap = new OrderHub(context).getOrderMap();
+            broadcastRefresh(context, HubType.ORDER_HUB);
             Log.w(logTag, "OrderHub().getOrderMap loaded...");
         } catch (IOException e) {
             Log.w(logTag, "OrderHub().getOrderMap couldn't be loaded...");

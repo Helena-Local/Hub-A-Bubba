@@ -7,12 +7,13 @@ package org.helenalocal.app.service;
 import android.app.IntentService;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
-import org.helenalocal.app.MainActivity;
 import org.helenalocal.base.get.AdHub;
 import org.helenalocal.base.get.CertificationHub;
 import org.helenalocal.base.get.InitHub;
 
 public class HubInitService extends IntentService {
+
+    public static final String HUB_INIT_FINISHED = "org.helenalocal.intent.action.HUB_INIT_FINISHED";
 
     private static final String LogTag = "HubInitService";
 
@@ -28,7 +29,7 @@ public class HubInitService extends IntentService {
         new AdHub(this).run();
 
         Intent broadcastIntent = new Intent();
-        broadcastIntent.setAction(MainActivity.ACTION_HUB_INIT_FINISHED);
+        broadcastIntent.setAction(HUB_INIT_FINISHED);
         broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
         LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastIntent);
     }

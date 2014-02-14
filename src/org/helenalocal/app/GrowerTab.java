@@ -2,9 +2,6 @@ package org.helenalocal.app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +9,23 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Hub;
-import org.helenalocal.base.Item;
+import org.helenalocal.base.HubInit;
 import org.helenalocal.base.Producer;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class GrowerTab extends Fragment {
+public class GrowerTab extends TabBase {
 
     private static String Tag = "GrowerTab";
     private List<Producer> _growerList;
     private GrowerListAdapter _arrayAdapter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initializeReceiver(HubInit.HubType.PRODUCER_HUB);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,8 +56,8 @@ public class GrowerTab extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onRefresh() {
+        super.onRefresh();
 
         _growerList.clear();
         _growerList.addAll(Hub.producerMap.values());

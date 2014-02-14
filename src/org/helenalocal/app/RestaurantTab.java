@@ -6,8 +6,6 @@ package org.helenalocal.app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,18 +14,26 @@ import android.widget.ListView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Buyer;
 import org.helenalocal.base.Hub;
+import org.helenalocal.base.HubInit;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantTab extends Fragment implements AdapterView.OnItemClickListener {
+public class RestaurantTab extends TabBase implements AdapterView.OnItemClickListener {
 
     public static final String BUYER_ID_KEY = "buyerIdKey";
 
-    private static final String Tag = "RestaurantTab";
+    private static final String LogTag = "RestaurantTab";
 
     private List<Buyer> _restaurantList;
     private RestaurantItemAdapter _arrayAdapter;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initializeReceiver(HubInit.HubType.BUYER_HUB);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,24 +52,22 @@ public class RestaurantTab extends Fragment implements AdapterView.OnItemClickLi
 
         listView.setClickable(true);
         listView.setOnItemClickListener(this);
-   }
+    }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    protected void onRefresh() {
+        super.onRefresh();
 
         _restaurantList.clear();
         _restaurantList.addAll(Hub.buyerMap.values());
         _arrayAdapter.notifyDataSetChanged();
     }
 
-
     /***
      * OnItemClickListener methods
      ***/
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.w(Tag, "onItemClick");
         ListView listView = (ListView)getActivity().findViewById(R.id.restaurantListView);
         Buyer buyer = (Buyer)listView.getItemAtPosition(position);
 

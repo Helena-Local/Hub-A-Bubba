@@ -191,6 +191,7 @@ public class ProducerHub extends Hub implements Runnable {
     public void run() {
         try {
             Hub.producerMap = new ProducerHub(context).getProducerMap();
+            broadcastRefresh(context, HubType.PRODUCER_HUB);
             Log.w(logTag, "ProducerHub().getProducerMap loaded...");
         } catch (IOException e) {
             Log.w(logTag, "ProducerHub().getProducerMap couldn't be loaded...");

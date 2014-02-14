@@ -6,6 +6,7 @@ package org.helenalocal.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import org.helenalocal.base.get.ProducerHub;
 
@@ -19,12 +20,8 @@ import java.util.HashMap;
  */
 public abstract class Hub extends HubInit {
 
-    private void broadcastActionView(Context context) {
-        Intent intent = new Intent();
-        intent.setType(HubType.PRODUCER_HUB.name());
-        context.sendBroadcast(intent);
-        Log.e(HubInit.logTag, "broadcast sent");
-    }
+    public static final String HUB_DATA_REFRESH = "org.helenalocal.intent.action.HUB_DATA_REFRESH";
+    public static final String EXTRA_HUB_TYPE = "org.helenalocal.extra.hubtype";
 
     public static HashMap<String, Buyer> buyerMap = new HashMap<String, Buyer>();
 
@@ -45,7 +42,6 @@ public abstract class Hub extends HubInit {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
-            //broadcastActionView(context);
         } catch (IOException e) {
             Log.e(HubInit.logTag, "File (" + fileName + ") write failed: " + e.toString());
         }
@@ -59,10 +55,18 @@ public abstract class Hub extends HubInit {
                 outputStreamWriter.write(line + '\n');
             }
             outputStreamWriter.close();
-            //broadcastActionView(context);
         } catch (IOException e) {
             Log.e(HubInit.logTag, "File (" + fileName + ") write failed: " + e.toString());
         }
     }
 
+    protected void broadcastRefresh(Context context, HubType type) {
+        Intent intent = new Intent();
+        intent.setAction(HUB_DATA_REFRESH);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.putExtra(EXTRA_HUB_TYPE, type);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+        Log.w(HubInit.logTag, "broadcast sent");
+    }
 }

@@ -30,8 +30,6 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends ActionBarActivity {
 
-    public static final String ACTION_HUB_INIT_FINISHED = "org.helenalocal.intent.action.HUB_INIT_FINISHED";
-
     private static ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(5);
     private static ScheduledFuture buyerHubScheduledFuture;
     private static ScheduledFuture<?> itemHubScheduledFuture;
@@ -230,7 +228,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void registerHubInitReceiver() {
-        IntentFilter filter = new IntentFilter(ACTION_HUB_INIT_FINISHED);
+        IntentFilter filter = new IntentFilter(HubInitService.HUB_INIT_FINISHED);
         filter.addCategory(Intent.CATEGORY_DEFAULT);
 
         _hubInitReceiver = new BroadcastReceiver() {

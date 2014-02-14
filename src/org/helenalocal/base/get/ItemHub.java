@@ -177,6 +177,7 @@ public class ItemHub extends Hub implements Runnable {
     public void run() {
         try {
             Hub.itemMap = new ItemHub(context).getItemMap();
+            broadcastRefresh(context, HubType.ITEM_HUB);
             Log.w(logTag, "ItemHub().getItemMap loaded...");
         } catch (IOException e) {
             Log.w(logTag, "ItemHub().getItemMap couldn't be loaded...");

@@ -182,10 +182,10 @@ public class BuyerHub extends Hub implements Runnable {
     public void run() {
         try {
             Hub.buyerMap = new BuyerHub(context).getBuyerMap();
+            broadcastRefresh(context, HubType.BUYER_HUB);
             Log.w(logTag, "BuyerHub().getBuyerMap loaded...");
         } catch (IOException e) {
             Log.w(logTag, "BuyerHub().getBuyerMap couldn't be loaded...");
         }
-
     }
 }

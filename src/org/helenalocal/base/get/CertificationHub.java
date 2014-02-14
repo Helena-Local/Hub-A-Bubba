@@ -169,6 +169,7 @@ public class CertificationHub extends Hub implements Runnable {
     public void run() {
         try {
             Hub.certificationMap = new CertificationHub(context).getCertificationMap();
+            broadcastRefresh(context, HubType.CERTIFICATION_HUB);
             Log.w(logTag, "OrderHub().getCertificationMapMap loaded...");
         } catch (IOException e) {
             Log.w(logTag, "OrderHub().getCertificationMap couldn't be loaded...");

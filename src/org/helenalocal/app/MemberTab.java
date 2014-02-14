@@ -5,25 +5,31 @@
 package org.helenalocal.app;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Hub;
+import org.helenalocal.base.HubInit;
 import org.helenalocal.base.Item;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class MemberTab extends Fragment {
+public class MemberTab extends TabBase {
 
     private static final String Tag = "MemberTab";
 
     private List<Item> _itemList;
     private MemberItemAdapter _arrayAdapter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initializeReceiver(HubInit.HubType.ITEM_HUB);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,26 +48,10 @@ public class MemberTab extends Fragment {
         listView.addHeaderView(new View(getActivity()));
         listView.addFooterView(new View(getActivity()));
         listView.setAdapter(_arrayAdapter);
-
-
-
-//        Button b = (Button) getActivity().findViewById(R.id.growerButton);
-//        b.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                // TODO - pass the name for now. Evenutally will pass grower id or something.
-//                Intent i = new Intent(getActivity(), GrowerDetailActivity.class);
-//                i.putExtra("growerNameKey", "Acme Farms");
-//                startActivity(i);
-//            }
-//        });
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
+    protected void onRefresh() {
         _itemList.clear();
         Collection<Item> tempList = Hub.itemMap.values();
         for (Item i : tempList) {
@@ -72,5 +62,4 @@ public class MemberTab extends Fragment {
 
         _arrayAdapter.notifyDataSetChanged();
     }
-
 }
