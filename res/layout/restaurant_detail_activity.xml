@@ -4,178 +4,194 @@
   ~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#dcdcdc"
-              android:paddingLeft="@dimen/card_layout_padding_left"
-              android:paddingRight="@dimen/card_layout_padding_right"
-              android:paddingTop="@dimen/card_layout_padding_top">
-
-    <RelativeLayout
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:background="@drawable/card_background"
-                  android:layout_marginBottom="5dp"
-                  android:paddingBottom="10dp"
-                  android:paddingRight="10dp"
-                  android:paddingLeft="10dp"
-                  android:paddingTop="10dp">
-
-        <ImageView
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:maxHeight="75dp"
-                android:maxWidth="75dp"
-                android:id="@+id/restaurantImageView"
-                android:adjustViewBounds="false"
-                android:layout_marginRight="10dp"
-                />
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Chino Bandito"
-                android:id="@+id/nameTextView"
-                android:layout_alignTop="@+id/restaurantImageView"
-                android:layout_toRightOf="@+id/restaurantImageView"
-                android:singleLine="false"
-                android:layout_marginTop="5dp"/>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="15414 N 19th Ave, Phoenix, AZ 85023"
-                android:id="@+id/addressTextView"
-                android:layout_below="@+id/nameTextView"
-                android:layout_alignLeft="@+id/nameTextView"
-                android:textSize="12sp"/>
-
-        <LinearLayout
-                android:id="@+id/actionLayout"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/restaurantImageView"
-                android:layout_below="@+id/restaurantImageView"
-                android:orientation="horizontal"
-                android:stretchColumns="*"
-                android:layout_marginTop="5dp">
-
-            <LinearLayout
-                    android:id="@+id/callLayout"
-                    android:orientation="horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:gravity="left">
-
-                <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_action_call"/>
-
-                <TextView
-                        android:id="@+id/callTextView"
-                        style="@style/selectableItem"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/restaurant_call_action"
-                        android:textColor="@color/helena_local_blue"
-                        android:layout_marginLeft="-3dp"
-                        android:clickable="true"
-                        android:onClick="onClickCall"/>
-            </LinearLayout>
-
-            <LinearLayout
-                    android:id="@+id/mapLayout"
-                    android:orientation="horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:gravity="center">
-
-                <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_action_map"/>
-
-                <TextView
-                    android:id="@+id/mapTextView"
-                    style="@style/selectableItem"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/restaurant_map_action"
-                    android:textColor="@color/helena_local_blue"
-                    android:layout_marginLeft="-3dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="onClickMap"/>
-            </LinearLayout>
-
-            <LinearLayout
-                    android:id="@+id/urlLayout"
-                    android:orientation="horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:gravity="right">
-
-                <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_action_web_site"/>
-
-                <TextView
-                    android:id="@+id/urlTextView"
-                    style="@style/selectableItem"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/restaurant_website_action"
-                    android:textColor="@color/helena_local_blue"
-                    android:layout_marginLeft="-3dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="onClickUrl"/>
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-    <ScrollView
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/scrollView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:fillViewport="true"
-            >
+            android:fillViewport="true">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:paddingLeft="@dimen/card_layout_padding_left"
+                  android:paddingRight="@dimen/card_layout_padding_right"
+                  android:paddingTop="@dimen/card_layout_padding_top"
+                  android:background="#dcdcdc"
+                  android:paddingBottom="@dimen/card_layout_padding_bottom">
+
+        <RelativeLayout
+                      android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:paddingBottom="10dp"
+                      android:paddingRight="10dp"
+                      android:paddingLeft="10dp"
+                      android:paddingTop="10dp"
+                      android:background="@drawable/card_background">
+
+            <ImageView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:maxHeight="75dp"
+                    android:maxWidth="75dp"
+                    android:id="@+id/restaurantImageView"
+                    android:adjustViewBounds="false"
+                    android:layout_marginRight="10dp"
+                    />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Chino Bandito"
+                    android:id="@+id/nameTextView"
+                    android:layout_alignTop="@+id/restaurantImageView"
+                    android:layout_toRightOf="@+id/restaurantImageView"
+                    android:singleLine="false"
+                    android:layout_marginTop="5dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15414 N 19th Ave, Phoenix, AZ 85023"
+                    android:id="@+id/addressTextView"
+                    android:layout_below="@+id/nameTextView"
+                    android:layout_alignLeft="@+id/nameTextView"
+                    android:textSize="12sp"/>
+
+            <LinearLayout
+                    android:id="@+id/actionLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/restaurantImageView"
+                    android:layout_below="@+id/restaurantImageView"
+                    android:orientation="horizontal"
+                    android:stretchColumns="*"
+                    android:layout_marginTop="5dp">
+
+                <LinearLayout
+                        android:id="@+id/callLayout"
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="left">
+
+                    <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_action_call"/>
+
+                    <TextView
+                            android:id="@+id/callTextView"
+                            style="@style/selectableItem"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/restaurant_call_action"
+                            android:textColor="@color/helena_local_blue"
+                            android:layout_marginLeft="-3dp"
+                            android:clickable="true"
+                            android:onClick="onClickCall"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/mapLayout"
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                    <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_action_map"/>
+
+                    <TextView
+                        android:id="@+id/mapTextView"
+                        style="@style/selectableItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/restaurant_map_action"
+                        android:textColor="@color/helena_local_blue"
+                        android:layout_marginLeft="-3dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="onClickMap"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/urlLayout"
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="right">
+
+                    <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_action_web_site"/>
+
+                    <TextView
+                        android:id="@+id/urlTextView"
+                        style="@style/selectableItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/restaurant_website_action"
+                        android:textColor="@color/helena_local_blue"
+                        android:layout_marginLeft="-3dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="onClickUrl"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
 
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="fill_parent"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/card_background"
+                android:padding="10dp"
+                >
 
             <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/quoteTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text='"Takee Outee! I Love Takee Outee! Three meals a day!"'
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"/>
+
+            <TextView
+                    android:id="@+id/certTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Sustainability"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="2.5dp"
+                    android:layout_marginTop="5dp"/>
 
+            <View style="@style/horizontalDivider"/>
 
             <LinearLayout
                     android:id="@+id/certificationLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/card_background">
+                    android:orientation="vertical">
 
                 <RelativeLayout
                         android:id="@+id/relativeOne"
@@ -185,10 +201,10 @@
                         android:padding="5dp">
 
                     <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:id="@+id/imageView"
-                            android:src="@drawable/tri_county_certification"
+                            android:src="@drawable/default_certification"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentTop="true"
                             android:layout_marginRight="5dp"/>
@@ -208,10 +224,10 @@
                         android:padding="5dp">
 
                     <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:id="@+id/imageView"
-                            android:src="@drawable/ccof_certification"
+                            android:src="@drawable/default_certification"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentTop="true"
                             android:layout_marginRight="5dp"/>
@@ -227,20 +243,22 @@
             </LinearLayout>
 
             <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/productTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Products"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginBottom="2.5dp"
+                    android:layout_marginTop="25dp"/>
+
+            <View style="@style/horizontalDivider"/>
 
             <LinearLayout
                     android:id="@+id/productsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="@drawable/card_background">
+                    >
 
                 <RelativeLayout
                         android:layout_width="fill_parent"
@@ -269,347 +287,9 @@
                 </RelativeLayout>
 
             </LinearLayout>
+
         </LinearLayout>
 
+    </LinearLayout>
 
-
-            <!--<TableLayout-->
-                    <!--android:id="@+id/productLayout"-->
-                    <!--android:layout_width="fill_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:stretchColumns="*"-->
-                    <!--android:background="@drawable/card_background"-->
-                    <!--android:padding="5dp">-->
-
-                <!--<TableRow-->
-                        <!--android:layout_width="fill_parent"-->
-                        <!--android:layout_height="fill_parent">-->
-
-                    <!--<TextView-->
-                            <!--android:id="@+id/textView2"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-                            <!--android:text="Products"/>-->
-                <!--</TableRow>-->
-
-                <!--<TableRow-->
-                        <!--android:layout_width="fill_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="2.5dp">-->
-
-                    <!--<View style="@style/horizontalDivider"-->
-                            <!--/>-->
-                <!--</TableRow>-->
-
-            <!--</TableLayout>-->
-
-    </ScrollView>
-
-</LinearLayout>
-
-
-
-
-
-
-
-
-
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-              <!--android:orientation="vertical"-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="match_parent"-->
-              <!--android:background="#dcdcdc"-->
-              <!--android:paddingLeft="@dimen/card_layout_padding_left"-->
-              <!--android:paddingRight="@dimen/card_layout_padding_right"-->
-              <!--android:paddingTop="@dimen/card_layout_padding_top">-->
-
-<!--<RelativeLayout-->
-        <!--android:orientation="vertical"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/card_background"-->
-        <!--android:layout_marginBottom="5dp"-->
-        <!--android:paddingBottom="10dp"-->
-        <!--android:paddingRight="10dp"-->
-        <!--android:paddingLeft="10dp"-->
-        <!--android:paddingTop="10dp">-->
-
-    <!--<ImageView-->
-            <!--android:layout_width="75dp"-->
-            <!--android:layout_height="75dp"-->
-            <!--android:maxHeight="75dp"-->
-            <!--android:maxWidth="75dp"-->
-            <!--android:id="@+id/restaurantImageView"-->
-            <!--android:adjustViewBounds="false"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--/>-->
-
-    <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-            <!--android:text="Chino Bandito"-->
-            <!--android:id="@+id/nameTextView"-->
-            <!--android:layout_alignTop="@+id/restaurantImageView"-->
-            <!--android:layout_toRightOf="@+id/restaurantImageView"-->
-            <!--android:singleLine="false"-->
-            <!--android:layout_marginTop="5dp"/>-->
-
-    <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="15414 N 19th Ave, Phoenix, AZ 85023"-->
-            <!--android:id="@+id/addressTextView"-->
-            <!--android:layout_below="@+id/nameTextView"-->
-            <!--android:layout_alignLeft="@+id/nameTextView"-->
-            <!--android:textSize="12sp"/>-->
-
-    <!--<LinearLayout-->
-            <!--android:id="@+id/actionLayout"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignLeft="@+id/restaurantImageView"-->
-            <!--android:layout_below="@+id/restaurantImageView"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:stretchColumns="*"-->
-            <!--android:layout_marginTop="5dp">-->
-
-        <!--<LinearLayout-->
-                <!--android:id="@+id/callLayout"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="fill_parent"-->
-                <!--android:layout_weight="1"-->
-                <!--android:gravity="left">-->
-
-            <!--<ImageView-->
-                    <!--android:id="@+id/imageView"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:src="@drawable/ic_action_call"/>-->
-
-            <!--<TextView-->
-                    <!--android:id="@+id/callTextView"-->
-                    <!--style="@style/selectableItem"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/restaurant_call_action"-->
-                    <!--android:textColor="@color/helena_local_blue"-->
-                    <!--android:layout_marginLeft="-3dp"-->
-                    <!--android:clickable="true"-->
-                    <!--android:onClick="onClickCall"/>-->
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout-->
-                <!--android:id="@+id/mapLayout"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="fill_parent"-->
-                <!--android:layout_weight="1"-->
-                <!--android:gravity="center">-->
-
-            <!--<ImageView-->
-                    <!--android:id="@+id/imageView"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:src="@drawable/ic_action_map"/>-->
-
-            <!--<TextView-->
-                    <!--android:id="@+id/mapTextView"-->
-                    <!--style="@style/selectableItem"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/restaurant_map_action"-->
-                    <!--android:textColor="@color/helena_local_blue"-->
-                    <!--android:layout_marginLeft="-3dp"-->
-                    <!--android:clickable="true"-->
-                    <!--android:focusable="true"-->
-                    <!--android:onClick="onClickMap"/>-->
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout-->
-                <!--android:id="@+id/urlLayout"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="fill_parent"-->
-                <!--android:layout_weight="1"-->
-                <!--android:gravity="right">-->
-
-            <!--<ImageView-->
-                    <!--android:id="@+id/imageView"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:src="@drawable/ic_action_web_site"/>-->
-
-            <!--<TextView-->
-                    <!--android:id="@+id/urlTextView"-->
-                    <!--style="@style/selectableItem"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/restaurant_website_action"-->
-                    <!--android:textColor="@color/helena_local_blue"-->
-                    <!--android:layout_marginLeft="-3dp"-->
-                    <!--android:clickable="true"-->
-                    <!--android:focusable="true"-->
-                    <!--android:onClick="onClickUrl"/>-->
-        <!--</LinearLayout>-->
-
-    <!--</LinearLayout>-->
-
-<!--</RelativeLayout>-->
-
-<!--<ScrollView-->
-        <!--android:id="@+id/scrollView"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="fill_parent"-->
-        <!--android:fillViewport="true"-->
-        <!-->-->
-
-    <!--<LinearLayout-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="fill_parent">-->
-
-        <!--<TextView-->
-                <!--android:id="@+id/textView"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-                <!--android:text="Sustainability"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:layout_marginBottom="5dp"/>-->
-
-
-        <!--<RelativeLayout-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="@drawable/card_background"-->
-                <!--android:layout_marginBottom="2.5dp"-->
-                <!--android:layout_marginTop="2.5dp"-->
-                <!--android:padding="5dp">-->
-
-            <!--<ImageView-->
-                    <!--android:layout_width="32dp"-->
-                    <!--android:layout_height="32dp"-->
-                    <!--android:id="@+id/imageView"-->
-                    <!--android:src="@drawable/ccof_logo"-->
-                    <!--android:layout_alignParentLeft="true"-->
-                    <!--android:layout_alignParentTop="true"-->
-                    <!--android:layout_marginRight="5dp"/>-->
-
-            <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="This is a certification"-->
-                    <!--android:layout_toRightOf="@+id/imageView"-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:textSize="12sp"/>-->
-        <!--</RelativeLayout>-->
-
-        <!--<RelativeLayout-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="@drawable/card_background"-->
-                <!--android:layout_marginBottom="2.5dp"-->
-                <!--android:layout_marginTop="2.5dp"-->
-                <!--android:padding="5dp">-->
-
-            <!--<ImageView-->
-                    <!--android:layout_width="32dp"-->
-                    <!--android:layout_height="32dp"-->
-                    <!--android:id="@+id/imageView"-->
-                    <!--android:src="@drawable/ccof_logo"-->
-                    <!--android:layout_alignParentLeft="true"-->
-                    <!--android:layout_alignParentTop="true"-->
-                    <!--android:layout_marginRight="5dp"/>-->
-
-            <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="This is another certification"-->
-                    <!--android:layout_toRightOf="@+id/imageView"-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:textSize="12sp"/>-->
-        <!--</RelativeLayout>-->
-
-        <!--<TextView-->
-                <!--android:id="@+id/textView"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-                <!--android:text="Products"-->
-                <!--android:layout_marginBottom="5dp"-->
-                <!--android:layout_marginTop="5dp"/>-->
-
-        <!--<RelativeLayout-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="@drawable/card_background"-->
-                <!--android:layout_marginBottom="2.5dp"-->
-                <!--android:layout_marginTop="2.5dp"-->
-                <!--android:padding="5dp">-->
-
-            <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Here lies some food"-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:textSize="12sp"/>-->
-        <!--</RelativeLayout>-->
-
-        <!--<RelativeLayout-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="@drawable/card_background"-->
-                <!--android:layout_marginBottom="2.5dp"-->
-                <!--android:layout_marginTop="2.5dp"-->
-                <!--android:padding="5dp">-->
-
-            <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="More food!"-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:textSize="12sp"/>-->
-        <!--</RelativeLayout>-->
-
-    <!--</LinearLayout>-->
-
-
-
-    <!--&lt;!&ndash;<TableLayout&ndash;&gt;-->
-    <!--&lt;!&ndash;android:id="@+id/productLayout"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_width="fill_parent"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:stretchColumns="*"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:background="@drawable/card_background"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:padding="5dp">&ndash;&gt;-->
-
-    <!--&lt;!&ndash;<TableRow&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_width="fill_parent"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_height="fill_parent">&ndash;&gt;-->
-
-    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-    <!--&lt;!&ndash;android:id="@+id/textView2"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:textAppearance="?android:attr/textAppearanceSmall"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:text="Products"/>&ndash;&gt;-->
-    <!--&lt;!&ndash;</TableRow>&ndash;&gt;-->
-
-    <!--&lt;!&ndash;<TableRow&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_width="fill_parent"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-    <!--&lt;!&ndash;android:layout_marginTop="2.5dp">&ndash;&gt;-->
-
-    <!--&lt;!&ndash;<View style="@style/horizontalDivider"&ndash;&gt;-->
-    <!--&lt;!&ndash;/>&ndash;&gt;-->
-    <!--&lt;!&ndash;</TableRow>&ndash;&gt;-->
-
-    <!--&lt;!&ndash;</TableLayout>&ndash;&gt;-->
-
-<!--</ScrollView>-->
-
-<!--</LinearLayout>-->
+</ScrollView>
