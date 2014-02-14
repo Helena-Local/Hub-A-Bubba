@@ -6,6 +6,7 @@ package org.helenalocal.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Buyer;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
+import org.helenalocal.base.Order;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +61,24 @@ public class RestaurantTab extends TabBase implements AdapterView.OnItemClickLis
         super.onRefresh();
 
         _restaurantList.clear();
-        _restaurantList.addAll(Hub.buyerMap.values());
+
+        // get buyer who are active and have at least one order!
+        ArrayList<Buyer> buyerArrayList = new ArrayList<Buyer>(Hub.buyerMap.values());
+        for (int j = 0; j < buyerArrayList.size(); j++) {
+            Buyer buyer = buyerArrayList.get(j);
+            boolean hasOrder = false;
+            for (int k = 0; k < Hub.orderArr.size(); k++) {
+                Order order = Hub.orderArr.get(k);
+                if (order.getBuyerID().equalsIgnoreCase(buyer.getBID())) {
+                    hasOrder = true;
+                }
+            }
+            int serviceLevel = Integer.valueOf(buyer.getServiceLevel().trim());
+            Log.w(LogTag, "buyer.getName() = " + buyer.getName() + "; serviceLevel = " + serviceLevel + "; hasOrder = " + hasOrder);
+            if (serviceLevel > 0 && hasOrder) {
+                _restaurantList.add(buyer);
+            }
+        }
         _arrayAdapter.notifyDataSetChanged();
     }
 

@@ -24,7 +24,6 @@ import org.helenalocal.base.*;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Map;
 
 public class RestaurantDetailActivity extends Activity {
 
@@ -97,16 +96,8 @@ public class RestaurantDetailActivity extends Activity {
 
         Log.w(LogTag, "Buyer ID: " + _buyer.getBID());
 
-        for (Map.Entry entry : Hub.orderMap.entrySet())
-        {
-            Order order1 = (Order)entry.getValue();
-            Item item1 = Hub.itemMap.get(order1.getItemID());
-
-            Log.w(LogTag, String.format("Order: ID - %s Item - %s BuyerId - %s", order1.getOrderID(), item1.getProductDesc(), order1.getBuyerID()));
-
-            if (entry.getKey().equals(_buyer.getBID()))
-            {
-                Order order = (Order)entry.getValue();
+        for (Order order : Hub.orderArr) {
+            if (order.getBuyerID().equalsIgnoreCase(_buyer.getBID())) {
                 Item item = Hub.itemMap.get(order.getItemID());
                 Producer producer = Hub.producerMap.get(item.getPID());
 
@@ -121,6 +112,8 @@ public class RestaurantDetailActivity extends Activity {
                 textView.setText(item.getProductDesc());
 
                 linearLayout.addView(relativeLayout);
+
+                Log.w(LogTag, String.format("Order: ID - %s Item - %s BuyerId - %s", order.getOrderID(), item.getProductDesc(), order.getBuyerID()));
             }
         }
     }

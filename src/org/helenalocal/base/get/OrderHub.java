@@ -18,9 +18,10 @@ import org.helenalocal.base.Order;
 import java.io.*;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by abbie on 1/24/14.
@@ -35,7 +36,7 @@ public class OrderHub extends Hub implements Runnable {
         this.context = context;
     }
 
-    private void parseCSV(HashMap<String, Order> myOrderMap, InputStream inputStream) throws IOException {
+    private void parseCSV(List<Order> myOrderArr, InputStream inputStream) throws IOException {
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(',');
@@ -88,13 +89,13 @@ public class OrderHub extends Hub implements Runnable {
                         order.setBuyerUrl(buyerUrl);
                     }
                 }
-                myOrderMap.put(order.getBuyerID(), order);
+                myOrderArr.add(order);
             }
         }
     }
 
-    protected HashMap<String, Order> readFromFile(Context context) {
-        HashMap<String, Order> myOrderMap = new HashMap<String, Order>();
+    protected List<Order> readFromFile(Context context) {
+        List<Order> myOrderArr = new ArrayList<Order>();
         try {
             // getItem the time the file was last changed here
             File myFile = new File(context.getFilesDir() + "/" + fileName);
@@ -106,7 +107,7 @@ public class OrderHub extends Hub implements Runnable {
             // create products from the file here
             InputStream inputStream = context.openFileInput(fileName);
             if (inputStream != null) {
-                parseCSV(myOrderMap, inputStream);
+                parseCSV(myOrderArr, inputStream);
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
@@ -114,11 +115,11 @@ public class OrderHub extends Hub implements Runnable {
         } catch (IOException e) {
             Log.e(HubInit.logTag, "Can not read file  (" + fileName + ") : " + e.toString());
         }
-        Log.w(HubInit.logTag, "Number of orders loaded: " + myOrderMap.size());
-        return myOrderMap;
+        Log.w(HubInit.logTag, "Number of orders loaded: " + myOrderArr.size());
+        return myOrderArr;
     }
 
-    public HashMap<String, Order> getOrderMap() throws IOException {
+    public List<Order> getOrderArr() throws IOException {
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet(orderHubDataUrl);
         try {
@@ -145,7 +146,7 @@ public class OrderHub extends Hub implements Runnable {
     @Override
     public void run() {
         try {
-            Hub.orderMap = new OrderHub(context).getOrderMap();
+            Hub.orderArr = new OrderHub(context).getOrderArr();
             broadcastRefresh(context, HubType.ORDER_HUB);
             Log.w(logTag, "OrderHub().getOrderMap loaded...");
         } catch (IOException e) {
