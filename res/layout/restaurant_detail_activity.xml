@@ -181,7 +181,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Sustainability"
+                    android:text="@string/restaurant_detail_awards"
                     android:layout_marginBottom="2.5dp"
                     android:layout_marginTop="5dp"/>
 
@@ -247,7 +247,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Products"
+                    android:text="@string/restaurant_detail_products"
                     android:layout_marginBottom="2.5dp"
                     android:layout_marginTop="25dp"/>
 

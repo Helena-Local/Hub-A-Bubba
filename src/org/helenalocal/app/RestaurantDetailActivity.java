@@ -95,14 +95,19 @@ public class RestaurantDetailActivity extends Activity {
 
         ProductItemClickListener clickListener = new ProductItemClickListener();
 
+        Log.w(LogTag, "Buyer ID: " + _buyer.getBID());
+
         for (Map.Entry entry : Hub.orderMap.entrySet())
         {
+            Order order1 = (Order)entry.getValue();
+            Item item1 = Hub.itemMap.get(order1.getItemID());
+
+            Log.w(LogTag, String.format("Order: ID - %s Item - %s BuyerId - %s", order1.getOrderID(), item1.getProductDesc(), order1.getBuyerID()));
+
             if (entry.getKey().equals(_buyer.getBID()))
             {
 
                 Order order = (Order)entry.getValue();
-
-                Producer producer = Hub.producerMap.get(order.getProducerID());
                 Item item = Hub.itemMap.get(order.getItemID());
 
                 RelativeLayout relativeLayout = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.certification, null);
@@ -149,9 +154,11 @@ public class RestaurantDetailActivity extends Activity {
 
             Certification cert = (Certification)v.getTag();
 
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(cert.getWebsiteUrl()));
-            startActivity(intent);
+            if (cert.getWebsiteUrl().isEmpty() == false) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(cert.getWebsiteUrl()));
+                startActivity(intent);
+            }
         }
     }
 
