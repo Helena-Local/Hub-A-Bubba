@@ -194,15 +194,14 @@
                     android:orientation="vertical">
 
                 <RelativeLayout
-                        android:id="@+id/relativeOne"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         style="@style/selectableItem"
                         android:padding="5dp">
 
                     <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="@dimen/default_list_item_image_width"
+                            android:layout_height="@dimen/default_list_item_image_height"
                             android:id="@+id/imageView"
                             android:src="@drawable/default_certification"
                             android:layout_alignParentLeft="true"
@@ -215,7 +214,7 @@
                             android:text="This is a certification"
                             android:layout_toRightOf="@+id/imageView"
                             android:layout_centerVertical="true"
-                            android:textSize="12sp"/>
+                            android:textSize="@dimen/default_list_item_text_size"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -224,8 +223,8 @@
                         android:padding="5dp">
 
                     <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="@dimen/default_list_item_image_width"
+                            android:layout_height="@dimen/default_list_item_image_height"
                             android:id="@+id/imageView"
                             android:src="@drawable/default_certification"
                             android:layout_alignParentLeft="true"
@@ -238,7 +237,7 @@
                             android:text="This is another certification"
                             android:layout_toRightOf="@+id/imageView"
                             android:layout_centerVertical="true"
-                            android:textSize="12sp"/>
+                            android:textSize="@dimen/default_list_item_text_size"/>
                 </RelativeLayout>
             </LinearLayout>
 
@@ -265,12 +264,22 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp">
 
+                    <ImageView
+                            android:layout_width="@dimen/default_list_item_image_width"
+                            android:layout_height="@dimen/default_list_item_image_height"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true"
+                            android:id="@+id/imageView"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/default_producer"/>
+
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Here lies some food"
                             android:layout_centerVertical="true"
-                            android:textSize="12sp"/>
+                            android:textSize="@dimen/default_list_item_text_size"
+                            android:layout_toRightOf="@+id/imageView"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -278,12 +287,22 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp">
 
+                    <ImageView
+                            android:layout_width="@dimen/default_list_item_image_width"
+                            android:layout_height="@dimen/default_list_item_image_height"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true"
+                            android:id="@+id/imageView"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/default_producer"/>
+
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="More food!"
                             android:layout_centerVertical="true"
-                            android:textSize="12sp"/>
+                            android:textSize="@dimen/default_list_item_text_size"
+                            android:layout_toRightOf="@+id/imageView"/>
                 </RelativeLayout>
 
             </LinearLayout>

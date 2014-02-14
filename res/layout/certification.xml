@@ -12,8 +12,8 @@
 
     <ImageView
             android:id="@+id/imageView"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="@dimen/default_list_item_image_width"
+            android:layout_height="@dimen/default_list_item_image_height"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="5dp"/>
@@ -24,5 +24,5 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:textSize="12sp"/>
+            android:textSize="@dimen/default_list_item_text_size"/>
 </RelativeLayout>

@@ -21,5 +21,5 @@
     <string name="restaurant_map_action">Map</string>
     <string name="restaurant_website_action">Website</string>
     <string name="restaurant_detail_awards">Sustainability and Awards</string>
-    <string name="restaurant_detail_products">Recent Local Products</string>
+    <string name="restaurant_detail_products">Local Grower Purchases</string>
 </resources>

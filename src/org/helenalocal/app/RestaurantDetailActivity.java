@@ -106,12 +106,16 @@ public class RestaurantDetailActivity extends Activity {
 
             if (entry.getKey().equals(_buyer.getBID()))
             {
-
                 Order order = (Order)entry.getValue();
                 Item item = Hub.itemMap.get(order.getItemID());
+                Producer producer = Hub.producerMap.get(item.getPID());
 
                 RelativeLayout relativeLayout = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.certification, null);
                 relativeLayout.setOnClickListener(clickListener);
+                relativeLayout.setTag(producer);
+
+                ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
+                new ImageAsyncTask(imageView).execute(producer.getIconUrl());
 
                 TextView textView = (TextView)relativeLayout.findViewById(R.id.textView);
                 textView.setText(item.getProductDesc());
@@ -166,7 +170,13 @@ public class RestaurantDetailActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            Log.w(LogTag, "ProductItemClickListener: onClick");
+            Producer producer = (Producer)v.getTag();
+
+            if (producer.getWebsiteUrl().isEmpty() == false) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(producer.getWebsiteUrl()));
+                startActivity(intent);
+            }
         }
     }
 
@@ -202,6 +212,7 @@ public class RestaurantDetailActivity extends Activity {
             }
             else {
                 // set the default image
+                // todo - get default images for certs and producer and pass their resource id in
                 _imageView.setImageResource(R.drawable.default_restaurant);
             }
         }

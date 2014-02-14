@@ -16,4 +16,8 @@
     <dimen name="card_layout_padding_bottom">5dp</dimen>
     <dimen name="card_layout_padding_left">5dp</dimen>
     <dimen name="card_layout_padding_right">5dp</dimen>
+
+    <dimen name="default_list_item_image_height">24dp</dimen>
+    <dimen name="default_list_item_image_width">24dp</dimen>
+    <dimen name="default_list_item_text_size">12sp</dimen>
 </resources>

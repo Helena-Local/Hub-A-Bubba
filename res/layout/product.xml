@@ -10,10 +10,19 @@
         style="@style/selectableItem"
         android:padding="5dp">
 
+    <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/default_list_item_image_width"
+            android:layout_height="@dimen/default_list_item_image_height"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="5dp"/>
+
     <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:textSize="12sp"/>
+            android:layout_toRightOf="@+id/imageView"
+            android:textSize="@dimen/default_list_item_text_size"/>
 </RelativeLayout>
