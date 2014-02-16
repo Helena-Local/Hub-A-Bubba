@@ -1,7 +1,12 @@
+/*
+ * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+ */
+
 package org.helenalocal.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +16,7 @@ import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
 import org.helenalocal.base.Producer;
+import org.helenalocal.base.get.ProducerHub;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +66,18 @@ public class GrowerTab extends TabBase {
         super.onRefresh();
 
         _growerList.clear();
-        _growerList.addAll(Hub.producerMap.values());
+
+        // add producers who are are serviceLevel = 2 (local) or (serviceLevel > 0 and have at least one order)!
+        ArrayList<Producer> producerArrayList = new ArrayList<Producer>(Hub.producerMap.values());
+        for (int j = 0; j < producerArrayList.size(); j++) {
+            Producer producer = producerArrayList.get(j);
+            int serviceLevel = Integer.valueOf(producer.getServiceLevel().trim());
+            int orderCnt = ProducerHub.getOrderItemCnt(producer.getPID());
+            if ((serviceLevel == 2) || (serviceLevel > 0 && orderCnt > 0)) {
+                Log.w(Tag, "producer.getName() = " + producer.getName() + "; serviceLevel = " + serviceLevel + "; orderCnt = " + orderCnt);
+                _growerList.add(producer);
+            }
+        }
         _arrayAdapter.notifyDataSetChanged();
     }
 }

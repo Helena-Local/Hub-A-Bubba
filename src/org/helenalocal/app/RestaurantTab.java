@@ -16,7 +16,7 @@ import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Buyer;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
-import org.helenalocal.base.Order;
+import org.helenalocal.base.get.BuyerHub;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +49,7 @@ public class RestaurantTab extends TabBase implements AdapterView.OnItemClickLis
         _restaurantList = new ArrayList<Buyer>();
         _arrayAdapter = new RestaurantItemAdapter(getActivity(), R.layout.restautant_listview_item, _restaurantList);
 
-        ListView listView = (ListView)getActivity().findViewById(R.id.restaurantListView);
+        ListView listView = (ListView) getActivity().findViewById(R.id.restaurantListView);
         listView.setAdapter(_arrayAdapter);
 
         listView.setClickable(true);
@@ -66,29 +66,24 @@ public class RestaurantTab extends TabBase implements AdapterView.OnItemClickLis
         ArrayList<Buyer> buyerArrayList = new ArrayList<Buyer>(Hub.buyerMap.values());
         for (int j = 0; j < buyerArrayList.size(); j++) {
             Buyer buyer = buyerArrayList.get(j);
-            boolean hasOrder = false;
-            for (int k = 0; k < Hub.orderArr.size(); k++) {
-                Order order = Hub.orderArr.get(k);
-                if (order.getBuyerID().equalsIgnoreCase(buyer.getBID())) {
-                    hasOrder = true;
-                }
-            }
             int serviceLevel = Integer.valueOf(buyer.getServiceLevel().trim());
-            Log.w(LogTag, "buyer.getName() = " + buyer.getName() + "; serviceLevel = " + serviceLevel + "; hasOrder = " + hasOrder);
-            if (serviceLevel > 0 && hasOrder) {
+            int orderCnt = BuyerHub.getOrderItemCnt(buyer.getBID());
+            if (serviceLevel > 0 && orderCnt > 0) {
+                Log.w(LogTag, "buyer.getName() = " + buyer.getName() + "; serviceLevel = " + serviceLevel + "; orderCnt = " + orderCnt);
                 _restaurantList.add(buyer);
             }
         }
         _arrayAdapter.notifyDataSetChanged();
     }
 
-    /***
+    /**
      * OnItemClickListener methods
-     ***/
+     * *
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ListView listView = (ListView)getActivity().findViewById(R.id.restaurantListView);
-        Buyer buyer = (Buyer)listView.getItemAtPosition(position);
+        ListView listView = (ListView) getActivity().findViewById(R.id.restaurantListView);
+        Buyer buyer = (Buyer) listView.getItemAtPosition(position);
 
         Intent i = new Intent(getActivity(), RestaurantDetailActivity.class);
         i.putExtra(BUYER_ID_KEY, buyer.getBID());
