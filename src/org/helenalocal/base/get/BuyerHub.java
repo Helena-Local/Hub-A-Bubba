@@ -95,6 +95,12 @@ public class BuyerHub extends Hub implements Runnable {
                     }
                 }
                 if (iterator.hasNext()) {
+                    String iconUrl = iterator.next();
+                    if (!iconUrl.equals("")) {
+                        buyer.setIconUrl(iconUrl);
+                    }
+                }
+                if (iterator.hasNext()) {
                     String location = iterator.next();
                     if (!location.equals("")) {
                         buyer.setLocation(location);
@@ -116,12 +122,6 @@ public class BuyerHub extends Hub implements Runnable {
                     String quote = iterator.next();
                     if (!quote.equals("")) {
                         buyer.setQuote(quote);
-                    }
-                }
-                if (iterator.hasNext()) {
-                    String iconUrl = iterator.next();
-                    if (!iconUrl.equals("")) {
-                        buyer.setIconUrl(iconUrl);
                     }
                 }
                 myBuyerMap.put(buyer.getBID(), buyer);
@@ -176,6 +176,17 @@ public class BuyerHub extends Hub implements Runnable {
 
     public static Calendar getLastRefreshTS() {
         return lastRefreshTS;
+    }
+
+    // This is used as one component in determining restaurant rank/sort order in the display list
+    public static int getOrderItemCnt(String bid) {
+        int out = 0;
+        for (int j = 0; j < Hub.orderArr.size(); j++) {
+            if (Hub.orderArr.get(j).getBuyerID().equalsIgnoreCase(bid)) {
+                out++;
+            }
+        }
+        return out;
     }
 
     @Override

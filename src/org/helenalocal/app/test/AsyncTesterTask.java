@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import org.helenalocal.app.MainActivity;
 import org.helenalocal.base.*;
+import org.helenalocal.base.get.BuyerHub;
 import org.helenalocal.base.get.CertificationHub;
 import org.helenalocal.base.get.InitHub;
 import org.helenalocal.base.get.ProducerHub;
@@ -142,7 +143,8 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
         // test buyerhub...
         ArrayList<Buyer> buyerArrayList = new ArrayList<Buyer>(Hub.buyerMap.values());
         for (int j = 0; j < buyerArrayList.size(); j++) {
-            Log.w(Tag, buyerArrayList.get(j).toString());
+            Buyer buyer = buyerArrayList.get(j);
+            Log.w(Tag, buyer.toString() + " ~ " + BuyerHub.getOrderItemCnt(buyer.getBID()));
             ArrayList<Certification> certificationsArrayList = new ArrayList<Certification>(buyerArrayList.get(j).getCertifications());
             Log.w(Tag, " \n     certifications -- ");
             for (int k = 0; k < certificationsArrayList.size(); k++) {
