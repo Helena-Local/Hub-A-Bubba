@@ -62,13 +62,13 @@ public class RestaurantTab extends TabBase implements AdapterView.OnItemClickLis
 
         _restaurantList.clear();
 
-        // get buyer who are active and have at least one order!
+        // add buyer who are at serviceLevel = 2 (premium) or (serviceLevel > 0 and have at least one order)!
         ArrayList<Buyer> buyerArrayList = new ArrayList<Buyer>(Hub.buyerMap.values());
         for (int j = 0; j < buyerArrayList.size(); j++) {
             Buyer buyer = buyerArrayList.get(j);
             int serviceLevel = Integer.valueOf(buyer.getServiceLevel().trim());
             int orderCnt = BuyerHub.getOrderItemCnt(buyer.getBID());
-            if (serviceLevel > 0 && orderCnt > 0) {
+            if ((serviceLevel == 2) || (serviceLevel > 0 && orderCnt > 0)) {
                 Log.w(LogTag, "buyer.getName() = " + buyer.getName() + "; serviceLevel = " + serviceLevel + "; orderCnt = " + orderCnt);
                 _restaurantList.add(buyer);
             }

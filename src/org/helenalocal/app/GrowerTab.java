@@ -52,7 +52,7 @@ public class GrowerTab extends TabBase {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Producer p = (Producer)lv.getItemAtPosition(position);
+                Producer p = (Producer) lv.getItemAtPosition(position);
 
                 Intent i = new Intent(getActivity(), GrowerDetailActivity.class);
                 i.putExtra("growerNameKey", p.getName());
@@ -67,7 +67,7 @@ public class GrowerTab extends TabBase {
 
         _growerList.clear();
 
-        // add producers who are are serviceLevel = 2 (local) or (serviceLevel > 0 and have at least one order)!
+        // add producers who are at serviceLevel = 2 (local) or (serviceLevel > 0 and have at least one order)!
         ArrayList<Producer> producerArrayList = new ArrayList<Producer>(Hub.producerMap.values());
         for (int j = 0; j < producerArrayList.size(); j++) {
             Producer producer = producerArrayList.get(j);
