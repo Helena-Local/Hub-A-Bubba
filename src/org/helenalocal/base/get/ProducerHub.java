@@ -86,9 +86,21 @@ public class ProducerHub extends Hub implements Runnable {
                     }
                 }
                 if (iterator.hasNext()) {
+                    String iconUrl = iterator.next();
+                    if (!iconUrl.equals("")) {
+                        producer.setIconUrl(iconUrl);
+                    }
+                }
+                if (iterator.hasNext()) {
                     String location = iterator.next();
                     if (!location.equals("")) {
                         producer.setLocation(location);
+                    }
+                }
+                if (iterator.hasNext()) {
+                    String serviceLevel = iterator.next();
+                    if (!serviceLevel.equals("")) {
+                        producer.setServiceLevel(serviceLevel);
                     }
                 }
                 if (iterator.hasNext()) {
@@ -101,12 +113,6 @@ public class ProducerHub extends Hub implements Runnable {
                     String quote = iterator.next();
                     if (!quote.equals("")) {
                         producer.setQuote(quote);
-                    }
-                }
-                if (iterator.hasNext()) {
-                    String iconUrl = iterator.next();
-                    if (!iconUrl.equals("")) {
-                        producer.setIconUrl(iconUrl);
                     }
                 }
                 myProducerMap.put(producer.getPID(), producer);
@@ -185,6 +191,17 @@ public class ProducerHub extends Hub implements Runnable {
 
     public static Calendar getLastRefreshTS() {
         return lastRefreshTS;
+    }
+
+    // This is used as one component in determining producer rank/sort order in the display list
+    public static int getOrderItemCnt(String pid) {
+        int out = 0;
+        for (int j = 0; j < Hub.orderArr.size(); j++) {
+            if (Hub.orderArr.get(j).getProducerID().equalsIgnoreCase(pid)) {
+                out++;
+            }
+        }
+        return out;
     }
 
     @Override

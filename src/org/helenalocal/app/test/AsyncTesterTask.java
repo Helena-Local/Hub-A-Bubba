@@ -131,7 +131,8 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
         // test producerhub...
         ArrayList<Producer> producerArrayList = new ArrayList<Producer>(Hub.producerMap.values());
         for (int j = 0; j < producerArrayList.size(); j++) {
-            Log.w(Tag, producerArrayList.get(j).toString());
+            Producer producer = producerArrayList.get(j);
+            Log.w(Tag, producer.toString() + " ~ " + ProducerHub.getOrderItemCnt(producer.getPID()));
             ArrayList<Certification> certificationsArrayList = new ArrayList<Certification>(producerArrayList.get(j).getCertifications());
             Log.w(Tag, " \n     certifications -- ");
             for (int k = 0; k < certificationsArrayList.size(); k++) {
@@ -144,7 +145,7 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
         ArrayList<Buyer> buyerArrayList = new ArrayList<Buyer>(Hub.buyerMap.values());
         for (int j = 0; j < buyerArrayList.size(); j++) {
             Buyer buyer = buyerArrayList.get(j);
-            Log.w(Tag, buyer.toString() + " ~ " + BuyerHub.getOrderItemCnt(buyer.getBID()));
+            Log.w(Tag, buyer.toString() + " - BuyerHub.getOrderItemCnt(buyer.getBID()) = " + BuyerHub.getOrderItemCnt(buyer.getBID()));
             ArrayList<Certification> certificationsArrayList = new ArrayList<Certification>(buyerArrayList.get(j).getCertifications());
             Log.w(Tag, " \n     certifications -- ");
             for (int k = 0; k < certificationsArrayList.size(); k++) {
