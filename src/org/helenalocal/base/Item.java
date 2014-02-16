@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+ */
+
 package org.helenalocal.base;
 
 import java.text.SimpleDateFormat;
@@ -14,6 +18,7 @@ public class Item {
     private String productDesc = "";
     private String productUrl = "";
     private String productImageUrl = "";
+    private String recipeUrl = "";
     private Integer unitsAvailable = 1;
     private String unitDesc = "";
     private Double unitPrice = 0.0;
@@ -25,8 +30,8 @@ public class Item {
         setDeliveryDate(null);
     }
 
-    public Item(String IID, String PID, boolean inCsaThisWeek, String category, String productDesc, String productUrl, String productImageUrl, Integer unitsAvailable,
-            String unitDesc, Double unitPrice, Calendar deliveryDate, String note) {
+    public Item(String IID, String PID, boolean inCsaThisWeek, String category, String productDesc, String productUrl, String productImageUrl, String recipeUrl, Integer unitsAvailable,
+                String unitDesc, Double unitPrice, Calendar deliveryDate, String note) {
         this.IID = IID;
         this.PID = PID;
         this.inCsaThisWeek = inCsaThisWeek;
@@ -34,11 +39,20 @@ public class Item {
         this.productDesc = productDesc;
         this.productUrl = productUrl;
         this.productImageUrl = productImageUrl;
+        this.recipeUrl = recipeUrl;
         this.unitsAvailable = unitsAvailable;
         this.unitPrice = unitPrice;
         this.unitDesc = unitDesc;
         setDeliveryDate(deliveryDate);
         this.note = note;
+    }
+
+    public String getRecipeUrl() {
+        return recipeUrl;
+    }
+
+    public void setRecipeUrl(String recipeUrl) {
+        this.recipeUrl = recipeUrl;
     }
 
     public String getIID() {
@@ -150,7 +164,8 @@ public class Item {
                 this.category + "; productDesc = " +
                 this.productDesc + "; productUrl = " +
                 this.productUrl + "; productImageUrl = " +
-                this.productImageUrl + "; unitsAvailable = " +
+                this.productImageUrl + "; recipeUrl = " +
+                this.recipeUrl + "; unitsAvailable = " +
                 this.unitsAvailable + "; unitDesc = " +
                 this.unitDesc + "; unitPrice = " +
                 this.unitPrice + "; deliveryDate = " +
@@ -178,6 +193,7 @@ public class Item {
                 this.productDesc + "," +
                 this.productUrl + "," +
                 this.productImageUrl + "," +
+                this.recipeUrl + "," +
                 this.unitsAvailable + "," +
                 this.unitDesc + "," +
                 this.unitPrice + "," +

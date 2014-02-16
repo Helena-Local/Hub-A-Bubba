@@ -95,6 +95,12 @@ public class ItemHub extends Hub implements Runnable {
                     }
                 }
                 if (iterator.hasNext()) {
+                    String recipeUrl = iterator.next();
+                    if (!recipeUrl.equals("")) {
+                        item.setRecipeUrl(recipeUrl);
+                    }
+                }
+                if (iterator.hasNext()) {
                     String unitsAvailable = iterator.next();
                     if (!unitsAvailable.equals("")) {
                         item.setUnitsAvailable(Integer.valueOf(unitsAvailable));
