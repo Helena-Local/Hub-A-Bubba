@@ -25,19 +25,19 @@ public class MockHub extends Hub {
         // public Item(String IID,Producer producer,boolean inCsaThisWeek, String category, String productDesc, String productUrl, String productImageUrl, Integer unitsAvailable,
         //        String unitDesc, Double unitPrice, Calendar deliveryDate, String note) {
         myItems.add(new Item("I-2014-2-2-3", "P-2013-0", true, "Produce", "Leeks", "http://en.wikipedia.org/wiki/Leek‎",
-                "http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Leek.jpg/160px-Leek.jpg", 20, "10 lbs", 10.01, Calendar.getInstance(), "note 1"));
+                "http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Leek.jpg/160px-Leek.jpg", "http://www.pinterest.com/search/pins/?q=Leek", 20, "10 lbs", 10.01, Calendar.getInstance(), "note 1"));
 
         myItems.add(new Item("I-2014-2-2-4", "P-2013-0", true, "Produce", "Carrots", "http://en.wikipedia.org/wiki/Carrots‎",
-                "http://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Carrots_on_end.jpg/220px-Carrots_on_end.jpg", 2, "25 lbs", 23.01, Calendar.getInstance(), "note 2"));
+                "http://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Carrots_on_end.jpg/220px-Carrots_on_end.jpg", "http://www.pinterest.com/search/pins/?q=Leek", 2, "25 lbs", 23.01, Calendar.getInstance(), "note 2"));
 
         myItems.add(new Item("I-2014-2-2-9", "P-2013-1", true, "Cheese", "Jack Cheese", "",
-                "", 5, "24 oz", 18.05, Calendar.getInstance(), ""));
+                "", "", 5, "24 oz", 18.05, Calendar.getInstance(), ""));
 
         myItems.add(new Item("I-2014-2-2-10", "P-2013-2", false, "Milk", "Whole Milk", "‎",
-                "", 4, "1 gal", 7.01, Calendar.getInstance(), ""));
+                "", "", 4, "1 gal", 7.01, Calendar.getInstance(), ""));
 
         myItems.add(new Item("I-2014-2-2-11", "P-2013-0", true, "Dry Goods", "Lentil", "‎",
-                "", 36, "16 oz", 5.89, Calendar.getInstance(), ""));
+                "", "", 36, "16 oz", 5.89, Calendar.getInstance(), ""));
 
         return myItems;
     }
