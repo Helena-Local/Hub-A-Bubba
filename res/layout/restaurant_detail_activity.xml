@@ -265,11 +265,11 @@
                         android:padding="5dp">
 
                     <ImageView
+                            android:id="@+id/imageView"
                             android:layout_width="@dimen/default_list_item_image_width"
                             android:layout_height="@dimen/default_list_item_image_height"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentLeft="true"
-                            android:id="@+id/imageView"
                             android:layout_marginRight="5dp"
                             android:src="@drawable/default_producer"/>
 
@@ -280,6 +280,15 @@
                             android:layout_centerVertical="true"
                             android:textSize="@dimen/default_list_item_text_size"
                             android:layout_toRightOf="@+id/imageView"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Purchased on 02/17/2014"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:textSize="10sp"/>
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -303,6 +312,14 @@
                             android:layout_centerVertical="true"
                             android:textSize="@dimen/default_list_item_text_size"
                             android:layout_toRightOf="@+id/imageView"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Purchased on 02/17/2014"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:textSize="10sp"/>
                 </RelativeLayout>
 
             </LinearLayout>

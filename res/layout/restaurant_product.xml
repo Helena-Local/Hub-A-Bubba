@@ -5,24 +5,34 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        style="@style/selectableItem"
-        android:padding="5dp">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                style="@style/selectableItem"
+                android:padding="5dp">
 
     <ImageView
             android:id="@+id/imageView"
             android:layout_width="@dimen/default_list_item_image_width"
             android:layout_height="@dimen/default_list_item_image_height"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:layout_marginRight="5dp"/>
 
     <TextView
-            android:id="@+id/textView"
+            android:id="@+id/productNameTextView"
+            android:layout_toRightOf="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/imageView"
             android:textSize="@dimen/default_list_item_text_size"/>
+
+    <TextView
+            android:id="@+id/purchaseDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Purchased on 02/17/2014"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="10sp"/>
+
 </RelativeLayout>

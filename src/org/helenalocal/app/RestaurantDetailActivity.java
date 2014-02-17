@@ -24,6 +24,7 @@ import org.helenalocal.base.*;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 
 public class RestaurantDetailActivity extends Activity {
 
@@ -101,15 +102,19 @@ public class RestaurantDetailActivity extends Activity {
                 Item item = Hub.itemMap.get(order.getItemID());
                 Producer producer = Hub.producerMap.get(item.getPID());
 
-                RelativeLayout relativeLayout = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.certification, null);
+                RelativeLayout relativeLayout = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.restaurant_product, null);
                 relativeLayout.setOnClickListener(clickListener);
                 relativeLayout.setTag(producer);
 
                 ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
                 new ImageAsyncTask(imageView).execute(producer.getIconUrl());
 
-                TextView textView = (TextView)relativeLayout.findViewById(R.id.textView);
+                TextView textView = (TextView)relativeLayout.findViewById(R.id.productNameTextView);
                 textView.setText(item.getProductDesc());
+
+                textView = (TextView)relativeLayout.findViewById(R.id.purchaseDateTextView);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                textView.setText(String.format("Purchased on %s", dateFormat.format(item.getDeliveryDate().getTime())));
 
                 linearLayout.addView(relativeLayout);
 
