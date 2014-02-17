@@ -165,11 +165,9 @@ public class RestaurantDetailActivity extends Activity {
         public void onClick(View v) {
             Producer producer = (Producer)v.getTag();
 
-            if (producer.getWebsiteUrl().isEmpty() == false) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(producer.getWebsiteUrl()));
-                startActivity(intent);
-            }
+            Intent intent = new Intent(RestaurantDetailActivity.this, GrowerDetailActivity.class);
+            intent.putExtra(GrowerDetailActivity.EXTRA_PRODUCER_ID, producer.getPID());
+            startActivity(intent);
         }
     }
 

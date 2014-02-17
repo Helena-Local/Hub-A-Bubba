@@ -45,18 +45,18 @@ public class GrowerTab extends TabBase {
         _growerList = new ArrayList<Producer>();
         _arrayAdapter = new GrowerListAdapter(getActivity(), R.layout.grower_listview_item, _growerList);
 
-        final ListView lv = (ListView) getActivity().findViewById(R.id.growerListView);
-        lv.setAdapter(_arrayAdapter);
+        ListView listView = (ListView) getActivity().findViewById(R.id.growerListView);
+        listView.setAdapter(_arrayAdapter);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Producer p = (Producer) lv.getItemAtPosition(position);
+                Producer producer = (Producer) ((ListView)parent).getItemAtPosition(position);
 
-                Intent i = new Intent(getActivity(), GrowerDetailActivity.class);
-                i.putExtra("growerNameKey", p.getName());
-                startActivity(i);
+                Intent intent = new Intent(getActivity(), GrowerDetailActivity.class);
+                intent.putExtra(GrowerDetailActivity.EXTRA_PRODUCER_ID, producer.getPID());
+                startActivity(intent);
             }
         });
     }
