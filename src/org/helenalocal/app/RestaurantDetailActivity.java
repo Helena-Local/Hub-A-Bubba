@@ -133,7 +133,7 @@ public class RestaurantDetailActivity extends Activity {
 
             textView = (TextView) relativeLayout.findViewById(R.id.purchaseDateTextView);
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-            textView.setText(String.format("Purchased on %s", dateFormat.format(order.getDate().getTime())));
+            textView.setText(String.format(getResources().getString(R.string.product_purchase_date), dateFormat.format(order.getDate().getTime())));
 
             linearLayout.addView(relativeLayout);
 
