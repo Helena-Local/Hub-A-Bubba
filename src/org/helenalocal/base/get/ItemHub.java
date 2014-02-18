@@ -59,18 +59,6 @@ public class ItemHub extends Hub implements Runnable {
                     }
                 }
                 if (iterator.hasNext()) {
-                    String producerId = iterator.next();
-                    if (!producerId.equals("")) {
-                        item.setPID(producerId);
-                    }
-                }
-                if (iterator.hasNext()) {
-                    String inCsaThisWeek = iterator.next();
-                    if ((!inCsaThisWeek.equals("")) && (inCsaThisWeek.equals("Y"))) {
-                        item.setInCsaThisWeek(true);
-                    }
-                }
-                if (iterator.hasNext()) {
                     String category = iterator.next();
                     if (!category.equals("")) {
                         item.setCategory(category);

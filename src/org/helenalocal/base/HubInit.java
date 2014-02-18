@@ -8,6 +8,8 @@ package org.helenalocal.base;
  * Created by abbie on 2/6/14.
  */
 public abstract class HubInit {
+    public static final String HELENA_LOCAL_BUYER_ID = "B-2014-00";
+
     public enum HubType {BUYER_HUB, CERTIFICATION_HUB, INIT_HUB, ITEM_HUB, ORDER_HUB, PRODUCER_HUB, AD_HUB}
 
     // defaults set below
@@ -17,7 +19,13 @@ public abstract class HubInit {
     protected static String dataVersion = "v0.0";
     protected static String dataVersionNotes = "Uninitialized...";
 
-    protected static String initHubDataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=5&output=csv";
+    //TODO This is where you point the app to data
+    // Hub-DEV
+    // protected static String initHubDataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdEJ6N1haWHpIT2VoaEtxNy1vTVVYLVE&single=true&gid=5&output=csv";
+    // Hub-TEST
+    protected static String initHubDataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdERDUlZLSHdEazFkN05sSGlLUDgwaGc&single=true&gid=5&output=csv";
+    // Hub
+    // protected static String initHubDataUrl = "https://docs.google.com/spreadsheet/pub?key=0AtzLFk-EifKHdF8yUzVSNHJMUzhnYV9ULW1xdDR2SUE&single=true&gid=5&output=csv";
 
     protected static String growerHubDataUrl = "";
     protected static String producerHubDataUrl = "";

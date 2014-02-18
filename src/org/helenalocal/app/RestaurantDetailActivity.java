@@ -20,12 +20,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.*;
+import org.helenalocal.base.get.OrderHub;
 
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -101,13 +101,8 @@ public class RestaurantDetailActivity extends Activity {
 
         Log.w(LogTag, "Buyer ID: " + _buyer.getBID());
 
-        List<Order> buyerOrder = new ArrayList<Order>();
-        // load relevant
-        for (Order order : Hub.orderArr) {
-            if (order.getBuyerID().equalsIgnoreCase(_buyer.getBID())) {
-                buyerOrder.add(order);
-            }
-        }
+        List<Order> buyerOrder = OrderHub.getOrdersForBuyer(_buyer.getBID());
+
         // now sort buyer orders
         Collections.sort(buyerOrder, new Comparator<Order>() {
             public int compare(Order o1, Order o2) {
@@ -119,7 +114,7 @@ public class RestaurantDetailActivity extends Activity {
         // now display
         for (Order order : buyerOrder) {
             Item item = Hub.itemMap.get(order.getItemID());
-            Producer producer = Hub.producerMap.get(item.getPID());
+            Producer producer = Hub.producerMap.get(order.getProducerID());
 
             RelativeLayout relativeLayout = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.restaurant_product, null);
             relativeLayout.setOnClickListener(clickListener);

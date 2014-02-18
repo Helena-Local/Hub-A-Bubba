@@ -12,8 +12,6 @@ import java.util.Calendar;
  */
 public class Item {
     private String IID = "";
-    private String PID = "";
-    private boolean inCsaThisWeek = false;
     private String category = "";
     private String productDesc = "";
     private String productUrl = "";
@@ -30,11 +28,9 @@ public class Item {
         setDeliveryDate(null);
     }
 
-    public Item(String IID, String PID, boolean inCsaThisWeek, String category, String productDesc, String productUrl, String productImageUrl, String recipeUrl, Integer unitsAvailable,
+    public Item(String IID, String category, String productDesc, String productUrl, String productImageUrl, String recipeUrl, Integer unitsAvailable,
                 String unitDesc, Double unitPrice, Calendar deliveryDate, String note) {
         this.IID = IID;
-        this.PID = PID;
-        this.inCsaThisWeek = inCsaThisWeek;
         this.category = category;
         this.productDesc = productDesc;
         this.productUrl = productUrl;
@@ -61,22 +57,6 @@ public class Item {
 
     public void setIID(String IID) {
         this.IID = IID;
-    }
-
-    public String getPID() {
-        return PID;
-    }
-
-    public void setPID(String PID) {
-        this.PID = PID;
-    }
-
-    public boolean isInCsaThisWeek() {
-        return inCsaThisWeek;
-    }
-
-    public void setInCsaThisWeek(boolean inCsaThisWeek) {
-        this.inCsaThisWeek = inCsaThisWeek;
     }
 
     public String getCategory() {
@@ -159,8 +139,7 @@ public class Item {
     @Override
     public String toString() {
         dateFormat.setCalendar(deliveryDate);
-        return "IID = " + IID + "; PID = " + PID +
-                "; inCsaThisWeek = " + this.inCsaThisWeek + "; category = " +
+        return "IID = " + IID + "; category = " +
                 this.category + "; productDesc = " +
                 this.productDesc + "; productUrl = " +
                 this.productUrl + "; productImageUrl = " +
@@ -175,7 +154,7 @@ public class Item {
 
     public String toEmail(String growerAgreementId) {
         dateFormat.setCalendar(deliveryDate);
-        return "\nIID = " + IID + "; \nPID = " + PID +
+        return "\nIID = " + IID +
                 "; \ncategory = " + this.category + "; \nproductDesc = " +
                 this.productDesc + "; \nunitsAvailable = " +
                 this.unitsAvailable + "; \nunitDesc = " +
@@ -187,8 +166,7 @@ public class Item {
 
     public String toCSV() {
         dateFormat.setCalendar(deliveryDate);
-        return IID + "," + PID +
-                "," + this.inCsaThisWeek + "," +
+        return IID + "," +
                 this.category + "," +
                 this.productDesc + "," +
                 this.productUrl + "," +

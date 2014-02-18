@@ -17,7 +17,6 @@ import org.helenalocal.base.HubInit;
 import org.helenalocal.base.Item;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,7 +43,7 @@ public class ProductTab extends TabBase {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        TextView textView = (TextView)getActivity().findViewById(R.id.welcomeText);
+        TextView textView = (TextView) getActivity().findViewById(R.id.welcomeText);
         Linkify.addLinks(textView, Linkify.PHONE_NUMBERS);
         Linkify.addLinks(textView, Pattern.compile("HelenaLocal.org"), "http://", null, new Linkify.TransformFilter() {
             @Override
@@ -56,7 +55,7 @@ public class ProductTab extends TabBase {
         _itemList = new ArrayList<Item>();
         _arrayAdapter = new ProductItemAdapter(getActivity(), R.layout.product_listview_item, _itemList);
 
-        ListView listView = (ListView)getActivity().findViewById(R.id.productListView);
+        ListView listView = (ListView) getActivity().findViewById(R.id.productListView);
         listView.addHeaderView(new View(getActivity()));
         listView.addFooterView(new View(getActivity()));
         listView.setAdapter(_arrayAdapter);
@@ -67,13 +66,12 @@ public class ProductTab extends TabBase {
         super.onRefresh();
 
         _itemList.clear();
-        Collection<Item> tempList = Hub.itemMap.values();
-        for (Item i : tempList) {
-            if (i.isInCsaThisWeek() == false) {
-                _itemList.add(i);
+        // display all for sale to community where qty > 0!
+        for (Item item : Hub.itemMap.values()) {
+            if (item.getUnitsAvailable() > 0) {
+                _itemList.add(item);
             }
         }
-
         _arrayAdapter.notifyDataSetChanged();
     }
 }

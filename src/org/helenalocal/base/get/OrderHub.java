@@ -142,6 +142,17 @@ public class OrderHub extends Hub implements Runnable {
         return readFromFile(context);
     }
 
+    public static List<Order> getOrdersForBuyer(String buyerId) {
+        List<Order> buyerOrder = new ArrayList<Order>();
+        // load relevant
+        for (Order order : Hub.orderArr) {
+            if (order.getBuyerID().equalsIgnoreCase(buyerId)) {
+                buyerOrder.add(order);
+            }
+        }
+        return buyerOrder;
+    }
+
     public static Calendar getLastRefreshTS() {
         return lastRefreshTS;
     }

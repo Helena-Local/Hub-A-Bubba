@@ -13,9 +13,10 @@ import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
 import org.helenalocal.base.Item;
+import org.helenalocal.base.Order;
+import org.helenalocal.base.get.OrderHub;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class MemberTab extends TabBase {
@@ -53,13 +54,10 @@ public class MemberTab extends TabBase {
     @Override
     protected void onRefresh() {
         _itemList.clear();
-        Collection<Item> tempList = Hub.itemMap.values();
-        for (Item i : tempList) {
-            if (i.isInCsaThisWeek() == true) {
-                _itemList.add(i);
-            }
+        // display all Helena Local bought for CSA!
+        for (Order order : OrderHub.getOrdersForBuyer(HubInit.HELENA_LOCAL_BUYER_ID)) {
+            _itemList.add(Hub.itemMap.get(order.getItemID()));
         }
-
         _arrayAdapter.notifyDataSetChanged();
     }
 }
