@@ -25,6 +25,10 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class RestaurantDetailActivity extends Activity {
 
@@ -97,29 +101,43 @@ public class RestaurantDetailActivity extends Activity {
 
         Log.w(LogTag, "Buyer ID: " + _buyer.getBID());
 
+        List<Order> buyerOrder = new ArrayList<Order>();
+        // load relevant
         for (Order order : Hub.orderArr) {
             if (order.getBuyerID().equalsIgnoreCase(_buyer.getBID())) {
-                Item item = Hub.itemMap.get(order.getItemID());
-                Producer producer = Hub.producerMap.get(item.getPID());
-
-                RelativeLayout relativeLayout = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.restaurant_product, null);
-                relativeLayout.setOnClickListener(clickListener);
-                relativeLayout.setTag(producer);
-
-                ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
-                new ImageAsyncTask(imageView).execute(producer.getIconUrl());
-
-                TextView textView = (TextView)relativeLayout.findViewById(R.id.productNameTextView);
-                textView.setText(item.getProductDesc());
-
-                textView = (TextView)relativeLayout.findViewById(R.id.purchaseDateTextView);
-                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-                textView.setText(String.format("Purchased on %s", dateFormat.format(order.getDate().getTime())));
-
-                linearLayout.addView(relativeLayout);
-
-                Log.w(LogTag, String.format("Order: ID - %s Item - %s BuyerId - %s", order.getOrderID(), item.getProductDesc(), order.getBuyerID()));
+                buyerOrder.add(order);
             }
+        }
+        // now sort buyer orders
+        Collections.sort(buyerOrder, new Comparator<Order>() {
+            public int compare(Order o1, Order o2) {
+                if (o1.getDate() == null || o2.getDate() == null)
+                    return 0;
+                return o2.getDate().compareTo(o1.getDate());
+            }
+        });
+        // now display
+        for (Order order : buyerOrder) {
+            Item item = Hub.itemMap.get(order.getItemID());
+            Producer producer = Hub.producerMap.get(item.getPID());
+
+            RelativeLayout relativeLayout = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.restaurant_product, null);
+            relativeLayout.setOnClickListener(clickListener);
+            relativeLayout.setTag(producer);
+
+            ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
+            new ImageAsyncTask(imageView).execute(producer.getIconUrl());
+
+            TextView textView = (TextView) relativeLayout.findViewById(R.id.productNameTextView);
+            textView.setText(item.getProductDesc());
+
+            textView = (TextView) relativeLayout.findViewById(R.id.purchaseDateTextView);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            textView.setText(String.format("Purchased on %s", dateFormat.format(order.getDate().getTime())));
+
+            linearLayout.addView(relativeLayout);
+
+            Log.w(LogTag, String.format("Order: ID - %s Item - %s BuyerId - %s", order.getOrderID(), item.getProductDesc(), order.getBuyerID()));
         }
     }
 
