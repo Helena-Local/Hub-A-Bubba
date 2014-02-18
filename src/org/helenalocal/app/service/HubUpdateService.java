@@ -1,7 +1,10 @@
+/*
+ * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+ */
+
 package org.helenalocal.app.service;
 
 import android.app.IntentService;
-import android.app.Service;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -80,7 +83,7 @@ public class HubUpdateService extends IntentService {
             e.printStackTrace();
         }
 
-        Log.w(Tag,"**** Ending fetch for items");
+        Log.w(Tag, "**** Ending fetch for items");
     }
 
     private void LoadProducerHub(Context context) {
@@ -102,7 +105,7 @@ public class HubUpdateService extends IntentService {
             e.printStackTrace();
         }
 
-        Log.w(Tag,"**** Ending fetch for producers");
+        Log.w(Tag, "**** Ending fetch for producers");
     }
 
     private void LoadBuyerHub(Context context) {
@@ -121,7 +124,7 @@ public class HubUpdateService extends IntentService {
             e.printStackTrace();
         }
 
-        Log.w(Tag,"**** Ending fetch for buyers");
+        Log.w(Tag, "**** Ending fetch for buyers");
     }
 
     private void updateDB() {
@@ -135,8 +138,6 @@ public class HubUpdateService extends IntentService {
             ContentValues values = new ContentValues();
 
             values.put(ItemProvider.KEY_ITEM_ID, i.getIID());
-            values.put(ItemProvider.KEY_PRODUCER_ID, i.getPID());
-            values.put(ItemProvider.KEY_IN_CSA, i.isInCsaThisWeek() ? 1 : 0);
             values.put(ItemProvider.KEY_CATEGORY, i.getCategory());
             values.put(ItemProvider.KEY_PRODUCT_DESC, i.getProductDesc());
             values.put(ItemProvider.KEY_PRODUCT_URL, i.getProductUrl());
