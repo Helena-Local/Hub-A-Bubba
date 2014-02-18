@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
@@ -43,8 +44,11 @@ public class RestaurantItemAdapter extends ArrayAdapter<Buyer> {
             li.inflate(_resource, restaurantView, true);
         }
 
-        TextView name = (TextView)restaurantView.findViewById(R.id.restaurantNameTextView);
+        ImageView imageView = (ImageView)restaurantView.findViewById(R.id.restaurantImageView);
+        imageView.setImageBitmap(null);
+        new AsyncImageLoader(imageView, R.drawable.default_restaurant).execute(restaurant.getPhotoUrl());
 
+        TextView name = (TextView)restaurantView.findViewById(R.id.restaurantNameTextView);
         name.setText(restaurant.getName());
 
 

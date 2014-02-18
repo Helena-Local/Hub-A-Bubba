@@ -4,21 +4,42 @@
 ~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+             <!--android:background="#dcdcdc"-->
+        <!--android:padding="5dp">-->
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/restaurant_tab_welcome"
-            android:id="@+id/textView"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/tab_welcome_text_margin"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  >
+        <!--android:background="@drawable/card_background"-->
+        <!--android:background="#dcdcdc"-->
 
-    <ListView android:id="@+id/restaurantListView"
-              style="@style/cardListView"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/restaurant_tab_welcome"
+                android:id="@+id/textView"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:gravity="center_horizontal"/>
 
-</LinearLayout>
+        <ListView android:id="@+id/restaurantListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"/>
+
+        <!--android:divider="#4fa5d5"-->
+        <!--android:dividerHeight="1dp"-->
+        <!--android:divider="@null"-->
+        <!--android:dividerHeight="0dp"-->
+        <!--android:listSelector="@android:color/transparent"-->
+        <!--android:cacheColorHint="@android:color/transparent"-->
+
+    </LinearLayout>
+
+</FrameLayout>
