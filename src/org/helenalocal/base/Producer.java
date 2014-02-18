@@ -24,6 +24,7 @@ public class Producer {
     private String location = "";
     private List<Certification> certifications = new ArrayList<Certification>();
     private String quote = "";
+    private Integer orderCnt = 0;
 
     public Producer() {
     }
@@ -38,6 +39,14 @@ public class Producer {
         this.certifications = certifications;
         this.quote = quote;
         this.iconUrl = iconUrl;
+    }
+
+    public Integer getOrderCnt() {
+        return orderCnt;
+    }
+
+    public void setOrderCnt(Integer orderCnt) {
+        this.orderCnt = orderCnt;
     }
 
     public String getServiceLevel() {

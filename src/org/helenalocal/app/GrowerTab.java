@@ -19,6 +19,8 @@ import org.helenalocal.base.Producer;
 import org.helenalocal.base.get.ProducerHub;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class GrowerTab extends TabBase {
@@ -68,16 +70,46 @@ public class GrowerTab extends TabBase {
         _growerList.clear();
 
         // add producers who are at serviceLevel = 2 (local) or (serviceLevel > 0 and have at least one order)!
+        ArrayList<Producer> localList = new ArrayList<Producer>();
+        ArrayList<Producer> regionalList = new ArrayList<Producer>();
         ArrayList<Producer> producerArrayList = new ArrayList<Producer>(Hub.producerMap.values());
         for (int j = 0; j < producerArrayList.size(); j++) {
             Producer producer = producerArrayList.get(j);
+            // now set the producer order count
+            producer.setOrderCnt(ProducerHub.getOrderItemCnt(producer.getPID()));
+
             int serviceLevel = Integer.valueOf(producer.getServiceLevel().trim());
-            int orderCnt = ProducerHub.getOrderItemCnt(producer.getPID());
-            if ((serviceLevel == 2) || (serviceLevel > 0 && orderCnt > 0)) {
-                Log.w(Tag, "producer.getName() = " + producer.getName() + "; serviceLevel = " + serviceLevel + "; orderCnt = " + orderCnt);
-                _growerList.add(producer);
+            // Service Level (0-off, 1-regional, 2-local)
+            if ((serviceLevel == 2) || (producer.getOrderCnt() > 0)) {
+                switch (serviceLevel) {
+                    case 0:
+                        break;
+                    case 2:
+                        localList.add(producer);
+                        break;
+                    default:
+                        regionalList.add(producer);
+                        break;
+                }
             }
+            Log.w(Tag, "producer.getName() = " + producer.getName() + "; serviceLevel = " + serviceLevel + "; orderCnt = " + producer.getOrderCnt());
         }
+        // sort by key and add
+        Collections.sort(localList, new Comparator<Producer>() {
+            public int compare(Producer o1, Producer o2) {
+                return o2.getOrderCnt().compareTo(o1.getOrderCnt());
+            }
+        });
+
+        Collections.sort(regionalList, new Comparator<Producer>() {
+            public int compare(Producer o1, Producer o2) {
+                return o2.getOrderCnt().compareTo(o1.getOrderCnt());
+            }
+        });
+
+        // add them in order
+        _growerList.addAll(localList);
+        _growerList.addAll(regionalList);
         _arrayAdapter.notifyDataSetChanged();
     }
 }
