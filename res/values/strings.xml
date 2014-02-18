@@ -22,4 +22,5 @@
     <string name="restaurant_website_action">Website</string>
     <string name="restaurant_detail_awards">Sustainability and Awards</string>
     <string name="restaurant_detail_products">Local Grower Purchases</string>
+    <string name="product_purchase_date">Purchased on %s</string>
 </resources>
