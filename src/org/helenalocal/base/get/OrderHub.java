@@ -17,6 +17,7 @@ import org.helenalocal.base.Order;
 
 import java.io.*;
 import java.net.UnknownHostException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,13 +31,13 @@ public class OrderHub extends Hub implements Runnable {
     private static Context context;
     private static Calendar lastRefreshTS;
     private String fileName = "HL-OrderHub.csv";
-
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
 
     public OrderHub(Context context) {
         this.context = context;
     }
 
-    private void parseCSV(List<Order> myOrderArr, InputStream inputStream) throws IOException {
+    private void parseCSV(List<Order> myOrderArr, InputStream inputStream) throws IOException, ParseException {
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(',');
@@ -56,7 +57,7 @@ public class OrderHub extends Hub implements Runnable {
                 if (iterator.hasNext()) {
                     String date = iterator.next();
                     if (!date.equals("")) {
-                        order.setDate(date);
+                        order.getDate().setTime(dateFormat.parse(date));
                     }
                 }
                 if (iterator.hasNext()) {
@@ -114,6 +115,8 @@ public class OrderHub extends Hub implements Runnable {
             Log.e(HubInit.logTag, "File  (" + fileName + ") not found: " + e.toString());
         } catch (IOException e) {
             Log.e(HubInit.logTag, "Can not read file  (" + fileName + ") : " + e.toString());
+        } catch (ParseException pe) {
+            Log.e(HubInit.logTag, "Can't parse Order date  (" + fileName + ") : " + pe.toString());
         }
         Log.w(HubInit.logTag, "Number of orders loaded: " + myOrderArr.size());
         return myOrderArr;

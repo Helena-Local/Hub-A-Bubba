@@ -1,21 +1,36 @@
+/*
+ * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+ */
+
 package org.helenalocal.base;
+
+import java.util.Calendar;
 
 /**
  * Created by abbie on 2/2/14.
  */
 public class Order {
-    private String date = "";
+    private Calendar date;
     private String OID = "";
     private String IID = "";
     private String PID = "";
     private String BID = "";
     private String buyerUrl = "";
 
-    public String getDate() {
+    public Order() {
+        setDate(null);
+    }
+
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Calendar date) {
+        if (date == null) {
+            date = Calendar.getInstance();
+            date.set(Calendar.DAY_OF_YEAR, 1);
+            date.set(Calendar.YEAR, 1970);
+        }
         this.date = date;
     }
 

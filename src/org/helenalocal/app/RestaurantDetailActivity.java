@@ -114,7 +114,7 @@ public class RestaurantDetailActivity extends Activity {
 
                 textView = (TextView)relativeLayout.findViewById(R.id.purchaseDateTextView);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-                textView.setText(String.format("Purchased on %s", dateFormat.format(item.getDeliveryDate().getTime())));
+                textView.setText(String.format("Purchased on %s", dateFormat.format(order.getDate().getTime())));
 
                 linearLayout.addView(relativeLayout);
 
