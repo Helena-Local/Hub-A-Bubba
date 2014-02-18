@@ -107,6 +107,12 @@ public class BuyerHub extends Hub implements Runnable {
                     }
                 }
                 if (iterator.hasNext()) {
+                    String locationDisplay = iterator.next();
+                    if (!locationDisplay.equals("")) {
+                        buyer.setLocationDisplay(locationDisplay);
+                    }
+                }
+                if (iterator.hasNext()) {
                     String serviceLevel = iterator.next();
                     if (!serviceLevel.equals("")) {
                         buyer.setServiceLevel(serviceLevel);

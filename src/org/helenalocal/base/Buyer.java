@@ -19,6 +19,7 @@ public class Buyer {
     private String websiteUrl = "";
     private String photoUrl = "";
     private String location = "";
+    private String locationDisplay = "";
     private String serviceLevel = "";
     private List<Certification> certifications = new ArrayList<Certification>();
     private String quote = "";
@@ -42,6 +43,14 @@ public class Buyer {
         this.quote = quote;
         this.iconUrl = iconUrl;
         this.lastOrderDate = lastOrderDate;
+    }
+
+    public String getLocationDisplay() {
+        return locationDisplay;
+    }
+
+    public void setLocationDisplay(String locationDisplay) {
+        this.locationDisplay = locationDisplay;
     }
 
     public String getIconUrl() {
@@ -151,6 +160,6 @@ public class Buyer {
     public String toString() {
         return "BID = " + BID + "; name = " + name + "; contactEmail = " + contactEmail
                 + "; hours = " + hours + "; phone = " + phone + "; websiteUrl = " + websiteUrl + "; photoUrl = "
-                + photoUrl + "; location = " + location + "; quote = " + quote + "; iconUrl = " + iconUrl + "; lastOrderDate = " + lastOrderDate;
+                + photoUrl + "; location = " + location + "; locationDisplay = " + locationDisplay + "; quote = " + quote + "; iconUrl = " + iconUrl + "; lastOrderDate = " + lastOrderDate;
     }
 }

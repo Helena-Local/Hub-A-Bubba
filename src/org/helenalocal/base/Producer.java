@@ -22,6 +22,7 @@ public class Producer {
     private String iconUrl = "";
     private String serviceLevel = "";
     private String location = "";
+    private String locationDisplay = "";
     private List<Certification> certifications = new ArrayList<Certification>();
     private String quote = "";
     private Integer orderCnt = 0;
@@ -39,6 +40,14 @@ public class Producer {
         this.certifications = certifications;
         this.quote = quote;
         this.iconUrl = iconUrl;
+    }
+
+    public String getLocationDisplay() {
+        return locationDisplay;
+    }
+
+    public void setLocationDisplay(String locationDisplay) {
+        this.locationDisplay = locationDisplay;
     }
 
     public Integer getOrderCnt() {
@@ -146,7 +155,7 @@ public class Producer {
 
         return "producer.PID = " + this.PID + "; producer.name = " + this.name + "; producer.contactEmail = " +
                 this.contactEmail + "; producer.websiteUrl = " + this.websiteUrl + "; producer.photoUrl = " +
-                this.photoUrl + "; producer.location = " + this.location + "; quote = " + quote + "; iconUrl = " + iconUrl + "; serviceLevel = " + serviceLevel;
+                this.photoUrl + "; producer.location = " + this.location + "; producer.locationDisplay = " + this.locationDisplay + "; quote = " + quote + "; iconUrl = " + iconUrl + "; serviceLevel = " + serviceLevel;
 
     }
 
@@ -156,6 +165,6 @@ public class Producer {
 
     public String toCSV() {
         return this.PID + "," + this.name + "," + this.contactEmail + "," + this.websiteUrl + "," +
-                this.photoUrl + "," + this.location + "," + TextUtils.join(",", certifications) + "," + quote;
+                this.photoUrl + "," + this.location + "," + this.locationDisplay + "," + TextUtils.join(",", certifications) + "," + quote;
     }
 }

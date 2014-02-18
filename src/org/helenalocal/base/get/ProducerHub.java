@@ -98,6 +98,12 @@ public class ProducerHub extends Hub implements Runnable {
                     }
                 }
                 if (iterator.hasNext()) {
+                    String locationDisplay = iterator.next();
+                    if (!locationDisplay.equals("")) {
+                        producer.setLocationDisplay(locationDisplay);
+                    }
+                }
+                if (iterator.hasNext()) {
                     String serviceLevel = iterator.next();
                     if (!serviceLevel.equals("")) {
                         producer.setServiceLevel(serviceLevel);
