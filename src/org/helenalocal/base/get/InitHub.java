@@ -11,6 +11,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
 
@@ -27,10 +29,15 @@ public class InitHub extends Hub implements Runnable {
     private static Context context;
     private static Calendar lastRefreshTS;
     private String fileName = "HL-InitHub.csv";
+    private int connectionTimeOutSec = 5;
+    private int socketTimeoutSec = 5;
 
 
     public InitHub(Context context) {
         this.context = context;
+        final HttpParams httpParameters = new DefaultHttpClient().getParams();
+        HttpConnectionParams.setConnectionTimeout(httpParameters, connectionTimeOutSec * 1000);
+        HttpConnectionParams.setSoTimeout(httpParameters, socketTimeoutSec * 1000);
     }
 
     private void parseCSV(InputStream inputStream) throws IOException {
