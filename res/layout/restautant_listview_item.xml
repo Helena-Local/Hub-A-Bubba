@@ -6,68 +6,29 @@
 
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:paddingTop="10dp"
-              android:paddingBottom="10dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
+              android:paddingTop="@dimen/default_list_item_padding_top"
+              android:paddingBottom="@dimen/default_list_item_padding_bottom"
+              android:paddingLeft="@dimen/default_list_item_padding_left"
+              android:paddingRight="@dimen/default_list_item_padding_right"
               android:clickable="false">
-    <!--android:background="@drawable/border"-->
 
     <ImageView
+            style="@style/default_list_item_imageview"
             android:id="@+id/restaurantImageView"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/default_restaurant"
-            android:layout_marginRight="15dp"
-            android:layout_centerVertical="true"/>
+            android:src="@drawable/default_restaurant"/>
 
     <TextView
+            style="@style/list_item_text_primary"
             android:id="@+id/restaurantNameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Chino Bandito"
-            android:layout_toRightOf="@+id/restaurantImageView"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="?android:textColorPrimary"/>
+            android:layout_toRightOf="@+id/restaurantImageView"/>
 
     <TextView
+            style="@style/list_item_text_secondary"
             android:id="@+id/cityTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/restaurantImageView"
             android:layout_below="@+id/restaurantNameTextView"
-            android:textColor="?android:textColorSecondaryInverse"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Phoenix, AZ"/>
+            android:text="Mizpah, MT"/>
 </RelativeLayout>
-
-
-        <!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-             <!--android:layout_width="match_parent"-->
-             <!--android:layout_height="wrap_content"-->
-             <!--android:paddingLeft="@dimen/card_list_item_padding_left"-->
-             <!--android:paddingRight="@dimen/card_list_item_padding_right"-->
-             <!--android:descendantFocusability="beforeDescendants">-->
-
-    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-                  <!--android:orientation="vertical"-->
-                  <!--android:layout_width="match_parent"-->
-                  <!--android:layout_height="match_parent"-->
-                  <!--android:paddingTop="@dimen/default_list_item_padding_top"-->
-                  <!--android:paddingBottom="@dimen/default_list_item_padding_bottom"-->
-                  <!--android:paddingLeft="@dimen/default_list_item_padding_left"-->
-                  <!--android:paddingRight="@dimen/default_list_item_padding_right"-->
-                  <!--android:background="@drawable/selector_card_background">-->
-
-    <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-                <!--android:text="Medium Text"-->
-                <!--android:id="@+id/restaurantNameTextView"/>-->
-    <!--</LinearLayout>-->
-
-<!--</FrameLayout>-->

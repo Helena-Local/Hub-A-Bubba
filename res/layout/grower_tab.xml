@@ -10,14 +10,16 @@
               android:layout_height="match_parent">
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/grower_tab_welcome"
-            android:id="@+id/textView" android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/tab_welcome_text_margin"/>
+            style="@style/activity_welcome_text"
+            android:id="@+id/textView"
+            android:text="@string/grower_welcome"/>
 
     <ListView android:id="@+id/growerListView"
-              style="@style/cardListView"/>
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginTop="@dimen/list_view_margin_top"
+              android:layout_marginBottom="@dimen/list_view_margin_bottom"
+              android:layout_marginLeft="@dimen/list_view_margin_left"
+              android:layout_marginRight="@dimen/list_view_margin_right"/>
 
 </LinearLayout>

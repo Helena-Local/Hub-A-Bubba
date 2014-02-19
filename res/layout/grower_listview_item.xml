@@ -4,29 +4,31 @@
 ~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
 -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:paddingLeft="@dimen/card_list_item_padding_left"
-             android:paddingRight="@dimen/card_list_item_padding_right"
-             android:descendantFocusability="beforeDescendants">
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:paddingTop="@dimen/default_list_item_padding_top"
-                  android:paddingBottom="@dimen/default_list_item_padding_bottom"
-                  android:paddingLeft="@dimen/default_list_item_padding_left"
-                  android:paddingRight="@dimen/default_list_item_padding_right"
-                  android:background="@drawable/selector_card_background">
-
-        <TextView
-                android:layout_width="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/growerNameTextView"
-                android:text="Grower Name Goes Here"/>
-    </LinearLayout>
+                android:paddingTop="@dimen/default_list_item_padding_top"
+                android:paddingBottom="@dimen/default_list_item_padding_bottom"
+                android:paddingLeft="@dimen/default_list_item_padding_left"
+                android:paddingRight="@dimen/default_list_item_padding_right"
+                android:clickable="false">
 
-</FrameLayout>
+    <ImageView
+            style="@style/default_list_item_imageview"
+            android:id="@+id/producerImageView"
+            android:src="@drawable/default_producer"/>
+
+    <TextView
+            style="@style/list_item_text_primary"
+            android:id="@+id/producerNameTextView"
+            android:layout_toRightOf="@id/producerImageView"
+            android:text="Farm-to-Table"/>
+
+    <TextView
+            style="@style/list_item_text_secondary"
+            android:id="@+id/cityTextView"
+            android:layout_toRightOf="@+id/producerImageView"
+            android:layout_below="@+id/producerNameTextView"
+            android:text="Knife River, MT"/>
+
+</RelativeLayout>

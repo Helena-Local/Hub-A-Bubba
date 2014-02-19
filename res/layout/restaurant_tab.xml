@@ -4,42 +4,21 @@
 ~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
 -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
-             <!--android:background="#dcdcdc"-->
-        <!--android:padding="5dp">-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  >
-        <!--android:background="@drawable/card_background"-->
-        <!--android:background="#dcdcdc"-->
+    <TextView style="@style/activity_welcome_text"
+              android:id="@+id/textView"
+              android:text="@string/restaurant_welcome"/>
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/restaurant_tab_welcome"
-                android:id="@+id/textView"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:gravity="center_horizontal"/>
+    <ListView android:id="@+id/restaurantListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/list_view_margin_top"
+            android:layout_marginBottom="@dimen/list_view_margin_bottom"
+            android:layout_marginLeft="@dimen/list_view_margin_left"
+            android:layout_marginRight="@dimen/list_view_margin_right"/>
 
-        <ListView android:id="@+id/restaurantListView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"/>
-
-        <!--android:divider="#4fa5d5"-->
-        <!--android:dividerHeight="1dp"-->
-        <!--android:divider="@null"-->
-        <!--android:dividerHeight="0dp"-->
-        <!--android:listSelector="@android:color/transparent"-->
-        <!--android:cacheColorHint="@android:color/transparent"-->
-
-    </LinearLayout>
-
-</FrameLayout>
+</LinearLayout>

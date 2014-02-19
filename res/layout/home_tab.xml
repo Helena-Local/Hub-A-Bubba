@@ -10,14 +10,9 @@
               android:layout_height="match_parent">
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/home_tab_welcome"
+            style="@style/activity_welcome_text"
             android:id="@+id/textView"
-            android:typeface="serif"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/tab_welcome_text_margin"/>
+            android:text="@string/home_tab_welcome"/>
 
     <Button
             android:layout_width="wrap_content"

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
@@ -25,24 +26,30 @@ public class GrowerListAdapter extends ArrayAdapter<Producer> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Producer p = getItem(position);
+        Producer producer = getItem(position);
 
-        LinearLayout growerView;
+        LinearLayout view;
 
         if (convertView != null) {
-            growerView = (LinearLayout)convertView;
+            view = (LinearLayout)convertView;
         }
         else {
-            growerView = new LinearLayout(getContext());
+            view = new LinearLayout(getContext());
             LayoutInflater li = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            li.inflate(_resourceId, growerView, true);
+            li.inflate(_resourceId, view, true);
         }
 
-        TextView growerName = (TextView)growerView.findViewById(R.id.growerNameTextView);
-        growerName.setText(p.getName());
+        ImageView imageView = (ImageView)view.findViewById(R.id.producerImageView);
+        imageView.setImageBitmap(null);
+        new AsyncImageLoader(imageView, R.drawable.default_producer).execute(producer.getIconUrl());
 
+        TextView textView = (TextView)view.findViewById(R.id.producerNameTextView);
+        textView.setText(producer.getName());
 
-        return growerView;
+        textView = (TextView)view.findViewById(R.id.cityTextView);
+        textView.setText(producer.getLocationDisplay());
+
+        return view;
     }
 
 }

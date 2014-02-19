@@ -46,7 +46,7 @@ public class RestaurantItemAdapter extends ArrayAdapter<Buyer> {
 
         ImageView imageView = (ImageView)view.findViewById(R.id.restaurantImageView);
         imageView.setImageBitmap(null);
-        new AsyncImageLoader(imageView, R.drawable.default_restaurant).execute(buyer.getPhotoUrl());
+        new AsyncImageLoader(imageView, R.drawable.default_restaurant).execute(buyer.getIconUrl());
 
         TextView textView = (TextView)view.findViewById(R.id.restaurantNameTextView);
         textView.setText(buyer.getName());
