@@ -48,8 +48,8 @@ public class RestaurantDetailActivity extends Activity {
 
 
         // load image
-        ImageView iv = (ImageView)findViewById(R.id.restaurantImageView);
-        new ImageAsyncTask(iv).execute(_buyer.getPhotoUrl());
+        ImageView imageView = (ImageView)findViewById(R.id.restaurantImageView);
+        new AsyncImageLoader(imageView, R.drawable.default_restaurant).execute(_buyer.getIconUrl());
 
         // restaurant name
         TextView tv = (TextView) findViewById(R.id.nameTextView);
@@ -85,7 +85,7 @@ public class RestaurantDetailActivity extends Activity {
             relativeLayout.setTag(cert);
 
             ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
-            new ImageAsyncTask(imageView).execute(cert.getIconUrl());
+            new AsyncImageLoader(imageView, R.drawable.default_certification).execute(cert.getIconUrl());
 
             TextView textView = (TextView)relativeLayout.findViewById(R.id.textView);
             textView.setText(cert.getDisplayName());
@@ -123,7 +123,7 @@ public class RestaurantDetailActivity extends Activity {
             relativeLayout.setTag(producer);
 
             ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
-            new ImageAsyncTask(imageView).execute(producer.getIconUrl());
+            new AsyncImageLoader(imageView, R.drawable.default_producer).execute(producer.getIconUrl());
 
             TextView textView = (TextView) relativeLayout.findViewById(R.id.productNameTextView);
             textView.setText(item.getProductDesc());
@@ -188,44 +188,6 @@ public class RestaurantDetailActivity extends Activity {
             Intent intent = new Intent(RestaurantDetailActivity.this, GrowerDetailActivity.class);
             intent.putExtra(GrowerDetailActivity.EXTRA_PRODUCER_ID, producer.getPID());
             startActivity(intent);
-        }
-    }
-
-    private class ImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
-
-        private ImageView _imageView;
-
-        public ImageAsyncTask(ImageView view) {
-            _imageView = view;
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            String url = params[0];
-            Bitmap bm = null;
-
-            try {
-                InputStream stream = new URL(url).openStream();
-                bm = BitmapFactory.decodeStream(stream);
-                stream.close();
-            } catch (Exception e) {
-
-            }
-
-            return bm;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            if (bitmap != null) {
-                _imageView.setImageBitmap(bitmap);
-            }
-            else {
-                // set the default image
-                // todo - get default images for certs and producer and pass their resource id in
-                _imageView.setImageResource(R.drawable.default_restaurant);
-            }
         }
     }
 }

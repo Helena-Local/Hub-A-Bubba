@@ -18,8 +18,8 @@
                   android:paddingLeft="@dimen/card_layout_padding_left"
                   android:paddingRight="@dimen/card_layout_padding_right"
                   android:paddingTop="@dimen/card_layout_padding_top"
-                  android:background="#dcdcdc"
-                  android:paddingBottom="@dimen/card_layout_padding_bottom">
+                  android:paddingBottom="@dimen/card_layout_padding_bottom"
+                  android:background="#dcdcdc">
 
         <RelativeLayout
                       android:orientation="vertical"

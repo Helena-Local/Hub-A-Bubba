@@ -22,13 +22,13 @@
             style="@style/list_item_text_primary"
             android:id="@+id/producerNameTextView"
             android:layout_toRightOf="@id/producerImageView"
-            android:text="Farm-to-Table"/>
+            android:text="Schnepf Farms"/>
 
     <TextView
             style="@style/list_item_text_secondary"
             android:id="@+id/cityTextView"
             android:layout_toRightOf="@+id/producerImageView"
             android:layout_below="@+id/producerNameTextView"
-            android:text="Knife River, MT"/>
+            android:text="Queen Creek, AZ"/>
 
 </RelativeLayout>
