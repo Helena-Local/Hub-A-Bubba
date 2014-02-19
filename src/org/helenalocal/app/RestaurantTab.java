@@ -19,6 +19,8 @@ import org.helenalocal.base.HubInit;
 import org.helenalocal.base.get.BuyerHub;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class RestaurantTab extends TabBase implements AdapterView.OnItemClickListener {
@@ -62,17 +64,53 @@ public class RestaurantTab extends TabBase implements AdapterView.OnItemClickLis
 
         _restaurantList.clear();
 
-        // add buyer who are at serviceLevel = 2 (premium) or (serviceLevel > 0 and have at least one order)!
+        // add buyers
+        ArrayList<Buyer> premiumWithOrdersList = new ArrayList<Buyer>();
+        ArrayList<Buyer> justOrdersList = new ArrayList<Buyer>();
+        ArrayList<Buyer> premiumNoOrdersList = new ArrayList<Buyer>();
+
         ArrayList<Buyer> buyerArrayList = new ArrayList<Buyer>(Hub.buyerMap.values());
         for (int j = 0; j < buyerArrayList.size(); j++) {
             Buyer buyer = buyerArrayList.get(j);
+            // now set the producer order count
+            buyer.setOrderCnt(BuyerHub.getOrderItemCnt(buyer.getBID()));
+
             int serviceLevel = Integer.valueOf(buyer.getServiceLevel().trim());
-            int orderCnt = BuyerHub.getOrderItemCnt(buyer.getBID());
-            if ((serviceLevel == 2) || (serviceLevel > 0 && orderCnt > 0)) {
-                Log.w(LogTag, "buyer.getName() = " + buyer.getName() + "; serviceLevel = " + serviceLevel + "; orderCnt = " + orderCnt);
-                _restaurantList.add(buyer);
+            // Service Level (0-off, 1-on, 2-premium)
+            if ((serviceLevel == 2) && (buyer.getOrderCnt() > 0)) {
+                premiumWithOrdersList.add(buyer);
+            } else if ((serviceLevel != 0) && buyer.getOrderCnt() > 0) {
+                justOrdersList.add(buyer);
+            } else if (serviceLevel == 2) {
+                premiumNoOrdersList.add(buyer);
             }
+            Log.w(LogTag, "buyer.getName() = " + buyer.getName() + "; serviceLevel = " + serviceLevel + "; orderCnt = " + buyer.getOrderCnt());
         }
+        // sort
+        Collections.sort(premiumWithOrdersList, new Comparator<Buyer>() {
+            public int compare(Buyer o1, Buyer o2) {
+                return o2.getOrderCnt().compareTo(o1.getOrderCnt());
+            }
+        });
+
+        // sort
+        Collections.sort(justOrdersList, new Comparator<Buyer>() {
+            public int compare(Buyer o1, Buyer o2) {
+                return o2.getOrderCnt().compareTo(o1.getOrderCnt());
+            }
+        });
+
+        // sort
+        Collections.sort(premiumNoOrdersList, new Comparator<Buyer>() {
+            public int compare(Buyer o1, Buyer o2) {
+                return o2.getOrderCnt().compareTo(o1.getOrderCnt());
+            }
+        });
+
+        // add them to display
+        _restaurantList.addAll(premiumWithOrdersList);
+        _restaurantList.addAll(justOrdersList);
+        _restaurantList.addAll(premiumNoOrdersList);
         _arrayAdapter.notifyDataSetChanged();
     }
 

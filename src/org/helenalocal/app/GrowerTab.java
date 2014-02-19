@@ -94,7 +94,7 @@ public class GrowerTab extends TabBase {
             }
             Log.w(Tag, "producer.getName() = " + producer.getName() + "; serviceLevel = " + serviceLevel + "; orderCnt = " + producer.getOrderCnt());
         }
-        // sort by key and add
+        // sort
         Collections.sort(localList, new Comparator<Producer>() {
             public int compare(Producer o1, Producer o2) {
                 return o2.getOrderCnt().compareTo(o1.getOrderCnt());

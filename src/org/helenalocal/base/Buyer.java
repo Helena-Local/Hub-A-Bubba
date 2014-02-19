@@ -24,6 +24,7 @@ public class Buyer {
     private List<Certification> certifications = new ArrayList<Certification>();
     private String quote = "";
     private String iconUrl = "";
+    private Integer orderCnt = 0;
     private String lastOrderDate = "";
 
     public Buyer() {
@@ -43,6 +44,14 @@ public class Buyer {
         this.quote = quote;
         this.iconUrl = iconUrl;
         this.lastOrderDate = lastOrderDate;
+    }
+
+    public Integer getOrderCnt() {
+        return orderCnt;
+    }
+
+    public void setOrderCnt(Integer orderCnt) {
+        this.orderCnt = orderCnt;
     }
 
     public String getLocationDisplay() {
