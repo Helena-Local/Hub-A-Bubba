@@ -32,6 +32,8 @@ import java.util.List;
 
 public class RestaurantDetailActivity extends Activity {
 
+    public static final String EXTRA_BUYER_ID = "org.helenalocal.extra.buyer_id";
+
     private static final String LogTag = "RestaurantDetailActivity";
 
     private Buyer _buyer;
@@ -41,7 +43,7 @@ public class RestaurantDetailActivity extends Activity {
 
         setContentView(R.layout.restaurant_detail_activity);
 
-        String buyerId = getIntent().getStringExtra(RestaurantTab.BUYER_ID_KEY);
+        String buyerId = getIntent().getStringExtra(EXTRA_BUYER_ID);
         _buyer = Hub.buyerMap.get(buyerId);
 
 

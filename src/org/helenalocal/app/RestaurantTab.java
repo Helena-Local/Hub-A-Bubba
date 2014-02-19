@@ -25,8 +25,6 @@ import java.util.List;
 
 public class RestaurantTab extends TabBase implements AdapterView.OnItemClickListener {
 
-    public static final String BUYER_ID_KEY = "buyerIdKey";
-
     private static final String LogTag = "RestaurantTab";
 
     private List<Buyer> _restaurantList;
@@ -124,7 +122,7 @@ public class RestaurantTab extends TabBase implements AdapterView.OnItemClickLis
         Buyer buyer = (Buyer) listView.getItemAtPosition(position);
 
         Intent i = new Intent(getActivity(), RestaurantDetailActivity.class);
-        i.putExtra(BUYER_ID_KEY, buyer.getBID());
+        i.putExtra(RestaurantDetailActivity.EXTRA_BUYER_ID, buyer.getBID());
         startActivity(i);
     }
 }
