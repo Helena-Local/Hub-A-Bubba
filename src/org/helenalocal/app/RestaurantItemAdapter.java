@@ -31,28 +31,30 @@ public class RestaurantItemAdapter extends ArrayAdapter<Buyer> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Buyer restaurant = getItem(position);
+        Buyer buyer = getItem(position);
 
-        LinearLayout restaurantView;
+        LinearLayout view;
 
         if (convertView != null) {
-            restaurantView = (LinearLayout)convertView;
+            view = (LinearLayout)convertView;
         }
         else {
-            restaurantView = new LinearLayout(getContext());
+            view = new LinearLayout(getContext());
             LayoutInflater li = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            li.inflate(_resource, restaurantView, true);
+            li.inflate(_resource, view, true);
         }
 
-        ImageView imageView = (ImageView)restaurantView.findViewById(R.id.restaurantImageView);
+        ImageView imageView = (ImageView)view.findViewById(R.id.restaurantImageView);
         imageView.setImageBitmap(null);
-        new AsyncImageLoader(imageView, R.drawable.default_restaurant).execute(restaurant.getPhotoUrl());
+        new AsyncImageLoader(imageView, R.drawable.default_restaurant).execute(buyer.getPhotoUrl());
 
-        TextView name = (TextView)restaurantView.findViewById(R.id.restaurantNameTextView);
-        name.setText(restaurant.getName());
+        TextView textView = (TextView)view.findViewById(R.id.restaurantNameTextView);
+        textView.setText(buyer.getName());
 
+        textView = (TextView)view.findViewById(R.id.cityTextView);
+        textView.setText(buyer.getLocationDisplay());
 
-        return restaurantView;
+        return view;
     }
 
 }
