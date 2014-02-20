@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
--->
+  ~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+  -->
 
 <resources>
     <string name="app_name">Helena Local Hub</string>
@@ -14,14 +14,16 @@
     <string name="product_tab_welcome">Below you will find our most recent local sustainable item availability. Call us now to order at 406.219.1414 or visit HelenaLocal.org to buy CSA Shares</string>
     <string name="restaurant_tab_text">Restaurants</string>
     <string name="restaurant_welcome">All these restaurants buy local sustainable food from Helena Local.</string>
-    <string name="grower_tab_text">Grower</string>
-    <string name="grower_welcome">Welcome to our grower list. All these producers have been vetted for sustainability by Helena Local.</string>
+    <string name="grower_tab_text">Producers</string>
+    <string name="grower_welcome">Welcome to our producer list. All these producers have been vetted for sustainability
+        by Helena Local.
+    </string>
     <string name="grower_detail_welcome">Welcome to Acme Farms</string>
     <string name="restaurant_call_action">Call</string>
     <string name="restaurant_map_action">Map</string>
     <string name="restaurant_website_action">Website</string>
     <string name="restaurant_detail_awards">Sustainability and Awards</string>
-    <string name="restaurant_detail_products">Local Grower Purchases</string>
+    <string name="restaurant_detail_products">Clickable Grower Purchases</string>
     <string name="product_purchase_date">Purchased on %s</string>
     <string name="producer_email_action">Email</string>
     <string name="producer_map_action">Map</string>
