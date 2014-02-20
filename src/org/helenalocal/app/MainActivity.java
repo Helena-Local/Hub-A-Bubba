@@ -14,9 +14,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.widget.Button;
-import android.widget.ImageSwitcher;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.app.service.HubInitService;
 import org.helenalocal.app.test.AsyncTesterTask;
@@ -84,26 +81,6 @@ public class MainActivity extends ActionBarActivity {
         Log.w(Tag, "stopHubThreads exec.getQueue().size() = " + exec.getQueue().size());
     }
 
-    //***********************
-    // Example from here:
-    // http://android-er.blogspot.com/2013/11/android-example-imageswitcher.html
-    //***********************
-
-    Button buttonNext;
-    ImageSwitcher imageSwitcher;
-
-    Animation slide_in_left, slide_out_right;
-
-    int imageResources[] = {
-            android.R.drawable.ic_dialog_alert,
-            android.R.drawable.ic_dialog_dialer,
-            android.R.drawable.ic_dialog_email,
-            android.R.drawable.ic_dialog_info,
-            android.R.drawable.ic_dialog_map};
-
-    int curIndex;
-    //*********** End ************
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -123,57 +100,6 @@ public class MainActivity extends ActionBarActivity {
         }
 
         startInitialize();
-
-        //***********************
-        // Example from here:
-        // http://android-er.blogspot.com/2013/11/android-example-imageswitcher.html
-        //***********************
-        buttonNext = (Button) findViewById(R.id.nextButton);
-        imageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher);
-
-        /*
-        slide_in_left = AnimationUtils.loadAnimation(this,
-                android.R.anim.slide_in_left);
-        slide_out_right = AnimationUtils.loadAnimation(this,
-                android.R.anim.slide_out_right);
-
-        imageSwitcher.setInAnimation(slide_in_left);
-        imageSwitcher.setOutAnimation(slide_out_right);
-
-        imageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
-
-            @Override
-            public View makeView() {
-
-                ImageView imageView = new ImageView(MainActivity.this);
-                imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-
-                ViewGroup.LayoutParams params = new ImageSwitcher.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-
-                imageView.setLayoutParams(params);
-                return imageView;
-
-            }
-        });
-
-        curIndex = 0;
-        imageSwitcher.setImageResource(imageResources[curIndex]);
-
-        buttonNext.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                if (curIndex == imageResources.length - 1) {
-                    curIndex = 0;
-                    imageSwitcher.setImageResource(imageResources[curIndex]);
-                } else {
-                    imageSwitcher.setImageResource(imageResources[++curIndex]);
-                }
-            }
-        });
-        */
-        //****** End *****************
         ViewServer.get(this).addWindow(this);
     }
 
@@ -255,5 +181,5 @@ public class MainActivity extends ActionBarActivity {
     public void onClick(View view) {
         AsyncTesterTask asyncTesterTask = new AsyncTesterTask(this);
         asyncTesterTask.execute(null);
-   }
+    }
 }

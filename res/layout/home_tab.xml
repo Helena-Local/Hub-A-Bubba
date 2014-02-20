@@ -7,7 +7,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent" android:weightSum="1">
 
     <TextView
             style="@style/activity_welcome_text"
@@ -21,13 +21,9 @@
             android:id="@+id/button"
             android:onClick="onClick"
             android:layout_gravity="center_horizontal"/>
-    <ImageSwitcher
-            android:layout_width="fill_parent"
-            android:layout_height="113dp"
-            android:id="@+id/imageSwitcher" android:layout_gravity="center_horizontal"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="next"
-            android:id="@+id/nextButton" android:layout_gravity="center_horizontal"/>
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:id="@+id/adImageView" android:src="@drawable/default_ad"
+            android:layout_weight="0.03"/>
 </LinearLayout>
