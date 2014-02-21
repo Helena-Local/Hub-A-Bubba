@@ -9,22 +9,17 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent" android:weightSum="1">
 
-    <TextView
-            style="@style/activity_welcome_text"
-            android:id="@+id/textView"
-            android:text="@string/home_tab_welcome"/>
-
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tester"
-            android:id="@+id/button"
-            android:onClick="onClick"
-            android:layout_gravity="center_horizontal"/>
     <ImageView
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:id="@+id/adImageView"
             android:src="@drawable/default_ad"
             android:layout_weight="0.03"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tester"
+            android:id="@+id/button"
+            android:onClick="onClick"
+            android:layout_gravity="right"/>
 </LinearLayout>
