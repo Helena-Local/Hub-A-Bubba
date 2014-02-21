@@ -17,6 +17,7 @@ import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
 import org.helenalocal.base.Producer;
 import org.helenalocal.base.get.ProducerHub;
+import org.helenalocal.utils.ImageCache;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,8 +45,9 @@ public class GrowerTab extends TabBase {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        ImageCache cache = ((HubApplication)getActivity().getApplication()).getImageCache();
         _growerList = new ArrayList<Producer>();
-        _arrayAdapter = new GrowerListAdapter(getActivity(), R.layout.grower_listview_item, _growerList);
+        _arrayAdapter = new GrowerListAdapter(getActivity(), R.layout.grower_listview_item, _growerList, cache);
 
         ListView listView = (ListView) getActivity().findViewById(R.id.growerListView);
         listView.setAdapter(_arrayAdapter);

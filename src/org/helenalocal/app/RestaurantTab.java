@@ -17,6 +17,7 @@ import org.helenalocal.base.Buyer;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
 import org.helenalocal.base.get.BuyerHub;
+import org.helenalocal.utils.ImageCache;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,8 +47,9 @@ public class RestaurantTab extends TabBase implements AdapterView.OnItemClickLis
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        ImageCache cache = ((HubApplication)getActivity().getApplication()).getImageCache();
         _restaurantList = new ArrayList<Buyer>();
-        _arrayAdapter = new RestaurantItemAdapter(getActivity(), R.layout.restautant_listview_item, _restaurantList);
+        _arrayAdapter = new RestaurantItemAdapter(getActivity(), R.layout.restautant_listview_item, _restaurantList, cache);
 
         ListView listView = (ListView) getActivity().findViewById(R.id.restaurantListView);
         listView.setAdapter(_arrayAdapter);

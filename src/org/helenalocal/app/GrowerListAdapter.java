@@ -10,16 +10,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Producer;
+import org.helenalocal.utils.ImageCache;
 
 import java.util.List;
 
 public class GrowerListAdapter extends ArrayAdapter<Producer> {
     private static String logTag = "GrowerListAdapter";
     private int _resourceId;
+    private ImageCache _imageCache;
 
-    public GrowerListAdapter(Context context, int resource, List<Producer> items) {
+    public GrowerListAdapter(Context context, int resource, List<Producer> items, ImageCache imageCache) {
         super(context, resource, items);
         _resourceId = resource;
+        _imageCache = imageCache;
     }
 
 
@@ -41,7 +44,7 @@ public class GrowerListAdapter extends ArrayAdapter<Producer> {
 
         ImageView imageView = (ImageView)view.findViewById(R.id.producerImageView);
         imageView.setImageBitmap(null);
-        new AsyncImageLoader(imageView, R.drawable.default_producer).execute(producer.getIconUrl());
+        _imageCache.loadImage(imageView, producer.getIconUrl(), R.drawable.default_producer);
 
         TextView textView = (TextView)view.findViewById(R.id.producerNameTextView);
         textView.setText(producer.getName());

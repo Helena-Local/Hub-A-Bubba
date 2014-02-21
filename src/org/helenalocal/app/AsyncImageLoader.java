@@ -8,19 +8,30 @@ package org.helenalocal.app;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ImageView;
+import org.helenalocal.utils.ImageCache;
 
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.net.URL;
 
 public class AsyncImageLoader extends AsyncTask<String, Void, Bitmap> {
 
-    private ImageView _imageView;
+    private static final String LogTag = "AsyncImageLoader";
+    private final WeakReference<ImageView> _imageViewReference;
+    private ImageCache _imageCache;
     private int _defaultImageId;
+    private boolean _isLoaded = false;
 
-    public AsyncImageLoader(ImageView view, int defaultImageId) {
-        _imageView = view;
+    public boolean isLoaded() {
+        return _isLoaded;
+    }
+
+    public AsyncImageLoader(ImageView view, int defaultImageId, ImageCache imageCache) {
+        _imageViewReference = new WeakReference<ImageView>(view);
         _defaultImageId = defaultImageId;
+        _imageCache = imageCache;
     }
 
     @Override
@@ -32,6 +43,10 @@ public class AsyncImageLoader extends AsyncTask<String, Void, Bitmap> {
             InputStream stream = new URL(url).openStream();
             bm = BitmapFactory.decodeStream(stream);
             stream.close();
+
+            _imageCache.addImageToCache(url, bm);
+
+            _isLoaded = true;
         } catch (Exception e) {
 
         }
@@ -42,12 +57,23 @@ public class AsyncImageLoader extends AsyncTask<String, Void, Bitmap> {
     @Override
     protected void onPostExecute(Bitmap bitmap) {
         super.onPostExecute(bitmap);
-        if (bitmap != null) {
-            _imageView.setImageBitmap(bitmap);
+
+        if (isCancelled()) {
+            _isLoaded = false;
         }
         else {
-            // set the default image
-            _imageView.setImageResource(_defaultImageId);
+            if (_imageViewReference.get() != null) {
+
+                ImageView imageView = _imageViewReference.get();
+
+                if (bitmap != null) {
+                    imageView.setImageBitmap(bitmap);
+                }
+                else {
+                    // set the default image
+                    imageView.setImageResource(_defaultImageId);
+                }
+            }
         }
     }
 }

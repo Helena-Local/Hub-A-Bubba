@@ -6,10 +6,7 @@ package org.helenalocal.app;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,9 +18,8 @@ import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.*;
 import org.helenalocal.base.get.OrderHub;
+import org.helenalocal.utils.ImageCache;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -48,8 +44,9 @@ public class RestaurantDetailActivity extends Activity {
 
 
         // load image
+        ImageCache imageCache = ((HubApplication)getApplication()).getImageCache();
         ImageView imageView = (ImageView)findViewById(R.id.restaurantImageView);
-        new AsyncImageLoader(imageView, R.drawable.default_restaurant).execute(_buyer.getIconUrl());
+        imageCache.loadImage(imageView, _buyer.getIconUrl(), R.drawable.default_restaurant);
 
         // restaurant name
         TextView tv = (TextView) findViewById(R.id.nameTextView);
@@ -77,6 +74,7 @@ public class RestaurantDetailActivity extends Activity {
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.certificationLayout);
         linearLayout.removeAllViews();
 
+        ImageCache imageCache = ((HubApplication)getApplication()).getImageCache();
         CertItemClickListener clickListener = new CertItemClickListener();
 
         for (Certification cert : _buyer.getCertifications()) {
@@ -85,7 +83,7 @@ public class RestaurantDetailActivity extends Activity {
             relativeLayout.setTag(cert);
 
             ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
-            new AsyncImageLoader(imageView, R.drawable.default_certification).execute(cert.getIconUrl());
+            imageCache.loadImage(imageView, cert.getIconUrl(), R.drawable.default_certification);
 
             TextView textView = (TextView)relativeLayout.findViewById(R.id.textView);
             textView.setText(cert.getDisplayName());
@@ -113,7 +111,9 @@ public class RestaurantDetailActivity extends Activity {
                 return o2.getDate().compareTo(o1.getDate());
             }
         });
+
         // now display
+        ImageCache imageCache = ((HubApplication)getApplication()).getImageCache();
         for (Order order : buyerOrder) {
             Item item = Hub.itemMap.get(order.getItemID());
             Producer producer = Hub.producerMap.get(order.getProducerID());
@@ -123,7 +123,7 @@ public class RestaurantDetailActivity extends Activity {
             relativeLayout.setTag(producer);
 
             ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
-            new AsyncImageLoader(imageView, R.drawable.default_producer).execute(producer.getIconUrl());
+            imageCache.loadImage(imageView, producer.getIconUrl(), R.drawable.default_producer);
 
             TextView textView = (TextView) relativeLayout.findViewById(R.id.productNameTextView);
             textView.setText(item.getProductDesc());

@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Buyer;
-import org.helenalocal.base.Item;
+import org.helenalocal.utils.ImageCache;
 
 import java.util.List;
 
@@ -22,10 +22,12 @@ public class RestaurantItemAdapter extends ArrayAdapter<Buyer> {
 
     private static String logTag = "RestaurantItemAdapter";
     private int _resource;
+    private ImageCache _imageCache;
 
-    public RestaurantItemAdapter(Context context, int resource, List<Buyer> items) {
+    public RestaurantItemAdapter(Context context, int resource, List<Buyer> items, ImageCache imageCache) {
         super(context, resource, items);
         _resource = resource;
+        _imageCache = imageCache;
     }
 
     @Override
@@ -44,9 +46,9 @@ public class RestaurantItemAdapter extends ArrayAdapter<Buyer> {
             li.inflate(_resource, view, true);
         }
 
+
         ImageView imageView = (ImageView)view.findViewById(R.id.restaurantImageView);
-        imageView.setImageBitmap(null);
-        new AsyncImageLoader(imageView, R.drawable.default_restaurant).execute(buyer.getIconUrl());
+        _imageCache.loadImage(imageView, buyer.getIconUrl(), R.drawable.default_restaurant);
 
         TextView textView = (TextView)view.findViewById(R.id.restaurantNameTextView);
         textView.setText(buyer.getName());
@@ -56,5 +58,4 @@ public class RestaurantItemAdapter extends ArrayAdapter<Buyer> {
 
         return view;
     }
-
 }

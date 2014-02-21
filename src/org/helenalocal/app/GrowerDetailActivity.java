@@ -14,6 +14,7 @@ import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Certification;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.Producer;
+import org.helenalocal.utils.ImageCache;
 
 import java.net.URLEncoder;
 
@@ -33,8 +34,9 @@ public class GrowerDetailActivity extends Activity {
         _producer = Hub.producerMap.get(producerId);
 
         // image
+        ImageCache imageCache = ((HubApplication)getApplication()).getImageCache();
         ImageView imageView = (ImageView)findViewById(R.id.producerImageView);
-        new AsyncImageLoader(imageView, R.drawable.default_producer).execute(_producer.getIconUrl());
+        imageCache.loadImage(imageView, _producer.getIconUrl(), R.drawable.default_producer);
 
         // name
         TextView textView = (TextView) findViewById(R.id.nameTextView);
@@ -68,8 +70,9 @@ public class GrowerDetailActivity extends Activity {
             relativeLayout.setOnClickListener(clickListener);
             relativeLayout.setTag(cert);
 
+            ImageCache imageCache = ((HubApplication)getApplication()).getImageCache();
             ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
-            new AsyncImageLoader(imageView, R.drawable.default_certification).execute(cert.getIconUrl());
+            imageCache.loadImage(imageView, cert.getIconUrl(), R.drawable.default_certification);
 
             TextView textView = (TextView)relativeLayout.findViewById(R.id.textView);
             textView.setText(cert.getDisplayName());
@@ -79,6 +82,7 @@ public class GrowerDetailActivity extends Activity {
     }
 
     public void onClickEmail(View view) {
+        // todo - fire off an email
 //        Intent intent = new Intent(Intent.ACTION_DIAL);
 //        intent.setData(Uri.parse("tel:" + _buyer.getPhone()));
 //        startActivity(intent);
