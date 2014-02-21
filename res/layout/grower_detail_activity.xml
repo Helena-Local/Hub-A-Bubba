@@ -135,12 +135,20 @@
             android:layout_height="fill_parent"
             android:layout_marginTop="@dimen/detail_activity_content_margin_top"
             android:padding="@dimen/detail_activity_content_padding"
-            android:background="@drawable/card_background">
+            android:background="@drawable/card_background"
+            android:weightSum="1">
 
         <TextView
                 android:id="@+id/quoteTextView"
                 style="@style/detailActivityQuote"
                 android:text='"I found the cure for hope"'/>
+
+        <ImageView
+                android:layout_width="240dp"
+                android:layout_height="150dp"
+                android:id="@+id/photoImageView"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="15dp"/>
 
         <TextView
                 android:id="@+id/certTextView"

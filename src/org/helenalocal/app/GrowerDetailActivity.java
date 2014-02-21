@@ -6,6 +6,7 @@ package org.helenalocal.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -59,6 +60,15 @@ public class GrowerDetailActivity extends Activity {
         }
         else {
             textView.setVisibility(View.GONE);
+        }
+
+        // photo
+        imageView = (ImageView)findViewById(R.id.photoImageView);
+        if (_producer.getPhotoUrl().isEmpty() == true) {
+            imageView.setVisibility(View.GONE);
+        }
+        else {
+            imageCache.loadImage(imageView, _producer.getPhotoUrl(), R.drawable.ic_contact_picture);
         }
 
         loadCertifications();
