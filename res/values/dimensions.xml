@@ -4,6 +4,8 @@
   -->
 
 <resources>
+    <dimen name="text_size_extra_small">12sp</dimen>
+
     <dimen name="welcome_text_margin_top">20dp</dimen>
     <dimen name="welcome_text_margin_bottom">10dp</dimen>
     <dimen name="welcome_text_margin_left">10dp</dimen>
@@ -30,5 +32,14 @@
     <dimen name="card_layout_padding_bottom">5dp</dimen>
     <dimen name="card_layout_padding_left">5dp</dimen>
     <dimen name="card_layout_padding_right">5dp</dimen>
+
+    <dimen name="detail_activity_header_padding">10dp</dimen>
+
+    <dimen name="detail_activity_header_image_width">75dp</dimen>
+    <dimen name="detail_activity_header_image_height">75dp</dimen>
+    <dimen name="detail_activity_header_image_margin_right">10dp</dimen>
+
+    <dimen name="detail_activity_content_margin_top">10dp</dimen>
+    <dimen name="detail_activity_content_padding">10dp</dimen>
 
 </resources>

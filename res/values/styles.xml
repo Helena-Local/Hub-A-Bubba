@@ -79,5 +79,30 @@
         <item name="android:textColor">?android:textColorSecondaryInverse</item>
     </style>
 
+    <style name="detailActivityActionItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">-3dp</item>
+        <item name="android:textColor">@color/helena_local_blue</item>
+        <item name="android:background">@android:drawable/list_selector_background</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="detailActivityQuote" parent="android:TextAppearance.Medium">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginBottom">25dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="detailActivitySectionHeader" parent="android:TextAppearance.Small">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">2.5dp</item>
+    </style>
+
 
 </resources>

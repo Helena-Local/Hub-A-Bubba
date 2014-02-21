@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--
+~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
@@ -8,27 +12,23 @@
               android:paddingRight="@dimen/card_layout_padding_right"
               android:paddingTop="@dimen/card_layout_padding_top"
               android:paddingBottom="@dimen/card_layout_padding_bottom"
-              android:background="#dcdcdc">
+              android:background="@color/detail_activity_background">
 
 
     <RelativeLayout
+            android:id="@+id/headerLayout"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
+            android:padding="@dimen/detail_activity_header_padding"
             android:background="@drawable/card_background">
 
         <ImageView
                 android:id="@+id/producerImageView"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:maxHeight="75dp"
-                android:maxWidth="75dp"
+                android:layout_width="@dimen/detail_activity_header_image_width"
+                android:layout_height="@dimen/detail_activity_header_image_height"
                 android:adjustViewBounds="false"
-                android:layout_marginRight="10dp"                />
+                android:layout_marginRight="@dimen/detail_activity_header_image_margin_right"/>
 
         <TextView
                 android:id="@+id/nameTextView"
@@ -48,7 +48,7 @@
                 android:text="24810 South Rittenhouse Road Queen Creek, Arizona 85142"
                 android:layout_below="@+id/nameTextView"
                 android:layout_alignLeft="@+id/nameTextView"
-                android:textSize="12sp"/>
+                android:textSize="@dimen/text_size_extra_small"/>
 
         <LinearLayout
                 android:id="@+id/actionLayout"
@@ -76,13 +76,8 @@
 
                 <TextView
                         android:id="@+id/emailTextView"
-                        style="@style/selectableItem"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/detailActivityActionItem"
                         android:text="@string/producer_email_action"
-                        android:textColor="@color/helena_local_blue"
-                        android:layout_marginLeft="-3dp"
-                        android:clickable="true"
                         android:onClick="onClickEmail"/>
             </LinearLayout>
 
@@ -102,14 +97,8 @@
 
                 <TextView
                         android:id="@+id/mapTextView"
-                        style="@style/selectableItem"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/detailActivityActionItem"
                         android:text="@string/producer_map_action"
-                        android:textColor="@color/helena_local_blue"
-                        android:layout_marginLeft="-3dp"
-                        android:clickable="true"
-                        android:focusable="true"
                         android:onClick="onClickMap"/>
             </LinearLayout>
 
@@ -129,14 +118,8 @@
 
                 <TextView
                         android:id="@+id/urlTextView"
-                        style="@style/selectableItem"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/detailActivityActionItem"
                         android:text="@string/producer_website_action"
-                        android:textColor="@color/helena_local_blue"
-                        android:layout_marginLeft="-3dp"
-                        android:clickable="true"
-                        android:focusable="true"
                         android:onClick="onClickUrl"/>
             </LinearLayout>
 
@@ -146,33 +129,23 @@
 
 
     <LinearLayout
+            android:id="@+id/contentLayout"
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/card_background"
-            android:padding="10dp"
-            >
+            android:layout_marginTop="@dimen/detail_activity_content_margin_top"
+            android:padding="@dimen/detail_activity_content_padding"
+            android:background="@drawable/card_background">
 
         <TextView
                 android:id="@+id/quoteTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text='"I found the cure for hope"'
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="25dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center_horizontal"/>
+                style="@style/detailActivityQuote"
+                android:text='"I found the cure for hope"'/>
 
         <TextView
                 android:id="@+id/certTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/restaurant_detail_awards"
-                android:layout_marginBottom="2.5dp"
-                android:layout_marginTop="5dp"/>
+                style="@style/detailActivitySectionHeader"
+                android:text="@string/restaurant_detail_awards"/>
 
         <View style="@style/horizontalDivider"/>
 
