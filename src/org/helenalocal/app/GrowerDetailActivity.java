@@ -1,9 +1,14 @@
+/*
+ * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+ */
+
 package org.helenalocal.app;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +18,7 @@ import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Certification;
 import org.helenalocal.base.Hub;
+import org.helenalocal.base.HubInit;
 import org.helenalocal.base.Producer;
 
 import java.net.URLEncoder;
@@ -79,9 +85,19 @@ public class GrowerDetailActivity extends Activity {
     }
 
     public void onClickEmail(View view) {
-//        Intent intent = new Intent(Intent.ACTION_DIAL);
-//        intent.setData(Uri.parse("tel:" + _buyer.getPhone()));
-//        startActivity(intent);
+        Log.w(Tag, "onClickEmail()");
+        if (_producer.getContactEmail().contains("@")) {
+            Log.w(Tag, "got an email");
+            Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + _producer.getContactEmail() + "," + HubInit.getHubEmailTo()));
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Hub Request For: " + _producer.getName());
+            emailIntent.putExtra(Intent.EXTRA_TEXT, "<grower love here...>");
+            startActivity(Intent.createChooser(emailIntent, "Send email..."));
+        } else {
+            Log.w(Tag, "got a phone");
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + _producer.getContactEmail()));
+            startActivity(intent);
+        }
     }
 
     public void onClickMap(View view) {
