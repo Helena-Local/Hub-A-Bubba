@@ -24,6 +24,7 @@
     <ImageView
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:id="@+id/adImageView" android:src="@drawable/default_ad"
+            android:id="@+id/adImageView"
+            android:src="@drawable/default_ad"
             android:layout_weight="0.03"/>
 </LinearLayout>
