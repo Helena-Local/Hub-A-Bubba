@@ -15,6 +15,16 @@
             android:text="@string/product_tab_welcome"/>
 
     <ListView android:id="@+id/productListView"
-              style="@style/cardListView"/>
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginTop="@dimen/list_view_margin_top"
+              android:layout_marginBottom="@dimen/list_view_margin_bottom"
+              android:layout_marginLeft="@dimen/list_view_margin_left"
+              android:layout_marginRight="@dimen/list_view_margin_right"
+              android:headerDividersEnabled="false"
+              android:footerDividersEnabled="false"
+              android:divider="@null"
+              android:dividerHeight="0dp"
+              android:cacheColorHint="@android:color/transparent"/>
 
 </LinearLayout>

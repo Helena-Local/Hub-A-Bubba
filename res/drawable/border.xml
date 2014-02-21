@@ -7,21 +7,21 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#4fa5d5" />
+            <solid android:color="@color/helena_local_blue" />
         </shape>
     </item>
-    <item android:left="1dp" android:right="1dp" android:top="1dp" android:bottom="0dp" >
+    <item android:left="0dp" android:right="0dp" android:top="0dp" android:bottom="1dp" >
         <shape android:shape="rectangle">
-            <solid android:color="#ffffff"/>
+            <solid android:color="#f0f0f0"/>
         </shape>
     </item>
 </layer-list>
 
-        <!---->
+
 <!--<shape xmlns:android="http://schemas.android.com/apk/res/android"-->
         <!--android:shape="rectangle">-->
 
-    <!--<solid android:color="#ffffff"/>-->
+    <!--<solid android:color="#dcdcdc"/>-->
     <!--<stroke android:width="1dp" android:color="#4fa5d5"/>-->
 
 <!--</shape>-->

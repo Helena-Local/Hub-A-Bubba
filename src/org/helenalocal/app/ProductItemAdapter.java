@@ -5,50 +5,92 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 import org.helenalocal.base.Item;
 import org.helenalocal.Helena_Local_Hub.R;
 
 import java.util.List;
 
-public class ProductItemAdapter extends ArrayAdapter<Item> {
-    private static String logTag = "ProductItemAdapter";
-    private int _resource;
+public class ProductItemAdapter extends BaseAdapter {
 
-    public ProductItemAdapter(Context context, int resource, List<Item> items) {
-        super(context, resource, items);
-        _resource = resource;
+    private static String logTag = "ProductItemAdapter";
+    private static final int ViewTypeSection = 0;
+    private static final int ViewTypeProduct = 1;
+
+    private List<Object> _itemList;
+    private Context _context;
+
+    public ProductItemAdapter(Context context, List<Object> items) {
+        _context = context;
+        _itemList = items;
     }
 
+    @Override
+    public int getCount() {
+        return _itemList.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return _itemList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return (_itemList.get(position) instanceof String) ? ViewTypeSection : ViewTypeProduct;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        // no items are clickable
+        return false;
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Item p = getItem(position);
+        int viewType = getItemViewType(position);
 
-        LinearLayout productView;
+        View view;
 
         if (convertView != null) {
-            productView = (LinearLayout)convertView;
+            view = convertView;
         }
         else {
-            productView = new LinearLayout(getContext());
-            LayoutInflater li = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            li.inflate(_resource, productView, true);
+            int layoutId = (viewType == ViewTypeSection) ? R.layout.product_listview_section : R.layout.product_listview_item;
+            view = LayoutInflater.from(_context).inflate(layoutId, parent, false);
         }
 
-        TextView productDesc = (TextView)productView.findViewById(R.id.productDesc);
-        TextView unitsAvail = (TextView)productView.findViewById(R.id.unitsAvailable);
-        TextView costPerUnit = (TextView)productView.findViewById(R.id.costPerUnit);
+        TextView textView;
+        if (viewType == ViewTypeSection) {
+            textView = (TextView)view.findViewById(R.id.textView);
+            textView.setText((String)_itemList.get(position));
+        }
+        else {
+            Item item = (Item)_itemList.get(position);
 
-        productDesc.setText(p.getProductDesc());
-        unitsAvail.setText(String.format("%s units available", p.getUnitsAvailable()));
-        costPerUnit.setText(String.format("$%.2f per %s", p.getUnitPrice(), p.getUnitDesc()));
+            textView = (TextView)view.findViewById(R.id.productDesc);
+            textView.setText(item.getProductDesc());
+
+            textView = (TextView)view.findViewById(R.id.unitsAvailable);
+            textView.setText(String.format("%s units available", item.getUnitsAvailable()));
+
+            textView = (TextView)view.findViewById(R.id.costPerUnit);
+            textView.setText(String.format("$%.2f per %s", item.getUnitPrice(), item.getUnitDesc()));
+        }
 
 
 
-        return productView;
+        return view;
     }
 }

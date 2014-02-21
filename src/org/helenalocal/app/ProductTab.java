@@ -6,6 +6,7 @@ package org.helenalocal.app;
 
 import android.os.Bundle;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,7 @@ import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
 import org.helenalocal.base.Item;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,7 +25,7 @@ public class ProductTab extends TabBase {
 
     private static String LogTag = "ProductTab";
 
-    private List<Item> _itemList;
+    private List<Object> _itemList;
     private ProductItemAdapter _arrayAdapter;
 
     @Override
@@ -52,8 +52,8 @@ public class ProductTab extends TabBase {
             }
         });
 
-        _itemList = new ArrayList<Item>();
-        _arrayAdapter = new ProductItemAdapter(getActivity(), R.layout.product_listview_item, _itemList);
+        _itemList = new ArrayList<Object>();
+        _arrayAdapter = new ProductItemAdapter(getActivity(), _itemList);
 
         ListView listView = (ListView) getActivity().findViewById(R.id.productListView);
         listView.addHeaderView(new View(getActivity()));
@@ -65,13 +65,45 @@ public class ProductTab extends TabBase {
     public void onRefresh() {
         super.onRefresh();
 
-        _itemList.clear();
-        // display all for sale to community where qty > 0!
+        // grab all items for sale to community where qty > 0!
+        // Toss them in a TreeMap keyed by category (sorted) with the list of items in the category as the value
+        TreeMap<String, List<Item>> productMap = new TreeMap<String, List<Item>>();
         for (Item item : Hub.itemMap.values()) {
             if (item.getUnitsAvailable() > 0) {
+                List<Item> itemList = productMap.get(item.getCategory());
+                if (itemList == null) {
+                    itemList = new ArrayList<Item>();
+                    productMap.put(item.getCategory(), itemList);
+                }
+
+                itemList.add(item);
+            }
+        }
+
+        // now that we have the data sorted by and organized by category, flatten it out into a list.
+        // NOTE: This list contains both String (category) and Item (product)
+        _itemList.clear();
+        for (Map.Entry<String, List<Item>> entry : productMap.entrySet()) {
+
+            // add the category
+            _itemList.add(entry.getKey());
+
+            // sort the products
+            List<Item> productList = entry.getValue();
+            Collections.sort(productList, new Comparator<Item>() {
+                public int compare(Item i1, Item i2) {
+                    return i1.getProductDesc().compareTo(i2.getProductDesc());
+                }
+            });
+
+
+            // add the products
+            for (Item item : productList) {
+                Log.w(LogTag, item.getProductDesc());
                 _itemList.add(item);
             }
         }
+
         _arrayAdapter.notifyDataSetChanged();
     }
 }
