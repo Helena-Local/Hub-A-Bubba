@@ -92,22 +92,22 @@ public class MemberItemAdapter extends BaseAdapter {
             ImageView imageView = (ImageView)view.findViewById(R.id.imageView);
             _imageCache.loadImage(imageView, item.getProductImageUrl(), R.drawable.default_product);
 
-            View separator = (View)view.findViewById(R.id.separatorView);
-            if (position + 1 == _itemList.size()) {
-                // very last item in list
-                separator.setVisibility(View.INVISIBLE);
-            }
-            else {
-                // last item in a section
-                viewType = getItemViewType(position + 1);
-                if (viewType == ViewTypeSection) {
-                    separator.setVisibility(View.INVISIBLE);
-                }
-                else {
-                    // normal item. Due to recycling make sure the separator is visible
-                    separator.setVisibility(View.VISIBLE);
-                }
-            }
+//            View separator = (View)view.findViewById(R.id.separatorView);
+//            if (position + 1 == _itemList.size()) {
+//                // very last item in list
+//                separator.setVisibility(View.INVISIBLE);
+//            }
+//            else {
+//                // last item in a section
+//                viewType = getItemViewType(position + 1);
+//                if (viewType == ViewTypeSection) {
+//                    separator.setVisibility(View.INVISIBLE);
+//                }
+//                else {
+//                    // normal item. Due to recycling make sure the separator is visible
+//                    separator.setVisibility(View.VISIBLE);
+//                }
+//            }
         }
 
         return view;

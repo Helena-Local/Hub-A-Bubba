@@ -3,7 +3,7 @@
 <resources>
     <color name="helena_local_blue">#1674BA</color>
     <color name="helena_local_green">#8CC540</color>
-    <color name="detail_activity_background">#dcdcdc</color>
+    <color name="detail_activity_background">#e7e7e7</color>
 
     <color name="one">#66FFFFFF</color>
     <color name="two">#FF666666</color>

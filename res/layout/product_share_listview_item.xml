@@ -8,10 +8,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="10dp"
+                android:paddingTop="@dimen/default_list_item_padding_top"
                 android:paddingLeft="@dimen/default_list_item_padding_left"
                 android:paddingRight="@dimen/default_list_item_padding_right"
-        >
+                android:background="@drawable/card_background">
 
     <LinearLayout
             android:orientation="horizontal"
@@ -28,16 +28,18 @@
                 style="@style/list_item_text_primary"
                 android:id="@+id/productDesc"
                 android:text="Durian"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical"
+                android:fontFamily="sans-serif-light"/>
     </LinearLayout>
 
     <LinearLayout
+            android:id="@+id/actionLayout"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/actionLayout"
             android:layout_marginTop="5dp"
-            android:stretchColumns="*">
+            android:stretchColumns="*"
+            android:layout_marginBottom="5dp">
 
         <LinearLayout
                 android:id="@+id/producerActionLayout"
@@ -103,13 +105,13 @@
 
     </LinearLayout>
 
-    <View
-        android:id="@+id/separatorView"
-        style="@style/horizontalDivider"
-        android:layout_alignParentBottom="false"
-        android:layout_below="@+id/actionLayout"
-        android:layout_marginTop="5dp"
-        />
+    <!--<View-->
+        <!--android:id="@+id/separatorView"-->
+        <!--style="@style/horizontalDivider"-->
+        <!--android:layout_alignParentBottom="false"-->
+        <!--android:layout_below="@+id/actionLayout"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--/>-->
 
 </LinearLayout>
 

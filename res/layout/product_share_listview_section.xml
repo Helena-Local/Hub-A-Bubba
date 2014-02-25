@@ -7,18 +7,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content"
+              android:baselineAligned="false">
 
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Medium Text"
+            android:text="Section"
             android:id="@+id/textView"
-            android:textColor="@android:color/darker_gray"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="2.5dp"/>
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="sans-serif-light"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-    <View style="@style/horizontalDivider"/>
+
+    <!--android:textColor="@android:color/darker_gray"-->
+    <!--<View style="@style/horizontalDivider"/>-->
 
 </LinearLayout>
