@@ -5,6 +5,7 @@
 package org.helenalocal.app;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +16,15 @@ import org.helenalocal.base.HubInit;
 import org.helenalocal.base.Item;
 import org.helenalocal.base.Order;
 import org.helenalocal.base.get.OrderHub;
+import org.helenalocal.utils.ImageCache;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class MemberTab extends TabBase {
 
-    private static final String Tag = "MemberTab";
+    private static final String LogTag = "MemberTab";
 
-    private List<Item> _itemList;
+    private List<Object> _itemList;
     private MemberItemAdapter _arrayAdapter;
 
     @Override
@@ -42,8 +43,10 @@ public class MemberTab extends TabBase {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        _itemList = new ArrayList<Item>();
-        _arrayAdapter = new MemberItemAdapter(getActivity(), R.layout.member_product_listview_item, _itemList);
+        ImageCache cache = ((HubApplication)getActivity().getApplication()).getImageCache();
+
+        _itemList = new ArrayList<Object>();
+        _arrayAdapter = new MemberItemAdapter(getActivity(), cache, _itemList);
 
         ListView listView = (ListView)getActivity().findViewById(R.id.memberListView);
         listView.addHeaderView(new View(getActivity()));
@@ -53,11 +56,46 @@ public class MemberTab extends TabBase {
 
     @Override
     protected void onRefresh() {
-        _itemList.clear();
+
         // display all Helena Local bought for CSA!
+        TreeMap<String, List<Item>> productMap = new TreeMap<String, List<Item>>();
         for (Order order : OrderHub.getOrdersForBuyer(HubInit.HELENA_LOCAL_BUYER_ID)) {
-            _itemList.add(Hub.itemMap.get(order.getItemID()));
+            Item item = Hub.itemMap.get(order.getItemID());
+
+            List<Item> itemList = productMap.get(item.getCategory());
+            if (itemList == null) {
+                itemList = new ArrayList<Item>();
+                productMap.put(item.getCategory(), itemList);
+            }
+
+            itemList.add(item);
+
         }
+
+        // now that we have the data sorted by and organized by category, flatten it out into a list.
+        // NOTE: This list contains both String (category) and Item (product)
+        _itemList.clear();
+        for (Map.Entry<String, List<Item>> entry : productMap.entrySet()) {
+
+            // add the category
+            _itemList.add(entry.getKey());
+
+            // sort the products
+            List<Item> productList = entry.getValue();
+            Collections.sort(productList, new Comparator<Item>() {
+                public int compare(Item i1, Item i2) {
+                    return i1.getProductDesc().compareTo(i2.getProductDesc());
+                }
+            });
+
+
+            // add the products
+            for (Item item : productList) {
+                Log.w(LogTag, item.getProductDesc());
+                _itemList.add(item);
+            }
+        }
+
         _arrayAdapter.notifyDataSetChanged();
     }
 }

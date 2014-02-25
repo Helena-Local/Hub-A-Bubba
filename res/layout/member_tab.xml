@@ -9,12 +9,29 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
-            style="@style/activity_welcome_text"
-            android:id="@+id/textView"
-            android:text="@string/member_tab_welcome"/>
+    <!--<TextView-->
+            <!--android:id="@+id/textView"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="@string/member_tab_welcome"-->
+            <!--android:background="@android:color/white"-->
+            <!--android:padding="5dp"/>-->
 
     <ListView android:id="@+id/memberListView"
-              style="@style/cardListView"/>
+              android:layout_height="wrap_content"
+              android:layout_width="match_parent"
+              android:layout_marginTop="@dimen/list_view_margin_top"
+              android:layout_marginBottom="@dimen/list_view_margin_bottom"
+              android:layout_marginLeft="@dimen/list_view_margin_left"
+              android:layout_marginRight="@dimen/list_view_margin_right"
+              android:headerDividersEnabled="false"
+              android:footerDividersEnabled="false"
+              android:divider="@null"
+              android:dividerHeight="0dp"
+            />
 
+    <!--android:cacheColorHint="@android:color/transparent"-->
+    <!--android:listSelector="#00000000"-->
 </LinearLayout>

@@ -89,8 +89,6 @@ public class ProductItemAdapter extends BaseAdapter {
             textView.setText(String.format("$%.2f per %s", item.getUnitPrice(), item.getUnitDesc()));
         }
 
-
-
         return view;
     }
 }

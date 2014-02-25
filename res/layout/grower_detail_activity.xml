@@ -20,7 +20,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/detail_activity_header_padding"
+            android:padding="10dp"
             android:background="@drawable/card_background">
 
         <ImageView
