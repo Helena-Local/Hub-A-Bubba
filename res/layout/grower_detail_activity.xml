@@ -69,13 +69,13 @@
                     android:gravity="left">
 
                 <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/contactImageView"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:src="@drawable/ic_action_email"/>
 
                 <TextView
-                        android:id="@+id/emailTextView"
+                        android:id="@+id/contactTextView"
                         style="@style/detailActivityActionItem"
                         android:text="@string/producer_email_action"
                         android:onClick="onClickEmail"/>
@@ -90,7 +90,7 @@
                     android:gravity="center">
 
                 <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/mapImageView"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:src="@drawable/ic_action_map"/>
@@ -111,7 +111,7 @@
                     android:gravity="right">
 
                 <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/urlImageView"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:src="@drawable/ic_action_web_site"/>
@@ -172,7 +172,7 @@
                 <ImageView
                         android:layout_width="@dimen/default_list_item_image_width"
                         android:layout_height="@dimen/default_list_item_image_height"
-                        android:id="@+id/imageView"
+                        android:id="@+id/contactimageView"
                         android:src="@drawable/default_certification"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
@@ -182,7 +182,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="This is a certification"
-                        android:layout_toRightOf="@+id/imageView"
+                        android:layout_toRightOf="@+id/contactimageView"
                         android:layout_centerVertical="true"
                         android:textSize="@dimen/default_list_item_text_size"/>
             </RelativeLayout>
@@ -195,7 +195,7 @@
                 <ImageView
                         android:layout_width="@dimen/default_list_item_image_width"
                         android:layout_height="@dimen/default_list_item_image_height"
-                        android:id="@+id/imageView"
+                        android:id="@+id/contactimageView"
                         android:src="@drawable/default_certification"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
@@ -205,7 +205,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="This is another certification"
-                        android:layout_toRightOf="@+id/imageView"
+                        android:layout_toRightOf="@+id/contactimageView"
                         android:layout_centerVertical="true"
                         android:textSize="@dimen/default_list_item_text_size"/>
             </RelativeLayout>

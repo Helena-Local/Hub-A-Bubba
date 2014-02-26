@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -52,6 +53,15 @@ public class GrowerDetailActivity extends Activity {
         // address
         textView = (TextView)findViewById(R.id.addressTextView);
         textView.setText(_producer.getLocation());
+
+        // phone / email action - default is email.
+        if (hasEmail(_producer) == false) {
+            imageView = (ImageView)findViewById(R.id.contactimageView);
+            imageView.setImageResource(R.drawable.ic_action_call);
+
+            textView = (TextView)findViewById(R.id.contactTextView);
+            textView.setText(getResources().getText(R.string.producer_call_action));
+        }
 
         // quote
         textView = (TextView)findViewById(R.id.quoteTextView);
@@ -97,9 +107,13 @@ public class GrowerDetailActivity extends Activity {
         }
     }
 
+    private boolean hasEmail(Producer producer) {
+            return _producer.getContactEmail().contains("@");
+        }
+
     public void onClickEmail(View view) {
         Log.w(Tag, "onClickEmail()");
-        if (_producer.getContactEmail().contains("@")) {
+        if (hasEmail(_producer)) {
             Log.w(Tag, "got an email");
             Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + _producer.getContactEmail() + "," + HubInit.getHubEmailTo()));
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Hub Request For: " + _producer.getName());
