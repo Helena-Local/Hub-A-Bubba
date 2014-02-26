@@ -11,10 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.*;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.*;
 import org.helenalocal.base.get.OrderHub;
@@ -94,8 +91,8 @@ public class RestaurantDetailActivity extends Activity {
 
     private void loadProducts() {
 
-        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.productsLayout);
-        linearLayout.removeAllViews();
+        TableLayout tableLayout = (TableLayout)findViewById(R.id.productsLayout);
+        tableLayout.removeAllViews();
 
         ProductItemClickListener clickListener = new ProductItemClickListener();
 
@@ -118,21 +115,21 @@ public class RestaurantDetailActivity extends Activity {
             Item item = Hub.itemMap.get(order.getItemID());
             Producer producer = Hub.producerMap.get(order.getProducerID());
 
-            RelativeLayout relativeLayout = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.restaurant_product, null);
-            relativeLayout.setOnClickListener(clickListener);
-            relativeLayout.setTag(producer);
+            TableRow tableRow = (TableRow) LayoutInflater.from(this).inflate(R.layout.restaurant_product, null);
+            tableRow.setOnClickListener(clickListener);
+            tableRow.setTag(producer);
 
-            ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
+            ImageView imageView = (ImageView) tableRow.findViewById(R.id.imageView);
             imageCache.loadImage(imageView, producer.getIconUrl(), R.drawable.default_producer);
 
-            TextView textView = (TextView) relativeLayout.findViewById(R.id.productNameTextView);
+            TextView textView = (TextView) tableRow.findViewById(R.id.productNameTextView);
             textView.setText(item.getProductDesc());
 
-            textView = (TextView) relativeLayout.findViewById(R.id.purchaseDateTextView);
+            textView = (TextView) tableRow.findViewById(R.id.purchaseDateTextView);
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
             textView.setText(String.format(getResources().getString(R.string.product_purchase_date), dateFormat.format(order.getDate().getTime())));
 
-            linearLayout.addView(relativeLayout);
+            tableLayout.addView(tableRow);
 
             Log.w(LogTag, String.format("Order: ID - %s Item - %s BuyerId - %s", order.getOrderID(), item.getProductDesc(), order.getBuyerID()));
         }
