@@ -11,6 +11,7 @@
                 android:paddingTop="@dimen/default_list_item_padding_top"
                 android:paddingLeft="@dimen/default_list_item_padding_left"
                 android:paddingRight="@dimen/default_list_item_padding_right"
+                android:paddingBottom="@dimen/default_list_item_padding_bottom"
                 android:background="@drawable/card_background">
 
     <LinearLayout
@@ -38,8 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:stretchColumns="*"
-            android:layout_marginBottom="5dp">
+            android:stretchColumns="*">
 
         <LinearLayout
                 android:id="@+id/producerActionLayout"
