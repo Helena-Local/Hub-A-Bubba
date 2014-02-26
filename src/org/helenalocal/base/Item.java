@@ -22,6 +22,7 @@ public class Item {
     private Double unitPrice = 0.0;
     private Calendar deliveryDate;
     private String note = "";
+    private String preOrder = "";
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     public Item() {
@@ -29,7 +30,7 @@ public class Item {
     }
 
     public Item(String IID, String category, String productDesc, String productUrl, String productImageUrl, String recipeUrl, Integer unitsAvailable,
-                String unitDesc, Double unitPrice, Calendar deliveryDate, String note) {
+                String unitDesc, Double unitPrice, Calendar deliveryDate, String note, String preOrder) {
         this.IID = IID;
         this.category = category;
         this.productDesc = productDesc;
@@ -41,6 +42,15 @@ public class Item {
         this.unitDesc = unitDesc;
         setDeliveryDate(deliveryDate);
         this.note = note;
+        this.preOrder = preOrder;
+    }
+
+    public String getPreOrder() {
+        return preOrder;
+    }
+
+    public void setPreOrder(String preOrder) {
+        this.preOrder = preOrder;
     }
 
     public String getRecipeUrl() {
@@ -149,7 +159,8 @@ public class Item {
                 this.unitDesc + "; unitPrice = " +
                 this.unitPrice + "; deliveryDate = " +
                 dateFormat.format(deliveryDate.getTime()) + "; note =" +
-                this.note;
+                this.note + "; preOrder = " +
+                this.preOrder;
     }
 
     public String toEmail(String growerAgreementId) {
@@ -176,6 +187,7 @@ public class Item {
                 this.unitDesc + "," +
                 this.unitPrice + "," +
                 dateFormat.format(deliveryDate.getTime()) + "," +
-                this.note;
+                this.note + "," +
+                this.preOrder;
     }
 }

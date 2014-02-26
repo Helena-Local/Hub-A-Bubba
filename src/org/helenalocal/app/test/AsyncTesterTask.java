@@ -32,7 +32,7 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
         // public Item(String IID,Producer producer,boolean inCsaThisWeek, String category, String productDesc, String productUrl, String productImageUrl, Integer unitsAvailable,
         //        String unitDesc, Double unitPrice, Calendar deliveryDate, String note) {
         Item item = new Item("I-2014-2-2-3", "Produce", "Leeks", "http://en.wikipedia.org/wiki/Leek‎",
-                "http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Leek.jpg/160px-Leek.jpg", "http://www.pinterest.com/search/pins/?q=Leek", 20, "10 lbs", 10.01, Calendar.getInstance(), "note 1");
+                "http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Leek.jpg/160px-Leek.jpg", "http://www.pinterest.com/search/pins/?q=Leek", 20, "10 lbs", 10.01, Calendar.getInstance(), "note 1", "by Tues.");
 
         // growerAgreementId only needed from UI submit... Not part of the item object.
         String growerAgreementId = "N/A";
@@ -157,7 +157,7 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
         // test producerhub send data...
         Intent email = new Intent(Intent.ACTION_SEND);
         Producer producer = new Producer("P-2013-0", "Western Montana Growers’ Cooperative", "grower@wmgcoop.com", "http://www.wmgcoop.com/", "http://g.virbcdn.com/_f2/images/58/PageImage-524372-4680215-WMGC_WebBanner.jpg", "Arlee, MT 59821", new ArrayList<Certification>(), "This day...", "icon-2");
-        Item item = new Item("I-2014-2-2-3", "Produce", "Beets", "http://en.wikipedia.org/wiki/Leek‎", "http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Leek.jpg/160px-Leek.jpg", "http://www.pinterest.com/search/pins/?q=Leek", 20, "10 lbs", 10.01, Calendar.getInstance(), "note 1");
+        Item item = new Item("I-2014-2-2-3", "Produce", "Beets", "http://en.wikipedia.org/wiki/Leek‎", "http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Leek.jpg/160px-Leek.jpg", "http://www.pinterest.com/search/pins/?q=Leek", 20, "10 lbs", 10.01, Calendar.getInstance(), "note 1", "");
         String growerAgreementId = "N/A";
         try {
             // succeed
