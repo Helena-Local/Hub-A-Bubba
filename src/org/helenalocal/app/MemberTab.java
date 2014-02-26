@@ -4,6 +4,8 @@
 
 package org.helenalocal.app;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,20 +13,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import org.helenalocal.Helena_Local_Hub.R;
-import org.helenalocal.base.Hub;
-import org.helenalocal.base.HubInit;
-import org.helenalocal.base.Item;
-import org.helenalocal.base.Order;
+import org.helenalocal.base.*;
 import org.helenalocal.base.get.OrderHub;
 import org.helenalocal.utils.ImageCache;
 
 import java.util.*;
 
-public class MemberTab extends TabBase {
+import org.helenalocal.app.MemberItemAdapter.IActionItemClickedListener;
+
+public class MemberTab extends TabBase  implements IActionItemClickedListener {
 
     private static final String LogTag = "MemberTab";
 
     private List<Object> _itemList;
+
     private MemberItemAdapter _arrayAdapter;
 
     @Override
@@ -46,7 +48,7 @@ public class MemberTab extends TabBase {
         ImageCache cache = ((HubApplication)getActivity().getApplication()).getImageCache();
 
         _itemList = new ArrayList<Object>();
-        _arrayAdapter = new MemberItemAdapter(getActivity(), cache, _itemList);
+        _arrayAdapter = new MemberItemAdapter(getActivity(), cache, _itemList, this);
 
         ListView listView = (ListView)getActivity().findViewById(R.id.memberListView);
         listView.addHeaderView(new View(getActivity()));
@@ -97,5 +99,41 @@ public class MemberTab extends TabBase {
         }
 
         _arrayAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onProducerItemClicked(Item item) {
+
+        Producer producer = null;
+        for (Order order : OrderHub.getOrdersForBuyer(HubInit.HELENA_LOCAL_BUYER_ID)) {
+
+            if (order.getItemID().equalsIgnoreCase(item.getIID())) {
+                producer = OrderHub.producerMap.get(order.getProducerID());
+                break;
+            }
+        }
+
+        if (producer == null) {
+            Log.w(LogTag, String.format("Producer for Item not found - Item Id: %s", item.getIID()));
+        }
+        else {
+            Intent intent = new Intent(getActivity(), GrowerDetailActivity.class);
+            intent.putExtra(GrowerDetailActivity.EXTRA_PRODUCER_ID, producer.getPID());
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onAboutItemClicked(Item item) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(item.getProductUrl()));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onRecipeItemClicked(Item item) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(item.getRecipeUrl()));
+        startActivity(intent);
     }
 }

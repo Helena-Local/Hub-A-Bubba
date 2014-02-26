@@ -6,6 +6,7 @@ package org.helenalocal.app;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,13 @@ import org.helenalocal.utils.ImageCache;
 
 import java.util.List;
 
-public class MemberItemAdapter extends BaseAdapter {
+public class MemberItemAdapter extends BaseAdapter implements View.OnClickListener {
+
+    public interface IActionItemClickedListener {
+        public void onProducerItemClicked(Item item);
+        public void onAboutItemClicked(Item item);
+        public void onRecipeItemClicked(Item item);
+    }
 
     private static String LogTag = "MemberItemAdapter";
     private static final int ViewTypeSection = 0;
@@ -25,11 +32,13 @@ public class MemberItemAdapter extends BaseAdapter {
     private List<Object> _itemList;
     private Context _context;
     private ImageCache _imageCache;
+    private IActionItemClickedListener _clickListener;
 
-    public MemberItemAdapter(Context context, ImageCache imageCache, List<Object> items) {
+    public MemberItemAdapter(Context context, ImageCache imageCache, List<Object> items, IActionItemClickedListener clickListener) {
         _context = context;
         _itemList = items;
         _imageCache = imageCache;
+        _clickListener = clickListener;
     }
 
     @Override
@@ -86,11 +95,25 @@ public class MemberItemAdapter extends BaseAdapter {
         else {
             Item item = (Item)_itemList.get(position);
 
+            ImageView imageView = (ImageView)view.findViewById(R.id.imageView);
+            _imageCache.loadImage(imageView, item.getProductImageUrl(), R.drawable.default_product);
+
             textView = (TextView)view.findViewById(R.id.productDesc);
             textView.setText(item.getProductDesc());
 
-            ImageView imageView = (ImageView)view.findViewById(R.id.imageView);
-            _imageCache.loadImage(imageView, item.getProductImageUrl(), R.drawable.default_product);
+            // action items
+            textView = (TextView)view.findViewById(R.id.producerInfo);
+            textView.setOnClickListener(this);
+            textView.setTag(item);
+
+            textView = (TextView)view.findViewById(R.id.productInfo);
+            textView.setOnClickListener(this);
+            textView.setTag(item);
+
+            textView = (TextView)view.findViewById(R.id.recipeInfo);
+            textView.setOnClickListener(this);
+            textView.setTag(item);
+
 
 //            View separator = (View)view.findViewById(R.id.separatorView);
 //            if (position + 1 == _itemList.size()) {
@@ -112,4 +135,19 @@ public class MemberItemAdapter extends BaseAdapter {
 
         return view;
     }
+
+    @Override
+    public void onClick(View v) {
+        Item item = (Item)v.getTag();
+
+        if (v.getId() == R.id.producerInfo) {
+            _clickListener.onProducerItemClicked(item);
+        }
+        else if (v.getId() == R.id.productInfo) {
+            _clickListener.onAboutItemClicked(item);
+        }
+        else if (v.getId() == R.id.recipeInfo) {
+            _clickListener.onRecipeItemClicked(item);
+        }
+   }
 }

@@ -99,7 +99,7 @@
 
             <TextView
                     style="@style/detailActivityActionItem"
-                    android:id="@+id/recipes"
+                    android:id="@+id/recipeInfo"
                     android:text="Recipes"/>
         </LinearLayout>
 
