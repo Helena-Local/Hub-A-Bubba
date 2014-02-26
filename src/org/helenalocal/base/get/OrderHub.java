@@ -109,8 +109,8 @@ public class OrderHub extends Hub implements Runnable {
             InputStream inputStream = context.openFileInput(fileName);
             if (inputStream != null) {
                 parseCSV(myOrderArr, inputStream);
-                inputStream.close();
             }
+            inputStream.close();
         } catch (FileNotFoundException e) {
             Log.e(HubInit.logTag, "File  (" + fileName + ") not found: " + e.toString());
         } catch (IOException e) {
