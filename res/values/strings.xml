@@ -31,5 +31,5 @@
     <string name="product_purchase_date">Purchased on %s</string>
     <string name="producer_email_action">Contact</string>
     <string name="producer_map_action">Map</string>
-    <string name="producer_website_action">Website</string>
+    <string name="producer_website_action">Website</string><string name="product_producer_detail_action">Producer</string><string name="product_about_action">About</string><string name="product_recipe_action">Recipes</string>
 </resources>

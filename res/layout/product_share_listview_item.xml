@@ -58,7 +58,7 @@
             <TextView
                     style="@style/detailActivityActionItem"
                     android:id="@+id/producerInfo"
-                    android:text="Producer"/>
+                    android:text="@string/product_producer_detail_action"/>
         </LinearLayout>
 
         <LinearLayout
@@ -78,7 +78,7 @@
             <TextView
                     style="@style/detailActivityActionItem"
                     android:id="@+id/productInfo"
-                    android:text="About"/>
+                    android:text="@string/product_about_action"/>
 
         </LinearLayout>
 
@@ -100,7 +100,7 @@
             <TextView
                     style="@style/detailActivityActionItem"
                     android:id="@+id/recipeInfo"
-                    android:text="Recipes"/>
+                    android:text="@string/product_recipe_action"/>
         </LinearLayout>
 
     </LinearLayout>
