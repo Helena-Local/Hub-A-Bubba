@@ -171,10 +171,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+        <!--NOTE:   The following two RelativeLayouts are here for design time only. They are removed at runtime and
+                    replaced with layouts created from certifications.xml -->
+
                 <RelativeLayout
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        style="@style/selectableItem"
+                        android:background="?attr/clickableItemBackground"
                         android:padding="5dp">
 
                     <ImageView
@@ -198,6 +201,7 @@
                 <RelativeLayout
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:background="?attr/clickableItemBackground"
                         android:padding="5dp">
 
                     <ImageView

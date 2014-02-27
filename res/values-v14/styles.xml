@@ -7,10 +7,8 @@
     -->
     <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light">
         <!-- API 14 theme customizations can go here. -->
-    </style>
 
-    <style name="selectableItem">
-        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="clickableItemBackground">?android:attr/selectableItemBackground</item>
     </style>
 
 </resources>

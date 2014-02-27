@@ -15,6 +15,8 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
+        <item name="clickableItemBackground">@android:drawable/list_selector_background</item>
+
     </style>
 
     <!-- Application theme. -->
@@ -31,10 +33,6 @@
         <item name="android:cacheColorHint">@android:color/transparent</item>
         <item name="android:headerDividersEnabled">false</item>
         <item name="android:footerDividersEnabled">false</item>
-    </style>
-
-    <style name="selectableItem">
-        <item name="android:background">@android:drawable/list_selector_background</item>
     </style>
 
     <style name="horizontalDivider">
@@ -83,7 +81,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">-3dp</item>
         <item name="android:textColor">@color/helena_local_blue</item>
-        <item name="android:background">@android:drawable/list_selector_background</item>
+        <item name="android:background">?attr/clickableItemBackground</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
     </style>

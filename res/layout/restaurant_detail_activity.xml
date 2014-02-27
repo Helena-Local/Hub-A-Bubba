@@ -165,10 +165,14 @@
                     android:orientation="vertical"
                     android:layout_marginBottom="25dp">
 
+
+        <!--NOTE:   The following two RelativeLayouts are here for design time only. They are removed at runtime and
+                    replaced with layouts created from certifications.xml -->
+
                 <RelativeLayout
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        style="@style/selectableItem"
+                        android:background="?attr/clickableItemBackground"
                         android:padding="5dp">
 
                     <ImageView
@@ -192,6 +196,7 @@
                 <RelativeLayout
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:background="?attr/clickableItemBackground"
                         android:padding="5dp">
 
                     <ImageView
@@ -227,7 +232,16 @@
                     android:stretchColumns="1"
                     android:shrinkColumns="1">
 
-                <TableRow android:padding="5dp">
+
+        <!--NOTE:   The following two TableRows are here for design time only. They are removed at runtime and
+                            replaced with layouts created from restaurant_product.xml -->
+
+                <TableRow android:layout_height="wrap_content"
+                          android:layout_width="match_parent"
+                          android:background="?attr/clickableItemBackground"
+                          android:padding="5dp"
+                          android:clickable="true"
+                          android:focusable="true">
 
                     <ImageView
                             android:id="@+id/imageView"
@@ -255,13 +269,19 @@
                             android:gravity="center_vertical|right"/>
                 </TableRow>
 
-                <TableRow android:padding="5dp">
+                <TableRow android:layout_height="wrap_content"
+                          android:layout_width="match_parent"
+                          android:background="?attr/clickableItemBackground"
+                          android:padding="5dp"
+                          android:clickable="true"
+                          android:focusable="true">
+
 
                     <ImageView
-                            android:id="@+id/imageView"
-                            android:layout_width="@dimen/default_list_item_image_width"
-                            android:layout_height="@dimen/default_list_item_image_height"
-                            android:src="@drawable/default_producer"/>
+                                android:id="@+id/imageView"
+                                android:layout_width="@dimen/default_list_item_image_width"
+                                android:layout_height="@dimen/default_list_item_image_height"
+                                android:src="@drawable/default_producer"/>
 
                     <TextView
                             android:layout_width="wrap_content"
