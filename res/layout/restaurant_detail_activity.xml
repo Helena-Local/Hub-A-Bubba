@@ -8,17 +8,20 @@
             android:id="@+id/scrollView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:fillViewport="true">
+            android:background="@color/detail_activity_background"
+            android:fillViewport="true"
+            android:paddingLeft="@dimen/card_layout_padding_left"
+            android:paddingRight="@dimen/card_layout_padding_right"
+            android:paddingTop="@dimen/card_layout_padding_top"
+            android:paddingBottom="@dimen/card_layout_padding_bottom"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideOverlay">
 
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:orientation="vertical"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:paddingLeft="@dimen/card_layout_padding_left"
-                  android:paddingRight="@dimen/card_layout_padding_right"
-                  android:paddingTop="@dimen/card_layout_padding_top"
-                  android:paddingBottom="@dimen/card_layout_padding_bottom"
                   android:background="@color/detail_activity_background">
 
         <RelativeLayout

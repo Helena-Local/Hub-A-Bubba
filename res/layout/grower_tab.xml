@@ -17,9 +17,8 @@
     <ListView android:id="@+id/growerListView"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:layout_marginTop="@dimen/list_view_margin_top"
-              android:layout_marginBottom="@dimen/list_view_margin_bottom"
-              android:layout_marginLeft="@dimen/list_view_margin_left"
-              android:layout_marginRight="@dimen/list_view_margin_right"/>
+              android:padding="@dimen/list_view_padding"
+              android:clipToPadding="false"
+              android:scrollbarStyle="outsideOverlay"/>
 
 </LinearLayout>

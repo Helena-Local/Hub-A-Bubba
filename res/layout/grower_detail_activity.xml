@@ -4,213 +4,224 @@
 ~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:paddingLeft="@dimen/card_layout_padding_left"
-              android:paddingRight="@dimen/card_layout_padding_right"
-              android:paddingTop="@dimen/card_layout_padding_top"
-              android:paddingBottom="@dimen/card_layout_padding_bottom"
-              android:background="@color/detail_activity_background">
-
-
-    <RelativeLayout
-            android:id="@+id/headerLayout"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/card_background">
-
-        <ImageView
-                android:id="@+id/producerImageView"
-                android:layout_width="@dimen/detail_activity_header_image_width"
-                android:layout_height="@dimen/detail_activity_header_image_height"
-                android:adjustViewBounds="false"
-                android:layout_marginRight="@dimen/detail_activity_header_image_margin_right"/>
-
-        <TextView
-                android:id="@+id/nameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_alignTop="@+id/producerImageView"
-                android:layout_toRightOf="@+id/producerImageView"
-                android:singleLine="false"
-                android:layout_marginTop="5dp"
-                android:text="Schnepf Farms"/>
-
-        <TextView
-                android:id="@+id/addressTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="24810 South Rittenhouse Road Queen Creek, Arizona 85142"
-                android:layout_below="@+id/nameTextView"
-                android:layout_alignLeft="@+id/nameTextView"
-                android:textSize="@dimen/text_size_extra_small"/>
-
-        <LinearLayout
-                android:id="@+id/actionLayout"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/producerImageView"
-                android:layout_below="@+id/producerImageView"
-                android:orientation="horizontal"
-                android:stretchColumns="*"
-                android:layout_marginTop="5dp">
-
-            <LinearLayout
-                    android:id="@+id/emailLayout"
-                    android:orientation="horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:gravity="left">
-
-                <ImageView
-                        android:id="@+id/contactImageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_action_email"/>
-
-                <TextView
-                        android:id="@+id/contactTextView"
-                        style="@style/detailActivityActionItem"
-                        android:text="@string/producer_email_action"
-                        android:onClick="onClickEmail"/>
-            </LinearLayout>
-
-            <LinearLayout
-                    android:id="@+id/mapLayout"
-                    android:orientation="horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:gravity="center">
-
-                <ImageView
-                        android:id="@+id/mapImageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_action_map"/>
-
-                <TextView
-                        android:id="@+id/mapTextView"
-                        style="@style/detailActivityActionItem"
-                        android:text="@string/producer_map_action"
-                        android:onClick="onClickMap"/>
-            </LinearLayout>
-
-            <LinearLayout
-                    android:id="@+id/urlLayout"
-                    android:orientation="horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:gravity="right">
-
-                <ImageView
-                        android:id="@+id/urlImageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_action_web_site"/>
-
-                <TextView
-                        android:id="@+id/urlTextView"
-                        style="@style/detailActivityActionItem"
-                        android:text="@string/producer_website_action"
-                        android:onClick="onClickUrl"/>
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-
-    <LinearLayout
-            android:id="@+id/contentLayout"
-            android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/scrollView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_marginTop="@dimen/detail_activity_content_margin_top"
-            android:padding="@dimen/detail_activity_content_padding"
-            android:background="@drawable/card_background"
-            android:weightSum="1">
+            android:background="@color/detail_activity_background"
+            android:fillViewport="true"
+            android:paddingLeft="@dimen/card_layout_padding_left"
+            android:paddingRight="@dimen/card_layout_padding_right"
+            android:paddingTop="@dimen/card_layout_padding_top"
+            android:paddingBottom="@dimen/card_layout_padding_bottom"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideOverlay">
 
-        <TextView
-                android:id="@+id/quoteTextView"
-                style="@style/detailActivityQuote"
-                android:text='"I found the cure for hope"'/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
 
-        <ImageView
-                android:layout_width="240dp"
-                android:layout_height="150dp"
-                android:id="@+id/photoImageView"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="15dp"/>
 
-        <TextView
-                android:id="@+id/certTextView"
-                style="@style/detailActivitySectionHeader"
-                android:text="@string/restaurant_detail_awards"/>
-
-        <View style="@style/horizontalDivider"/>
-
-        <LinearLayout
-                android:id="@+id/certificationLayout"
+        <RelativeLayout
+                android:id="@+id/headerLayout"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:padding="10dp"
+                android:background="@drawable/card_background">
 
-            <RelativeLayout
+            <ImageView
+                    android:id="@+id/producerImageView"
+                    android:layout_width="@dimen/detail_activity_header_image_width"
+                    android:layout_height="@dimen/detail_activity_header_image_height"
+                    android:adjustViewBounds="false"
+                    android:layout_marginRight="@dimen/detail_activity_header_image_margin_right"/>
+
+            <TextView
+                    android:id="@+id/nameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_alignTop="@+id/producerImageView"
+                    android:layout_toRightOf="@+id/producerImageView"
+                    android:singleLine="false"
+                    android:layout_marginTop="5dp"
+                    android:text="Schnepf Farms"/>
+
+            <TextView
+                    android:id="@+id/addressTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="24810 South Rittenhouse Road Queen Creek, Arizona 85142"
+                    android:layout_below="@+id/nameTextView"
+                    android:layout_alignLeft="@+id/nameTextView"
+                    android:textSize="@dimen/text_size_extra_small"/>
+
+            <LinearLayout
+                    android:id="@+id/actionLayout"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    style="@style/selectableItem"
-                    android:padding="5dp">
+                    android:layout_alignLeft="@+id/producerImageView"
+                    android:layout_below="@+id/producerImageView"
+                    android:orientation="horizontal"
+                    android:stretchColumns="*"
+                    android:layout_marginTop="5dp">
 
-                <ImageView
-                        android:layout_width="@dimen/default_list_item_image_width"
-                        android:layout_height="@dimen/default_list_item_image_height"
-                        android:id="@+id/contactimageView"
-                        android:src="@drawable/default_certification"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginRight="5dp"/>
+                <LinearLayout
+                        android:id="@+id/emailLayout"
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="left">
 
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="This is a certification"
-                        android:layout_toRightOf="@+id/contactimageView"
-                        android:layout_centerVertical="true"
-                        android:textSize="@dimen/default_list_item_text_size"/>
-            </RelativeLayout>
+                    <ImageView
+                            android:id="@+id/contactImageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_action_email"/>
 
-            <RelativeLayout
-                    android:layout_width="fill_parent"
+                    <TextView
+                            android:id="@+id/contactTextView"
+                            style="@style/detailActivityActionItem"
+                            android:text="@string/producer_email_action"
+                            android:onClick="onClickEmail"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/mapLayout"
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                    <ImageView
+                            android:id="@+id/mapImageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_action_map"/>
+
+                    <TextView
+                            android:id="@+id/mapTextView"
+                            style="@style/detailActivityActionItem"
+                            android:text="@string/producer_map_action"
+                            android:onClick="onClickMap"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/urlLayout"
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="right">
+
+                    <ImageView
+                            android:id="@+id/urlImageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_action_web_site"/>
+
+                    <TextView
+                            android:id="@+id/urlTextView"
+                            style="@style/detailActivityActionItem"
+                            android:text="@string/producer_website_action"
+                            android:onClick="onClickUrl"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+                android:id="@+id/contentLayout"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="@dimen/detail_activity_content_margin_top"
+                android:padding="@dimen/detail_activity_content_padding"
+                android:background="@drawable/card_background"
+                android:weightSum="1">
+
+            <TextView
+                    android:id="@+id/quoteTextView"
+                    style="@style/detailActivityQuote"
+                    android:text='"I found the cure for hope"'/>
+
+            <ImageView
+                    android:layout_width="240dp"
+                    android:layout_height="150dp"
+                    android:id="@+id/photoImageView"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="15dp"/>
+
+            <TextView
+                    android:id="@+id/certTextView"
+                    style="@style/detailActivitySectionHeader"
+                    android:text="@string/restaurant_detail_awards"/>
+
+            <View style="@style/horizontalDivider"/>
+
+            <LinearLayout
+                    android:id="@+id/certificationLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp">
+                    android:orientation="vertical">
 
-                <ImageView
-                        android:layout_width="@dimen/default_list_item_image_width"
-                        android:layout_height="@dimen/default_list_item_image_height"
-                        android:id="@+id/contactimageView"
-                        android:src="@drawable/default_certification"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginRight="5dp"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
+                <RelativeLayout
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="This is another certification"
-                        android:layout_toRightOf="@+id/contactimageView"
-                        android:layout_centerVertical="true"
-                        android:textSize="@dimen/default_list_item_text_size"/>
-            </RelativeLayout>
+                        style="@style/selectableItem"
+                        android:padding="5dp">
+
+                    <ImageView
+                            android:layout_width="@dimen/default_list_item_image_width"
+                            android:layout_height="@dimen/default_list_item_image_height"
+                            android:id="@+id/contactimageView"
+                            android:src="@drawable/default_certification"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginRight="5dp"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="This is a certification"
+                            android:layout_toRightOf="@+id/contactimageView"
+                            android:layout_centerVertical="true"
+                            android:textSize="@dimen/default_list_item_text_size"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp">
+
+                    <ImageView
+                            android:layout_width="@dimen/default_list_item_image_width"
+                            android:layout_height="@dimen/default_list_item_image_height"
+                            android:id="@+id/contactimageView"
+                            android:src="@drawable/default_certification"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginRight="5dp"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="This is another certification"
+                            android:layout_toRightOf="@+id/contactimageView"
+                            android:layout_centerVertical="true"
+                            android:textSize="@dimen/default_list_item_text_size"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

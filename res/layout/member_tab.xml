@@ -8,10 +8,6 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:paddingLeft="@dimen/card_layout_padding_left"
-              android:paddingRight="@dimen/card_layout_padding_right"
-              android:paddingTop="@dimen/card_layout_padding_top"
-              android:paddingBottom="@dimen/card_layout_padding_bottom"
               android:background="@color/detail_activity_background">
 
     <!--<TextView-->
@@ -27,7 +23,10 @@
 
     <ListView
             style="@style/cardListView"
-            android:id="@+id/memberListView"/>
+            android:id="@+id/memberListView"
+            android:padding="8dp"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideOverlay"/>
 
 
     <!--android:listSelector="#00000000"-->
