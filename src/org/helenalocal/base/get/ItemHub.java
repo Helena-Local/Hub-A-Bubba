@@ -113,6 +113,12 @@ public class ItemHub extends Hub implements Runnable {
                         item.setNote(note);
                     }
                 }
+                if (iterator.hasNext()) {
+                    String preOrder = iterator.next();
+                    if (!preOrder.equals("")) {
+                        item.setPreOrder(preOrder);
+                    }
+                }
                 myItemMap.put(item.getIID(), item);
             }
         }
