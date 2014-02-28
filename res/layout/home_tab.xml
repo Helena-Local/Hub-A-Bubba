@@ -15,11 +15,11 @@
             android:id="@+id/adImageView"
             android:src="@drawable/default_ad"
             android:layout_weight="0.03"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tester"
-            android:id="@+id/button"
-            android:onClick="onClick"
-            android:layout_gravity="right"/>
+    <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Tester"-->
+            <!--android:id="@+id/button"-->
+            <!--android:onClick="onClick"-->
+            <!--android:layout_gravity="right"/>-->
 </LinearLayout>
