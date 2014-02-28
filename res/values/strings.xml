@@ -14,12 +14,12 @@
     </string>
     <string name="product_tab_text">Product</string>
     <string name="product_tab_welcome">Below you will find our most recent local sustainable item availability. Call us
-        now to order at 406.219.1414 or visit HelenaLocal.org to buy CSA Shares
+        now to order at 406.219.1414
     </string>
     <string name="restaurant_tab_text">Restaurants</string>
     <string name="restaurant_welcome">All these restaurants buy local sustainable food from Helena Local.</string>
     <string name="grower_tab_text">Producers</string>
-    <string name="grower_welcome">Welcome to our producer list. All these producers have been vetted for sustainability
+    <string name="grower_welcome">All these producers have been vetted for sustainability
         by Helena Local.
     </string>
     <string name="grower_detail_welcome">Welcome to Acme Farms</string>

@@ -10,16 +10,21 @@
               android:layout_height="match_parent"
               android:background="@color/detail_activity_background">
 
-    <!--<TextView-->
-            <!--android:id="@+id/textView"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:gravity="center_horizontal"-->
-            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-            <!--android:text="@string/member_tab_welcome"-->
-            <!--android:background="@android:color/white"-->
-            <!--android:padding="5dp"/>-->
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@drawable/header_background_temp"
+        android:padding="8dp"
+        android:minHeight="48dp"
+           android:orientation="vertical">
+
+        <TextView
+                style="@style/activity_welcome_text"
+                android:text="Visit HelenaLocal.org to purchase shares."
+                android:id="@+id/textView"
+                android:autoLink="web"/>
+
+    </LinearLayout>
 
     <ListView
             style="@style/cardListView"
@@ -28,6 +33,4 @@
             android:clipToPadding="false"
             android:scrollbarStyle="outsideOverlay"/>
 
-
-    <!--android:listSelector="#00000000"-->
 </LinearLayout>

@@ -7,11 +7,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+        android:background="@android:color/white">
 
-    <TextView style="@style/activity_welcome_text"
-              android:id="@+id/textView"
-              android:text="@string/restaurant_welcome"/>
+    <LinearLayout
+            style="@style/activity_header"
+            android:orientation="vertical">
+
+        <TextView style="@style/activity_welcome_text"
+                  android:id="@+id/textView"
+                  android:text="@string/restaurant_welcome"/>
+
+    </LinearLayout>
 
     <ListView android:id="@+id/restaurantListView"
             android:layout_width="match_parent"

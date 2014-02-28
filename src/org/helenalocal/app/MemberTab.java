@@ -17,6 +17,7 @@ import org.helenalocal.base.*;
 import org.helenalocal.base.get.OrderHub;
 import org.helenalocal.utils.ImageCache;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.helenalocal.app.MemberItemAdapter.IActionItemClickedListener;
@@ -62,6 +63,10 @@ public class MemberTab extends TabBase  implements IActionItemClickedListener {
         // display all Helena Local bought for CSA!
         TreeMap<String, List<Item>> productMap = new TreeMap<String, List<Item>>();
         for (Order order : OrderHub.getOrdersForBuyer(HubInit.HELENA_LOCAL_BUYER_ID)) {
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            Log.w(LogTag, "Order Date: " + dateFormat.format(order.getDate().getTime()));
+
             Item item = Hub.itemMap.get(order.getItemID());
 
             List<Item> itemList = productMap.get(item.getCategory());

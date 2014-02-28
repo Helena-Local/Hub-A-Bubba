@@ -8,18 +8,17 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/detail_activity_background"
-        >
+              android:background="@android:color/white">
 
-    <TextView
-            android:id="@+id/welcomeText"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:gravity="center_horizontal"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/product_tab_welcome"
-            android:padding="5dp"
-            />
+    <LinearLayout
+            style="@style/activity_header"
+            android:orientation="vertical">
+
+        <TextView
+                style="@style/activity_welcome_text"
+                android:id="@+id/welcomeText"
+                android:text="@string/product_tab_welcome"/>
+    </LinearLayout>
 
     <ListView android:id="@+id/productListView"
               android:layout_width="match_parent"
