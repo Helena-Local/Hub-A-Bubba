@@ -36,4 +36,8 @@
     <string name="product_producer_detail_action">Producer</string>
     <string name="product_about_action">About</string>
     <string name="product_recipe_action">Recipes</string>
+    <plurals name="category_count">
+        <item quantity="one">%d item</item>
+        <item quantity="other">%d items</item>
+    </plurals>
 </resources>

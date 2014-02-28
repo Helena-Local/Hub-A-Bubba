@@ -26,6 +26,7 @@
 
         <activity android:name="org.helenalocal.app.GrowerDetailActivity"/>
         <activity android:name="org.helenalocal.app.RestaurantDetailActivity"/>
+        <activity android:name="org.helenalocal.app.ProductCategoryDetailActivity"/>
 
         <service android:name="org.helenalocal.app.service.HubInitService"
                  android:exported="false"/>

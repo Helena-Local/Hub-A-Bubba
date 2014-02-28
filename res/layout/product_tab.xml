@@ -9,7 +9,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/detail_activity_background"
-              android:paddingTop="5dp">
+        >
 
     <TextView
             android:id="@+id/welcomeText"
@@ -19,20 +19,14 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/product_tab_welcome"
             android:padding="5dp"
-            android:background="@android:color/white"/>
+            />
 
     <ListView android:id="@+id/productListView"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:headerDividersEnabled="false"
-              android:footerDividersEnabled="false"
-              android:background="@android:color/white"
-              android:divider="@null"
-              android:dividerHeight="0dp"
-              android:cacheColorHint="@android:color/transparent"
-              android:padding="10dp"
-              android:layout_marginTop="5dp"
               android:clipToPadding="false"
-              android:scrollbarStyle="outsideOverlay"/>
+              android:scrollbarStyle="outsideOverlay"
+              android:layout_marginTop="5dp"
+              android:padding="@dimen/list_view_padding"/>
 
 </LinearLayout>

@@ -4,12 +4,13 @@
 
 package org.helenalocal.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.util.Linkify;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
@@ -21,11 +22,13 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ProductTab extends TabBase {
+public class ProductTab extends TabBase implements ListView.OnItemClickListener {
+
+    public static final String CATEGORY_NAME_EXTRA = "org.helenalocal.category_name_extra";
 
     private static String LogTag = "ProductTab";
 
-    private List<Object> _itemList;
+    private List<Category> _categoryList = new ArrayList<Category>();
     private ProductItemAdapter _arrayAdapter;
 
     @Override
@@ -52,13 +55,12 @@ public class ProductTab extends TabBase {
             }
         });
 
-        _itemList = new ArrayList<Object>();
-        _arrayAdapter = new ProductItemAdapter(getActivity(), _itemList);
+        _categoryList = new ArrayList<Category>();
+        _arrayAdapter = new ProductItemAdapter(getActivity(), _categoryList);
 
         ListView listView = (ListView) getActivity().findViewById(R.id.productListView);
-//        listView.addHeaderView(new View(getActivity()));
-//        listView.addFooterView(new View(getActivity()));
         listView.setAdapter(_arrayAdapter);
+        listView.setOnItemClickListener(this);
     }
 
     @Override
@@ -80,14 +82,8 @@ public class ProductTab extends TabBase {
             }
         }
 
-        // now that we have the data sorted by and organized by category, flatten it out into a list.
-        // NOTE: This list contains both String (category) and Item (product)
-        _itemList.clear();
+        _categoryList.clear();
         for (Map.Entry<String, List<Item>> entry : productMap.entrySet()) {
-
-            // add the category
-            _itemList.add(entry.getKey());
-
             // sort the products
             List<Item> productList = entry.getValue();
             Collections.sort(productList, new Comparator<Item>() {
@@ -96,15 +92,38 @@ public class ProductTab extends TabBase {
                 }
             });
 
-
-            // add the products
-            for (Item item : productList) {
-                Log.w(LogTag, item.getProductDesc());
-                _itemList.add(item);
-            }
+            _categoryList.add(new Category(entry.getKey(), productList));
         }
 
         _arrayAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Category category = (Category)parent.getItemAtPosition(position);
+
+        Intent intent = new Intent(getActivity(), ProductCategoryDetailActivity.class);
+        intent.putExtra(CATEGORY_NAME_EXTRA, category.getDescription());
+        startActivity(intent);
+    }
+
+
+    public class Category {
+        private String _description;
+        private List<Item> _itemList;
+
+        public String getDescription() {
+            return _description;
+        }
+
+        public List<Item> getItemList() {
+            return _itemList;
+        }
+
+        public Category(String description, List<Item> items) {
+            _description = description;
+            _itemList = items;
+        }
     }
 }
 
