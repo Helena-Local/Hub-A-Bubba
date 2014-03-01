@@ -43,7 +43,7 @@ public class ProductCategoryDetailAdapter extends ArrayAdapter<Item> {
         textView.setText(String.format("%s units available", item.getUnitsAvailable()));
 
         textView = (TextView)view.findViewById(R.id.costPerUnit);
-        textView.setText(String.format("$%.2f per %s", item.getUnitPrice(), item.getUnitDesc()));
+        textView.setText(String.format("$%.0f per %s", item.getUnitPrice(), item.getUnitDesc()));
 
         return view;
     }

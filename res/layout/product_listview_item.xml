@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
--->
+  ~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+  -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -18,24 +18,23 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Durian"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignParentLeft="false"/>
     <TextView
             android:id="@+id/costPerUnit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="$25 per 10lb case"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignBaseline="@id/productDesc"/>
+            android:layout_below="@+id/productDesc" android:layout_toRightOf="@+id/productDesc"
+            android:layout_alignParentRight="true" android:layout_alignParentEnd="true"/>
     <TextView
             android:id="@+id/unitsAvailable"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="5 units available"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/costPerUnit"
-            android:layout_marginTop="5dp"/>
+            android:layout_below="@+id/costPerUnit" android:layout_toRightOf="@+id/productDesc"
+            android:layout_alignParentRight="true" android:layout_alignParentEnd="true"/>
+    />
 </RelativeLayout>
 
