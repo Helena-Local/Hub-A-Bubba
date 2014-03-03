@@ -4,45 +4,21 @@
 
 package org.helenalocal.app;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import org.helenalocal.Helena_Local_Hub.R;
-import org.helenalocal.app.service.HubInitService;
 import org.helenalocal.app.test.AsyncTesterTask;
-import org.helenalocal.base.HubInit;
-import org.helenalocal.base.get.*;
 import org.helenalocal.utils.ViewServer;
 
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-
 public class MainActivity extends ActionBarActivity {
-
-    private static ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(5);
-    private static ScheduledFuture buyerHubScheduledFuture;
-    private static ScheduledFuture<?> itemHubScheduledFuture;
-    private static ScheduledFuture<?> orderHubScheduledFuture;
-    private static ScheduledFuture<?> producerHubScheduledFuture;
-    private static ScheduledFuture<?> certificationHubScheduledFuture;
-    private static ScheduledFuture<?> adHubScheduledFuture;
 
     private static final String LAST_SELECTED_TAB = "LastSelectedTab";
     private static final String Tag = "MainActivity";
 
 
     private int _lastSelectedTab = 0;
-    private boolean _initializing = false;
-    private boolean _paused;
-    private BroadcastReceiver _hubInitReceiver;
 
     private void addTab(Class tabClass, int stringId) {
         ActionBar actionBar = getSupportActionBar();
@@ -53,38 +29,9 @@ public class MainActivity extends ActionBarActivity {
         actionBar.addTab(tab);
     }
 
-    public static void startHubThreads(Context context) {
-        Log.w(Tag, "startHubThreads exec.getQueue().size() = " + exec.getQueue().size());
-        // schedule hub refreshes...
-        itemHubScheduledFuture = exec.scheduleWithFixedDelay(new ItemHub(context), 0, HubInit.getItemDelay(), TimeUnit.MINUTES);
-        orderHubScheduledFuture = exec.scheduleWithFixedDelay(new OrderHub(context), 0, HubInit.getOrderDelay(), TimeUnit.MINUTES);
-        buyerHubScheduledFuture = exec.scheduleWithFixedDelay(new BuyerHub(context), 0, HubInit.getBuyerDelay(), TimeUnit.MINUTES);
-        producerHubScheduledFuture = exec.scheduleWithFixedDelay(new ProducerHub(context), 0, HubInit.getProducerDelay(), TimeUnit.MINUTES);
-        certificationHubScheduledFuture = exec.scheduleWithFixedDelay(new CertificationHub(context), 0, HubInit.getCertificateDelay(), TimeUnit.MINUTES);
-        adHubScheduledFuture = exec.scheduleWithFixedDelay(new AdHub(context), 0, HubInit.getAdDelay(), TimeUnit.MINUTES);
-        Log.w(Tag, "startHubThreads exec.getQueue().size() = " + exec.getQueue().size());
-    }
-
-    public static void stopHubThreads() {
-        Log.w(Tag, "stopHubThreads exec.getQueue().size() = " + exec.getQueue().size());
-        if (exec.getQueue().size() != 0) {
-            buyerHubScheduledFuture.cancel(false);
-            itemHubScheduledFuture.cancel(false);
-            orderHubScheduledFuture.cancel(false);
-            producerHubScheduledFuture.cancel(false);
-            certificationHubScheduledFuture.cancel(false);
-            adHubScheduledFuture.cancel(false);
-        }
-        exec.shutdownNow();
-        exec = null;
-        exec = new ScheduledThreadPoolExecutor(4);
-        Log.w(Tag, "stopHubThreads exec.getQueue().size() = " + exec.getQueue().size());
-    }
-
-    public void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        _paused = false;
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -99,7 +46,6 @@ public class MainActivity extends ActionBarActivity {
             _lastSelectedTab = savedInstanceState.getInt(LAST_SELECTED_TAB);
         }
 
-        startInitialize();
         ViewServer.get(this).addWindow(this);
     }
 
@@ -111,17 +57,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
-
-        _paused = false;
 
         getSupportActionBar().getTabAt(_lastSelectedTab).select();
 
-        if (_initializing == false) {
-            startHubThreads(this);
-            Log.w(Tag, "Scheduled hub refreshes...");
-        }
+        ((HubApplication)getApplication()).startHubThreads();
 
         ViewServer.get(this).setFocusedWindow(this);
     }
@@ -130,56 +71,20 @@ public class MainActivity extends ActionBarActivity {
     protected void onPause() {
         super.onPause();
 
-        // todo - may need to stop the HubInitService if it is running?
+        ((HubApplication)getApplication()).stopHubThreads();
 
-        _paused = true;
         _lastSelectedTab = getSupportActionBar().getSelectedTab().getPosition();
-
-        if (_initializing == false) {
-            stopHubThreads();
-            Log.w(Tag, "Stopped hub refreshes...");
-        }
     }
 
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         super.onDestroy();
         ViewServer.get(this).removeWindow(this);
     }
 
-    private void startInitialize() {
-        _initializing = true;
-        registerHubInitReceiver();
-        startService(new Intent(this, HubInitService.class));
-    }
-
-    private void registerHubInitReceiver() {
-        IntentFilter filter = new IntentFilter(HubInitService.HUB_INIT_FINISHED);
-        filter.addCategory(Intent.CATEGORY_DEFAULT);
-
-        _hubInitReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                onHubInitFinished();
-            }
-        };
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(_hubInitReceiver, filter);
-    }
-
-    private void onHubInitFinished() {
-        _initializing = false;
-
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(_hubInitReceiver);
-        _hubInitReceiver = null;
-
-        if (_paused == false) {
-            startHubThreads(this);
-        }
-    }
 
     public void onClick(View view) {
-        AsyncTesterTask asyncTesterTask = new AsyncTesterTask(this);
+        AsyncTesterTask asyncTesterTask = new AsyncTesterTask(this, (HubApplication)getApplication());
         asyncTesterTask.execute(null);
     }
 }

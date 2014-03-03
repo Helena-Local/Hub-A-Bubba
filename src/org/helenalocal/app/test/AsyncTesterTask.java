@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import org.helenalocal.app.HubApplication;
 import org.helenalocal.app.MainActivity;
 import org.helenalocal.base.*;
 import org.helenalocal.base.get.BuyerHub;
@@ -22,6 +23,7 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
 
     private static final String Tag = "AsyncTesterTask";
     private static Context _context;
+    private HubApplication _application;
 
     private Intent bigTest() {
         Intent email = null;
@@ -41,8 +43,8 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
             // after init hub runs all other hubs need to reload!
             new InitHub(_context).run();
             new CertificationHub(_context).run();
-            MainActivity.stopHubThreads();
-            MainActivity.startHubThreads(_context);
+            _application.stopHubThreads();
+            _application.startHubThreads();
 
             // test buyerhub...
             ArrayList<Buyer> buyerArrayList = new ArrayList<Buyer>(Hub.buyerMap.values());
@@ -104,8 +106,9 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
         return email;
     }
 
-    public AsyncTesterTask(Context context) {
+    public AsyncTesterTask(Context context, HubApplication application) {
         _context = context;
+        _application = application;
     }
 
     @Override
