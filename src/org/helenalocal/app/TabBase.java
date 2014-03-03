@@ -60,8 +60,6 @@ public class TabBase extends Fragment {
                 }
             }
         };
-
-        registerReceiver();
     }
 
     private void registerReceiver() {
