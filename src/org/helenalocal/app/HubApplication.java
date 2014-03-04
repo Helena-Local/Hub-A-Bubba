@@ -24,8 +24,8 @@ public class HubApplication extends Application {
 
     private static final String LogTag = "HubApplication";
 
-    private ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(5);
-    private ScheduledFuture buyerHubScheduledFuture;
+    private ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(6);
+    private ScheduledFuture<?> buyerHubScheduledFuture;
     private ScheduledFuture<?> itemHubScheduledFuture;
     private ScheduledFuture<?> orderHubScheduledFuture;
     private ScheduledFuture<?> producerHubScheduledFuture;
