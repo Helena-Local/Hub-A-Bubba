@@ -49,7 +49,7 @@ public class RestaurantTab extends TabBase implements AdapterView.OnItemClickLis
 
         ImageCache cache = ((HubApplication)getActivity().getApplication()).getImageCache();
         _restaurantList = new ArrayList<Buyer>();
-        _arrayAdapter = new RestaurantItemAdapter(getActivity(), R.layout.restautant_listview_item, _restaurantList, cache);
+        _arrayAdapter = new RestaurantItemAdapter(getActivity(), _restaurantList, cache);
 
         ListView listView = (ListView) getActivity().findViewById(R.id.restaurantListView);
         listView.setAdapter(_arrayAdapter);

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Producer;
@@ -16,12 +15,10 @@ import java.util.List;
 
 public class GrowerListAdapter extends ArrayAdapter<Producer> {
     private static String logTag = "GrowerListAdapter";
-    private int _resourceId;
     private ImageCache _imageCache;
 
-    public GrowerListAdapter(Context context, int resource, List<Producer> items, ImageCache imageCache) {
-        super(context, resource, items);
-        _resourceId = resource;
+    public GrowerListAdapter(Context context, List<Producer> items, ImageCache imageCache) {
+        super(context, R.layout.grower_listview_item, items);
         _imageCache = imageCache;
     }
 
@@ -31,15 +28,14 @@ public class GrowerListAdapter extends ArrayAdapter<Producer> {
 
         Producer producer = getItem(position);
 
-        LinearLayout view;
+        View view;
 
         if (convertView != null) {
-            view = (LinearLayout)convertView;
+            view = convertView;
         }
         else {
-            view = new LinearLayout(getContext());
             LayoutInflater li = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            li.inflate(_resourceId, view, true);
+            view = li.inflate(R.layout.grower_listview_item, parent, false);
         }
 
         ImageView imageView = (ImageView)view.findViewById(R.id.producerImageView);

@@ -47,7 +47,7 @@ public class GrowerTab extends TabBase {
 
         ImageCache cache = ((HubApplication)getActivity().getApplication()).getImageCache();
         _growerList = new ArrayList<Producer>();
-        _arrayAdapter = new GrowerListAdapter(getActivity(), R.layout.grower_listview_item, _growerList, cache);
+        _arrayAdapter = new GrowerListAdapter(getActivity(), _growerList, cache);
 
         ListView listView = (ListView) getActivity().findViewById(R.id.growerListView);
         listView.setAdapter(_arrayAdapter);

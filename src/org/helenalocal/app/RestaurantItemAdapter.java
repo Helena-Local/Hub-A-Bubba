@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Buyer;
@@ -21,12 +20,10 @@ import java.util.List;
 public class RestaurantItemAdapter extends ArrayAdapter<Buyer> {
 
     private static String logTag = "RestaurantItemAdapter";
-    private int _resource;
     private ImageCache _imageCache;
 
-    public RestaurantItemAdapter(Context context, int resource, List<Buyer> items, ImageCache imageCache) {
-        super(context, resource, items);
-        _resource = resource;
+    public RestaurantItemAdapter(Context context, List<Buyer> items, ImageCache imageCache) {
+        super(context, R.layout.restautant_listview_item, items);
         _imageCache = imageCache;
     }
 
@@ -35,15 +32,14 @@ public class RestaurantItemAdapter extends ArrayAdapter<Buyer> {
 
         Buyer buyer = getItem(position);
 
-        LinearLayout view;
+        View view;
 
         if (convertView != null) {
-            view = (LinearLayout)convertView;
+            view = convertView;
         }
         else {
-            view = new LinearLayout(getContext());
             LayoutInflater li = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            li.inflate(_resource, view, true);
+            view = li.inflate(R.layout.restautant_listview_item, parent, false);
         }
 
 
