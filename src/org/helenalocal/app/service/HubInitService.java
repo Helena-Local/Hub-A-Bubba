@@ -10,6 +10,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import org.helenalocal.base.get.AdHub;
 import org.helenalocal.base.get.CertificationHub;
 import org.helenalocal.base.get.InitHub;
+import org.helenalocal.base.get.OrderHub;
 
 public class HubInitService extends IntentService {
 
@@ -27,6 +28,7 @@ public class HubInitService extends IntentService {
         new InitHub(this).run();
         new CertificationHub(this).run();
         new AdHub(this).run();
+        new OrderHub(this).run();
 
         Intent broadcastIntent = new Intent();
         broadcastIntent.setAction(HUB_INIT_FINISHED);
