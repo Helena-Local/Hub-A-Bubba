@@ -27,6 +27,7 @@ import java.util.List;
  * Created by abbie on 1/24/14.
  */
 public class AdHub extends Hub implements Runnable {
+    private static boolean isFirstLoad = true;
     private static Context context;
     private static Calendar lastRefreshTS;
     private String fileName = "HL-AdHub.csv";
@@ -84,8 +85,8 @@ public class AdHub extends Hub implements Runnable {
             InputStream inputStream = context.openFileInput(fileName);
             if (inputStream != null) {
                 parseCSV(myAdArr, inputStream);
-                inputStream.close();
             }
+            inputStream.close();
         } catch (FileNotFoundException e) {
             Log.e(HubInit.logTag, "File  (" + fileName + ") not found: " + e.toString());
         } catch (IOException e) {
@@ -96,23 +97,30 @@ public class AdHub extends Hub implements Runnable {
     }
 
     public List<Ad> getAdArr() throws IOException {
-        HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet(adHubDataUrl);
-        try {
-            // first try the net
-            HttpResponse response = client.execute(request);
-            Log.w(HubInit.logTag, "HTTP execute Response.getStatusLine() = " + response.getStatusLine());
+        List<Ad> out;
+        if (isFirstLoad) {
+            // try to load disk file first.
+            isFirstLoad = false;
+            out = readFromFile(context);
+        } else {
+            HttpClient client = new DefaultHttpClient();
+            HttpGet request = new HttpGet(adHubDataUrl);
+            try {
+                // first try the net
+                HttpResponse response = client.execute(request);
+                Log.w(HubInit.logTag, "HTTP execute Response.getStatusLine() = " + response.getStatusLine());
 
-            // make net version local
-            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-            writeToFile(context, rd, fileName);
-            Log.w(HubInit.logTag, "Wrote file from the net to device...");
-        } catch (UnknownHostException e) {
-            Log.w(HubInit.logTag, "Couldn't getItem the file from the net just using file from device... ");
+                // make net version local
+                BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+                writeToFile(context, rd, fileName);
+                Log.w(HubInit.logTag, "Wrote file from the net to device...");
+            } catch (UnknownHostException e) {
+                Log.w(HubInit.logTag, "Couldn't getItem the file from the net just using file from device... ");
+            }
+            // regardless of net work with file
+            out = readFromFile(context);
         }
-
-        // regardless of net work with file
-        return readFromFile(context);
+        return out;
     }
 
     public static Calendar getLastRefreshTS() {
