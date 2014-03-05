@@ -56,7 +56,7 @@ public class GrowerDetailActivity extends Activity {
 
         // phone / email action - default is email.
         if (hasEmail(_producer) == false) {
-            imageView = (ImageView)findViewById(R.id.contactimageView);
+            imageView = (ImageView)findViewById(R.id.contactImageView);
             imageView.setImageResource(R.drawable.ic_action_call);
 
             textView = (TextView)findViewById(R.id.contactTextView);

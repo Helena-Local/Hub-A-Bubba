@@ -69,7 +69,7 @@
                     android:layout_marginTop="5dp">
 
                 <LinearLayout
-                        android:id="@+id/emailLayout"
+                        android:id="@+id/contactLayout"
                         android:orientation="horizontal"
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
@@ -183,7 +183,7 @@
                     <ImageView
                             android:layout_width="@dimen/default_list_item_image_width"
                             android:layout_height="@dimen/default_list_item_image_height"
-                            android:id="@+id/contactimageView"
+                            android:id="@+id/certImageView"
                             android:src="@drawable/default_certification"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentTop="true"
@@ -193,7 +193,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="This is a certification"
-                            android:layout_toRightOf="@+id/contactimageView"
+                            android:layout_toRightOf="@+id/certImageView"
                             android:layout_centerVertical="true"
                             android:textSize="@dimen/default_list_item_text_size"/>
                 </RelativeLayout>
@@ -207,7 +207,7 @@
                     <ImageView
                             android:layout_width="@dimen/default_list_item_image_width"
                             android:layout_height="@dimen/default_list_item_image_height"
-                            android:id="@+id/contactimageView"
+                            android:id="@+id/certImageView"
                             android:src="@drawable/default_certification"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentTop="true"
@@ -217,7 +217,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="This is another certification"
-                            android:layout_toRightOf="@+id/contactimageView"
+                            android:layout_toRightOf="@+id/certImageView"
                             android:layout_centerVertical="true"
                             android:textSize="@dimen/default_list_item_text_size"/>
                 </RelativeLayout>
