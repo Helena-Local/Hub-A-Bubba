@@ -39,4 +39,13 @@
         <item quantity="one">%d item</item>
         <item quantity="other">%d items</item>
     </plurals>
+    <string name="drawer_open">Navigation Drawer Open</string>
+    <string name="drawer_closed">Navigation Drawer Closed</string>
+    <string-array name="navigation_drawer_items">
+        <item>Events</item>
+        <item>Members</item>
+        <item>Restaurants</item>
+        <item>Producers</item>
+        <item>Products</item>
+    </string-array>
 </resources>
