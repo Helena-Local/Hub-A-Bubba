@@ -25,10 +25,14 @@ import org.helenalocal.app.MemberItemAdapter.IActionItemClickedListener;
 public class MemberFragment extends FragmentBase implements IActionItemClickedListener {
 
     private static final String LogTag = "MemberFragment";
-
     private List<Object> _itemList;
-
     private MemberItemAdapter _arrayAdapter;
+
+    @Override
+    public String getTitle() {
+        String title = getResources().getString(R.string.member_fragment_title);
+        return title;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

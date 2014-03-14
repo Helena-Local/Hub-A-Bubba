@@ -8,37 +8,37 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
 
-public class FragmentBase extends Fragment {
+abstract public class FragmentBase extends Fragment {
 
     private HubInit.HubType _hubType;
     private BroadcastReceiver _broadcastReceiver;
     private IntentFilter _intentFilter;
+    private boolean _receiverInitialized = false;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return null;
-    }
+    abstract public String getTitle();
 
     @Override
     public void onResume() {
         super.onResume();
-        registerReceiver();
-        onRefresh();
+
+        if (_receiverInitialized == true) {
+            registerReceiver();
+            onRefresh();
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        unregisterReceiver();
+
+        if (_receiverInitialized == true) {
+            unregisterReceiver();
+        }
     }
 
     protected void onRefresh() {
@@ -46,6 +46,7 @@ public class FragmentBase extends Fragment {
 
 
     protected void initializeReceiver(HubInit.HubType type) {
+        _receiverInitialized = true;
         _hubType = type;
 
         _intentFilter = new IntentFilter(Hub.HUB_DATA_REFRESH);

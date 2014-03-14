@@ -31,6 +31,12 @@ public class ProducerFragment extends FragmentBase {
     private ProducerListAdapter _arrayAdapter;
 
     @Override
+    public String getTitle() {
+        String title = getResources().getString(R.string.producer_fragment_title);
+        return title;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeReceiver(HubInit.HubType.PRODUCER_HUB);

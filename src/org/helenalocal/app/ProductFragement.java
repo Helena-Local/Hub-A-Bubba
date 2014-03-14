@@ -32,6 +32,12 @@ public class ProductFragement extends FragmentBase implements ListView.OnItemCli
     private ProductItemAdapter _arrayAdapter;
 
     @Override
+    public String getTitle() {
+        String title = getResources().getString(R.string.product_fragment_title);
+        return title;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeReceiver(HubInit.HubType.ITEM_HUB);

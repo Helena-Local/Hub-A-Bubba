@@ -14,19 +14,33 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Ad;
+import org.helenalocal.base.HubInit;
 import org.helenalocal.base.get.AdHub;
 import org.helenalocal.utils.ImageCache;
 
 import java.util.Random;
 
-public class EventsFragment extends Fragment {
+public class EventsFragment extends FragmentBase {
 
     private static final String Tag = "EventsFragment";
     private static Random random = new Random();
 
     @Override
+    public String getTitle() {
+        String title = getResources().getString(R.string.event_fragment_title);
+        return title;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initializeReceiver(HubInit.HubType.ITEM_HUB);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.events_fragment, container, false);
+
         if (AdHub.adArr.size() > 0) {
             // choose ad here!
             final Ad ad = AdHub.adArr.get(random.nextInt(AdHub.adArr.size()));
@@ -53,6 +67,7 @@ public class EventsFragment extends Fragment {
                 });
             }
         }
+
         return v;
     }
 }

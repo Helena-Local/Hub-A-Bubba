@@ -4,47 +4,49 @@
 
 package org.helenalocal.app;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.app.test.AsyncTesterTask;
 import org.helenalocal.utils.ViewServer;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends NavigationDrawerActionBarActivity {
 
-    private static final String LAST_SELECTED_TAB = "LastSelectedTab";
+    public static final String EXTRA_DRAWER_ITEM_ID = "org.helenalocal.extra.drawer_item_id";
+
+    //    private static final String LAST_SELECTED_TAB = "LastSelectedTab";
     private static final String Tag = "MainActivity";
 
 
-    private int _lastSelectedTab = 0;
+    private FragmentBase _currentFrag;
 
-    private void addTab(Class tabClass, int stringId) {
-        ActionBar actionBar = getSupportActionBar();
-        ActionBar.TabListener tabListener = new TabListener(this, tabClass);
-        ActionBar.Tab tab = actionBar.newTab();
-        tab.setText(stringId);
-        tab.setTabListener(tabListener);
-        actionBar.addTab(tab);
+
+//    private int _lastSelectedTab = 0;
+
+    @Override
+    public String getActivityTitle() {
+        return _currentFrag.getTitle();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        setupDrawer();
 
-        addTab(EventsFragment.class, R.string.event_fragment_title);
-        addTab(MemberFragment.class, R.string.member_fragment_title);
-        addTab(RestaurantFragment.class, R.string.restaurant_fragment_title);
-        addTab(ProducerFragment.class, R.string.producer_fragment_title);
-        addTab(ProductFragement.class, R.string.product_fragment_title);
+        Intent intent = getIntent();
+        int selectedItem = intent.getIntExtra(EXTRA_DRAWER_ITEM_ID, 0);
+        selectItem(selectedItem);
 
-        if (savedInstanceState != null) {
-            _lastSelectedTab = savedInstanceState.getInt(LAST_SELECTED_TAB);
-        }
+
+//        if (savedInstanceState != null) {
+//            _lastSelectedTab = savedInstanceState.getInt(LAST_SELECTED_TAB);
+//        }
 
         ViewServer.get(this).addWindow(this);
     }
@@ -53,14 +55,14 @@ public class MainActivity extends ActionBarActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putInt(LAST_SELECTED_TAB, _lastSelectedTab);
+//        outState.putInt(LAST_SELECTED_TAB, _lastSelectedTab);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        getSupportActionBar().getTabAt(_lastSelectedTab).select();
+//        getSupportActionBar().getTabAt(_lastSelectedTab).select();
 
         ((HubApplication)getApplication()).startHubThreads();
 
@@ -73,7 +75,7 @@ public class MainActivity extends ActionBarActivity {
 
         ((HubApplication)getApplication()).stopHubThreads();
 
-        _lastSelectedTab = getSupportActionBar().getSelectedTab().getPosition();
+//        _lastSelectedTab = getSupportActionBar().getSelectedTab().getPosition();
     }
 
     @Override
@@ -82,6 +84,43 @@ public class MainActivity extends ActionBarActivity {
         ViewServer.get(this).removeWindow(this);
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        super.onItemClick(parent, view, position, id);
+        selectItem(position);
+    }
+
+    private void selectItem(int position) {
+
+        switch (position) {
+            case 0:
+                _currentFrag = new EventsFragment();
+                break;
+            case 1:
+                _currentFrag = new MemberFragment();
+                break;
+            case 2:
+                _currentFrag = new RestaurantFragment();
+                break;
+            case 3:
+                _currentFrag = new ProducerFragment();
+                break;
+            case 4:
+                _currentFrag = new ProductFragement();
+                break;
+        }
+
+        Bundle args = new Bundle();
+        args.putInt(EXTRA_DRAWER_ITEM_ID, position);
+        _currentFrag.setArguments(args);
+
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction()
+                .replace(R.id.mainContent, _currentFrag)
+                .commit();
+
+//        _drawerListView.setItemChecked(position, true);
+    }
 
     public void onClick(View view) {
         AsyncTesterTask asyncTesterTask = new AsyncTesterTask(this, (HubApplication)getApplication());
