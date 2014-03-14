@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="org.helenalocal.app.GrowerDetailActivity"/>
+        <activity android:name="org.helenalocal.app.ProducerDetailActivity"/>
         <activity android:name="org.helenalocal.app.RestaurantDetailActivity"/>
         <activity android:name="org.helenalocal.app.ProductCategoryDetailActivity"/>
 

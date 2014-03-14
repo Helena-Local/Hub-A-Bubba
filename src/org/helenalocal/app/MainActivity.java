@@ -36,11 +36,11 @@ public class MainActivity extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        addTab(HomeTab.class, R.string.home_tab_text);
-        addTab(MemberTab.class, R.string.member_tab_text);
-        addTab(RestaurantTab.class, R.string.restaurant_tab_text);
-        addTab(GrowerTab.class, R.string.grower_tab_text);
-        addTab(ProductTab.class, R.string.product_tab_text);
+        addTab(EventsFragment.class, R.string.event_fragment_title);
+        addTab(MemberFragment.class, R.string.member_fragment_title);
+        addTab(RestaurantFragment.class, R.string.restaurant_fragment_title);
+        addTab(ProducerFragment.class, R.string.producer_fragment_title);
+        addTab(ProductFragement.class, R.string.product_fragment_title);
 
         if (savedInstanceState != null) {
             _lastSelectedTab = savedInstanceState.getInt(LAST_SELECTED_TAB);

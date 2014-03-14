@@ -22,9 +22,9 @@ import java.util.*;
 
 import org.helenalocal.app.MemberItemAdapter.IActionItemClickedListener;
 
-public class MemberTab extends TabBase  implements IActionItemClickedListener {
+public class MemberFragment extends FragmentBase implements IActionItemClickedListener {
 
-    private static final String LogTag = "MemberTab";
+    private static final String LogTag = "MemberFragment";
 
     private List<Object> _itemList;
 
@@ -38,7 +38,7 @@ public class MemberTab extends TabBase  implements IActionItemClickedListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.member_tab, container, false);
+        View v = inflater.inflate(R.layout.member_fragment, container, false);
         return v;
     }
 
@@ -122,8 +122,8 @@ public class MemberTab extends TabBase  implements IActionItemClickedListener {
             Log.w(LogTag, String.format("Producer for Item not found - Item Id: %s", item.getIID()));
         }
         else {
-            Intent intent = new Intent(getActivity(), GrowerDetailActivity.class);
-            intent.putExtra(GrowerDetailActivity.EXTRA_PRODUCER_ID, producer.getPID());
+            Intent intent = new Intent(getActivity(), ProducerDetailActivity.class);
+            intent.putExtra(ProducerDetailActivity.EXTRA_PRODUCER_ID, producer.getPID());
             startActivity(intent);
         }
     }

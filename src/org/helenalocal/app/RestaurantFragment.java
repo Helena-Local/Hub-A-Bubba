@@ -24,9 +24,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class RestaurantTab extends TabBase implements AdapterView.OnItemClickListener {
+public class RestaurantFragment extends FragmentBase implements AdapterView.OnItemClickListener {
 
-    private static final String LogTag = "RestaurantTab";
+    private static final String LogTag = "RestaurantFragment";
 
     private List<Buyer> _restaurantList;
     private RestaurantItemAdapter _arrayAdapter;
@@ -40,7 +40,7 @@ public class RestaurantTab extends TabBase implements AdapterView.OnItemClickLis
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.restaurant_tab, container, false);
+        return inflater.inflate(R.layout.restaurant_fragment, container, false);
     }
 
     @Override

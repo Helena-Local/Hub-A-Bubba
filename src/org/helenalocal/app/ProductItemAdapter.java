@@ -10,18 +10,18 @@ import org.helenalocal.Helena_Local_Hub.R;
 
 import java.util.List;
 
-public class ProductItemAdapter extends ArrayAdapter<ProductTab.Category> {
+public class ProductItemAdapter extends ArrayAdapter<ProductFragement.Category> {
 
     private static String logTag = "ProductItemAdapter";
 
-    public ProductItemAdapter(Context context, List<ProductTab.Category> items) {
+    public ProductItemAdapter(Context context, List<ProductFragement.Category> items) {
         super(context, R.layout.product_category_listview_item, items);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ProductTab.Category category = getItem(position);
+        ProductFragement.Category category = getItem(position);
 
         View view;
 

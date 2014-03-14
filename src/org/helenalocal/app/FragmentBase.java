@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
 
-public class TabBase extends Fragment {
+public class FragmentBase extends Fragment {
 
     private HubInit.HubType _hubType;
     private BroadcastReceiver _broadcastReceiver;

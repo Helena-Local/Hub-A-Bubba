@@ -19,14 +19,14 @@ import org.helenalocal.utils.ImageCache;
 
 import java.util.Random;
 
-public class HomeTab extends Fragment {
+public class EventsFragment extends Fragment {
 
-    private static final String Tag = "HomeTab";
+    private static final String Tag = "EventsFragment";
     private static Random random = new Random();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.home_tab, container, false);
+        View v = inflater.inflate(R.layout.events_fragment, container, false);
         if (AdHub.adArr.size() > 0) {
             // choose ad here!
             final Ad ad = AdHub.adArr.get(random.nextInt(AdHub.adArr.size()));

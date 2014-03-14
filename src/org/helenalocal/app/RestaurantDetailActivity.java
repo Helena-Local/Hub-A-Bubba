@@ -182,8 +182,8 @@ public class RestaurantDetailActivity extends Activity {
         public void onClick(View v) {
             Producer producer = (Producer)v.getTag();
 
-            Intent intent = new Intent(RestaurantDetailActivity.this, GrowerDetailActivity.class);
-            intent.putExtra(GrowerDetailActivity.EXTRA_PRODUCER_ID, producer.getPID());
+            Intent intent = new Intent(RestaurantDetailActivity.this, ProducerDetailActivity.class);
+            intent.putExtra(ProducerDetailActivity.EXTRA_PRODUCER_ID, producer.getPID());
             startActivity(intent);
         }
     }

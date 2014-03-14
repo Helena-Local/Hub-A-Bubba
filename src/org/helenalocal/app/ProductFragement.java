@@ -22,11 +22,11 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ProductTab extends TabBase implements ListView.OnItemClickListener {
+public class ProductFragement extends FragmentBase implements ListView.OnItemClickListener {
 
     public static final String CATEGORY_NAME_EXTRA = "org.helenalocal.category_name_extra";
 
-    private static String LogTag = "ProductTab";
+    private static String LogTag = "ProductFragement";
 
     private List<Category> _categoryList = new ArrayList<Category>();
     private ProductItemAdapter _arrayAdapter;
@@ -39,7 +39,7 @@ public class ProductTab extends TabBase implements ListView.OnItemClickListener 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.product_tab, container, false);
+        return inflater.inflate(R.layout.product_fragment, container, false);
     }
 
     @Override
@@ -127,9 +127,9 @@ public class ProductTab extends TabBase implements ListView.OnItemClickListener 
     }
 }
 
-//public class ProductTab extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+//public class ProductFragement extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 //
-//    private static String Tag = "ProductTab";
+//    private static String Tag = "ProductFragement";
 //    private static final int LoaderId = 0;
 //
 //    private List<Item> _itemList;

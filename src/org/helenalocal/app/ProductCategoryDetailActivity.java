@@ -23,7 +23,7 @@ public class ProductCategoryDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_category_detail_activity);
 
-        _category = getIntent().getStringExtra(ProductTab.CATEGORY_NAME_EXTRA);
+        _category = getIntent().getStringExtra(ProductFragement.CATEGORY_NAME_EXTRA);
 
         List<Item> itemList = new ArrayList<Item>();
         for (Item item : Hub.itemMap.values()) {

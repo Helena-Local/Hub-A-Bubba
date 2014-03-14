@@ -6,13 +6,11 @@ package org.helenalocal.app;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -26,17 +24,17 @@ import org.helenalocal.utils.ImageCache;
 
 import java.net.URLEncoder;
 
-public class GrowerDetailActivity extends Activity {
+public class ProducerDetailActivity extends Activity {
 
     public static final String EXTRA_PRODUCER_ID = "org.helenalocal.extra.producer_id";
 
-    private static final String Tag = "GrowerDetailActivity";
+    private static final String Tag = "ProducerDetailActivity";
 
     private Producer _producer;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.grower_detail_activity);
+        setContentView(R.layout.producer_detail_activity);
 
         String producerId = getIntent().getStringExtra(EXTRA_PRODUCER_ID);
         _producer = Hub.producerMap.get(producerId);

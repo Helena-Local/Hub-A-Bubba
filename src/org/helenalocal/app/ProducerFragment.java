@@ -24,11 +24,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class GrowerTab extends TabBase {
+public class ProducerFragment extends FragmentBase {
 
-    private static String Tag = "GrowerTab";
-    private List<Producer> _growerList;
-    private GrowerListAdapter _arrayAdapter;
+    private static String Tag = "ProducerFragment";
+    private List<Producer> _producerList;
+    private ProducerListAdapter _arrayAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class GrowerTab extends TabBase {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.grower_tab, container, false);
+        return inflater.inflate(R.layout.producer_fragment, container, false);
     }
 
     @Override
@@ -46,10 +46,10 @@ public class GrowerTab extends TabBase {
         super.onActivityCreated(savedInstanceState);
 
         ImageCache cache = ((HubApplication)getActivity().getApplication()).getImageCache();
-        _growerList = new ArrayList<Producer>();
-        _arrayAdapter = new GrowerListAdapter(getActivity(), _growerList, cache);
+        _producerList = new ArrayList<Producer>();
+        _arrayAdapter = new ProducerListAdapter(getActivity(), _producerList, cache);
 
-        ListView listView = (ListView) getActivity().findViewById(R.id.growerListView);
+        ListView listView = (ListView) getActivity().findViewById(R.id.producerListView);
         listView.setAdapter(_arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -58,8 +58,8 @@ public class GrowerTab extends TabBase {
 
                 Producer producer = (Producer) ((ListView)parent).getItemAtPosition(position);
 
-                Intent intent = new Intent(getActivity(), GrowerDetailActivity.class);
-                intent.putExtra(GrowerDetailActivity.EXTRA_PRODUCER_ID, producer.getPID());
+                Intent intent = new Intent(getActivity(), ProducerDetailActivity.class);
+                intent.putExtra(ProducerDetailActivity.EXTRA_PRODUCER_ID, producer.getPID());
                 startActivity(intent);
             }
         });
@@ -69,7 +69,7 @@ public class GrowerTab extends TabBase {
     public void onRefresh() {
         super.onRefresh();
 
-        _growerList.clear();
+        _producerList.clear();
 
         // add producers who are at serviceLevel = 2 (local) or (serviceLevel > 0 and have at least one order)!
         ArrayList<Producer> localList = new ArrayList<Producer>();
@@ -110,8 +110,8 @@ public class GrowerTab extends TabBase {
         });
 
         // add them in order
-        _growerList.addAll(localList);
-        _growerList.addAll(regionalList);
+        _producerList.addAll(localList);
+        _producerList.addAll(regionalList);
         _arrayAdapter.notifyDataSetChanged();
     }
 }

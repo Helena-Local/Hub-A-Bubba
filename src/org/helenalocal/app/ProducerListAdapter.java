@@ -13,12 +13,12 @@ import org.helenalocal.utils.ImageCache;
 
 import java.util.List;
 
-public class GrowerListAdapter extends ArrayAdapter<Producer> {
-    private static String logTag = "GrowerListAdapter";
+public class ProducerListAdapter extends ArrayAdapter<Producer> {
+    private static String logTag = "ProducerListAdapter";
     private ImageCache _imageCache;
 
-    public GrowerListAdapter(Context context, List<Producer> items, ImageCache imageCache) {
-        super(context, R.layout.grower_listview_item, items);
+    public ProducerListAdapter(Context context, List<Producer> items, ImageCache imageCache) {
+        super(context, R.layout.producer_listview_item, items);
         _imageCache = imageCache;
     }
 
@@ -35,7 +35,7 @@ public class GrowerListAdapter extends ArrayAdapter<Producer> {
         }
         else {
             LayoutInflater li = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = li.inflate(R.layout.grower_listview_item, parent, false);
+            view = li.inflate(R.layout.producer_listview_item, parent, false);
         }
 
         ImageView imageView = (ImageView)view.findViewById(R.id.producerImageView);

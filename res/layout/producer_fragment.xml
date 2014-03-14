@@ -8,23 +8,24 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-        android:background="@android:color/white">
+              android:background="@android:color/white">
 
     <LinearLayout
             style="@style/activity_header"
             android:orientation="vertical">
 
-        <TextView style="@style/activity_welcome_text"
-                  android:id="@+id/textView"
-                  android:text="@string/restaurant_welcome"/>
+        <TextView
+                style="@style/activity_welcome_text"
+                android:id="@+id/textView"
+                android:text="@string/producer_fragment_welcome"/>
 
     </LinearLayout>
 
-    <ListView android:id="@+id/restaurantListView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/list_view_padding"
-            android:clipToPadding="false"
-            android:scrollbarStyle="outsideOverlay"/>
+    <ListView android:id="@+id/producerListView"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="@dimen/list_view_padding"
+              android:clipToPadding="false"
+              android:scrollbarStyle="outsideOverlay"/>
 
 </LinearLayout>

@@ -17,7 +17,7 @@
         <TextView
                 style="@style/activity_welcome_text"
                 android:id="@+id/welcomeText"
-                android:text="@string/product_tab_welcome"/>
+                android:text="@string/product_fragment_welcome"/>
 
     </LinearLayout>
 
