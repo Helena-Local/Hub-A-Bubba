@@ -29,8 +29,9 @@ public class RestaurantDetailFragment extends FragmentBase implements View.OnCli
     private Buyer _buyer;
 
     @Override
-    public String getTitle() {
-        return null;
+    public int getTitleId() {
+        // todo - figure out title stuff
+        return 0;
     }
 
     @Override

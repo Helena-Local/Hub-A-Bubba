@@ -32,9 +32,8 @@ public class ProductFragement extends FragmentBase implements ListView.OnItemCli
     private ProductItemAdapter _arrayAdapter;
 
     @Override
-    public String getTitle() {
-        String title = getResources().getString(R.string.product_fragment_title);
-        return title;
+    public int getTitleId() {
+        return R.string.product_fragment_title;
     }
 
     @Override

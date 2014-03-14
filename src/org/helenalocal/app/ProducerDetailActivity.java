@@ -4,13 +4,9 @@
 
 package org.helenalocal.app;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.NavUtils;
-import android.view.View;
-import android.widget.AdapterView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.Producer;
@@ -24,6 +20,11 @@ public class ProducerDetailActivity extends NavigationDrawerActionBarActivity {
     @Override
     public CharSequence getActivityTitle() {
         return getTitle();
+    }
+
+    @Override
+    protected int getHierarchialParent() {
+        return PRODUCER_HOME;
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -46,14 +47,5 @@ public class ProducerDetailActivity extends NavigationDrawerActionBarActivity {
 
         setupDrawer();
         _drawerToggle.setDrawerIndicatorEnabled(false);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        super.onItemClick(parent, view, position, id);
-
-        Intent upIntent = NavUtils.getParentActivityIntent(this);
-        upIntent.putExtra(MainActivity.EXTRA_DRAWER_ITEM_ID, position);
-        NavUtils.navigateUpTo(this, upIntent);
     }
 }

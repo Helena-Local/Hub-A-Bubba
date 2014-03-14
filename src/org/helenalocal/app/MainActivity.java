@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import org.helenalocal.Helena_Local_Hub.R;
@@ -23,15 +24,21 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
     private static final String LogTag = "MainActivity";
     private static final String PREFS_FIRST_RUN = "FirstRun";
     private static final int DRAWER_OPEN_DELAY_MS = 750;
-    //    private static final String LAST_SELECTED_TAB = "LastSelectedTab";
+    private static final String LAST_SELECTED_FRAGMENT = "LastSelectedFragment";
 
 
     private FragmentBase _currentFrag;
-//    private int _lastSelectedTab = 0;
+    private int _lastSelectedFragment = 0;
 
     @Override
     public String getActivityTitle() {
-        return _currentFrag.getTitle();
+        String title = getResources().getString(_currentFrag.getTitleId());
+        return title;
+    }
+
+    @Override
+    protected int getHierarchialParent() {
+        return EVENT_HOME;
     }
 
     @Override
@@ -40,9 +47,13 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
 
         setupDrawer();
 
-        Intent intent = getIntent();
-        int selectedItem = intent.getIntExtra(EXTRA_DRAWER_ITEM_ID, 0);
-        selectItem(selectedItem);
+        if (savedInstanceState != null) {
+            _lastSelectedFragment = savedInstanceState.getInt(LAST_SELECTED_FRAGMENT);
+        }
+        else {
+            Intent intent = getIntent();
+            _lastSelectedFragment = intent.getIntExtra(EXTRA_DRAWER_ITEM_ID, 0);
+        }
 
         // pop the drawer open on the first run after installation to let the user know it is there
         SharedPreferences prefs = getPreferences(MODE_PRIVATE);
@@ -54,11 +65,6 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
 
             new Handler().postDelayed(openDrawerRunnable(), DRAWER_OPEN_DELAY_MS);
         }
-
-
-//        if (savedInstanceState != null) {
-//            _lastSelectedTab = savedInstanceState.getInt(LAST_SELECTED_TAB);
-//        }
 
         ViewServer.get(this).addWindow(this);
     }
@@ -76,14 +82,14 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-//        outState.putInt(LAST_SELECTED_TAB, _lastSelectedTab);
+        outState.putInt(LAST_SELECTED_FRAGMENT, _lastSelectedFragment);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-//        getSupportActionBar().getTabAt(_lastSelectedTab).select();
+        selectItem(_lastSelectedFragment);
 
         ((HubApplication)getApplication()).startHubThreads();
 
@@ -95,8 +101,6 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
         super.onPause();
 
         ((HubApplication)getApplication()).stopHubThreads();
-
-//        _lastSelectedTab = getSupportActionBar().getSelectedTab().getPosition();
     }
 
     @Override
@@ -107,8 +111,8 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        super.onItemClick(parent, view, position, id);
         selectItem(position);
+        _drawerlayout.closeDrawer(_drawerListView);
     }
 
     private void selectItem(int position) {
@@ -140,8 +144,11 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
                 .replace(R.id.mainContent, _currentFrag)
                 .commit();
 
-//        _drawerListView.setItemChecked(position, true);
+        _lastSelectedFragment = position;
+        _drawerListView.setItemChecked(position, true);
+        setTitle(getActivityTitle());
     }
+
 
     public void onClick(View view) {
         AsyncTesterTask asyncTesterTask = new AsyncTesterTask(this, (HubApplication)getApplication());

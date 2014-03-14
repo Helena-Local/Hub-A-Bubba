@@ -31,9 +31,8 @@ public class ProducerFragment extends FragmentBase {
     private ProducerListAdapter _arrayAdapter;
 
     @Override
-    public String getTitle() {
-        String title = getResources().getString(R.string.producer_fragment_title);
-        return title;
+    public int getTitleId() {
+        return R.string.producer_fragment_title;
     }
 
     @Override

@@ -29,9 +29,8 @@ public class MemberFragment extends FragmentBase implements IActionItemClickedLi
     private MemberItemAdapter _arrayAdapter;
 
     @Override
-    public String getTitle() {
-        String title = getResources().getString(R.string.member_fragment_title);
-        return title;
+    public int getTitleId() {
+        return R.string.member_fragment_title;
     }
 
     @Override

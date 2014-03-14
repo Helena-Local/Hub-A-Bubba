@@ -26,9 +26,8 @@ public class EventsFragment extends FragmentBase {
     private static Random random = new Random();
 
     @Override
-    public String getTitle() {
-        String title = getResources().getString(R.string.event_fragment_title);
-        return title;
+    public int getTitleId() {
+        return R.string.event_fragment_title;
     }
 
     @Override

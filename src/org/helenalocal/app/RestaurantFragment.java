@@ -32,9 +32,8 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
     private RestaurantItemAdapter _arrayAdapter;
 
     @Override
-    public String getTitle() {
-        String title = getResources().getString(R.string.restaurant_fragment_title);
-        return title;
+    public int getTitleId() {
+        return R.string.restaurant_fragment_title;
     }
 
     @Override

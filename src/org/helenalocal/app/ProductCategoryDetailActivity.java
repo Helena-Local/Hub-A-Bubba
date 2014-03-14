@@ -4,19 +4,10 @@
 
 package org.helenalocal.app;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.NavUtils;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import org.helenalocal.Helena_Local_Hub.R;
-import org.helenalocal.base.Hub;
-import org.helenalocal.base.Item;
-
-import java.util.*;
 
 public class ProductCategoryDetailActivity extends NavigationDrawerActionBarActivity {
 
@@ -25,6 +16,11 @@ public class ProductCategoryDetailActivity extends NavigationDrawerActionBarActi
     @Override
     public CharSequence getActivityTitle() {
         return getTitle();
+    }
+
+    @Override
+    protected int getHierarchialParent() {
+        return PRODUCT_HOME;
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -46,14 +42,5 @@ public class ProductCategoryDetailActivity extends NavigationDrawerActionBarActi
 
         setupDrawer();
         _drawerToggle.setDrawerIndicatorEnabled(false);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        super.onItemClick(parent, view, position, id);
-
-        Intent upIntent = NavUtils.getParentActivityIntent(this);
-        upIntent.putExtra(MainActivity.EXTRA_DRAWER_ITEM_ID, position);
-        NavUtils.navigateUpTo(this, upIntent);
     }
 }

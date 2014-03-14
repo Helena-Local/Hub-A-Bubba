@@ -20,7 +20,7 @@ abstract public class FragmentBase extends Fragment {
     private IntentFilter _intentFilter;
     private boolean _receiverInitialized = false;
 
-    abstract public String getTitle();
+    abstract public int getTitleId();
 
     @Override
     public void onResume() {

@@ -1,7 +1,9 @@
 package org.helenalocal.app;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
@@ -13,12 +15,21 @@ import org.helenalocal.Helena_Local_Hub.R;
 
 public abstract class NavigationDrawerActionBarActivity extends ActionBarActivity implements ListView.OnItemClickListener {
 
-    public abstract CharSequence getActivityTitle();
+    // todo - create dynamic mapping
+    public static int EVENT_HOME = 0;
+    public static int MEMBER_HOME = 1;
+    public static int RESTAURANT_HOME = 2;
+    public static int PRODUCER_HOME = 3;
+    public static int PRODUCT_HOME = 4;
 
-    private String[] _drawerItems;
+    public abstract CharSequence getActivityTitle();
+    protected abstract int getHierarchialParent();
+
     protected DrawerLayout _drawerlayout;
     protected ActionBarToggle _drawerToggle;
-    private ListView _drawerListView;
+    protected ListView _drawerListView;
+
+    private String[] _drawerItems;
 
     public CharSequence getDrawerTitle() {
         return getResources().getString(R.string.app_name);
@@ -51,7 +62,14 @@ public abstract class NavigationDrawerActionBarActivity extends ActionBarActivit
 
         boolean handled = true;
         if (_drawerToggle.onOptionsItemSelected(item) == false) {
-            handled = super.onOptionsItemSelected(item);
+            if (item.getItemId() == android.R.id.home) {
+                Intent upIntent = NavUtils.getParentActivityIntent(this);
+                upIntent.putExtra(MainActivity.EXTRA_DRAWER_ITEM_ID, getHierarchialParent());
+                NavUtils.navigateUpTo(this, upIntent);
+            }
+            else {
+                handled = super.onOptionsItemSelected(item);
+            }
         }
 
         return handled;
@@ -65,6 +83,10 @@ public abstract class NavigationDrawerActionBarActivity extends ActionBarActivit
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent upIntent = NavUtils.getParentActivityIntent(this);
+        upIntent.putExtra(MainActivity.EXTRA_DRAWER_ITEM_ID, position);
+        NavUtils.navigateUpTo(this, upIntent);
+
         _drawerlayout.closeDrawer(_drawerListView);
     }
 
