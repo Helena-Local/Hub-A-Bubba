@@ -4,7 +4,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,14 +13,14 @@ import org.helenalocal.Helena_Local_Hub.R;
 
 public abstract class NavigationDrawerActionBarActivity extends ActionBarActivity implements ListView.OnItemClickListener {
 
-    public abstract String getActivityTitle();
+    public abstract CharSequence getActivityTitle();
 
     private String[] _drawerItems;
     private DrawerLayout _drawerlayout;
     protected ActionBarToggle _drawerToggle;
     private ListView _drawerListView;
 
-    public String getDrawerTitle() {
+    public CharSequence getDrawerTitle() {
         return getResources().getString(R.string.app_name);
     }
 

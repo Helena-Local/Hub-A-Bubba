@@ -86,8 +86,7 @@
                     <TextView
                             android:id="@+id/callTextView"
                             style="@style/detailActivityActionItem"
-                            android:text="@string/restaurant_call_action"
-                            android:onClick="onClickCall"/>
+                            android:text="@string/restaurant_call_action"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -107,8 +106,7 @@
                     <TextView
                         android:id="@+id/mapTextView"
                         style="@style/detailActivityActionItem"
-                        android:text="@string/restaurant_map_action"
-                        android:onClick="onClickMap"/>
+                        android:text="@string/restaurant_map_action"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -128,8 +126,7 @@
                     <TextView
                         android:id="@+id/urlTextView"
                         style="@style/detailActivityActionItem"
-                        android:text="@string/restaurant_website_action"
-                        android:onClick="onClickUrl"/>
+                        android:text="@string/restaurant_website_action"/>
                 </LinearLayout>
 
             </LinearLayout>

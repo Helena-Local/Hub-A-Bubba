@@ -85,8 +85,7 @@
                     <TextView
                             android:id="@+id/contactTextView"
                             style="@style/detailActivityActionItem"
-                            android:text="@string/producer_email_action"
-                            android:onClick="onClickEmail"/>
+                            android:text="@string/producer_email_action"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -106,8 +105,7 @@
                     <TextView
                             android:id="@+id/mapTextView"
                             style="@style/detailActivityActionItem"
-                            android:text="@string/producer_map_action"
-                            android:onClick="onClickMap"/>
+                            android:text="@string/producer_map_action"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -127,8 +125,7 @@
                     <TextView
                             android:id="@+id/urlTextView"
                             style="@style/detailActivityActionItem"
-                            android:text="@string/producer_website_action"
-                            android:onClick="onClickUrl"/>
+                            android:text="@string/producer_website_action"/>
                 </LinearLayout>
 
             </LinearLayout>

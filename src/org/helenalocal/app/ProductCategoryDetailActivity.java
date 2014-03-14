@@ -4,8 +4,13 @@
 
 package org.helenalocal.app;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NavUtils;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Hub;
@@ -13,36 +18,42 @@ import org.helenalocal.base.Item;
 
 import java.util.*;
 
-public class ProductCategoryDetailActivity extends Activity {
+public class ProductCategoryDetailActivity extends NavigationDrawerActionBarActivity {
+
     private static final String LogTag = "ProductCategoryDetailActivity";
 
-    private String _category;
-    private ProductCategoryDetailAdapter _adapter;
+    @Override
+    public CharSequence getActivityTitle() {
+        return getTitle();
+    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.product_category_detail_activity);
 
-        _category = getIntent().getStringExtra(ProductFragement.CATEGORY_NAME_EXTRA);
+        String category = getIntent().getStringExtra(ProductFragement.CATEGORY_NAME_EXTRA);
+        setTitle(category);
 
-        List<Item> itemList = new ArrayList<Item>();
-        for (Item item : Hub.itemMap.values()) {
-            if ((item.getUnitsAvailable() > 0) && (item.getCategory().equalsIgnoreCase(_category))) {
-                itemList.add(item);
-            }
-        }
+        Bundle args = new Bundle();
+        args.putString(ProductFragement.CATEGORY_NAME_EXTRA, category);
 
-        _adapter = new ProductCategoryDetailAdapter(this, itemList);
-        ListView listView = (ListView)findViewById(R.id.listView);
-        listView.setAdapter(_adapter);
-        _adapter.notifyDataSetChanged();
+        Fragment frag = new ProductCategoryDetailFragment();
+        frag.setArguments(args);
+
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction()
+                .replace(R.id.mainContent, frag)
+                .commit();
+
+        setupDrawer();
+        _drawerToggle.setDrawerIndicatorEnabled(false);
     }
-
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        super.onItemClick(parent, view, position, id);
 
+        Intent upIntent = NavUtils.getParentActivityIntent(this);
+        upIntent.putExtra(MainActivity.EXTRA_DRAWER_ITEM_ID, position);
+        NavUtils.navigateUpTo(this, upIntent);
     }
-
 }
