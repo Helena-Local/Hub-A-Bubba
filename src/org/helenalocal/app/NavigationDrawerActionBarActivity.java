@@ -16,7 +16,7 @@ public abstract class NavigationDrawerActionBarActivity extends ActionBarActivit
     public abstract CharSequence getActivityTitle();
 
     private String[] _drawerItems;
-    private DrawerLayout _drawerlayout;
+    protected DrawerLayout _drawerlayout;
     protected ActionBarToggle _drawerToggle;
     private ListView _drawerListView;
 

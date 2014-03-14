@@ -5,10 +5,11 @@
 package org.helenalocal.app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.view.GravityCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import org.helenalocal.Helena_Local_Hub.R;
@@ -19,13 +20,13 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
 
     public static final String EXTRA_DRAWER_ITEM_ID = "org.helenalocal.extra.drawer_item_id";
 
+    private static final String LogTag = "MainActivity";
+    private static final String PREFS_FIRST_RUN = "FirstRun";
+    private static final int DRAWER_OPEN_DELAY_MS = 750;
     //    private static final String LAST_SELECTED_TAB = "LastSelectedTab";
-    private static final String Tag = "MainActivity";
 
 
     private FragmentBase _currentFrag;
-
-
 //    private int _lastSelectedTab = 0;
 
     @Override
@@ -43,12 +44,32 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
         int selectedItem = intent.getIntExtra(EXTRA_DRAWER_ITEM_ID, 0);
         selectItem(selectedItem);
 
+        // pop the drawer open on the first run after installation to let the user know it is there
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        boolean firstRun = prefs.getBoolean(PREFS_FIRST_RUN, true);
+        if (firstRun == true) {
+            SharedPreferences.Editor prefEdit = prefs.edit();
+            prefEdit.putBoolean(PREFS_FIRST_RUN, false);
+            prefEdit.apply();
+
+            new Handler().postDelayed(openDrawerRunnable(), DRAWER_OPEN_DELAY_MS);
+        }
+
 
 //        if (savedInstanceState != null) {
 //            _lastSelectedTab = savedInstanceState.getInt(LAST_SELECTED_TAB);
 //        }
 
         ViewServer.get(this).addWindow(this);
+    }
+
+    private Runnable openDrawerRunnable() {
+        return new Runnable() {
+            @Override
+            public void run() {
+                _drawerlayout.openDrawer(GravityCompat.START);
+            }
+        };
     }
 
     @Override
