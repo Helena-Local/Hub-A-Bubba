@@ -142,7 +142,7 @@ public class RestaurantDetailFragment extends FragmentBase implements View.OnCli
             textView.setText(item.getProductDesc());
 
             textView = (TextView) tableRow.findViewById(R.id.purchaseDateTextView);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
             textView.setText(String.format(getResources().getString(R.string.product_purchase_date), dateFormat.format(order.getDate().getTime())));
 
             tableLayout.addView(tableRow);
