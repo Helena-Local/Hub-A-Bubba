@@ -41,4 +41,9 @@ public class MockHub extends Hub {
 
         return myItems;
     }
+
+    @Override
+    public void refresh() {
+
+    }
 }

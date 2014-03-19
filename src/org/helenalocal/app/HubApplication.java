@@ -5,10 +5,7 @@
 package org.helenalocal.app;
 
 import android.app.Application;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.*;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import org.helenalocal.app.service.HubInitService;
@@ -37,6 +34,7 @@ public class HubApplication extends Application {
     private BroadcastReceiver _hubInitReceiver;
     private boolean _hubInitialized = false;
     private boolean _startHubThreads = false;
+    private boolean _firstAppRun = true;
 
     public ImageCache getImageCache() {
         return _imageCache;
@@ -54,18 +52,30 @@ public class HubApplication extends Application {
     }
 
     private void startHubInitService() {
+
+        // setup the broadcast receiver for when the service has finished
         IntentFilter filter = new IntentFilter(HubInitService.HUB_INIT_FINISHED);
         filter.addCategory(Intent.CATEGORY_DEFAULT);
 
-        _hubInitReceiver = new BroadcastReceiver() {
+        _hubInitReceiver = getHubInitReceiver();
+        LocalBroadcastManager.getInstance(this).registerReceiver(_hubInitReceiver, filter);
+
+        // start the service
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
+        _firstAppRun = prefs.getBoolean(Preferences.FIRST_RUN_AFTER_INSTALL, true);
+
+        Intent startIntent = new Intent(this, HubInitService.class);
+        startIntent.putExtra(HubInitService.EXTRA_APP_FIRST_RUN, _firstAppRun);
+        startService(startIntent);
+    }
+
+    private BroadcastReceiver getHubInitReceiver() {
+        return new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 onHubInitFinished();
             }
         };
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(_hubInitReceiver, filter);
-        startService(new Intent(this, HubInitService.class));
     }
 
     private void onHubInitFinished() {
@@ -77,6 +87,17 @@ public class HubApplication extends Application {
         _hubInitialized = true;
         if (_startHubThreads == true) {
             startHubThreads(getApplicationContext());
+        }
+
+        // todo - update the first time value to false;
+        if (_firstAppRun == true) {
+            Log.w(LogTag, "Updating SharedPreferences");
+
+            _firstAppRun = false;
+            SharedPreferences prefs = getApplicationContext().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
+            SharedPreferences.Editor prefEdit = prefs.edit();
+            prefEdit.putBoolean(Preferences.FIRST_RUN_AFTER_INSTALL, false);
+            prefEdit.apply();
         }
     }
 

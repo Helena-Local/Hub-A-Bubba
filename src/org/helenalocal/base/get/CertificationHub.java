@@ -111,24 +111,29 @@ public class CertificationHub extends Hub implements Runnable {
             isFirstLoad = false;
             out = readFromFile(context);
         } else {
-            HttpClient client = new DefaultHttpClient();
-            HttpGet request = new HttpGet(certificationHubDataUrl);
-            try {
-                // first try the net
-                HttpResponse response = client.execute(request);
-                Log.w(HubInit.logTag, "HTTP execute Response.getStatusLine() = " + response.getStatusLine());
-
-                // make net version local
-                BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                writeToFile(context, rd, fileName);
-                Log.w(HubInit.logTag, "Wrote file from the net to device...");
-            } catch (UnknownHostException e) {
-                Log.w(HubInit.logTag, "Couldn't getItem the file from the net just using file from device... ");
-            }
-            // regardless of net work with file
-            out = readFromFile(context);
+           out = loadFromServer(context);
         }
         return out;
+    }
+
+    protected HashMap<String, Certification> loadFromServer(Context context) throws IOException {
+        HttpClient client = new DefaultHttpClient();
+        HttpGet request = new HttpGet(certificationHubDataUrl);
+        try {
+            // first try the net
+            HttpResponse response = client.execute(request);
+            Log.w(HubInit.logTag, "HTTP execute Response.getStatusLine() = " + response.getStatusLine());
+
+            // make net version local
+            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            writeToFile(context, rd, fileName);
+            Log.w(HubInit.logTag, "Wrote file from the net to device...");
+        } catch (UnknownHostException e) {
+            Log.w(HubInit.logTag, "Couldn't getItem the file from the net just using file from device... ");
+        }
+
+        // regardless of net work with file
+        return readFromFile(context);
     }
 
     public static Calendar getLastRefreshTS() {
@@ -178,11 +183,20 @@ public class CertificationHub extends Hub implements Runnable {
         try {
             Hub.certificationMap = new CertificationHub(context).getCertificationMap();
             broadcastRefresh(context, HubType.CERTIFICATION_HUB);
-            Log.w(logTag, "OrderHub().getCertificationMapMap loaded...");
+            Log.w(logTag, "CertificationHub().getCertificationMap loaded...");
         } catch (IOException e) {
-            Log.w(logTag, "OrderHub().getCertificationMap couldn't be loaded...");
+            Log.w(logTag, "CertificationHub().getCertificationMap couldn't be loaded...");
         }
-
     }
 
+    @Override
+    public void refresh() {
+        try {
+            Hub.certificationMap = loadFromServer(context);
+            broadcastRefresh(context, HubType.CERTIFICATION_HUB);
+            Log.w(logTag, "CertificationHub.refresh() loaded...");
+        } catch (IOException e) {
+            Log.w(logTag, "CertificationHub.refresh() could not be loaded...");
+        }
+    }
 }

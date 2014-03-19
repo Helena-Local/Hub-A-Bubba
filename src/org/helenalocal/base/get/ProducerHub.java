@@ -159,24 +159,30 @@ public class ProducerHub extends Hub implements Runnable {
             isFirstLoad = false;
             out = readFromFile(context);
         } else {
-            HttpClient client = new DefaultHttpClient();
-            HttpGet request = new HttpGet(producerHubDataUrl);
-            try {
-                // first try the net
-                HttpResponse response = client.execute(request);
-                Log.w(HubInit.logTag, "HTTP execute Response.getStatusLine() = " + response.getStatusLine());
-
-                // make net version local
-                BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                writeToFile(context, rd, fileName);
-                Log.w(HubInit.logTag, "Wrote file from the net to device...");
-            } catch (UnknownHostException e) {
-                Log.w(HubInit.logTag, "Couldn't getItem the file from the net just using file from device... ");
-            }
-            // regardless of net work with file
-            out = readFromFile(context);
+            out = loadFromServer(context);
         }
+
         return out;
+    }
+
+    protected HashMap<String, Producer> loadFromServer(Context context) throws IOException {
+        HttpClient client = new DefaultHttpClient();
+        HttpGet request = new HttpGet(producerHubDataUrl);
+        try {
+            // first try the net
+            HttpResponse response = client.execute(request);
+            Log.w(HubInit.logTag, "HTTP execute Response.getStatusLine() = " + response.getStatusLine());
+
+            // make net version local
+            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            writeToFile(context, rd, fileName);
+            Log.w(HubInit.logTag, "Wrote file from the net to device...");
+        } catch (UnknownHostException e) {
+            Log.w(HubInit.logTag, "Couldn't getItem the file from the net just using file from device... ");
+        }
+
+        // regardless of net work with file
+        return readFromFile(context);
     }
 
     // This is used for submitting producer availability
@@ -227,6 +233,16 @@ public class ProducerHub extends Hub implements Runnable {
         } catch (IOException e) {
             Log.w(logTag, "ProducerHub().getProducerMap couldn't be loaded...");
         }
+    }
 
+    @Override
+    public void refresh() {
+        try {
+            Hub.producerMap = loadFromServer(context);
+            broadcastRefresh(context, HubType.PRODUCER_HUB);
+            Log.w(logTag, "ProducerHub().refresh loaded...");
+        } catch (IOException e) {
+            Log.w(logTag, "ProducerHub().refresh couldn't be loaded...");
+        }
     }
 }

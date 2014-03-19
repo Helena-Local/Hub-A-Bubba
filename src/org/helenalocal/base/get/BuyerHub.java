@@ -168,24 +168,30 @@ public class BuyerHub extends Hub implements Runnable {
             isFirstLoad = false;
             out = readFromFile(context);
         } else {
-            HttpClient client = new DefaultHttpClient();
-            HttpGet request = new HttpGet(buyerHubDataUrl);
-            try {
-                // first try the net
-                HttpResponse response = client.execute(request);
-                Log.w(HubInit.logTag, "HTTP execute Response.getStatusLine() = " + response.getStatusLine());
-
-                // make net version local
-                BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                writeToFile(context, rd, fileName);
-                Log.w(HubInit.logTag, "Wrote file from the net to device...");
-            } catch (UnknownHostException e) {
-                Log.w(HubInit.logTag, "Couldn't getItem the file from the net just using file from device... ");
-            }
-            // regardless of net work with file
-            out = readFromFile(context);
+            out = loadFromServer(context);
         }
+
         return out;
+    }
+
+    protected HashMap<String, Buyer> loadFromServer(Context context) throws IOException {
+        HttpClient client = new DefaultHttpClient();
+        HttpGet request = new HttpGet(buyerHubDataUrl);
+        try {
+            // first try the net
+            HttpResponse response = client.execute(request);
+            Log.w(HubInit.logTag, "HTTP execute Response.getStatusLine() = " + response.getStatusLine());
+
+            // make net version local
+            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            writeToFile(context, rd, fileName);
+            Log.w(HubInit.logTag, "Wrote file from the net to device...");
+        } catch (UnknownHostException e) {
+            Log.w(HubInit.logTag, "Couldn't getItem the file from the net just using file from device... ");
+        }
+
+        // regardless of net work with file
+        return readFromFile(context);
     }
 
     public static Calendar getLastRefreshTS() {
@@ -211,6 +217,17 @@ public class BuyerHub extends Hub implements Runnable {
             Log.w(logTag, "BuyerHub().getBuyerMap loaded...");
         } catch (IOException e) {
             Log.w(logTag, "BuyerHub().getBuyerMap couldn't be loaded...");
+        }
+    }
+
+    @Override
+    public void refresh() {
+        try {
+            Hub.buyerMap = loadFromServer(context);
+            broadcastRefresh(context, HubType.BUYER_HUB);
+            Log.w(logTag, "BuyerHub().refresh loaded...");
+        } catch (IOException e) {
+            Log.w(logTag, "BuyerHub().refresh couldn't be loaded...");
         }
     }
 }

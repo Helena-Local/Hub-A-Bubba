@@ -255,4 +255,10 @@ public class InitHub extends Hub implements Runnable {
             Log.w(logTag, "InitHub().getInitHub couldn't be loaded...");
         }
     }
+
+    @Override
+    public void refresh() {
+        // since we always load our data from the server simply call run() for now.
+        run();
+    }
 }

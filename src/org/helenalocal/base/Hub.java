@@ -39,6 +39,8 @@ public abstract class Hub extends HubInit {
 
     public static ProducerHub producerHub = new ProducerHub(null);
 
+    public abstract void refresh();
+
     protected void writeToFile(Context context, String data, String fileName) {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_PRIVATE));

@@ -130,24 +130,29 @@ public class OrderHub extends Hub implements Runnable {
             isFirstLoad = false;
             out = readFromFile(context);
         } else {
-            HttpClient client = new DefaultHttpClient();
-            HttpGet request = new HttpGet(orderHubDataUrl);
-            try {
-                // first try the net
-                HttpResponse response = client.execute(request);
-                Log.w(HubInit.logTag, "HTTP execute Response.getStatusLine() = " + response.getStatusLine());
-
-                // make net version local
-                BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                writeToFile(context, rd, fileName);
-                Log.w(HubInit.logTag, "Wrote file from the net to device...");
-            } catch (UnknownHostException e) {
-                Log.w(HubInit.logTag, "Couldn't getItem the file from the net just using file from device... ");
-            }
-            // regardless of net work with file
-            out = readFromFile(context);
+            out = loadFromServer(context);
         }
         return out;
+    }
+
+    protected List<Order> loadFromServer(Context context) throws IOException {
+        HttpClient client = new DefaultHttpClient();
+        HttpGet request = new HttpGet(orderHubDataUrl);
+        try {
+            // first try the net
+            HttpResponse response = client.execute(request);
+            Log.w(HubInit.logTag, "HTTP execute Response.getStatusLine() = " + response.getStatusLine());
+
+            // make net version local
+            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            writeToFile(context, rd, fileName);
+            Log.w(HubInit.logTag, "Wrote file from the net to device...");
+        } catch (UnknownHostException e) {
+            Log.w(HubInit.logTag, "Couldn't getItem the file from the net just using file from device... ");
+        }
+
+        // regardless of net work with file
+        return readFromFile(context);
     }
 
     public static List<Order> getOrdersForBuyer(String buyerId) {
@@ -174,7 +179,16 @@ public class OrderHub extends Hub implements Runnable {
         } catch (IOException e) {
             Log.w(logTag, "OrderHub().getOrderMap couldn't be loaded...");
         }
-
     }
 
+    @Override
+    public void refresh() {
+        try {
+            Hub.orderArr = loadFromServer(context);
+            broadcastRefresh(context, HubType.ORDER_HUB);
+            Log.w(logTag, "OrderHub().refresh loaded...");
+        } catch (IOException e) {
+            Log.w(logTag, "OrderHub().refresh couldn't be loaded...");
+        }
+    }
 }
