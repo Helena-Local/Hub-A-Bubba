@@ -4,6 +4,7 @@
 
 package org.helenalocal.app;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,6 +32,8 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
     private int _lastSelectedFragment = 0;
     private SharedPreferences.OnSharedPreferenceChangeListener _preferenceChangedListener;
 
+    private ProgressDialog _waitScreen;
+
     @Override
     public String getActivityTitle() {
         String title = getResources().getString(_currentFrag.getTitleId());
@@ -56,46 +59,7 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
             _lastSelectedFragment = intent.getIntExtra(EXTRA_DRAWER_ITEM_ID, 0);
         }
 
-        SharedPreferences prefs = getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
-        boolean firstRun = prefs.getBoolean(Preferences.FIRST_RUN_AFTER_INSTALL, true);
-        if (firstRun == true) {
-
-            // pop the drawer open on the first run after installation to let the user know it is there
-            new Handler().postDelayed(openDrawerRunnable(), DRAWER_OPEN_DELAY_MS);
-
-            // todo - toss up a wait screen while the data loads for the first time.
-            // toss up a wait screen while the data loads for the first time.
-
-            // wait for the load to finish
-            _preferenceChangedListener = getPreferenceChangedListener();
-            prefs.registerOnSharedPreferenceChangeListener(_preferenceChangedListener);
-        }
-
         ViewServer.get(this).addWindow(this);
-    }
-
-    private Runnable openDrawerRunnable() {
-        return new Runnable() {
-            @Override
-            public void run() {
-                _drawerlayout.openDrawer(GravityCompat.START);
-            }
-        };
-    }
-
-    private SharedPreferences.OnSharedPreferenceChangeListener getPreferenceChangedListener() {
-        return new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                Log.w(LogTag, "onSharedPreferencesChanged");
-
-                if (key.equals(Preferences.FIRST_RUN_AFTER_INSTALL)) {
-                    SharedPreferences prefs = getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
-                    prefs.unregisterOnSharedPreferenceChangeListener(_preferenceChangedListener);
-                    _preferenceChangedListener = null;
-                }
-            }
-        };
     }
 
     @Override
@@ -111,6 +75,7 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
 
         selectItem(_lastSelectedFragment);
 
+        setupFirstAppRun();
         ((HubApplication)getApplication()).startHubThreads();
 
         ViewServer.get(this).setFocusedWindow(this);
@@ -120,6 +85,7 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
     protected void onPause() {
         super.onPause();
 
+        teardownFirstAppRun();
         ((HubApplication)getApplication()).stopHubThreads();
     }
 
@@ -133,6 +99,80 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         selectItem(position);
         _drawerlayout.closeDrawer(_drawerListView);
+    }
+
+    private void setupFirstAppRun() {
+        SharedPreferences prefs = getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
+        boolean firstRun = prefs.getBoolean(Preferences.FIRST_RUN_AFTER_INSTALL, true);
+        if (firstRun == true) {
+
+            // toss up a wait screen while the data loads for the first time.
+            setupWaitScreen();
+
+            // wait for the load to finish
+            registerPreferenceChangedListener();
+        }
+    }
+
+    private void teardownFirstAppRun() {
+        teardownWaitScreen();
+        unregisterPreferenceChangedListener();
+    }
+
+    private void setupWaitScreen() {
+        _waitScreen = new ProgressDialog(this);
+        _waitScreen.setMessage(getResources().getString(R.string.appInitializing));
+        _waitScreen.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        _waitScreen.setCanceledOnTouchOutside(false);
+        _waitScreen.show();
+    }
+
+    private void teardownWaitScreen() {
+        if (_waitScreen != null) {
+            _waitScreen.dismiss();
+            _waitScreen = null;
+        }
+    }
+
+    private void registerPreferenceChangedListener() {
+        SharedPreferences prefs = getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
+        _preferenceChangedListener = getPreferenceChangedListener();
+        prefs.registerOnSharedPreferenceChangeListener(_preferenceChangedListener);
+    }
+
+    private void unregisterPreferenceChangedListener() {
+        if (_preferenceChangedListener != null) {
+
+            SharedPreferences prefs = getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
+            prefs.unregisterOnSharedPreferenceChangeListener(_preferenceChangedListener);
+            _preferenceChangedListener = null;
+        }
+    }
+
+
+    private SharedPreferences.OnSharedPreferenceChangeListener getPreferenceChangedListener() {
+        return new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
+                if (key.equals(Preferences.FIRST_RUN_AFTER_INSTALL)) {
+                    teardownWaitScreen();
+                    unregisterPreferenceChangedListener();
+
+                    // pop the drawer open on the first run after installation to let the user know it is there
+                    new Handler().postDelayed(openDrawerRunnable(), DRAWER_OPEN_DELAY_MS);
+                }
+            }
+        };
+    }
+
+    private Runnable openDrawerRunnable() {
+        return new Runnable() {
+            @Override
+            public void run() {
+                _drawerlayout.openDrawer(GravityCompat.START);
+            }
+        };
     }
 
     private void selectItem(int position) {

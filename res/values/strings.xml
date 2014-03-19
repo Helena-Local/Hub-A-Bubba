@@ -48,4 +48,5 @@
         <item>Producers</item>
         <item>Products</item>
     </string-array>
+    <string name="appInitializing">Initializing...</string>
 </resources>
