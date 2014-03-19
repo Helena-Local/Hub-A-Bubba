@@ -89,7 +89,6 @@ public class HubApplication extends Application {
             startHubThreads(getApplicationContext());
         }
 
-        // todo - update the first time value to false;
         if (_firstAppRun == true) {
             Log.w(LogTag, "Updating SharedPreferences");
 
@@ -113,14 +112,29 @@ public class HubApplication extends Application {
     }
 
     private void startHubThreads(Context context) {
+        Log.w(LogTag, "startHubThreads - firstAppRun: " + _firstAppRun);
         Log.w(LogTag, "startHubThreads exec.getQueue().size() = " + exec.getQueue().size());
-        // schedule hub refreshes...
-        itemHubScheduledFuture = exec.scheduleWithFixedDelay(new ItemHub(context), 0, HubInit.getItemDelay(), TimeUnit.MINUTES);
-        orderHubScheduledFuture = exec.scheduleWithFixedDelay(new OrderHub(context), 0, HubInit.getOrderDelay(), TimeUnit.MINUTES);
-        buyerHubScheduledFuture = exec.scheduleWithFixedDelay(new BuyerHub(context), 0, HubInit.getBuyerDelay(), TimeUnit.MINUTES);
-        producerHubScheduledFuture = exec.scheduleWithFixedDelay(new ProducerHub(context), 0, HubInit.getProducerDelay(), TimeUnit.MINUTES);
-        certificationHubScheduledFuture = exec.scheduleWithFixedDelay(new CertificationHub(context), 0, HubInit.getCertificateDelay(), TimeUnit.MINUTES);
-        adHubScheduledFuture = exec.scheduleWithFixedDelay(new AdHub(context), 0, HubInit.getAdDelay(), TimeUnit.MINUTES);
+
+        // if this was the first run after installation the data was just loaded and no need to load it immediately
+
+        long initialDelay = (_firstAppRun == false) ? 0 : HubInit.getItemDelay();
+        itemHubScheduledFuture = exec.scheduleWithFixedDelay(new ItemHub(context), initialDelay, HubInit.getItemDelay(), TimeUnit.MINUTES);
+
+        initialDelay = (_firstAppRun == false) ? 0 : HubInit.getOrderDelay();
+        orderHubScheduledFuture = exec.scheduleWithFixedDelay(new OrderHub(context), initialDelay, HubInit.getOrderDelay(), TimeUnit.MINUTES);
+
+        initialDelay = (_firstAppRun == false) ? 0 : HubInit.getBuyerDelay();
+        buyerHubScheduledFuture = exec.scheduleWithFixedDelay(new BuyerHub(context), initialDelay, HubInit.getBuyerDelay(), TimeUnit.MINUTES);
+
+        initialDelay = (_firstAppRun == false) ? 0 : HubInit.getProducerDelay();
+        producerHubScheduledFuture = exec.scheduleWithFixedDelay(new ProducerHub(context), initialDelay, HubInit.getProducerDelay(), TimeUnit.MINUTES);
+
+        initialDelay = (_firstAppRun == false) ? 0 : HubInit.getCertificateDelay();
+        certificationHubScheduledFuture = exec.scheduleWithFixedDelay(new CertificationHub(context), initialDelay, HubInit.getCertificateDelay(), TimeUnit.MINUTES);
+
+        initialDelay = (_firstAppRun == false) ? 0 : HubInit.getAdDelay();
+        adHubScheduledFuture = exec.scheduleWithFixedDelay(new AdHub(context), initialDelay, HubInit.getAdDelay(), TimeUnit.MINUTES);
+
         Log.w(LogTag, "startHubThreads exec.getQueue().size() = " + exec.getQueue().size());
     }
 
