@@ -88,7 +88,7 @@ public class MemberFragment extends FragmentBase implements ProductItem.IActionI
         ImageCache imageCache = ((HubApplication)getActivity().getApplication()).getImageCache();
 
         // insert the marquee item first
-        _itemList.add(new MarqueeItem());
+        _itemList.add(new MarqueeItem(getActivity()));
 
         // now that we have the data sorted by and organized by category, flatten it out into a list.
         for (Map.Entry<String, List<Item>> entry : productMap.entrySet()) {

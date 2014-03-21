@@ -27,14 +27,46 @@
 
     <TextView
             android:id="@+id/textViewBody"
-            android:text="Not a member? Visit buy.helenalocal.org to purchase shares and become a member today!"
+            android:text="Put some sorta text here about something more relavant than what is here now."
             android:autoLink="web"
             android:textSize="14sp"
             android:fontFamily="sans-serif-light"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="10dp"/>
+
+    <View style="@style/horizontalDivider"/>
+
+    <RelativeLayout
+            android:id="@+id/actionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+        <TextView
+                android:id="@+id/infoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/helena_local_blue"
+                android:background = "?attr/clickableItemBackground"
+                android:clickable = "true"
+                android:focusable = "true"
+                android:text="CSA Info"/>
+
+        <TextView
+                android:id="@+id/buyTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/helena_local_blue"
+                android:background = "?attr/clickableItemBackground"
+                android:clickable = "true"
+                android:focusable = "true"
+                android:text="Buy Shares"
+                android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
 
 </LinearLayout>
 
