@@ -15,6 +15,7 @@ import android.widget.ListView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.*;
 import org.helenalocal.base.get.OrderHub;
+import org.helenalocal.utils.ActivityUtils;
 import org.helenalocal.utils.ImageCache;
 
 import java.text.SimpleDateFormat;
@@ -135,13 +136,13 @@ public class MemberFragment extends FragmentBase implements IActionItemClickedLi
     public void onAboutItemClicked(Item item) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(item.getProductUrl()));
-        startActivity(intent);
+        ActivityUtils.startImplicitActivity(getActivity(), intent, R.string.unable_to_start_activity, LogTag);
     }
 
     @Override
     public void onRecipeItemClicked(Item item) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(item.getRecipeUrl()));
-        startActivity(intent);
+        ActivityUtils.startImplicitActivity(getActivity(), intent, R.string.unable_to_start_activity, LogTag);
     }
 }

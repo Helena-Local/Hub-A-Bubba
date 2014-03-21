@@ -15,6 +15,7 @@ import android.widget.*;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.*;
 import org.helenalocal.base.get.OrderHub;
+import org.helenalocal.utils.ActivityUtils;
 import org.helenalocal.utils.ImageCache;
 
 import java.net.URLEncoder;
@@ -177,19 +178,16 @@ public class RestaurantDetailFragment extends FragmentBase implements View.OnCli
     private void onClickCall() {
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:" + _buyer.getPhone()));
-        startActivity(intent);
+        ActivityUtils.startImplicitActivity(getActivity(), intent, R.string.no_phone_application, LogTag);
     }
 
     private void onClickMap() {
-        // todo - verify that the maps application is installed (apparently it is not on a kindle)
-
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             String address = String.format("%s %s", _buyer.getName(), _buyer.getLocation());
             String data = String.format("geo:0,0?q=%s", URLEncoder.encode(address, "UTF-8"));
-
             intent.setData(Uri.parse(data));
-            startActivity(intent);
+            ActivityUtils.startImplicitActivity(getActivity(), intent, R.string.no_maps_application, LogTag);
         } catch (Exception e) {
         }
     }
@@ -197,7 +195,7 @@ public class RestaurantDetailFragment extends FragmentBase implements View.OnCli
     private void onClickUrl() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(_buyer.getWebsiteUrl()));
-        startActivity(intent);
+        ActivityUtils.startImplicitActivity(getActivity(), intent, R.string.no_web_browser_application, LogTag);
     }
 
     private void onClickCertification(Certification cert) {
@@ -205,7 +203,7 @@ public class RestaurantDetailFragment extends FragmentBase implements View.OnCli
         if (cert.getWebsiteUrl().isEmpty() == false) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(cert.getWebsiteUrl()));
-            startActivity(intent);
+            ActivityUtils.startImplicitActivity(getActivity(), intent, R.string.no_web_browser_application, LogTag);
         }
     }
 

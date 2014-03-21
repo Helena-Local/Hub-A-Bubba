@@ -12,15 +12,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.*;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Certification;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
 import org.helenalocal.base.Producer;
+import org.helenalocal.utils.ActivityUtils;
 import org.helenalocal.utils.ImageCache;
 
 import java.net.URLEncoder;
@@ -121,7 +119,7 @@ public class ProducerDetailFragment extends Fragment implements View.OnClickList
     }
 
     private boolean hasEmail(Producer producer) {
-        return _producer.getContactEmail().contains("@");
+        return producer.getContactEmail().contains("@");
     }
 
 
@@ -147,43 +145,57 @@ public class ProducerDetailFragment extends Fragment implements View.OnClickList
 
     private void onClickContact() {
         if (hasEmail(_producer)) {
-            Log.w(LogTag, "got an email");
-            Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + _producer.getContactEmail() + "," + HubInit.getHubEmailTo()));
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Hub Request For: " + _producer.getName());
-            emailIntent.putExtra(Intent.EXTRA_TEXT, "<grower love here...>");
-            startActivity(Intent.createChooser(emailIntent, "Send email..."));
+            Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + _producer.getContactEmail() + "," + HubInit.getHubEmailTo()));
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Hub Request For: " + _producer.getName());
+            intent.putExtra(Intent.EXTRA_TEXT, "<grower love here...>");
+            ActivityUtils.startImplicitActivity(getActivity(), intent, R.string.no_email_application, LogTag);
         } else {
-            Log.w(LogTag, "got a phone");
-            Intent intent = new Intent(Intent.ACTION_DIAL);
-            intent.setData(Uri.parse("tel:" + _producer.getContactEmail()));
-            startActivity(intent);
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + _producer.getContactEmail()));
+            ActivityUtils.startImplicitActivity(getActivity(), intent, R.string.no_phone_application, LogTag);
         }
     }
 
     private void onClickMap() {
-        // todo - verify that the maps application is installed (apparently it is not on a kindle)
-
         try {
+
+            // various ways to check if 'the' google maps is installed. getApplicationInfo & getPackageInfo will throw
+            // PackageManager.NameNotFoundException if maps is not installed while getLaunchIntentForPackage will return
+            // null
+            //            ApplicationInfo aInfo = getActivity().getPackageManager().getApplicationInfo("com.google.android.apps.maps", 0);
+            //            PackageInfo pInfo = getActivity().getPackageManager().getPackageInfo("com.google.android.apps.maps", PackageManager.GET_ACTIVITIES);
+            //            Intent i = getActivity().getPackageManager().getLaunchIntentForPackage("com.google.android.apps.maps");
+
+            // vaious ways to check if there is an activity that can handle the desired intent. Either an empty list (queryIntentActivities)
+            // or null (resolveActivity) wil be returned
+            //            List<ResolveInfo> l = getActivity().getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+            //            ResolveInfo r = getActivity().getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+            //            ComponentName cn = intent.resolveActivity(getActivity().getPackageManager());
+
+
             Intent intent = new Intent(Intent.ACTION_VIEW);
             String data = String.format("geo:0,0?q=%s", URLEncoder.encode(_producer.getLocation(), "UTF-8"));
-
             intent.setData(Uri.parse(data));
-            startActivity(intent);
-        } catch (Exception e) {
+            ActivityUtils.startImplicitActivity(getActivity(), intent, R.string.no_maps_application, LogTag);
+        }
+        catch (Exception e) {
+            Log.w(LogTag, e.toString());
         }
     }
 
     private void onClickUrl() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(_producer.getWebsiteUrl()));
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(_producer.getWebsiteUrl()));
+            ActivityUtils.startImplicitActivity(getActivity(), intent, R.string.no_web_browser_application, LogTag);
+        }
+        catch (Exception e) {
+            Log.w(LogTag, e.toString());
+        }
     }
 
     private void onClickCertification(Certification cert) {
         if (cert.getWebsiteUrl().isEmpty() == false) {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(cert.getWebsiteUrl()));
-            startActivity(intent);
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(cert.getWebsiteUrl()));
+            ActivityUtils.startImplicitActivity(getActivity(), intent, R.string.no_web_browser_application, LogTag);
         }
     }
 }

@@ -49,4 +49,9 @@
         <item>Products</item>
     </string-array>
     <string name="appInitializing">Initializing...</string>
+    <string name="no_maps_application">A mapping application is not installed on this device</string>
+    <string name="no_email_application">An email application is not installed on this device</string>
+    <string name="no_phone_application">This device does not have the ability to make phone calls</string>
+    <string name="no_web_browser_application">A web browser is not installed on this device</string>
+    <string name="unable_to_start_activity">Unable to start activity</string>
 </resources>
