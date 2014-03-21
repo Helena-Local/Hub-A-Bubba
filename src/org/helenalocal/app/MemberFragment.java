@@ -13,6 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import org.helenalocal.Helena_Local_Hub.R;
+import org.helenalocal.app.member.ListItem;
+import org.helenalocal.app.member.MarqueeItem;
+import org.helenalocal.app.member.ProductItem;
+import org.helenalocal.app.member.SectionItem;
 import org.helenalocal.base.*;
 import org.helenalocal.base.get.OrderHub;
 import org.helenalocal.utils.ActivityUtils;
@@ -21,12 +25,10 @@ import org.helenalocal.utils.ImageCache;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import org.helenalocal.app.MemberItemAdapter.IActionItemClickedListener;
-
-public class MemberFragment extends FragmentBase implements IActionItemClickedListener {
+public class MemberFragment extends FragmentBase implements ProductItem.IActionItemClickedListener {
 
     private static final String LogTag = "MemberFragment";
-    private List<Object> _itemList;
+    private List<ListItem> _itemList;
     private MemberItemAdapter _arrayAdapter;
 
     @Override
@@ -52,8 +54,8 @@ public class MemberFragment extends FragmentBase implements IActionItemClickedLi
 
         ImageCache cache = ((HubApplication)getActivity().getApplication()).getImageCache();
 
-        _itemList = new ArrayList<Object>();
-        _arrayAdapter = new MemberItemAdapter(getActivity(), cache, _itemList, this);
+        _itemList = new ArrayList<ListItem>();
+        _arrayAdapter = new MemberItemAdapter(getActivity(), _itemList, this);
 
         ListView listView = (ListView)getActivity().findViewById(R.id.memberListView);
         listView.addHeaderView(new View(getActivity()));
@@ -83,13 +85,17 @@ public class MemberFragment extends FragmentBase implements IActionItemClickedLi
 
         }
 
-        // now that we have the data sorted by and organized by category, flatten it out into a list.
-        // NOTE: This list contains both String (category) and Item (product)
         _itemList.clear();
+        ImageCache imageCache = ((HubApplication)getActivity().getApplication()).getImageCache();
+
+        // insert the marquee item first
+        _itemList.add(new MarqueeItem());
+
+        // now that we have the data sorted by and organized by category, flatten it out into a list.
         for (Map.Entry<String, List<Item>> entry : productMap.entrySet()) {
 
             // add the category
-            _itemList.add(entry.getKey());
+            _itemList.add(new SectionItem(entry.getKey()));
 
             // sort the products
             List<Item> productList = entry.getValue();
@@ -103,7 +109,7 @@ public class MemberFragment extends FragmentBase implements IActionItemClickedLi
             // add the products
             for (Item item : productList) {
                 Log.w(LogTag, item.getProductDesc());
-                _itemList.add(item);
+                _itemList.add(new ProductItem(item, imageCache, this));
             }
         }
 

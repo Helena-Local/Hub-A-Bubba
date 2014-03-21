@@ -10,22 +10,6 @@
               android:layout_height="match_parent"
               android:background="@color/detail_activity_background">
 
-    <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:background="@drawable/header_background_temp"
-            android:padding="8dp"
-            android:minHeight="48dp"
-            android:orientation="vertical">
-
-        <TextView
-                style="@style/activity_welcome_text"
-                android:text="Visit buy.helenalocal.org to purchase shares."
-                android:id="@+id/textView"
-                android:autoLink="web"/>
-
-    </LinearLayout>
-
     <ListView
             style="@style/cardListView"
             android:id="@+id/memberListView"

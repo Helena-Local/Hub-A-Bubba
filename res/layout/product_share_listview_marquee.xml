@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:minHeight="48dp"
+              android:baselineAligned="false"
+              android:paddingTop="@dimen/default_list_item_padding_top"
+              android:paddingLeft="@dimen/default_list_item_padding_left"
+              android:paddingRight="@dimen/default_list_item_padding_right"
+              android:paddingBottom="@dimen/default_list_item_padding_bottom"
+              android:background="@drawable/card_background">
+
+
+    <TextView
+            android:id="@+id/textViewHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Shares for the week of March 17th"
+            android:fontFamily="sans-serif-light"/>
+
+    <TextView
+            android:id="@+id/textViewBody"
+            android:text="Not a member? Visit buy.helenalocal.org to purchase shares and become a member today!"
+            android:autoLink="web"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-light"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"/>
+
+</LinearLayout>
+
+
