@@ -10,7 +10,12 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
+import org.helenalocal.base.Hub;
+import org.helenalocal.base.HubInit;
+import org.helenalocal.base.Order;
 import org.helenalocal.utils.ActivityUtils;
+
+import java.text.SimpleDateFormat;
 
 public class MarqueeItem extends ListItem implements View.OnClickListener {
 
@@ -28,6 +33,19 @@ public class MarqueeItem extends ListItem implements View.OnClickListener {
 
     @Override
     public void loadView(View view) {
+        // TODO not sure this goes here...
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d");
+        String csaDateStr = "";
+
+        for (int i=0; i < Hub.orderArr.size(); i++) {
+            Order o = Hub.orderArr.get(i);
+            if (o.getBuyerID().equals(HubInit.HELENA_LOCAL_BUYER_ID)) {
+                csaDateStr = dateFormat.format(o.getDate().getTime());
+                break;
+            }
+        }
+        TextView textHeader = (TextView) view.findViewById(R.id.textViewHeader);
+        textHeader.setText("Shares for the week of " + csaDateStr);
 
         // info click listener
         TextView textView = (TextView) view.findViewById(R.id.infoTextView);
@@ -40,7 +58,6 @@ public class MarqueeItem extends ListItem implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
         if (v.getId() == R.id.infoTextView) {
             onClickInfo();
         }
@@ -51,13 +68,13 @@ public class MarqueeItem extends ListItem implements View.OnClickListener {
 
     private void onClickInfo() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("http://sites.google.com/site/helenalocalcsa2/about"));
+        intent.setData(Uri.parse(Hub.buyerMap.get(HubInit.HELENA_LOCAL_BUYER_ID).getContactEmail()));
         ActivityUtils.startImplicitActivity(_context, intent, R.string.no_web_browser_application, LogTag);
     }
 
     private void onClickBuy() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("http://buy.helenalocal.org"));
+        intent.setData(Uri.parse(Hub.buyerMap.get(HubInit.HELENA_LOCAL_BUYER_ID).getWebsiteUrl()));
         ActivityUtils.startImplicitActivity(_context, intent, R.string.no_web_browser_application, LogTag);
     }
 }

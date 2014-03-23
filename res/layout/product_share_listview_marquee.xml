@@ -22,12 +22,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Shares for the week of March 17th"
-            android:fontFamily="sans-serif-light"/>
+            android:fontFamily="sans-serif-light" android:text="Shares for the week of March 17th"/>
 
     <TextView
             android:id="@+id/textViewBody"
-            android:text="Put some sorta text here about something more relavant than what is here now."
+            android:text="CSA members will be receiving the following items in their shares. Enjoy them and contact us if you have questions!"
             android:autoLink="web"
             android:textSize="14sp"
             android:fontFamily="sans-serif-light"
