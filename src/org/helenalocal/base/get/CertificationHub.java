@@ -105,13 +105,18 @@ public class CertificationHub extends Hub implements Runnable {
     }
 
     public HashMap<String, Certification> getCertificationMap() throws IOException {
-        HashMap<String, Certification> out;
-        if (isFirstLoad) {
-            // try to load disk file first.
+        HashMap<String, Certification> out = new HashMap<String, Certification>();
+        try {
+            if (isFirstLoad) {
+                // try to load disk file first.
+                out = readFromFile(context);
+            } else {
+                out = loadFromServer(context);
+            }
+        } catch (IOException ie) {
+            Log.w(logTag, "CertificationHub().getCertificationMap couldn't be loaded...");
+        } finally {
             isFirstLoad = false;
-            out = readFromFile(context);
-        } else {
-           out = loadFromServer(context);
         }
         return out;
     }

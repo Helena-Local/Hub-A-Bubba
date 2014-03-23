@@ -162,15 +162,19 @@ public class BuyerHub extends Hub implements Runnable {
     }
 
     public HashMap<String, Buyer> getBuyerMap() throws IOException {
-        HashMap<String, Buyer> out;
-        if (isFirstLoad) {
-            // try to load disk file first.
+        HashMap<String, Buyer> out = new HashMap<String, Buyer>();
+        try {
+            if (isFirstLoad) {
+                // try to load disk file first.
+                out = readFromFile(context);
+            } else {
+                out = loadFromServer(context);
+            }
+        } catch (IOException ie) {
+            Log.w(logTag, "BuyerHub().getBuyerMap couldn't be loaded...");
+        } finally {
             isFirstLoad = false;
-            out = readFromFile(context);
-        } else {
-            out = loadFromServer(context);
         }
-
         return out;
     }
 

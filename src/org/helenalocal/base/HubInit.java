@@ -37,6 +37,7 @@ public abstract class HubInit {
 
     protected static String hubEmailTo = "info@helenalocal.org";
     protected static String hubEmailSubject = "HL Hub - Request email...";
+    protected static String hubEventCalUrl = "";
 
     protected static long buyerDelay = 5;
     protected static long itemDelay = 1;
@@ -45,6 +46,14 @@ public abstract class HubInit {
     protected static long certificateDelay = 5;
     protected static long adDelay = 1;
     protected static long adPlayRate = 1;
+
+    public static String getHubEventCalUrl() {
+        return hubEventCalUrl;
+    }
+
+    public static void setHubEventCalUrl(String hubEventCalUrl) {
+        HubInit.hubEventCalUrl = hubEventCalUrl;
+    }
 
     public static long getBuyerDelay() {
         return buyerDelay;

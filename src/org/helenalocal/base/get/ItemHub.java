@@ -151,13 +151,18 @@ public class ItemHub extends Hub implements Runnable {
     }
 
     public HashMap<String, Item> getItemMap() throws IOException {
-        HashMap<String, Item> out;
-        if (isFirstLoad) {
-            // try to load disk file first.
+        HashMap<String, Item> out = new HashMap<String, Item>();
+        try {
+            if (isFirstLoad) {
+                // try to load disk file first.
+                out = readFromFile(context);
+            } else {
+                out = loadFromServer(context);
+            }
+        } catch (IOException ie) {
+            Log.w(logTag, "ItemHub().getItemMap couldn't be loaded...");
+        } finally {
             isFirstLoad = false;
-            out = readFromFile(context);
-        } else {
-            out = loadFromServer(context);
         }
         return out;
     }

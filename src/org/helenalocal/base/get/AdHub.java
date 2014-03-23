@@ -97,13 +97,18 @@ public class AdHub extends Hub implements Runnable {
     }
 
     public List<Ad> getAdArr() throws IOException {
-        List<Ad> out;
-        if (isFirstLoad) {
-            // try to load disk file first.
+        List<Ad> out = new ArrayList<Ad>();
+        try {
+            if (isFirstLoad) {
+                // try to load disk file first.
+                out = readFromFile(context);
+            } else {
+                out = loadFromServer(context);
+            }
+        } catch (IOException ie) {
+            Log.w(logTag, "AdHub().getAdMap couldn't be loaded...");
+        } finally {
             isFirstLoad = false;
-            out = readFromFile(context);
-        } else {
-            out = loadFromServer(context);
         }
         return out;
     }

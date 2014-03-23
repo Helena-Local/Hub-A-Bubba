@@ -124,13 +124,18 @@ public class OrderHub extends Hub implements Runnable {
     }
 
     public List<Order> getOrderArr() throws IOException {
-        List<Order> out;
-        if (isFirstLoad) {
-            // try to load disk file first.
+        List<Order> out = new ArrayList<Order>();
+        try {
+            if (isFirstLoad) {
+                // try to load disk file first.
+                out = readFromFile(context);
+            } else {
+                out = loadFromServer(context);
+            }
+        } catch (IOException ie) {
+            Log.w(logTag, "OrderHub().getOrderArr couldn't be loaded...");
+        } finally {
             isFirstLoad = false;
-            out = readFromFile(context);
-        } else {
-            out = loadFromServer(context);
         }
         return out;
     }

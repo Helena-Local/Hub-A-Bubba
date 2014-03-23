@@ -153,15 +153,19 @@ public class ProducerHub extends Hub implements Runnable {
     }
 
     public HashMap<String, Producer> getProducerMap() throws IOException {
-        HashMap<String, Producer> out;
-        if (isFirstLoad) {
-            // try to load disk file first.
+        HashMap<String, Producer> out = new HashMap<String, Producer>();
+        try {
+            if (isFirstLoad) {
+                // try to load disk file first.
+                out = readFromFile(context);
+            } else {
+                out = loadFromServer(context);
+            }
+        } catch (IOException ie) {
+            Log.w(logTag, "ProducerHub().getProducerMap couldn't be loaded...");
+        } finally {
             isFirstLoad = false;
-            out = readFromFile(context);
-        } else {
-            out = loadFromServer(context);
         }
-
         return out;
     }
 

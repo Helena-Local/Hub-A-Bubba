@@ -138,6 +138,13 @@ public class InitHub extends Hub implements Runnable {
                     Log.w(HubInit.logTag, "hubEmailSubject = " + HubInit.getHubEmailSubject());
                 }
                 if (iterator.hasNext()) {
+                    String hubEventCalUrl = iterator.next();
+                    if (!hubEventCalUrl.equals("")) {
+                        HubInit.setHubEventCalUrl(hubEventCalUrl);
+                    }
+                    Log.w(HubInit.logTag, "hubEventCalUrl = " + HubInit.getHubEventCalUrl());
+                }
+                if (iterator.hasNext()) {
                     String buyerDelay = iterator.next();
                     if (!buyerDelay.equals("")) {
                         HubInit.setBuyerDelay(Long.parseLong(buyerDelay.trim()));
