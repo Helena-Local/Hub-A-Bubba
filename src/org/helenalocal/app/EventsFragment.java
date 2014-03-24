@@ -6,13 +6,13 @@ package org.helenalocal.app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import org.helenalocal.Helena_Local_Hub.R;
+import org.helenalocal.app.restaurant.RestaurantDetailActivity;
 import org.helenalocal.base.Ad;
 import org.helenalocal.base.HubInit;
 import org.helenalocal.base.get.AdHub;

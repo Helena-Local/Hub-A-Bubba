@@ -30,7 +30,7 @@
                        android:value="org.helenalocal.app.MainActivity"/>
         </activity>
 
-        <activity android:name="org.helenalocal.app.RestaurantDetailActivity"
+        <activity android:name="org.helenalocal.app.restaurant.RestaurantDetailActivity"
                   android:parentActivityName="org.helenalocal.app.MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                        android:value="org.helenalocal.app.MainActivity"/>
