@@ -4,7 +4,9 @@
 
 package org.helenalocal.app;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.base.Buyer;
 import org.helenalocal.base.Hub;
@@ -24,7 +27,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class RestaurantFragment extends FragmentBase implements AdapterView.OnItemClickListener {
+public class RestaurantFragment extends FragmentBase implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     private static final String LogTag = "RestaurantFragment";
 
@@ -60,6 +63,18 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
 
         listView.setClickable(true);
         listView.setOnItemClickListener(this);
+
+        SharedPreferences prefs = getActivity().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
+        boolean headerCleared = prefs.getBoolean(Preferences.RESTAURANT_INFO_HEADER_CLEARED, false);
+        if (headerCleared == true) {
+            View header = getActivity().findViewById(R.id.infoHeader);
+            header.setVisibility(View.GONE);
+        }
+        else {
+
+            TextView textview = (TextView) getActivity().findViewById(R.id.gotItTextView);
+            textview.setOnClickListener(this);
+        }
     }
 
     @Override
@@ -130,5 +145,21 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
         Intent i = new Intent(getActivity(), RestaurantDetailActivity.class);
         i.putExtra(RestaurantDetailActivity.EXTRA_BUYER_ID, buyer.getBID());
         startActivity(i);
+    }
+
+    /**
+     *
+     * View.OnClickListener
+     */
+    @Override
+    public void onClick(View v) {
+
+        SharedPreferences prefs = getActivity().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = prefs.edit();
+        edit.putBoolean(Preferences.RESTAURANT_INFO_HEADER_CLEARED, true);
+        edit.apply();
+
+        View header = getActivity().findViewById(R.id.infoHeader);
+        header.setVisibility(View.GONE);
     }
 }

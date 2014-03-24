@@ -8,5 +8,6 @@ public class Preferences {
 
     public static final String File = "org.helenalocal.preferences";
     public static final String FIRST_RUN_AFTER_INSTALL = "FirstRunAfterInstall";
+    public static final String RESTAURANT_INFO_HEADER_CLEARED = "RestaurantInfoHeaderCleared";
 
 }
