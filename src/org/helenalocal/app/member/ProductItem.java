@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
+import org.helenalocal.app.ListItem;
 import org.helenalocal.base.Item;
 import org.helenalocal.utils.ImageCache;
 

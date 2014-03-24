@@ -14,13 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.app.FragmentBase;
 import org.helenalocal.app.HubApplication;
+import org.helenalocal.app.ListItem;
 import org.helenalocal.app.Preferences;
-import org.helenalocal.app.RestaurantItemAdapter;
-import org.helenalocal.app.restaurant.RestaurantDetailActivity;
 import org.helenalocal.base.Buyer;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
@@ -32,11 +30,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class RestaurantFragment extends FragmentBase implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class RestaurantFragment extends FragmentBase implements AdapterView.OnItemClickListener, InfoHeaderItem.IInfoHeaderDismissedListener {
 
     private static final String LogTag = "RestaurantFragment";
 
-    private List<Buyer> _restaurantList;
+    private List<ListItem> _restaurantList;
     private RestaurantItemAdapter _arrayAdapter;
 
     @Override
@@ -60,7 +58,7 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
         super.onActivityCreated(savedInstanceState);
 
         ImageCache cache = ((HubApplication)getActivity().getApplication()).getImageCache();
-        _restaurantList = new ArrayList<Buyer>();
+        _restaurantList = new ArrayList<ListItem>();
         _arrayAdapter = new RestaurantItemAdapter(getActivity(), _restaurantList, cache);
 
         ListView listView = (ListView) getActivity().findViewById(R.id.restaurantListView);
@@ -68,18 +66,6 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
 
         listView.setClickable(true);
         listView.setOnItemClickListener(this);
-
-        SharedPreferences prefs = getActivity().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
-        boolean headerCleared = prefs.getBoolean(Preferences.RESTAURANT_INFO_HEADER_CLEARED, false);
-        if (headerCleared == true) {
-            View header = getActivity().findViewById(R.id.infoHeader);
-            header.setVisibility(View.GONE);
-        }
-        else {
-
-            TextView textview = (TextView) getActivity().findViewById(R.id.gotItTextView);
-            textview.setOnClickListener(this);
-        }
     }
 
     @Override
@@ -88,10 +74,18 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
 
         _restaurantList.clear();
 
+        SharedPreferences prefs = getActivity().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
+        boolean infoDismissed= prefs.getBoolean(Preferences.RESTAURANT_INFO_HEADER_DISMISSED, false);
+        if (infoDismissed == false) {
+            _restaurantList.add(new InfoHeaderItem(this));
+        }
+
+        ImageCache imageCache = ((HubApplication)(getActivity().getApplication())).getImageCache();
+
         // add buyers
-        ArrayList<Buyer> premiumWithOrdersList = new ArrayList<Buyer>();
-        ArrayList<Buyer> justOrdersList = new ArrayList<Buyer>();
-        ArrayList<Buyer> premiumNoOrdersList = new ArrayList<Buyer>();
+        ArrayList<BuyerItem> premiumWithOrdersList = new ArrayList<BuyerItem>();
+        ArrayList<BuyerItem> justOrdersList = new ArrayList<BuyerItem>();
+        ArrayList<BuyerItem> premiumNoOrdersList = new ArrayList<BuyerItem>();
 
         ArrayList<Buyer> buyerArrayList = new ArrayList<Buyer>(Hub.buyerMap.values());
         for (int j = 0; j < buyerArrayList.size(); j++) {
@@ -102,32 +96,32 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
             int serviceLevel = Integer.valueOf(buyer.getServiceLevel().trim());
             // Service Level (0-off, 1-on, 2-premium)
             if ((serviceLevel == 2) && (buyer.getOrderCnt() > 0)) {
-                premiumWithOrdersList.add(buyer);
+                premiumWithOrdersList.add(new BuyerItem(buyer, imageCache));
             } else if ((serviceLevel != 0) && buyer.getOrderCnt() > 0) {
-                justOrdersList.add(buyer);
+                justOrdersList.add(new BuyerItem(buyer, imageCache));
             } else if (serviceLevel == 2) {
-                premiumNoOrdersList.add(buyer);
+                premiumNoOrdersList.add(new BuyerItem(buyer, imageCache));
             }
             Log.w(LogTag, "buyer.getName() = " + buyer.getName() + "; serviceLevel = " + serviceLevel + "; orderCnt = " + buyer.getOrderCnt());
         }
         // sort
-        Collections.sort(premiumWithOrdersList, new Comparator<Buyer>() {
-            public int compare(Buyer o1, Buyer o2) {
-                return o2.getOrderCnt().compareTo(o1.getOrderCnt());
+        Collections.sort(premiumWithOrdersList, new Comparator<BuyerItem>() {
+            public int compare(BuyerItem o1, BuyerItem o2) {
+                return o2.getBuyer().getOrderCnt().compareTo(o1.getBuyer().getOrderCnt());
             }
         });
 
         // sort
-        Collections.sort(justOrdersList, new Comparator<Buyer>() {
-            public int compare(Buyer o1, Buyer o2) {
-                return o2.getOrderCnt().compareTo(o1.getOrderCnt());
+        Collections.sort(justOrdersList, new Comparator<BuyerItem>() {
+            public int compare(BuyerItem o1, BuyerItem o2) {
+                return o2.getBuyer().getOrderCnt().compareTo(o1.getBuyer().getOrderCnt());
             }
         });
 
         // sort
-        Collections.sort(premiumNoOrdersList, new Comparator<Buyer>() {
-            public int compare(Buyer o1, Buyer o2) {
-                return o2.getOrderCnt().compareTo(o1.getOrderCnt());
+        Collections.sort(premiumNoOrdersList, new Comparator<BuyerItem>() {
+            public int compare(BuyerItem o1, BuyerItem o2) {
+                return o2.getBuyer().getOrderCnt().compareTo(o1.getBuyer().getOrderCnt());
             }
         });
 
@@ -145,26 +139,24 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         ListView listView = (ListView) getActivity().findViewById(R.id.restaurantListView);
-        Buyer buyer = (Buyer) listView.getItemAtPosition(position);
+        BuyerItem item = (BuyerItem) listView.getItemAtPosition(position);
 
         Intent i = new Intent(getActivity(), RestaurantDetailActivity.class);
-        i.putExtra(RestaurantDetailActivity.EXTRA_BUYER_ID, buyer.getBID());
+        i.putExtra(RestaurantDetailActivity.EXTRA_BUYER_ID, item.getBuyer().getBID());
         startActivity(i);
     }
 
     /**
-     *
-     * View.OnClickListener
+     * InfoHeaderItem.IInfoHeaderDismissedListener
      */
     @Override
-    public void onClick(View v) {
-
+    public void onDismiss(InfoHeaderItem item) {
         SharedPreferences prefs = getActivity().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = prefs.edit();
-        edit.putBoolean(Preferences.RESTAURANT_INFO_HEADER_CLEARED, true);
+        edit.putBoolean(Preferences.RESTAURANT_INFO_HEADER_DISMISSED, true);
         edit.apply();
 
-        View header = getActivity().findViewById(R.id.infoHeader);
-        header.setVisibility(View.GONE);
+        _restaurantList.remove(item);
+        _arrayAdapter.notifyDataSetChanged();
     }
 }

@@ -50,7 +50,7 @@
     <style name="activity_header">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:background">@drawable/header_background</item>
+        <item name="android:background">@drawable/activity_info_header_background</item>
         <item name="android:padding">8dp</item>
         <item name="android:minHeight">48dp</item>
     </style>

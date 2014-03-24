@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
+import org.helenalocal.app.ListItem;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
 import org.helenalocal.base.Order;

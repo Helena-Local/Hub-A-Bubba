@@ -7,6 +7,7 @@ package org.helenalocal.app.member;
 import android.view.View;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
+import org.helenalocal.app.ListItem;
 
 public class SectionItem extends ListItem {
 

@@ -12,7 +12,8 @@
               android:paddingBottom="@dimen/default_list_item_padding_bottom"
               android:paddingLeft="@dimen/default_list_item_padding_left"
               android:paddingRight="@dimen/default_list_item_padding_right"
-              android:clickable="false">
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
 
     <ImageView
             style="@style/default_list_item_imageview"

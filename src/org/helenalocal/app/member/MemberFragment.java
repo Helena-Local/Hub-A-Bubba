@@ -15,6 +15,7 @@ import android.widget.ListView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.app.FragmentBase;
 import org.helenalocal.app.HubApplication;
+import org.helenalocal.app.ListItem;
 import org.helenalocal.app.ProducerDetailActivity;
 import org.helenalocal.base.*;
 import org.helenalocal.base.get.OrderHub;

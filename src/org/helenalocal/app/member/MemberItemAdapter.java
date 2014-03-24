@@ -6,18 +6,13 @@ package org.helenalocal.app.member;
 
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-import org.helenalocal.app.member.ListItem;
-import org.helenalocal.app.member.MarqueeItem;
-import org.helenalocal.app.member.ProductItem;
-import org.helenalocal.app.member.SectionItem;
+import org.helenalocal.app.ListItem;
 import org.helenalocal.base.Item;
 import org.helenalocal.Helena_Local_Hub.R;
-import org.helenalocal.utils.ImageCache;
 
 import java.util.List;
 
