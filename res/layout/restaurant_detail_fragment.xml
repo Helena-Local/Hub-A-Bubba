@@ -81,7 +81,7 @@
                             android:id="@+id/imageView"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_action_call"/>
+                            android:src="@drawable/ic_action_call_blue"/>
 
                     <TextView
                             android:id="@+id/callTextView"
@@ -101,7 +101,7 @@
                             android:id="@+id/imageView"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_action_map"/>
+                            android:src="@drawable/ic_action_map_blue"/>
 
                     <TextView
                         android:id="@+id/mapTextView"
@@ -121,7 +121,7 @@
                             android:id="@+id/imageView"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_action_web_site"/>
+                            android:src="@drawable/ic_action_web_site_blue"/>
 
                     <TextView
                         android:id="@+id/urlTextView"

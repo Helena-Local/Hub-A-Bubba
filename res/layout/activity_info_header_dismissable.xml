@@ -50,7 +50,7 @@
                 android:gravity="center_vertical"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="2dp"
-                android:drawableLeft="@drawable/ic_action_accept"
+                android:drawableLeft="@drawable/ic_action_accept_blue"
                 android:textSize="16sp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"/>

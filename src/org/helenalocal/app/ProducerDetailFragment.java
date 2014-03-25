@@ -53,7 +53,7 @@ public class ProducerDetailFragment extends Fragment implements View.OnClickList
         // phone / email action - default is email.
         if (hasEmail(_producer) == false) {
             imageView = (ImageView) view.findViewById(R.id.contactImageView);
-            imageView.setImageResource(R.drawable.ic_action_call);
+            imageView.setImageResource(R.drawable.ic_action_call_blue);
 
             textView = (TextView) view.findViewById(R.id.contactTextView);
             textView.setText(getResources().getText(R.string.producer_call_action));

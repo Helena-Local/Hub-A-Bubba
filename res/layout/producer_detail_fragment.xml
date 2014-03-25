@@ -80,7 +80,7 @@
                             android:id="@+id/contactImageView"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_action_email"/>
+                            android:src="@drawable/ic_action_email_blue"/>
 
                     <TextView
                             android:id="@+id/contactTextView"
@@ -100,7 +100,7 @@
                             android:id="@+id/mapImageView"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_action_map"/>
+                            android:src="@drawable/ic_action_map_blue"/>
 
                     <TextView
                             android:id="@+id/mapTextView"
@@ -120,7 +120,7 @@
                             android:id="@+id/urlImageView"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_action_web_site"/>
+                            android:src="@drawable/ic_action_web_site_blue"/>
 
                     <TextView
                             android:id="@+id/urlTextView"
