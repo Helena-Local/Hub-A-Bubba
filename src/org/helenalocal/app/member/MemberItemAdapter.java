@@ -18,12 +18,6 @@ import java.util.List;
 
 public class MemberItemAdapter extends BaseAdapter implements View.OnClickListener {
 
-//    public interface IActionItemClickedListener {
-//        public void onProducerItemClicked(Item item);
-//        public void onAboutItemClicked(Item item);
-//        public void onRecipeItemClicked(Item item);
-//    }
-
     private static String LogTag = "MemberItemAdapter";
     private static final int ViewTypeUndefined = -1;
     private static final int ViewTypeMarquee = 0;
@@ -33,13 +27,11 @@ public class MemberItemAdapter extends BaseAdapter implements View.OnClickListen
 
     private List<ListItem> _itemList;
     private Context _context;
-//    private ImageCache _imageCache;
     private ProductItem.IActionItemClickedListener _clickListener;
 
     public MemberItemAdapter(Context context, List<ListItem> items, ProductItem.IActionItemClickedListener clickListener) {
         _context = context;
         _itemList = items;
-//        _imageCache = imageCache;
         _clickListener = clickListener;
     }
 
@@ -91,8 +83,6 @@ public class MemberItemAdapter extends BaseAdapter implements View.OnClickListen
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-//        int viewType = getItemViewType(position);
-
         ListItem listItem = _itemList.get(position);
         View view;
 
@@ -100,56 +90,10 @@ public class MemberItemAdapter extends BaseAdapter implements View.OnClickListen
             view = convertView;
         }
         else {
-//            int layoutId = (viewType == ViewTypeSection) ? R.layout.product_share_listview_section : R.layout.product_share_listview_item;
             view = LayoutInflater.from(_context).inflate(listItem.getViewId(), parent, false);
         }
 
         listItem.loadView(view);
-//        TextView textView;
-//        if (viewType == ViewTypeSection) {
-//            textView = (TextView)view.findViewById(R.id.textView);
-//            textView.setText((String)_itemList.get(position));
-//        }
-//        else {
-//            Item item = (Item)_itemList.get(position);
-//
-//            ImageView imageView = (ImageView)view.findViewById(R.id.imageView);
-//            _imageCache.loadImage(imageView, item.getProductImageUrl(), R.drawable.default_product);
-//
-//            textView = (TextView)view.findViewById(R.id.productDesc);
-//            textView.setText(item.getProductDesc());
-//
-//            // action items
-//            textView = (TextView)view.findViewById(R.id.producerInfo);
-//            textView.setOnClickListener(this);
-//            textView.setTag(item);
-//
-//            textView = (TextView)view.findViewById(R.id.productInfo);
-//            textView.setOnClickListener(this);
-//            textView.setTag(item);
-//
-//            textView = (TextView)view.findViewById(R.id.recipeInfo);
-//            textView.setOnClickListener(this);
-//            textView.setTag(item);
-//
-//
-////            View separator = (View)view.findViewById(R.id.separatorView);
-////            if (position + 1 == _itemList.size()) {
-////                // very last item in list
-////                separator.setVisibility(View.INVISIBLE);
-////            }
-////            else {
-////                // last item in a section
-////                viewType = getItemViewType(position + 1);
-////                if (viewType == ViewTypeSection) {
-////                    separator.setVisibility(View.INVISIBLE);
-////                }
-////                else {
-////                    // normal item. Due to recycling make sure the separator is visible
-////                    separator.setVisibility(View.VISIBLE);
-////                }
-////            }
-//        }
 
         return view;
     }
