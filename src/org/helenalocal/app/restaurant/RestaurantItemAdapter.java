@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
+import org.helenalocal.app.DismissableInfoHeaderItem;
 import org.helenalocal.app.ListItem;
 import org.helenalocal.base.Buyer;
 import org.helenalocal.utils.ImageCache;
@@ -28,13 +29,11 @@ public class RestaurantItemAdapter extends BaseAdapter {
     private static final int ViewTypeCount = 2;
 
     private List<ListItem> _itemList;
-    private ImageCache _imageCache;
     private Context _context;
 
 
-    public RestaurantItemAdapter(Context context, List<ListItem> items, ImageCache imageCache) {
+    public RestaurantItemAdapter(Context context, List<ListItem> items) {
         _itemList = items;
-        _imageCache = imageCache;
         _context = context;
     }
 
@@ -64,7 +63,7 @@ public class RestaurantItemAdapter extends BaseAdapter {
         int type = ViewTypeUndefined;
 
         Object item = _itemList.get(position);
-        if (item instanceof InfoHeaderItem) {
+        if (item instanceof DismissableInfoHeaderItem) {
             type = ViewTypeInfoHeader;
         }
         else if (item instanceof BuyerItem) {

@@ -15,10 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import org.helenalocal.Helena_Local_Hub.R;
-import org.helenalocal.app.FragmentBase;
-import org.helenalocal.app.HubApplication;
-import org.helenalocal.app.ListItem;
-import org.helenalocal.app.Preferences;
+import org.helenalocal.app.*;
 import org.helenalocal.base.Buyer;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
@@ -30,7 +27,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class RestaurantFragment extends FragmentBase implements AdapterView.OnItemClickListener, InfoHeaderItem.IInfoHeaderDismissedListener {
+public class RestaurantFragment extends FragmentBase implements AdapterView.OnItemClickListener, DismissableInfoHeaderItem.IInfoHeaderDismissedListener {
 
     private static final String LogTag = "RestaurantFragment";
 
@@ -57,14 +54,11 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ImageCache cache = ((HubApplication)getActivity().getApplication()).getImageCache();
         _restaurantList = new ArrayList<ListItem>();
-        _arrayAdapter = new RestaurantItemAdapter(getActivity(), _restaurantList, cache);
+        _arrayAdapter = new RestaurantItemAdapter(getActivity(), _restaurantList);
 
         ListView listView = (ListView) getActivity().findViewById(R.id.restaurantListView);
         listView.setAdapter(_arrayAdapter);
-
-        listView.setClickable(true);
         listView.setOnItemClickListener(this);
     }
 
@@ -74,11 +68,7 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
 
         _restaurantList.clear();
 
-        SharedPreferences prefs = getActivity().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
-        boolean infoDismissed= prefs.getBoolean(Preferences.RESTAURANT_INFO_HEADER_DISMISSED, false);
-        if (infoDismissed == false) {
-            _restaurantList.add(new InfoHeaderItem(this));
-        }
+        addInfoHeader();
 
         ImageCache imageCache = ((HubApplication)(getActivity().getApplication())).getImageCache();
 
@@ -132,6 +122,14 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
         _arrayAdapter.notifyDataSetChanged();
     }
 
+    private void addInfoHeader() {
+        SharedPreferences prefs = getActivity().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
+        boolean infoDismissed= prefs.getBoolean(Preferences.RESTAURANT_INFO_HEADER_DISMISSED, false);
+        if (infoDismissed == false) {
+            _restaurantList.add(new DismissableInfoHeaderItem(this, R.string.restaurant_fragment_welcome));
+        }
+    }
+
     /**
      * OnItemClickListener methods
      * *
@@ -147,10 +145,10 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
     }
 
     /**
-     * InfoHeaderItem.IInfoHeaderDismissedListener
+     * DismissableInfoHeaderItem.IInfoHeaderDismissedListener
      */
     @Override
-    public void onDismiss(InfoHeaderItem item) {
+    public void onDismiss(DismissableInfoHeaderItem item) {
         SharedPreferences prefs = getActivity().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = prefs.edit();
         edit.putBoolean(Preferences.RESTAURANT_INFO_HEADER_DISMISSED, true);

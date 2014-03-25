@@ -4,7 +4,9 @@
 
 package org.helenalocal.app.producer;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,8 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import org.helenalocal.Helena_Local_Hub.R;
-import org.helenalocal.app.FragmentBase;
-import org.helenalocal.app.HubApplication;
+import org.helenalocal.app.*;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
 import org.helenalocal.base.Producer;
@@ -26,10 +27,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class ProducerFragment extends FragmentBase {
+public class ProducerFragment extends FragmentBase implements AdapterView.OnItemClickListener, DismissableInfoHeaderItem.IInfoHeaderDismissedListener {
 
     private static String Tag = "ProducerFragment";
-    private List<Producer> _producerList;
+    private List<ListItem> _producerList;
     private ProducerListAdapter _arrayAdapter;
 
     @Override
@@ -52,35 +53,27 @@ public class ProducerFragment extends FragmentBase {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ImageCache cache = ((HubApplication)getActivity().getApplication()).getImageCache();
-        _producerList = new ArrayList<Producer>();
-        _arrayAdapter = new ProducerListAdapter(getActivity(), _producerList, cache);
+        _producerList = new ArrayList<ListItem>();
+        _arrayAdapter = new ProducerListAdapter(getActivity(), _producerList);
 
         ListView listView = (ListView) getActivity().findViewById(R.id.producerListView);
         listView.setAdapter(_arrayAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Producer producer = (Producer) ((ListView)parent).getItemAtPosition(position);
-
-                Intent intent = new Intent(getActivity(), ProducerDetailActivity.class);
-                intent.putExtra(ProducerDetailActivity.EXTRA_PRODUCER_ID, producer.getPID());
-                startActivity(intent);
-            }
-        });
+        listView.setOnItemClickListener(this);
     }
 
     @Override
     public void onRefresh() {
         super.onRefresh();
 
+        ImageCache cache = ((HubApplication)getActivity().getApplication()).getImageCache();
+
         _producerList.clear();
 
+        addInfoHeader();
+
         // add producers who are at serviceLevel = 2 (local) or (serviceLevel > 0 and have at least one order)!
-        ArrayList<Producer> localList = new ArrayList<Producer>();
-        ArrayList<Producer> regionalList = new ArrayList<Producer>();
+        ArrayList<ProducerItem> localList = new ArrayList<ProducerItem>();
+        ArrayList<ProducerItem> regionalList = new ArrayList<ProducerItem>();
         ArrayList<Producer> producerArrayList = new ArrayList<Producer>(Hub.producerMap.values());
         for (int j = 0; j < producerArrayList.size(); j++) {
             Producer producer = producerArrayList.get(j);
@@ -94,31 +87,62 @@ public class ProducerFragment extends FragmentBase {
                     case 0:
                         break;
                     case 2:
-                        localList.add(producer);
+                        localList.add(new ProducerItem(producer, cache));
                         break;
                     default:
-                        regionalList.add(producer);
+                        regionalList.add(new ProducerItem(producer, cache));
                         break;
                 }
             }
             Log.w(Tag, "producer.getName() = " + producer.getName() + "; serviceLevel = " + serviceLevel + "; orderCnt = " + producer.getOrderCnt());
         }
         // sort
-        Collections.sort(localList, new Comparator<Producer>() {
-            public int compare(Producer o1, Producer o2) {
-                return o2.getOrderCnt().compareTo(o1.getOrderCnt());
+        Collections.sort(localList, new Comparator<ProducerItem>() {
+            public int compare(ProducerItem o1, ProducerItem o2) {
+                return o2.getProducer().getOrderCnt().compareTo(o1.getProducer().getOrderCnt());
             }
         });
 
-        Collections.sort(regionalList, new Comparator<Producer>() {
-            public int compare(Producer o1, Producer o2) {
-                return o2.getOrderCnt().compareTo(o1.getOrderCnt());
+        Collections.sort(regionalList, new Comparator<ProducerItem>() {
+            public int compare(ProducerItem o1, ProducerItem o2) {
+                return o2.getProducer().getOrderCnt().compareTo(o1.getProducer().getOrderCnt());
             }
         });
 
         // add them in order
         _producerList.addAll(localList);
         _producerList.addAll(regionalList);
+        _arrayAdapter.notifyDataSetChanged();
+    }
+
+
+    private void addInfoHeader() {
+        SharedPreferences prefs = getActivity().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
+        boolean infoDismissed= prefs.getBoolean(Preferences.PRODUCER_INFO_HEADER_DISMISSED, false);
+        if (infoDismissed == false) {
+            _producerList.add(new DismissableInfoHeaderItem(this, R.string.producer_fragment_welcome));
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        ListItem item = (ListItem) ((ListView)parent).getItemAtPosition(position);
+        Producer producer = ((ProducerItem)item).getProducer();
+
+        Intent intent = new Intent(getActivity(), ProducerDetailActivity.class);
+        intent.putExtra(ProducerDetailActivity.EXTRA_PRODUCER_ID, producer.getPID());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onDismiss(DismissableInfoHeaderItem item) {
+        SharedPreferences prefs = getActivity().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = prefs.edit();
+        edit.putBoolean(Preferences.PRODUCER_INFO_HEADER_DISMISSED, true);
+        edit.apply();
+
+        _producerList.remove(item);
         _arrayAdapter.notifyDataSetChanged();
     }
 }

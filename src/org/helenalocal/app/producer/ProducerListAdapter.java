@@ -4,49 +4,87 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.BaseAdapter;
 import org.helenalocal.Helena_Local_Hub.R;
+import org.helenalocal.app.DismissableInfoHeaderItem;
+import org.helenalocal.app.ListItem;
+import org.helenalocal.app.member.ProductItem;
+import org.helenalocal.app.restaurant.BuyerItem;
 import org.helenalocal.base.Producer;
-import org.helenalocal.utils.ImageCache;
 
 import java.util.List;
 
-public class ProducerListAdapter extends ArrayAdapter<Producer> {
-    private static String logTag = "ProducerListAdapter";
-    private ImageCache _imageCache;
+public class ProducerListAdapter extends BaseAdapter {
 
-    public ProducerListAdapter(Context context, List<Producer> items, ImageCache imageCache) {
-        super(context, R.layout.producer_listview_item, items);
-        _imageCache = imageCache;
+    private static String logTag = "ProducerListAdapter";
+    private static final int ViewTypeUndefined = -1;
+    private static final int ViewTypeInfoHeader = 0;
+    private static final int ViewTypeProducer = 1;
+    private static final int ViewTypeCount = 2;
+
+    private List<ListItem> _itemList;
+    private Context _context;
+
+    public ProducerListAdapter(Context context, List<ListItem> items) {
+        _context = context;
+        _itemList = items;
+    }
+
+    @Override
+    public int getCount() {
+        return _itemList.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return _itemList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return ViewTypeCount;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+
+        int type = ViewTypeUndefined;
+
+        Object item = _itemList.get(position);
+        if (item instanceof DismissableInfoHeaderItem) {
+            type = ViewTypeInfoHeader;
+        }
+        else if (item instanceof ProducerItem) {
+            type = ViewTypeProducer;
+        }
+
+        return type;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+
+        return (getItemViewType(position) == ViewTypeProducer) ? true : false;
     }
 
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Producer producer = getItem(position);
+        ListItem item = _itemList.get(position);
 
-        View view;
+        View view = convertView;
 
-        if (convertView != null) {
-            view = convertView;
-        }
-        else {
-            LayoutInflater li = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = li.inflate(R.layout.producer_listview_item, parent, false);
+        if (view == null) {
+            view = LayoutInflater.from(_context).inflate(item.getViewId(), parent, false);
         }
 
-        ImageView imageView = (ImageView)view.findViewById(R.id.producerImageView);
-        imageView.setImageBitmap(null);
-        _imageCache.loadImage(imageView, producer.getIconUrl(), R.drawable.default_producer);
-
-        TextView textView = (TextView)view.findViewById(R.id.producerNameTextView);
-        textView.setText(producer.getName());
-
-        textView = (TextView)view.findViewById(R.id.cityTextView);
-        textView.setText(producer.getLocationDisplay());
+        item.loadView(view);
 
         return view;
     }

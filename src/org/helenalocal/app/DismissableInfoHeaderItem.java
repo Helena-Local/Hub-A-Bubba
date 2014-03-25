@@ -2,26 +2,28 @@
  * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
  */
 
-package org.helenalocal.app.restaurant;
+package org.helenalocal.app;
 
 import android.view.View;
 import android.widget.TextView;
 import org.helenalocal.Helena_Local_Hub.R;
-import org.helenalocal.app.ListItem;
 
-public class InfoHeaderItem extends ListItem  implements View.OnClickListener {
+public class DismissableInfoHeaderItem extends ListItem implements View.OnClickListener{
+
     public interface IInfoHeaderDismissedListener {
-        public void onDismiss(InfoHeaderItem item);
+        public void onDismiss(DismissableInfoHeaderItem item);
     }
 
     private IInfoHeaderDismissedListener _listener;
+    private int _messageId;
 
-    public InfoHeaderItem(IInfoHeaderDismissedListener listener) {
+    public DismissableInfoHeaderItem(IInfoHeaderDismissedListener listener, int messageId) {
         if (listener == null) {
-            throw new IllegalArgumentException("IHeaderItemClearedLister is required");
+            throw new IllegalArgumentException("IInfoHeaderDismissedListener is required");
         }
 
         _listener = listener;
+        _messageId = messageId;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class InfoHeaderItem extends ListItem  implements View.OnClickListener {
     @Override
     public void loadView(View view) {
         TextView textView = (TextView) view.findViewById(R.id.msgTextView);
-        textView.setText(R.string.restaurant_fragment_welcome);
+        textView.setText(_messageId);
 
         textView = (TextView) view.findViewById(R.id.clearItemTextView);
         textView.setOnClickListener(this);

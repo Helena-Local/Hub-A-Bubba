@@ -8,7 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
-        android:background="@color/detail_activity_background">
+        android:background="@color/detail_activity_background"
+        android:paddingTop="10dp"
+        >
 
     <LinearLayout
             android:id="@+id/infoHeader"
@@ -18,8 +20,8 @@
             android:minHeight="48dp"
             android:baselineAligned="false"
             android:paddingTop="10dp"
-            android:background="@drawable/activity_info_header_background">
-        <!--android:background="@drawable/card_background">-->
+        android:background="@drawable/card_background">
+        <!--android:background="@drawable/activity_info_header_background">-->
 
 
         <TextView
