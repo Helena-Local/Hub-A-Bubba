@@ -2,7 +2,7 @@
  * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
  */
 
-package org.helenalocal.app;
+package org.helenalocal.app.producer;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import org.helenalocal.Helena_Local_Hub.R;
+import org.helenalocal.app.HubApplication;
+import org.helenalocal.app.producer.ProducerDetailActivity;
 import org.helenalocal.base.Certification;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;

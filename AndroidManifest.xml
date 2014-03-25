@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="org.helenalocal.app.ProducerDetailActivity"
+        <activity android:name="org.helenalocal.app.producer.ProducerDetailActivity"
                   android:parentActivityName="org.helenalocal.app.MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                        android:value="org.helenalocal.app.MainActivity"/>

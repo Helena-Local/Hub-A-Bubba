@@ -1,4 +1,4 @@
-package org.helenalocal.app;
+package org.helenalocal.app.producer;
 
 import android.content.Context;
 import android.view.LayoutInflater;
