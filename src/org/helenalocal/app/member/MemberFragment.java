@@ -17,6 +17,7 @@ import org.helenalocal.app.FragmentBase;
 import org.helenalocal.app.HubApplication;
 import org.helenalocal.app.ListItem;
 import org.helenalocal.app.producer.ProducerDetailActivity;
+import org.helenalocal.app.restaurant.RestaurantDetailActivity;
 import org.helenalocal.base.*;
 import org.helenalocal.base.get.OrderHub;
 import org.helenalocal.utils.ActivityUtils;
@@ -28,6 +29,7 @@ import java.util.*;
 public class MemberFragment extends FragmentBase implements ProductItem.IActionItemClickedListener {
 
     private static final String LogTag = "MemberFragment";
+    private Buyer _buyer;
     private List<ListItem> _itemList;
     private MemberItemAdapter _arrayAdapter;
 
@@ -39,13 +41,18 @@ public class MemberFragment extends FragmentBase implements ProductItem.IActionI
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeReceiver(HubInit.HubType.ITEM_HUB);
+//        initializeReceiver(HubInit.HubType.ITEM_HUB);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.member_fragment, container, false);
-        return v;
+        View view = inflater.inflate(R.layout.member_fragment, container, false);
+
+        Bundle args = getArguments();
+        String buyerId = args.getString(CSADetailActivity.EXTRA_CSA_ID);
+        _buyer = Hub.buyerMap.get(buyerId);
+
+        return view;
     }
 
     @Override
@@ -64,11 +71,15 @@ public class MemberFragment extends FragmentBase implements ProductItem.IActionI
     }
 
     @Override
-    protected void onRefresh() {
+//    protected void onRefresh() {
+    public void onResume() {
+        super.onResume();
 
         // display all Helena Local bought for CSA!
         TreeMap<String, List<Item>> productMap = new TreeMap<String, List<Item>>();
-        for (Order order : OrderHub.getOrdersForBuyer(HubInit.HELENA_LOCAL_BUYER_ID)) {
+//        for (Order order : OrderHub.getOrdersForBuyer(HubInit.HELENA_LOCAL_BUYER_ID)) {
+        List<Order> orderList = OrderHub.getOrdersForBuyer(_buyer.getBID());
+        for (Order order : orderList) {
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
             Log.w(LogTag, "Order Date: " + dateFormat.format(order.getDate().getTime()));

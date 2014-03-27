@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:background="@color/detail_activity_background"
+        android:paddingTop="10dp"
+        >
+
+    <LinearLayout
+            android:id="@+id/infoHeader"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:baselineAligned="false"
+            android:background="@drawable/card_background">
+        <!--android:background="@drawable/activity_info_header_background">-->
+
+
+        <TextView
+                android:id="@+id/msgTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:fontFamily="sans-serif-light"
+                android:text="Put some sorta text here about something more relevant that what is here now."
+                android:layout_margin="10dp"/>
+
+
+        <LinearLayout
+                android:id="@+id/dismissContainer"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingTop="1dp"
+                android:paddingBottom="2dp">
+
+            <View style="@style/horizontalDivider"
+                  android:layout_marginRight="10dp"
+                  android:layout_marginLeft="10dp"/>
+
+            <TextView
+                    android:id="@+id/clearItemTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:textColor="@color/helena_local_blue"
+                    android:background = "?attr/clickableItemBackground"
+                    android:clickable = "true"
+                    android:focusable = "true"
+                    android:text="@string/info_header_dismiss"
+                    android:gravity="center_vertical"
+                    android:drawableLeft="@drawable/ic_action_accept_blue"
+                    android:textSize="16sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

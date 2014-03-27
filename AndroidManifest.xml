@@ -42,9 +42,16 @@
                        android:value="org.helenalocal.app.MainActivity"/>
         </activity>
 
+        <activity android:name="org.helenalocal.app.member.CSADetailActivity"
+            android:parentActivityName="org.helenalocal.app.MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value="org.helenalocal.app.MainActivity"/>
+        </activity>
+
 
         <service android:name="org.helenalocal.app.service.HubInitService"
-                 android:exported="false"/>
+                 android:exported="false">
+         </service>
 
         <!--<provider android:name="org.helenalocal.app.provider.ItemProvider"-->
                   <!--android:authorities="org.helenalocal.provider.itemprovider"-->

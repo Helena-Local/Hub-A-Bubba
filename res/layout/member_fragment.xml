@@ -13,7 +13,10 @@
     <ListView
             style="@style/cardListView"
             android:id="@+id/memberListView"
-            android:padding="8dp"
+            android:paddingLeft="@dimen/card_layout_padding_left"
+            android:paddingRight="@dimen/card_layout_padding_right"
+            android:paddingTop="@dimen/card_layout_padding_top"
+            android:paddingBottom="@dimen/card_layout_padding_bottom"
             android:clipToPadding="false"
             android:scrollbarStyle="outsideOverlay"/>
 

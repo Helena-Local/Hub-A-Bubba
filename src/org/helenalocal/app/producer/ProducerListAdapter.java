@@ -5,12 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import org.helenalocal.Helena_Local_Hub.R;
-import org.helenalocal.app.DismissableInfoHeaderItem;
+import org.helenalocal.app.InfoHeaderItem;
 import org.helenalocal.app.ListItem;
-import org.helenalocal.app.member.ProductItem;
-import org.helenalocal.app.restaurant.BuyerItem;
-import org.helenalocal.base.Producer;
 
 import java.util.List;
 
@@ -56,7 +52,7 @@ public class ProducerListAdapter extends BaseAdapter {
         int type = ViewTypeUndefined;
 
         Object item = _itemList.get(position);
-        if (item instanceof DismissableInfoHeaderItem) {
+        if (item instanceof InfoHeaderItem) {
             type = ViewTypeInfoHeader;
         }
         else if (item instanceof ProducerItem) {

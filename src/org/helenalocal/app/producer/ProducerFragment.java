@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class ProducerFragment extends FragmentBase implements AdapterView.OnItemClickListener, DismissableInfoHeaderItem.IInfoHeaderDismissedListener {
+public class ProducerFragment extends FragmentBase implements AdapterView.OnItemClickListener, InfoHeaderItem.IInfoHeaderDismissedListener {
 
     private static String Tag = "ProducerFragment";
     private List<ListItem> _producerList;
@@ -120,7 +120,9 @@ public class ProducerFragment extends FragmentBase implements AdapterView.OnItem
         SharedPreferences prefs = getActivity().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
         boolean infoDismissed= prefs.getBoolean(Preferences.PRODUCER_INFO_HEADER_DISMISSED, false);
         if (infoDismissed == false) {
-            _producerList.add(new DismissableInfoHeaderItem(this, R.string.producer_fragment_welcome));
+            InfoHeaderItem h = new InfoHeaderItem(R.string.producer_fragment_welcome);
+            h.setOnDismissedListener(this);
+            _producerList.add(h);
         }
     }
 
@@ -136,7 +138,7 @@ public class ProducerFragment extends FragmentBase implements AdapterView.OnItem
     }
 
     @Override
-    public void onDismiss(DismissableInfoHeaderItem item) {
+    public void onDismiss(InfoHeaderItem item) {
         SharedPreferences prefs = getActivity().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = prefs.edit();
         edit.putBoolean(Preferences.PRODUCER_INFO_HEADER_DISMISSED, true);

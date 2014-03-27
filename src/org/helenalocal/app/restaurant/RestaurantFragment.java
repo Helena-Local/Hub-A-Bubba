@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class RestaurantFragment extends FragmentBase implements AdapterView.OnItemClickListener, DismissableInfoHeaderItem.IInfoHeaderDismissedListener {
+public class RestaurantFragment extends FragmentBase implements AdapterView.OnItemClickListener, InfoHeaderItem.IInfoHeaderDismissedListener {
 
     private static final String LogTag = "RestaurantFragment";
 
@@ -80,6 +80,8 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
         ArrayList<Buyer> buyerArrayList = new ArrayList<Buyer>(Hub.buyerMap.values());
         for (int j = 0; j < buyerArrayList.size(); j++) {
             Buyer buyer = buyerArrayList.get(j);
+
+            // todo - move setting order count to the data load
             // now set the producer order count
             buyer.setOrderCnt(BuyerHub.getOrderItemCnt(buyer.getBID()));
 
@@ -126,7 +128,9 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
         SharedPreferences prefs = getActivity().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
         boolean infoDismissed= prefs.getBoolean(Preferences.RESTAURANT_INFO_HEADER_DISMISSED, false);
         if (infoDismissed == false) {
-            _restaurantList.add(new DismissableInfoHeaderItem(this, R.string.restaurant_fragment_welcome));
+            InfoHeaderItem h = new InfoHeaderItem(R.string.restaurant_fragment_welcome);
+            h.setOnDismissedListener(this);
+            _restaurantList.add(h);
         }
     }
 
@@ -145,10 +149,10 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
     }
 
     /**
-     * DismissableInfoHeaderItem.IInfoHeaderDismissedListener
+     * InfoHeaderItem.IInfoHeaderDismissedListener
      */
     @Override
-    public void onDismiss(DismissableInfoHeaderItem item) {
+    public void onDismiss(InfoHeaderItem item) {
         SharedPreferences prefs = getActivity().getSharedPreferences(Preferences.File, Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = prefs.edit();
         edit.putBoolean(Preferences.RESTAURANT_INFO_HEADER_DISMISSED, true);

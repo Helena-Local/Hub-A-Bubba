@@ -17,7 +17,7 @@ public abstract class NavigationDrawerActionBarActivity extends ActionBarActivit
 
     // todo - create dynamic mapping
     public static int EVENT_HOME = 0;
-    public static int MEMBER_HOME = 1;
+    public static int CSA_HOME = 1;
     public static int RESTAURANT_HOME = 2;
     public static int PRODUCER_HOME = 3;
     public static int PRODUCT_HOME = 4;

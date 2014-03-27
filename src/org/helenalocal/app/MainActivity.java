@@ -15,7 +15,7 @@ import android.support.v4.view.GravityCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import org.helenalocal.Helena_Local_Hub.R;
-import org.helenalocal.app.member.MemberFragment;
+import org.helenalocal.app.member.CSAListFragment;
 import org.helenalocal.app.producer.ProducerFragment;
 import org.helenalocal.app.product.ProductFragement;
 import org.helenalocal.app.restaurant.RestaurantFragment;
@@ -185,7 +185,7 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
                 _currentFrag = new EventsFragment();
                 break;
             case 1:
-                _currentFrag = new MemberFragment();
+                _currentFrag = new CSAListFragment();
                 break;
             case 2:
                 _currentFrag = new RestaurantFragment();

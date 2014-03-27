@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/default_list_item_padding_top"
+                android:paddingBottom="@dimen/default_list_item_padding_bottom"
+                android:paddingLeft="@dimen/default_list_item_padding_left"
+                android:paddingRight="@dimen/default_list_item_padding_right">
+
+    <ImageView
+            style="@style/default_list_item_imageview"
+            android:id="@+id/csaImageView"
+            android:src="@drawable/default_csa"/>
+
+    <TextView
+            style="@style/list_item_text_primary"
+            android:text="Sunflower"
+            android:id="@+id/csaNameTextView"
+            android:layout_toRightOf="@id/csaImageView"
+            android:layout_centerVertical="true"/>
+
+</RelativeLayout>

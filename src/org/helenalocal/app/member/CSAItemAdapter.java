@@ -2,9 +2,10 @@
  * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
  */
 
-package org.helenalocal.app.restaurant;
+package org.helenalocal.app.member;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,32 +15,31 @@ import org.helenalocal.app.ListItem;
 
 import java.util.List;
 
-public class RestaurantItemAdapter extends BaseAdapter {
+public class CSAItemAdapter extends BaseAdapter {
 
-    private static final String logTag = "RestaurantItemAdapter";
+    private static final String LogTag = "CSAItemAdapter";
 
-    private static final int ViewTypeUndefined = -1;
-    private static final int ViewTypeInfoHeader = 0;
-    private static final int ViewTypeBuyer = 1;
-    private static final int ViewTypeCount = 2;
+    private final int ViewTypeUndefined = -1;
+    private final int ViewTypeInfoHeader = 0;
+    private final int ViewTypeCSA = 1;
+    private final int ViewTypeCount = 2;
 
-    private List<ListItem> _itemList;
+    private List<ListItem> _csaList;
     private Context _context;
 
-
-    public RestaurantItemAdapter(Context context, List<ListItem> items) {
-        _itemList = items;
+    public CSAItemAdapter(Context context, List<ListItem> items) {
         _context = context;
+        _csaList = items;
     }
 
     @Override
     public int getCount() {
-        return _itemList.size();
+        return _csaList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return _itemList.get(position);
+        return _csaList.get(position);
     }
 
     @Override
@@ -57,12 +57,12 @@ public class RestaurantItemAdapter extends BaseAdapter {
 
         int type = ViewTypeUndefined;
 
-        Object item = _itemList.get(position);
+        ListItem item = _csaList.get(position);
         if (item instanceof InfoHeaderItem) {
             type = ViewTypeInfoHeader;
         }
-        else if (item instanceof BuyerItem) {
-            type = ViewTypeBuyer;
+        else if (item instanceof CSAItem) {
+            type = ViewTypeCSA;
         }
 
         return type;
@@ -70,14 +70,13 @@ public class RestaurantItemAdapter extends BaseAdapter {
 
     @Override
     public boolean isEnabled(int position) {
-
-        return (getItemViewType(position) == ViewTypeBuyer) ? true : false;
+        return (getItemViewType(position) == ViewTypeCSA) ? true : false;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ListItem item = _itemList.get(position);
+        ListItem item = _csaList.get(position);
 
         View view = convertView;
         if (view == null) {
