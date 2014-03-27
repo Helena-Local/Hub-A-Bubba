@@ -1,4 +1,4 @@
-package org.helenalocal.app;
+package org.helenalocal.app.product;
 
 
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import org.helenalocal.Helena_Local_Hub.R;
+import org.helenalocal.app.product.ProductFragement;
 
 import java.util.List;
 

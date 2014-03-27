@@ -2,7 +2,7 @@
  * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
  */
 
-package org.helenalocal.app;
+package org.helenalocal.app.product;
 
 import android.content.Context;
 import android.view.LayoutInflater;

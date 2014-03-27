@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import org.helenalocal.Helena_Local_Hub.R;
 import org.helenalocal.app.member.MemberFragment;
 import org.helenalocal.app.producer.ProducerFragment;
+import org.helenalocal.app.product.ProductFragement;
 import org.helenalocal.app.restaurant.RestaurantFragment;
 import org.helenalocal.app.test.AsyncTesterTask;
 import org.helenalocal.utils.ViewServer;

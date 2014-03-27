@@ -36,7 +36,7 @@
                        android:value="org.helenalocal.app.MainActivity"/>
         </activity>
 
-        <activity android:name="org.helenalocal.app.ProductCategoryDetailActivity"
+        <activity android:name="org.helenalocal.app.product.ProductCategoryDetailActivity"
                   android:parentActivityName="org.helenalocal.app.MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                        android:value="org.helenalocal.app.MainActivity"/>
