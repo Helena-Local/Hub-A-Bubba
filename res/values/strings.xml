@@ -5,7 +5,7 @@
   -->
 
 <resources>
-    <string name="app_name">Helena Local Hub</string>
+    <string name="app_name">Helena Hub</string>
     <string name="event_fragment_title">Events</string>
     <string name="event_fragment_welcome">Check out our local foods event calendar.</string>
     <string name="member_fragment_title">Members</string>

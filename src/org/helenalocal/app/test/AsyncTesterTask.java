@@ -97,7 +97,7 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
             email = new Intent(Intent.ACTION_SEND);
             email.putExtra(Intent.EXTRA_EMAIL, new String[]{HubInit.getHubEmailTo()});
             email.putExtra(Intent.EXTRA_SUBJECT, HubInit.getHubEmailSubject());
-            email.putExtra(Intent.EXTRA_TEXT, "We found a problem submitting your data to the Helena Local Hub... Click the send button for this email and we'll send the request to Helena Local for you... Next time you have a good network " +
+            email.putExtra(Intent.EXTRA_TEXT, "We found a problem submitting your data to the Helena Hub... Click the send button for this email and we'll send the request to Helena Local for you... Next time you have a good network " +
                     "connection synchronize your email, then check your sent folder to make sure it went out.  Call us @ 406-219-1414 if you have questions or concerns.  " +
                     "\n\nDetails follow: \n-----------------" + producer.toEmail() + "\n+++++++++" + item.toEmail(growerAgreementId) + "\n-----------------");
             //need this to prompts email client only
@@ -175,7 +175,7 @@ public class AsyncTesterTask extends AsyncTask<Void, Void, Intent> {
             email = new Intent(Intent.ACTION_SEND);
             email.putExtra(Intent.EXTRA_EMAIL, new String[]{HubInit.getHubEmailTo()});
             email.putExtra(Intent.EXTRA_SUBJECT, HubInit.getHubEmailSubject());
-            email.putExtra(Intent.EXTRA_TEXT, "We found a problem submitting your data to the Helena Local Hub... Click the send button for this email and we'll send the request to Helena Local for you... Next time you have a good network " +
+            email.putExtra(Intent.EXTRA_TEXT, "We found a problem submitting your data to the Helena Hub... Click the send button for this email and we'll send the request to Helena Local for you... Next time you have a good network " +
                     "connection synchronize your email, then check your sent folder to make sure it went out.  Call us @ 406-219-1414 if you have questions or concerns.  " +
                     "\n\nDetails follow: \n-----------------" + producer.toEmail() + "\n+++++++++" + item.toEmail(growerAgreementId) + "\n-----------------");
             //need this to prompts email client only
