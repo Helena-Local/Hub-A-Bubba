@@ -63,10 +63,8 @@ public class CSAListFragment extends FragmentBase implements AdapterView.OnItemC
         ImageCache imageCache = ((HubApplication)getActivity().getApplication()).getImageCache();
         ArrayList<CSAItem> buyerList = new ArrayList<CSAItem>();
         for (Map.Entry<String, Buyer> entry : Hub.buyerMap.entrySet()) {
-
-            int serviceLevel = Integer.valueOf(entry.getValue().getServiceLevel().trim());
-
-            if (serviceLevel == 0) {
+            // Service Level (0-off, 1-restaurant-on, 2-restaurant-premium, 3-CSA)
+            if (entry.getValue().getBuyerType() == 3) {
                 buyerList.add(new CSAItem(entry.getValue(), imageCache));
             }
         }

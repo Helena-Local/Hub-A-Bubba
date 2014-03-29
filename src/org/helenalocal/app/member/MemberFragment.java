@@ -17,7 +17,6 @@ import org.helenalocal.app.FragmentBase;
 import org.helenalocal.app.HubApplication;
 import org.helenalocal.app.ListItem;
 import org.helenalocal.app.producer.ProducerDetailActivity;
-import org.helenalocal.app.restaurant.RestaurantDetailActivity;
 import org.helenalocal.base.*;
 import org.helenalocal.base.get.OrderHub;
 import org.helenalocal.utils.ActivityUtils;
@@ -131,6 +130,7 @@ public class MemberFragment extends FragmentBase implements ProductItem.IActionI
     public void onProducerItemClicked(Item item) {
 
         Producer producer = null;
+        //TODO This need to be dynamic based on selected CSA...
         for (Order order : OrderHub.getOrdersForBuyer(HubInit.HELENA_LOCAL_BUYER_ID)) {
 
             if (order.getItemID().equalsIgnoreCase(item.getIID())) {

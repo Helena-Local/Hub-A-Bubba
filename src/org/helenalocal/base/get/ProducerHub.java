@@ -105,12 +105,6 @@ public class ProducerHub extends Hub implements Runnable {
                     }
                 }
                 if (iterator.hasNext()) {
-                    String serviceLevel = iterator.next();
-                    if (!serviceLevel.equals("")) {
-                        producer.setServiceLevel(serviceLevel);
-                    }
-                }
-                if (iterator.hasNext()) {
                     String certificationStr = iterator.next();
                     if (!certificationStr.equals("")) {
                         producer.setCertifications(CertificationHub.buildCertificationList(certificationStr));
@@ -120,6 +114,17 @@ public class ProducerHub extends Hub implements Runnable {
                     String quote = iterator.next();
                     if (!quote.equals("")) {
                         producer.setQuote(quote);
+                    }
+                }
+                if (iterator.hasNext()) {
+                    String producerType = iterator.next();
+                    if (!producerType.equals("")) {
+                        try {
+                            // this should help validate the csv file format we are reading.
+                            producer.setProducerType(Integer.valueOf(producerType.trim()));
+                        } catch (Exception e) {
+                            Log.e(HubInit.logTag, "SKIPPING - ERROR in csv producer tab this line: >" + receiveString + "<");
+                        }
                     }
                 }
                 myProducerMap.put(producer.getPID(), producer);

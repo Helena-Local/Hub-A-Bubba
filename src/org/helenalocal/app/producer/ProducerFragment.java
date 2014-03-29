@@ -80,10 +80,9 @@ public class ProducerFragment extends FragmentBase implements AdapterView.OnItem
             // now set the producer order count
             producer.setOrderCnt(ProducerHub.getOrderItemCnt(producer.getPID()));
 
-            int serviceLevel = Integer.valueOf(producer.getServiceLevel().trim());
             // Service Level (0-off, 1-regional, 2-local)
-            if ((serviceLevel == 2) || (producer.getOrderCnt() > 0)) {
-                switch (serviceLevel) {
+            if ((producer.getProducerType() == 2) || (producer.getOrderCnt() > 0)) {
+                switch (producer.getProducerType()) {
                     case 0:
                         break;
                     case 2:
@@ -94,7 +93,7 @@ public class ProducerFragment extends FragmentBase implements AdapterView.OnItem
                         break;
                 }
             }
-            Log.w(Tag, "producer.getName() = " + producer.getName() + "; serviceLevel = " + serviceLevel + "; orderCnt = " + producer.getOrderCnt());
+            Log.w(Tag, "producer.getName() = " + producer.getName() + "; producerType = " + producer.getProducerType() + "; orderCnt = " + producer.getOrderCnt());
         }
         // sort
         Collections.sort(localList, new Comparator<ProducerItem>() {

@@ -20,7 +20,7 @@ public class Producer {
     private String websiteUrl = "";
     private String photoUrl = "";
     private String iconUrl = "";
-    private String serviceLevel = "";
+    private int producerType = 0;
     private String location = "";
     private String locationDisplay = "";
     private List<Certification> certifications = new ArrayList<Certification>();
@@ -58,12 +58,12 @@ public class Producer {
         this.orderCnt = orderCnt;
     }
 
-    public String getServiceLevel() {
-        return serviceLevel;
+    public int getProducerType() {
+        return producerType;
     }
 
-    public void setServiceLevel(String serviceLevel) {
-        this.serviceLevel = serviceLevel;
+    public void setProducerType(int producerType) {
+        this.producerType = producerType;
     }
 
     public String getIconUrl() {
@@ -155,7 +155,7 @@ public class Producer {
 
         return "producer.PID = " + this.PID + "; producer.name = " + this.name + "; producer.contactEmail = " +
                 this.contactEmail + "; producer.websiteUrl = " + this.websiteUrl + "; producer.photoUrl = " +
-                this.photoUrl + "; producer.location = " + this.location + "; producer.locationDisplay = " + this.locationDisplay + "; quote = " + quote + "; iconUrl = " + iconUrl + "; serviceLevel = " + serviceLevel;
+                this.photoUrl + "; producer.location = " + this.location + "; producer.locationDisplay = " + this.locationDisplay + "; quote = " + quote + "; iconUrl = " + iconUrl + "; producerType = " + producerType;
 
     }
 

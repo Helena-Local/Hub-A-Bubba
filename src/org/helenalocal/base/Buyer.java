@@ -20,7 +20,7 @@ public class Buyer {
     private String photoUrl = "";
     private String location = "";
     private String locationDisplay = "";
-    private String serviceLevel = "";
+    private int buyerType = 0;
     private List<Certification> certifications = new ArrayList<Certification>();
     private String quote = "";
     private String iconUrl = "";
@@ -150,12 +150,12 @@ public class Buyer {
         this.lastOrderDate = lastOrderDate;
     }
 
-    public String getServiceLevel() {
-        return serviceLevel;
+    public int getBuyerType() {
+        return buyerType;
     }
 
-    public void setServiceLevel(String serviceLevel) {
-        this.serviceLevel = serviceLevel;
+    public void setBuyerType(int buyerType) {
+        this.buyerType = buyerType;
     }
 
     public List<Certification> getCertifications() {

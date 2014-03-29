@@ -85,16 +85,15 @@ public class RestaurantFragment extends FragmentBase implements AdapterView.OnIt
             // now set the producer order count
             buyer.setOrderCnt(BuyerHub.getOrderItemCnt(buyer.getBID()));
 
-            int serviceLevel = Integer.valueOf(buyer.getServiceLevel().trim());
-            // Service Level (0-off, 1-on, 2-premium)
-            if ((serviceLevel == 2) && (buyer.getOrderCnt() > 0)) {
+            // Service Level (0-off, 1-restaurant-on, 2-restaurant-premium, 3-CSA)
+            if ((buyer.getBuyerType() == 2) && (buyer.getOrderCnt() > 0)) {
                 premiumWithOrdersList.add(new BuyerItem(buyer, imageCache));
-            } else if ((serviceLevel != 0) && buyer.getOrderCnt() > 0) {
+            } else if ((buyer.getBuyerType() == 1) && buyer.getOrderCnt() > 0) {
                 justOrdersList.add(new BuyerItem(buyer, imageCache));
-            } else if (serviceLevel == 2) {
+            } else if (buyer.getBuyerType() == 2) {
                 premiumNoOrdersList.add(new BuyerItem(buyer, imageCache));
             }
-            Log.w(LogTag, "buyer.getName() = " + buyer.getName() + "; serviceLevel = " + serviceLevel + "; orderCnt = " + buyer.getOrderCnt());
+            Log.w(LogTag, "buyer.getName() = " + buyer.getName() + "; buyerType = " + buyer.getBuyerType() + "; orderCnt = " + buyer.getOrderCnt());
         }
         // sort
         Collections.sort(premiumWithOrdersList, new Comparator<BuyerItem>() {

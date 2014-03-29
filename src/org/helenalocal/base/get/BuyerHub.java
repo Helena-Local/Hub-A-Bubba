@@ -114,12 +114,6 @@ public class BuyerHub extends Hub implements Runnable {
                     }
                 }
                 if (iterator.hasNext()) {
-                    String serviceLevel = iterator.next();
-                    if (!serviceLevel.equals("")) {
-                        buyer.setServiceLevel(serviceLevel);
-                    }
-                }
-                if (iterator.hasNext()) {
                     String certificationStr = iterator.next();
                     if (!certificationStr.equals("")) {
                         buyer.setCertifications(CertificationHub.buildCertificationList(certificationStr));
@@ -129,6 +123,17 @@ public class BuyerHub extends Hub implements Runnable {
                     String quote = iterator.next();
                     if (!quote.equals("")) {
                         buyer.setQuote(quote);
+                    }
+                }
+                if (iterator.hasNext()) {
+                    String buyerType = iterator.next();
+                    if (!buyerType.equals("")) {
+                        try {
+                            // this should help validate the csv file format we are reading.
+                            buyer.setBuyerType(Integer.valueOf(buyerType.trim()));;
+                        } catch (Exception e) {
+                            Log.e(HubInit.logTag, "SKIPPING - ERROR in csv buyer tab this line: >" + receiveString + "<");
+                        }
                     }
                 }
                 myBuyerMap.put(buyer.getBID(), buyer);
@@ -217,7 +222,6 @@ public class BuyerHub extends Hub implements Runnable {
     public void run() {
         try {
             Hub.buyerMap = new BuyerHub(context).getBuyerMap();
-            loadBogusData();
             broadcastRefresh(context, HubType.BUYER_HUB);
             Log.w(logTag, "BuyerHub().getBuyerMap loaded...");
         } catch (IOException e) {
@@ -233,21 +237,6 @@ public class BuyerHub extends Hub implements Runnable {
             Log.w(logTag, "BuyerHub().refresh loaded...");
         } catch (IOException e) {
             Log.w(logTag, "BuyerHub().refresh couldn't be loaded...");
-        }
-    }
-
-    private void loadBogusData() {
-
-        for (int d = 0; d < 7; d++) {
-            Buyer b = new Buyer();
-            b.setBID(String.format("CSA%02d", d));
-            b.setName(String.format("The CSA %02d", d));
-            b.setContactEmail(String.format("csa%02d@porkonafork.net", d));
-            b.setPhone("949-867-5309");
-            b.setWebsiteUrl("http://en.wikipedia.org/wiki/Community-supported_agriculture");
-            b.setPhotoUrl("http://en.wikipedia.org/wiki/File:Clagett_Farm_CSA_Week_11.jpg");
-            b.setServiceLevel("0");
-            Hub.buyerMap.put(b.getBID(), b);
         }
     }
 }
