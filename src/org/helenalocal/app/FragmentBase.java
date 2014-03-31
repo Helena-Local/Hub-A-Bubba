@@ -4,14 +4,17 @@
 
 package org.helenalocal.app;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import org.helenalocal.base.Hub;
 import org.helenalocal.base.HubInit;
+import org.helenalocal.utils.ActivityUtils;
 
 abstract public class FragmentBase extends Fragment {
 
@@ -19,6 +22,7 @@ abstract public class FragmentBase extends Fragment {
     private BroadcastReceiver _broadcastReceiver;
     private IntentFilter _intentFilter;
     private boolean _receiverInitialized = false;
+    private boolean _receiverRegistered = false;
 
     abstract public int getTitleId();
 
@@ -46,28 +50,36 @@ abstract public class FragmentBase extends Fragment {
 
 
     protected void initializeReceiver(HubInit.HubType type) {
-        _receiverInitialized = true;
         _hubType = type;
 
         _intentFilter = new IntentFilter(Hub.HUB_DATA_REFRESH);
         _intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
 
-        _broadcastReceiver = new BroadcastReceiver() {
+        _broadcastReceiver = getBroadcastReceiver();
+        _receiverInitialized = true;
+    }
+
+    private BroadcastReceiver getBroadcastReceiver() {
+        return new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 HubInit.HubType type = (HubInit.HubType)intent.getSerializableExtra(Hub.EXTRA_HUB_TYPE);
-                if (type == _hubType) {
-                    onRefresh();
+
+                // due to the async nature of the broadcast message it is possible to receive this after we have unregistered
+                if ((type == _hubType) && (_receiverRegistered == true)) {
+                        onRefresh();
                 }
             }
         };
     }
 
     private void registerReceiver() {
+        _receiverRegistered = true;
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(_broadcastReceiver, _intentFilter);
     }
 
     private void unregisterReceiver() {
+        _receiverRegistered = false;
         LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(_broadcastReceiver);
     }
 }
