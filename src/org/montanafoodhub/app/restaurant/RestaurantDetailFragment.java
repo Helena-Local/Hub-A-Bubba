@@ -61,16 +61,6 @@ public class RestaurantDetailFragment extends FragmentBase implements View.OnCli
         textView = (TextView) view.findViewById(R.id.addressTextView);
         textView.setText(_buyer.getLocation());
 
-        // quote
-        textView = (TextView) view.findViewById(R.id.quoteTextView);
-        if (_buyer.getQuote().isEmpty() == false) {
-            textView.setText(String.format("\"%s\"", _buyer.getQuote()));
-        }
-        else {
-            textView.setVisibility(View.GONE);
-        }
-
-
         // call click listener
         textView = (TextView) view.findViewById(R.id.callTextView);
         textView.setOnClickListener(this);

@@ -153,7 +153,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:stretchColumns="1"
-                    android:shrinkColumns="1">
+                    android:shrinkColumns="1"
+                    android:layout_marginBottom="25dp">
 
 
         <!--NOTE:   The following two TableRows are here for design time only. They are removed at runtime and
@@ -244,7 +245,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginBottom="25dp">
+                    >
 
 
         <!--NOTE:   The following two RelativeLayouts are here for design time only. They are removed at runtime and
@@ -298,10 +299,6 @@
                             android:textSize="@dimen/default_list_item_text_size"/>
                 </RelativeLayout>
             </LinearLayout>
-            <TextView
-                    android:id="@+id/quoteTextView"
-                    style="@style/detailActivityQuote"
-                    android:text='"Takee Outee! I Love Takee Outee! Three meals a day!"'/>
 
             <!--<LinearLayout-->
                     <!--android:id="@+id/productsLayout"-->
