@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="org.helenalocal.Helena_Local_Hub"
+          package="org.montanafoodhub.Helena_Local_Hub"
           android:versionCode="1"
           android:versionName="1.0">
 
@@ -14,9 +14,9 @@
                  android:theme="@style/AppTheme"
                  android:icon="@drawable/ic_launcher"
                  android:debuggable="true"
-                 android:name="org.helenalocal.app.HubApplication">
+                 android:name="org.montanafoodhub.app.HubApplication">
 
-        <activity android:name="org.helenalocal.app.MainActivity"
+        <activity android:name="org.montanafoodhub.app.MainActivity"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -24,40 +24,40 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="org.helenalocal.app.producer.ProducerDetailActivity"
-                  android:parentActivityName="org.helenalocal.app.MainActivity">
+        <activity android:name="org.montanafoodhub.app.producer.ProducerDetailActivity"
+                  android:parentActivityName="org.montanafoodhub.app.MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                       android:value="org.helenalocal.app.MainActivity"/>
+                       android:value="org.montanafoodhub.app.MainActivity"/>
         </activity>
 
-        <activity android:name="org.helenalocal.app.restaurant.RestaurantDetailActivity"
-                  android:parentActivityName="org.helenalocal.app.MainActivity">
+        <activity android:name="org.montanafoodhub.app.restaurant.RestaurantDetailActivity"
+                  android:parentActivityName="org.montanafoodhub.app.MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                       android:value="org.helenalocal.app.MainActivity"/>
+                       android:value="org.montanafoodhub.app.MainActivity"/>
         </activity>
 
-        <activity android:name="org.helenalocal.app.product.ProductCategoryDetailActivity"
-                  android:parentActivityName="org.helenalocal.app.MainActivity">
+        <activity android:name="org.montanafoodhub.app.product.ProductCategoryDetailActivity"
+                  android:parentActivityName="org.montanafoodhub.app.MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                       android:value="org.helenalocal.app.MainActivity"/>
+                       android:value="org.montanafoodhub.app.MainActivity"/>
         </activity>
 
-        <activity android:name="org.helenalocal.app.member.CSADetailActivity"
-            android:parentActivityName="org.helenalocal.app.MainActivity">
+        <activity android:name="org.montanafoodhub.app.member.CSADetailActivity"
+            android:parentActivityName="org.montanafoodhub.app.MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                       android:value="org.helenalocal.app.MainActivity"/>
+                       android:value="org.montanafoodhub.app.MainActivity"/>
         </activity>
 
 
-        <service android:name="org.helenalocal.app.service.HubInitService"
+        <service android:name="org.montanafoodhub.app.service.HubInitService"
                  android:exported="false">
          </service>
 
-        <!--<provider android:name="org.helenalocal.app.provider.ItemProvider"-->
-                  <!--android:authorities="org.helenalocal.provider.itemprovider"-->
+        <!--<provider android:name="org.montanafoodhub.app.provider.ItemProvider"-->
+                  <!--android:authorities="org.montanafoodhub.provider.itemprovider"-->
                   <!--android:exported="false"/>-->
 
-        <!--<service android:name="org.helenalocal.app.service.HubUpdateService"-->
+        <!--<service android:name="org.montanafoodhub.app.service.HubUpdateService"-->
                  <!--android:exported="false"/>-->
 
     </application>
