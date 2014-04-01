@@ -7,10 +7,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/default_list_item_padding_top"
-                android:paddingBottom="@dimen/default_list_item_padding_bottom"
-                android:paddingLeft="@dimen/default_list_item_padding_left"
-                android:paddingRight="@dimen/default_list_item_padding_right"
+                android:paddingTop="@dimen/large_list_item_padding_top"
+                android:paddingBottom="@dimen/large_list_item_padding_bottom"
+                android:paddingLeft="@dimen/large_list_item_padding_left"
+                android:paddingRight="@dimen/large_list_item_padding_right"
                 android:clickable="false">
 
     <ImageView

@@ -109,10 +109,10 @@ public class ProducerDetailFragment extends Fragment implements View.OnClickList
             relativeLayout.setOnClickListener(this);
             relativeLayout.setTag(cert);
 
-            ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
+            ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.certificationImageview);
             imageCache.loadImage(imageView, cert.getIconUrl(), R.drawable.default_certification);
 
-            TextView textView = (TextView)relativeLayout.findViewById(R.id.textView);
+            TextView textView = (TextView)relativeLayout.findViewById(R.id.certificationText);
             textView.setText(cert.getDisplayName());
 
             linearLayout.addView(relativeLayout);

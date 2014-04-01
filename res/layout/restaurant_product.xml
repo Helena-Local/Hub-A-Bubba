@@ -5,40 +5,36 @@
   -->
 
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
-          android:layout_height="wrap_content"
-          android:layout_width="match_parent"
-          android:background="?attr/clickableItemBackground"
-          android:paddingTop="2.5dp"
-          android:paddingBottom="2.5dp"
-          android:clickable="true"
-          android:focusable="true">
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="?attr/clickableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingTop="@dimen/medium_list_item_padding_top"
+        android:paddingBottom="@dimen/medium_list_item_padding_bottom">
 
-<ImageView
-            android:id="@+id/imageView"
-            android:layout_width="@dimen/default_list_item_image_width"
-            android:layout_height="wrap_content"
-            android:maxHeight="@dimen/default_list_item_image_height"
-            android:scaleType="centerInside"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/default_producer"/>
+    <ImageView style="@style/medium_list_item_imageview"
+            android:id="@+id/recentProductImageView"
+            android:src="@drawable/default_producer"
+            android:layout_marginLeft="@dimen/medium_list_item_image_margin_left"/>
 
     <TextView
-            android:id="@+id/productNameTextView"
+            android:id="@+id/recentProductLeftText"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Here lies some food"
-            android:textSize="@dimen/default_list_item_text_size"
+            android:textSize="@dimen/medium_list_item_text_size"
             android:singleLine="false"
-            android:gravity="center_vertical|left"/>
+            android:gravity="center_vertical|left"
+            android:text="Here lies some food"/>
 
     <TextView
-            android:id="@+id/purchaseDateTextView"
+            android:id="@+id/recentProductRightText"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:text="Purchased on 02/17/2014"
-            android:textSize="10sp"
-            android:gravity="center_vertical|right"/>
+            android:textSize="@dimen/medium_list_item_text_size_small"
+            android:gravity="center_vertical|right"
+            android:text="on 02/17/2014"/>
+
 </TableRow>

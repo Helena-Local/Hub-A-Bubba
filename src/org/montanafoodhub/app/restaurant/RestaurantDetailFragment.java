@@ -91,10 +91,10 @@ public class RestaurantDetailFragment extends FragmentBase implements View.OnCli
             relativeLayout.setOnClickListener(this);
             relativeLayout.setTag(cert);
 
-            ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.imageView);
+            ImageView imageView = (ImageView) relativeLayout.findViewById(R.id.certificationImageview);
             imageCache.loadImage(imageView, cert.getIconUrl(), R.drawable.default_certification);
 
-            TextView textView = (TextView)relativeLayout.findViewById(R.id.textView);
+            TextView textView = (TextView)relativeLayout.findViewById(R.id.certificationText);
             textView.setText(cert.getDisplayName());
 
             linearLayout.addView(relativeLayout);
@@ -129,13 +129,13 @@ public class RestaurantDetailFragment extends FragmentBase implements View.OnCli
             tableRow.setOnClickListener(this);
             tableRow.setTag(producer);
 
-            ImageView imageView = (ImageView) tableRow.findViewById(R.id.imageView);
+            ImageView imageView = (ImageView) tableRow.findViewById(R.id.recentProductImageView);
             imageCache.loadImage(imageView, producer.getIconUrl(), R.drawable.default_producer);
 
-            TextView textView = (TextView) tableRow.findViewById(R.id.productNameTextView);
+            TextView textView = (TextView) tableRow.findViewById(R.id.recentProductLeftText);
             textView.setText(item.getProductDesc());
 
-            textView = (TextView) tableRow.findViewById(R.id.purchaseDateTextView);
+            textView = (TextView) tableRow.findViewById(R.id.recentProductRightText);
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
             textView.setText(String.format(getResources().getString(R.string.product_purchase_date), dateFormat.format(order.getDate().getTime())));
 

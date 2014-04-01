@@ -10,10 +10,10 @@
               android:layout_height="wrap_content"
               android:minHeight="48dp"
               android:baselineAligned="false"
-              android:paddingTop="@dimen/default_list_item_padding_top"
-              android:paddingLeft="@dimen/default_list_item_padding_left"
-              android:paddingRight="@dimen/default_list_item_padding_right"
-              android:paddingBottom="@dimen/default_list_item_padding_bottom"
+              android:paddingTop="@dimen/large_list_item_padding_top"
+              android:paddingLeft="@dimen/large_list_item_padding_left"
+              android:paddingRight="@dimen/large_list_item_padding_right"
+              android:paddingBottom="@dimen/large_list_item_padding_bottom"
               android:background="@drawable/card_background">
 
 

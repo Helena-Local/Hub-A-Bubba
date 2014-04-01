@@ -67,6 +67,12 @@
         <item name="android:layout_marginRight">15dp</item>
     </style>
 
+    <style name="medium_list_item_imageview">
+        <item name="android:layout_width">@dimen/medium_list_item_image_width</item>
+        <item name="android:layout_height">@dimen/medium_list_item_image_height</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:layout_marginRight">@dimen/medium_list_item_image_margin_right</item>
+    </style>
 
     <style name="list_item_text_primary" parent="android:TextAppearance.Medium">
         <item name="android:layout_width">wrap_content</item>
@@ -88,6 +94,7 @@
         <item name="android:background">?attr/clickableItemBackground</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="detailActivityQuote" parent="android:TextAppearance.Medium">
@@ -104,6 +111,5 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginBottom">2.5dp</item>
     </style>
-
 
 </resources>

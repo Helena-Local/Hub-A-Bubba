@@ -6,11 +6,6 @@
 <resources>
     <dimen name="text_size_extra_small">12sp</dimen>
 
-    <dimen name="welcome_text_margin_top">20dp</dimen>
-    <dimen name="welcome_text_margin_bottom">10dp</dimen>
-    <dimen name="welcome_text_margin_left">10dp</dimen>
-    <dimen name="welcome_text_margin_right">10dp</dimen>
-
     <dimen name="list_view_margin_top">10dp</dimen>
     <dimen name="list_view_margin_bottom">10dp</dimen>
     <dimen name="list_view_margin_left">10dp</dimen>
@@ -18,14 +13,22 @@
 
     <dimen name="list_view_padding">10dp</dimen>
 
-    <dimen name="default_list_item_padding_top">10dp</dimen>
-    <dimen name="default_list_item_padding_bottom">10dp</dimen>
-    <dimen name="default_list_item_padding_left">10dp</dimen>
-    <dimen name="default_list_item_padding_right">10dp</dimen>
+    <dimen name="large_list_item_padding_top">10dp</dimen>
+    <dimen name="large_list_item_padding_bottom">10dp</dimen>
+    <dimen name="large_list_item_padding_left">10dp</dimen>
+    <dimen name="large_list_item_padding_right">10dp</dimen>
 
-    <dimen name="default_list_item_image_height">24dp</dimen>
-    <dimen name="default_list_item_image_width">24dp</dimen>
-    <dimen name="default_list_item_text_size">12sp</dimen>
+
+    <dimen name="medium_list_item_padding_top">5dp</dimen>
+    <dimen name="medium_list_item_padding_bottom">5dp</dimen>
+    <dimen name="medium_list_item_padding_right">5dp</dimen>
+    <dimen name="medium_list_item_padding_left">5dp</dimen>
+    <dimen name="medium_list_item_image_margin_left">5dp</dimen>
+    <dimen name="medium_list_item_image_margin_right">5dp</dimen>
+    <dimen name="medium_list_item_text_size">12sp</dimen>
+    <dimen name="medium_list_item_text_size_small">10sp</dimen>
+    <dimen name="medium_list_item_image_height">24dp</dimen>
+    <dimen name="medium_list_item_image_width">24dp</dimen>
 
     <dimen name="card_list_item_padding_left">15dp</dimen>
     <dimen name="card_list_item_padding_right">15dp</dimen>
