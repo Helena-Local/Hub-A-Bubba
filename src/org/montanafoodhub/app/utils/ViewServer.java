@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.montanafoodhub.utils;
+package org.montanafoodhub.app.utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

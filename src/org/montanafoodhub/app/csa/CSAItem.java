@@ -11,7 +11,7 @@ import android.widget.TextView;
 import org.montanafoodhub.Helena_Local_Hub.R;
 import org.montanafoodhub.app.ListItem;
 import org.montanafoodhub.base.Buyer;
-import org.montanafoodhub.utils.ImageCache;
+import org.montanafoodhub.app.utils.ImageCache;
 
 public class CSAItem extends ListItem {
 

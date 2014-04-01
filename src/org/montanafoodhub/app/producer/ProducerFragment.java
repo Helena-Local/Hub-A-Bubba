@@ -20,7 +20,7 @@ import org.montanafoodhub.base.Hub;
 import org.montanafoodhub.base.HubInit;
 import org.montanafoodhub.base.Producer;
 import org.montanafoodhub.base.get.ProducerHub;
-import org.montanafoodhub.utils.ImageCache;
+import org.montanafoodhub.app.utils.ImageCache;
 
 import java.util.ArrayList;
 import java.util.Collections;

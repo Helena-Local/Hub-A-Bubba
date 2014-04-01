@@ -19,8 +19,8 @@ import org.montanafoodhub.app.ListItem;
 import org.montanafoodhub.app.producer.ProducerDetailActivity;
 import org.montanafoodhub.base.*;
 import org.montanafoodhub.base.get.OrderHub;
-import org.montanafoodhub.utils.ActivityUtils;
-import org.montanafoodhub.utils.ImageCache;
+import org.montanafoodhub.app.utils.ActivityUtils;
+import org.montanafoodhub.app.utils.ImageCache;
 
 import java.text.SimpleDateFormat;
 import java.util.*;

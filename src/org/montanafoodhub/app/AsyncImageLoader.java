@@ -9,7 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
-import org.montanafoodhub.utils.ImageCache;
+import org.montanafoodhub.app.utils.ImageCache;
 
 import java.io.InputStream;
 import java.lang.ref.WeakReference;

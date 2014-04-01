@@ -11,7 +11,7 @@ import android.util.Log;
 import org.montanafoodhub.app.service.HubInitService;
 import org.montanafoodhub.base.HubInit;
 import org.montanafoodhub.base.get.*;
-import org.montanafoodhub.utils.ImageCache;
+import org.montanafoodhub.app.utils.ImageCache;
 
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;

@@ -14,7 +14,7 @@ import org.montanafoodhub.app.ListItem;
 import org.montanafoodhub.base.Hub;
 import org.montanafoodhub.base.HubInit;
 import org.montanafoodhub.base.Order;
-import org.montanafoodhub.utils.ActivityUtils;
+import org.montanafoodhub.app.utils.ActivityUtils;
 
 import java.text.SimpleDateFormat;
 

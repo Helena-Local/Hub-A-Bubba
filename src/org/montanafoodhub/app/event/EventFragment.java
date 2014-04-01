@@ -18,7 +18,7 @@ import org.montanafoodhub.app.restaurant.RestaurantDetailActivity;
 import org.montanafoodhub.base.Ad;
 import org.montanafoodhub.base.HubInit;
 import org.montanafoodhub.base.get.AdHub;
-import org.montanafoodhub.utils.ImageCache;
+import org.montanafoodhub.app.utils.ImageCache;
 
 import java.util.Random;
 

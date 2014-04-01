@@ -19,8 +19,8 @@ import org.montanafoodhub.base.Certification;
 import org.montanafoodhub.base.Hub;
 import org.montanafoodhub.base.HubInit;
 import org.montanafoodhub.base.Producer;
-import org.montanafoodhub.utils.ActivityUtils;
-import org.montanafoodhub.utils.ImageCache;
+import org.montanafoodhub.app.utils.ActivityUtils;
+import org.montanafoodhub.app.utils.ImageCache;
 
 import java.net.URLEncoder;
 

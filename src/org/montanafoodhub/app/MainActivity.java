@@ -21,7 +21,7 @@ import org.montanafoodhub.app.producer.ProducerFragment;
 import org.montanafoodhub.app.product.ProductFragement;
 import org.montanafoodhub.app.restaurant.RestaurantFragment;
 import org.montanafoodhub.app.test.AsyncTesterTask;
-import org.montanafoodhub.utils.ViewServer;
+import org.montanafoodhub.app.utils.ViewServer;
 
 public class MainActivity extends NavigationDrawerActionBarActivity {
 
