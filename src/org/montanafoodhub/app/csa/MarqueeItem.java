@@ -69,7 +69,7 @@ public class MarqueeItem extends ListItem implements View.OnClickListener {
 
     private void onClickInfo() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(Hub.buyerMap.get(HubInit.HELENA_LOCAL_BUYER_ID).getContactEmail()));
+        intent.setData(Uri.parse(Hub.buyerMap.get(HubInit.HELENA_LOCAL_BUYER_ID).getWebsiteUrl()));
         ActivityUtils.startImplicitActivity(_context, intent, R.string.no_web_browser_application, LogTag);
     }
 
