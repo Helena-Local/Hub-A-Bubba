@@ -58,6 +58,14 @@ public class ProductFragement extends FragmentBase implements ListView.OnItemCli
         ListView listView = (ListView) getActivity().findViewById(R.id.productListView);
         listView.setAdapter(_arrayAdapter);
         listView.setOnItemClickListener(this);
+
+
+        // these items are contained in the 'included' info header
+        TextView textView = (TextView) getActivity().findViewById(R.id.msgTextView);
+        textView.setText(R.string.product_fragment_welcome);
+
+        View view = getActivity().findViewById(R.id.dismissContainer);
+        view.setVisibility(View.GONE);
     }
 
     @Override

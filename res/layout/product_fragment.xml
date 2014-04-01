@@ -10,16 +10,7 @@
               android:layout_height="match_parent"
               android:background="@android:color/white">
 
-    <LinearLayout
-            style="@style/activity_header"
-            android:orientation="vertical">
-
-        <TextView
-                style="@style/activity_welcome_text"
-                android:id="@+id/welcomeText"
-                android:text="@string/product_fragment_welcome"/>
-
-    </LinearLayout>
+    <include layout="@layout/activity_info_header" />
 
     <ListView android:id="@+id/productListView"
               android:layout_width="match_parent"

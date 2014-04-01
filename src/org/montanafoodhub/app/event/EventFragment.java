@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import org.montanafoodhub.Helena_Local_Hub.R;
 import org.montanafoodhub.app.FragmentBase;
 import org.montanafoodhub.app.HubApplication;
@@ -68,6 +69,12 @@ public class EventFragment extends FragmentBase {
                 });
             }
         }
+
+        TextView textView = (TextView) v.findViewById(R.id.msgTextView);
+        textView.setText(R.string.event_fragment_welcome);
+
+        View view = v.findViewById(R.id.dismissContainer);
+        view.setVisibility(View.GONE);
 
         return v;
     }
