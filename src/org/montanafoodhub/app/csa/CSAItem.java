@@ -40,5 +40,8 @@ public class CSAItem extends ListItem {
         TextView textView = (TextView)view.findViewById(R.id.csaNameTextView);
         textView.setText(_buyer.getName());
 
+        textView = (TextView) view.findViewById(R.id.cityTextView);
+        textView.setText(_buyer.getLocationDisplay());
+
     }
 }

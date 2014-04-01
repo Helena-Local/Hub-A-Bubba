@@ -19,9 +19,16 @@
 
     <TextView
             style="@style/list_item_text_primary"
-            android:text="Sunflower"
+            android:text="Maya's Farm"
             android:id="@+id/csaNameTextView"
             android:layout_toRightOf="@id/csaImageView"
-            android:layout_centerVertical="true"/>
+            />
+
+    <TextView
+            style="@style/list_item_text_secondary"
+            android:id="@+id/cityTextView"
+            android:layout_toRightOf="@+id/csaImageView"
+            android:layout_below="@+id/csaNameTextView"
+            android:text="Phoenix"/>
 
 </RelativeLayout>
