@@ -2,7 +2,7 @@
  * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
  */
 
-package org.montanafoodhub.app.member;
+package org.montanafoodhub.app.csa;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -45,7 +45,7 @@ public class MemberFragment extends FragmentBase implements ProductItem.IActionI
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.member_fragment, container, false);
+        View view = inflater.inflate(R.layout.csa_detail_fragment, container, false);
 
         Bundle args = getArguments();
         String buyerId = args.getString(CSADetailActivity.EXTRA_CSA_ID);

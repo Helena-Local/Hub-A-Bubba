@@ -15,7 +15,7 @@ import android.support.v4.view.GravityCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import org.montanafoodhub.Helena_Local_Hub.R;
-import org.montanafoodhub.app.member.CSAListFragment;
+import org.montanafoodhub.app.csa.CSAListFragment;
 import org.montanafoodhub.app.producer.ProducerFragment;
 import org.montanafoodhub.app.product.ProductFragement;
 import org.montanafoodhub.app.restaurant.RestaurantFragment;

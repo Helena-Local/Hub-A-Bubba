@@ -42,7 +42,7 @@
                        android:value="org.montanafoodhub.app.MainActivity"/>
         </activity>
 
-        <activity android:name="org.montanafoodhub.app.member.CSADetailActivity"
+        <activity android:name="org.montanafoodhub.app.csa.CSADetailActivity"
             android:parentActivityName="org.montanafoodhub.app.MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                        android:value="org.montanafoodhub.app.MainActivity"/>
