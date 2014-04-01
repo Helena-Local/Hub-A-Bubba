@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import org.montanafoodhub.Helena_Local_Hub.R;
 import org.montanafoodhub.app.csa.CSAListFragment;
+import org.montanafoodhub.app.event.EventFragment;
 import org.montanafoodhub.app.producer.ProducerFragment;
 import org.montanafoodhub.app.product.ProductFragement;
 import org.montanafoodhub.app.restaurant.RestaurantFragment;
@@ -182,7 +183,7 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
 
         switch (position) {
             case 0:
-                _currentFrag = new EventsFragment();
+                _currentFrag = new EventFragment();
                 break;
             case 1:
                 _currentFrag = new CSAListFragment();

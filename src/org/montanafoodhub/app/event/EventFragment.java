@@ -2,7 +2,7 @@
  * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
  */
 
-package org.montanafoodhub.app;
+package org.montanafoodhub.app.event;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import org.montanafoodhub.Helena_Local_Hub.R;
+import org.montanafoodhub.app.FragmentBase;
+import org.montanafoodhub.app.HubApplication;
 import org.montanafoodhub.app.restaurant.RestaurantDetailActivity;
 import org.montanafoodhub.base.Ad;
 import org.montanafoodhub.base.HubInit;
@@ -20,9 +22,9 @@ import org.montanafoodhub.utils.ImageCache;
 
 import java.util.Random;
 
-public class EventsFragment extends FragmentBase {
+public class EventFragment extends FragmentBase {
 
-    private static final String Tag = "EventsFragment";
+    private static final String Tag = "EventFragment";
     private static Random random = new Random();
 
     @Override
