@@ -74,9 +74,7 @@ public class MemberFragment extends FragmentBase implements ProductItem.IActionI
     public void onResume() {
         super.onResume();
 
-        // display all Helena Local bought for CSA!
         TreeMap<String, List<Item>> productMap = new TreeMap<String, List<Item>>();
-//        for (Order order : OrderHub.getOrdersForBuyer(HubInit.HELENA_LOCAL_BUYER_ID)) {
         List<Order> orderList = OrderHub.getOrdersForBuyer(_buyer.getBID());
         for (Order order : orderList) {
 
@@ -99,7 +97,7 @@ public class MemberFragment extends FragmentBase implements ProductItem.IActionI
         ImageCache imageCache = ((HubApplication)getActivity().getApplication()).getImageCache();
 
         // insert the marquee item first
-        _itemList.add(new MarqueeItem(getActivity()));
+        _itemList.add(new MarqueeItem(getActivity(), _buyer));
 
         // now that we have the data sorted by and organized by category, flatten it out into a list.
         for (Map.Entry<String, List<Item>> entry : productMap.entrySet()) {
@@ -130,8 +128,8 @@ public class MemberFragment extends FragmentBase implements ProductItem.IActionI
     public void onProducerItemClicked(Item item) {
 
         Producer producer = null;
-        //TODO This need to be dynamic based on selected CSA...
-        for (Order order : OrderHub.getOrdersForBuyer(HubInit.HELENA_LOCAL_BUYER_ID)) {
+        List<Order> orderList = OrderHub.getOrdersForBuyer(_buyer.getBID());
+        for (Order order : orderList) {
 
             if (order.getItemID().equalsIgnoreCase(item.getIID())) {
                 producer = OrderHub.producerMap.get(order.getProducerID());

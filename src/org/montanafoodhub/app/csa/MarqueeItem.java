@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import org.montanafoodhub.Helena_Local_Hub.R;
 import org.montanafoodhub.app.ListItem;
+import org.montanafoodhub.base.Buyer;
 import org.montanafoodhub.base.Hub;
 import org.montanafoodhub.base.HubInit;
 import org.montanafoodhub.base.Order;
@@ -21,10 +22,12 @@ import java.text.SimpleDateFormat;
 public class MarqueeItem extends ListItem implements View.OnClickListener {
 
     private static final String LogTag = "MarqueeItem";
-    private Context _context;
+    private final Buyer _buyer;
+    private final Context _context;
 
-    public MarqueeItem(Context context) {
+    public MarqueeItem(Context context, Buyer buyer) {
         _context = context;
+        _buyer = buyer;
     }
 
     @Override
@@ -34,13 +37,12 @@ public class MarqueeItem extends ListItem implements View.OnClickListener {
 
     @Override
     public void loadView(View view) {
-        // TODO not sure this goes here...
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d");
         String csaDateStr = "";
 
         for (int i=0; i < Hub.orderArr.size(); i++) {
             Order o = Hub.orderArr.get(i);
-            if (o.getBuyerID().equals(HubInit.HELENA_LOCAL_BUYER_ID)) {
+            if (o.getBuyerID().equals(_buyer.getBID())) {
                 csaDateStr = dateFormat.format(o.getDate().getTime());
                 break;
             }
@@ -69,13 +71,13 @@ public class MarqueeItem extends ListItem implements View.OnClickListener {
 
     private void onClickInfo() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(Hub.buyerMap.get(HubInit.HELENA_LOCAL_BUYER_ID).getWebsiteUrl()));
+        intent.setData(Uri.parse(_buyer.getWebsiteUrl()));
         ActivityUtils.startImplicitActivity(_context, intent, R.string.no_web_browser_application, LogTag);
     }
 
     private void onClickBuy() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(Hub.buyerMap.get(HubInit.HELENA_LOCAL_BUYER_ID).getWebsiteUrl()));
+        intent.setData(Uri.parse(_buyer.getWebsiteUrl()));
         ActivityUtils.startImplicitActivity(_context, intent, R.string.no_web_browser_application, LogTag);
     }
 }
