@@ -23,7 +23,7 @@ import org.montanafoodhub.utils.ImageCache;
 
 import java.util.*;
 
-public class CSAListFragment extends FragmentBase implements AdapterView.OnItemClickListener {
+public class CSAFragment extends FragmentBase implements AdapterView.OnItemClickListener {
 
     private List<ListItem> _csaList;
     private CSAItemAdapter _listAdapter;
