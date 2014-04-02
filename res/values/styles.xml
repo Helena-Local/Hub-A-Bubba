@@ -86,16 +86,6 @@
         <item name="android:textColor">?android:textColorSecondaryInverse</item>
     </style>
 
-    <style name="detailActivityActionItem">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">-3dp</item>
-        <item name="android:textColor">@color/helena_local_blue</item>
-        <item name="android:background">?attr/clickableItemBackground</item>
-        <item name="android:clickable">true</item>
-        <item name="android:focusable">true</item>
-        <item name="android:textSize">16sp</item>
-    </style>
 
     <style name="detailActivityQuote" parent="android:TextAppearance.Medium">
         <item name="android:layout_width">wrap_content</item>
@@ -110,6 +100,40 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginBottom">2.5dp</item>
+    </style>
+
+    <style name="ActionContainer">
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:background">?attr/clickableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="ActionContainerLeft" parent="ActionContainer">
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">@dimen/action_container_left_padding_left</item>
+        <item name="android:paddingRight">@dimen/action_container_left_padding_right</item>
+    </style>
+
+    <style name="ActionContainerCenter" parent="ActionContainer">
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">@dimen/action_container_center_padding_left</item>
+        <item name="android:paddingRight">@dimen/action_container_center_padding_right</item>
+    </style>
+
+    <style name="ActionContainerRight" parent="ActionContainer">
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">@dimen/action_container_right_padding_left</item>
+        <item name="android:paddingRight">@dimen/action_container_right_padding_right</item>
+    </style>
+
+    <style name="ActionText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:textColor">@color/helena_local_blue</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
 </resources>

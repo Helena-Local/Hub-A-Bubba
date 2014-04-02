@@ -22,7 +22,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:fontFamily="sans-serif-light" android:text="Shares for the week of March 17th"/>
+            android:fontFamily="sans-serif-light"
+            android:text="Shares for the week of March 17th"/>
 
     <TextView
             android:id="@+id/textViewBody"
@@ -41,28 +42,17 @@
             android:id="@+id/actionLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="8dp">
 
-        <TextView
+        <TextView style="@style/ActionContainerLeft"
                 android:id="@+id/infoTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:textColor="@color/helena_local_blue"
-                android:background = "?attr/clickableItemBackground"
-                android:clickable = "true"
-                android:focusable = "true"
-                android:text="CSA Info"/>
+                android:text="@string/csa_header_left_action_text"/>
 
-        <TextView
+        <TextView style="@style/ActionContainerRight"
                 android:id="@+id/buyTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:textColor="@color/helena_local_blue"
-                android:background = "?attr/clickableItemBackground"
-                android:clickable = "true"
-                android:focusable = "true"
-                android:text="Buy Shares"
+                android:text="@string/csa_header_right_action_text"
                 android:layout_alignParentRight="true"/>
 
     </RelativeLayout>

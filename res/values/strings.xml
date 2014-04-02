@@ -51,4 +51,6 @@
     <string name="no_web_browser_application">A web browser is not installed on this device</string>
     <string name="unable_to_start_activity">Unable to start activity</string>
     <string name="info_header_dismiss">Got it</string>
+    <string name="csa_header_left_action_text">CSA Info</string>
+    <string name="csa_header_right_action_text">Buy Shares</string>
 </resources>

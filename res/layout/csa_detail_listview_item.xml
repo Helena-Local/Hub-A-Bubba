@@ -17,8 +17,7 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
         <ImageView
             style="@style/default_list_item_imageview"
@@ -34,78 +33,63 @@
                 android:fontFamily="sans-serif-light"/>
     </LinearLayout>
 
-    <LinearLayout
+
+    <RelativeLayout
             android:id="@+id/actionLayout"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:stretchColumns="*">
+            android:layout_marginTop="5dp">
 
-        <LinearLayout
+        <LinearLayout style="@style/ActionContainerLeft"
                 android:id="@+id/producerActionLayout"
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left">
-
+                android:layout_alignParentLeft="true">
             <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/action_image_width"
+                    android:layout_height="@dimen/action_image_height"
                     android:src="@drawable/ic_action_producer_blue"/>
-
             <TextView
-                    style="@style/detailActivityActionItem"
+                    style="@style/ActionText"
                     android:id="@+id/producerInfo"
-                    android:text="@string/product_producer_detail_action"
-                    />
+                    android:text="@string/product_producer_detail_action"/>
         </LinearLayout>
 
-        <LinearLayout
+        <LinearLayout style="@style/ActionContainerCenter"
                 android:id="@+id/productActionLayout"
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center">
-
+                android:layout_centerInParent="true">
             <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/action_image_width"
+                    android:layout_height="@dimen/action_image_height"
                     android:src="@drawable/ic_action_about_blue"/>
-
             <TextView
-                    style="@style/detailActivityActionItem"
+                    style="@style/ActionText"
                     android:id="@+id/productInfo"
                     android:text="@string/product_about_action"/>
 
         </LinearLayout>
 
 
-        <LinearLayout
+        <LinearLayout style="@style/ActionContainerRight"
                 android:id="@+id/recipeActionLayout"
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right">
+                android:layout_alignParentRight="true">
 
             <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/action_image_width"
+                    android:layout_height="@dimen/action_image_height"
                     android:src="@drawable/ic_action_recipe_blue"/>
 
             <TextView
-                    style="@style/detailActivityActionItem"
+                    style="@style/ActionText"
                     android:id="@+id/recipeInfo"
                     android:text="@string/product_recipe_action"/>
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <!--<View-->
         <!--android:id="@+id/separatorView"-->

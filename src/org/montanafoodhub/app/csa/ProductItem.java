@@ -45,30 +45,30 @@ public class ProductItem extends ListItem implements View.OnClickListener{
         textView.setText(_item.getProductDesc());
 
         // action items
-        textView = (TextView)view.findViewById(R.id.producerInfo);
-        textView.setOnClickListener(this);
-        textView.setTag(_item);
+        View actionView = view.findViewById(R.id.producerActionLayout);
+        actionView.setOnClickListener(this);
+        actionView.setTag(_item);
 
-        textView = (TextView)view.findViewById(R.id.productInfo);
-        textView.setOnClickListener(this);
-        textView.setTag(_item);
+        actionView = view.findViewById(R.id.productActionLayout);
+        actionView.setOnClickListener(this);
+        actionView.setTag(_item);
 
-        textView = (TextView)view.findViewById(R.id.recipeInfo);
-        textView.setOnClickListener(this);
-        textView.setTag(_item);
+        actionView = view.findViewById(R.id.recipeActionLayout);
+        actionView.setOnClickListener(this);
+        actionView.setTag(_item);
     }
 
     @Override
     public void onClick(View v) {
         Item item = (Item)v.getTag();
 
-        if (v.getId() == R.id.producerInfo) {
+        if (v.getId() == R.id.producerActionLayout) {
             _clickListener.onProducerItemClicked(item);
         }
-        else if (v.getId() == R.id.productInfo) {
+        else if (v.getId() == R.id.productActionLayout) {
             _clickListener.onAboutItemClicked(item);
         }
-        else if (v.getId() == R.id.recipeInfo) {
+        else if (v.getId() == R.id.recipeActionLayout) {
             _clickListener.onRecipeItemClicked(item);
         }
     }

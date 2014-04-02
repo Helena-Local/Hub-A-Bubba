@@ -54,24 +54,24 @@ public class RestaurantDetailFragment extends FragmentBase implements View.OnCli
         imageCache.loadImage(imageView, _buyer.getIconUrl(), R.drawable.default_restaurant);
 
         // restaurant name
-        TextView textView = (TextView) view.findViewById(R.id.nameTextView);
+        TextView textView = (TextView) view.findViewById(R.id.restaurantNameTextView);
         textView.setText(_buyer.getName());
 
         // restaurant address
-        textView = (TextView) view.findViewById(R.id.addressTextView);
+        textView = (TextView) view.findViewById(R.id.restaurantAddressTextView);
         textView.setText(_buyer.getLocation());
 
         // call click listener
-        textView = (TextView) view.findViewById(R.id.callTextView);
-        textView.setOnClickListener(this);
+        View clickView = view.findViewById(R.id.contactActionLayout);
+        clickView.setOnClickListener(this);
 
         // map click listener
-        textView = (TextView) view.findViewById(R.id.mapTextView);
-        textView.setOnClickListener(this);
+        clickView = view.findViewById(R.id.mapActionLayout);
+        clickView.setOnClickListener(this);
 
         // url click listener
-        textView = (TextView) view.findViewById(R.id.urlTextView);
-        textView.setOnClickListener(this);
+        clickView = view.findViewById(R.id.urlActionLayout);
+        clickView.setOnClickListener(this);
 
         loadCertifications(view);
         loadProducts(view);
@@ -148,13 +148,13 @@ public class RestaurantDetailFragment extends FragmentBase implements View.OnCli
     @Override
     public void onClick(View v) {
 
-        if (v.getId() == R.id.callTextView) {
+        if (v.getId() == R.id.contactActionLayout) {
             onClickCall();
         }
-        else if (v.getId() == R.id.mapTextView) {
+        else if (v.getId() == R.id.mapActionLayout) {
             onClickMap();
         }
-        else if (v.getId() == R.id.urlTextView) {
+        else if (v.getId() == R.id.urlActionLayout) {
             onClickUrl();
         }
         else {

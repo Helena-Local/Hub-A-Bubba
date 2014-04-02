@@ -44,11 +44,11 @@ public class ProducerDetailFragment extends Fragment implements View.OnClickList
         imageCache.loadImage(imageView, _producer.getIconUrl(), R.drawable.default_producer);
 
         // name
-        TextView textView = (TextView) view.findViewById(R.id.nameTextView);
+        TextView textView = (TextView) view.findViewById(R.id.producerNameTextView);
         textView.setText(_producer.getName());
 
         // address
-        textView = (TextView) view.findViewById(R.id.addressTextView);
+        textView = (TextView) view.findViewById(R.id.producerAddressTextView);
         textView.setText(_producer.getLocation());
 
         // phone / email action - default is email.
@@ -62,16 +62,16 @@ public class ProducerDetailFragment extends Fragment implements View.OnClickList
 
 
         // contact click listener
-        textView = (TextView) view.findViewById(R.id.contactTextView);
-        textView.setOnClickListener(this);
+        View actionView = view.findViewById(R.id.contactActionLayout);
+        actionView.setOnClickListener(this);
 
         // map click listener
-        textView = (TextView) view.findViewById(R.id.mapTextView);
-        textView.setOnClickListener(this);
+        actionView = view.findViewById(R.id.mapActionLayout);
+        actionView.setOnClickListener(this);
 
         // url click listener
-        textView = (TextView) view.findViewById(R.id.urlTextView);
-        textView.setOnClickListener(this);
+        actionView = view.findViewById(R.id.urlActionLayout);
+        actionView.setOnClickListener(this);
 
 
         // quote
@@ -127,13 +127,13 @@ public class ProducerDetailFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-        if (v.getId() == R.id.contactTextView) {
+        if (v.getId() == R.id.contactActionLayout) {
             onClickContact();
         }
-        else if (v.getId() == R.id.mapTextView) {
+        else if (v.getId() == R.id.mapActionLayout) {
             onClickMap();
         }
-        else if (v.getId() == R.id.urlTextView) {
+        else if (v.getId() == R.id.urlActionLayout) {
             onClickUrl();
         }
         else {
