@@ -40,7 +40,7 @@ public abstract class NavigationDrawerActionBarActivity extends ActionBarActivit
         _drawerlayout = (DrawerLayout)findViewById(R.id.drawerLayout);
         _drawerListView = (ListView)findViewById(R.id.drawerList);
 
-        _drawerListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, _drawerItems));
+        _drawerListView.setAdapter(new ArrayAdapter<String>(this, R.layout.navigation_drawer_item, R.id.drawerItemTextView, _drawerItems));
         _drawerListView.setOnItemClickListener(this);
 
         _drawerToggle = new ActionBarToggle(this, _drawerlayout);
