@@ -9,7 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
-import org.montanafoodhub.Helena_Local_Hub.R;
+import org.montanafoodhub.Helena_Hub.R;
 
 public class ActivityUtils {
 

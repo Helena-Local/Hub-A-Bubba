@@ -9,10 +9,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.BaseAdapter;
+import org.montanafoodhub.Helena_Hub.R;
 import org.montanafoodhub.app.ListItem;
 import org.montanafoodhub.base.Item;
-import org.montanafoodhub.Helena_Local_Hub.R;
 
 import java.util.List;
 

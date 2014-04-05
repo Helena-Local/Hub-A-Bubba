@@ -9,13 +9,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
-import org.montanafoodhub.Helena_Local_Hub.R;
+import org.montanafoodhub.Helena_Hub.R;
 import org.montanafoodhub.app.ListItem;
+import org.montanafoodhub.app.utils.ActivityUtils;
 import org.montanafoodhub.base.Buyer;
 import org.montanafoodhub.base.Hub;
-import org.montanafoodhub.base.HubInit;
 import org.montanafoodhub.base.Order;
-import org.montanafoodhub.app.utils.ActivityUtils;
 
 import java.text.SimpleDateFormat;
 

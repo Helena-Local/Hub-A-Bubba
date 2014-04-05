@@ -7,10 +7,10 @@ package org.montanafoodhub.app.csa;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import org.montanafoodhub.Helena_Local_Hub.R;
+import org.montanafoodhub.Helena_Hub.R;
 import org.montanafoodhub.app.ListItem;
-import org.montanafoodhub.base.Item;
 import org.montanafoodhub.app.utils.ImageCache;
+import org.montanafoodhub.base.Item;
 
 public class ProductItem extends ListItem implements View.OnClickListener{
 

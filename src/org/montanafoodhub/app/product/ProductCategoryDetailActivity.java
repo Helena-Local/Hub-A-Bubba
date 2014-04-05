@@ -7,7 +7,7 @@ package org.montanafoodhub.app.product;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import org.montanafoodhub.Helena_Local_Hub.R;
+import org.montanafoodhub.Helena_Hub.R;
 import org.montanafoodhub.app.NavigationDrawerActionBarActivity;
 
 public class ProductCategoryDetailActivity extends NavigationDrawerActionBarActivity {

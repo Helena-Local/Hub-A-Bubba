@@ -8,10 +8,10 @@ package org.montanafoodhub.app.csa;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import org.montanafoodhub.Helena_Local_Hub.R;
+import org.montanafoodhub.Helena_Hub.R;
 import org.montanafoodhub.app.ListItem;
-import org.montanafoodhub.base.Buyer;
 import org.montanafoodhub.app.utils.ImageCache;
+import org.montanafoodhub.base.Buyer;
 
 public class CSAItem extends ListItem {
 

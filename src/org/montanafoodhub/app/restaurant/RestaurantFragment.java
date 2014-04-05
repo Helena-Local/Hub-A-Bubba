@@ -14,13 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import org.montanafoodhub.Helena_Local_Hub.R;
+import org.montanafoodhub.Helena_Hub.R;
 import org.montanafoodhub.app.*;
+import org.montanafoodhub.app.utils.ImageCache;
 import org.montanafoodhub.base.Buyer;
 import org.montanafoodhub.base.Hub;
 import org.montanafoodhub.base.HubInit;
 import org.montanafoodhub.base.get.BuyerHub;
-import org.montanafoodhub.app.utils.ImageCache;
 
 import java.util.ArrayList;
 import java.util.Collections;

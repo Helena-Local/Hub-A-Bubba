@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--
+  ~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+  -->
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:montanafoodhub="http://schemas.android.com/apk/res/org.montanafoodhub.Helena_Local_Hub">
+        xmlns:montanafoodhub="http://schemas.android.com/apk/res/org.montanafoodhub.Helena_Hub">
 
     <item android:id="@+id/refresh"
           android:title="Refresh"

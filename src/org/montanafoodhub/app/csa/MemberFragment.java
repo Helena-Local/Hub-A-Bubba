@@ -12,15 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import org.montanafoodhub.Helena_Local_Hub.R;
+import org.montanafoodhub.Helena_Hub.R;
 import org.montanafoodhub.app.FragmentBase;
 import org.montanafoodhub.app.HubApplication;
 import org.montanafoodhub.app.ListItem;
 import org.montanafoodhub.app.producer.ProducerDetailActivity;
-import org.montanafoodhub.base.*;
-import org.montanafoodhub.base.get.OrderHub;
 import org.montanafoodhub.app.utils.ActivityUtils;
 import org.montanafoodhub.app.utils.ImageCache;
+import org.montanafoodhub.base.*;
+import org.montanafoodhub.base.get.OrderHub;
 
 import java.text.SimpleDateFormat;
 import java.util.*;

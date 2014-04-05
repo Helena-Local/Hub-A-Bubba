@@ -6,7 +6,7 @@ package org.montanafoodhub.app;
 
 import android.view.View;
 import android.widget.TextView;
-import org.montanafoodhub.Helena_Local_Hub.R;
+import org.montanafoodhub.Helena_Hub.R;
 
 public class InfoHeaderItem extends ListItem implements View.OnClickListener{
 

@@ -7,7 +7,7 @@ package org.montanafoodhub.app.restaurant;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import org.montanafoodhub.Helena_Local_Hub.R;
+import org.montanafoodhub.Helena_Hub.R;
 import org.montanafoodhub.app.NavigationDrawerActionBarActivity;
 import org.montanafoodhub.base.Buyer;
 import org.montanafoodhub.base.Hub;

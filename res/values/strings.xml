@@ -5,18 +5,18 @@
   -->
 
 <resources>
-    <string name="app_name">Helena Hub</string>
+    <string name="app_name">Montana Food Hub</string>
     <string name="event_fragment_title">Events</string>
-    <string name="event_fragment_welcome">Check out our local foods event calendar.</string>
+    <string name="event_fragment_welcome">Check out your regions local food events.</string>
     <string name="member_fragment_title">Members</string>
     <string name="csa_fragment_title">CSAs</string>
-    <string name="csa_fragment_welcome">Community Supported Agriculture (CSAs) in the area. See what your getting this week or buy your shares today!</string>
+    <string name="csa_fragment_welcome">Community Supported Agriculture (CSAs) in your region. See what you are getting this week or buy your shares today!</string>
     <string name="product_fragment_title">Products</string>
     <string name="product_fragment_welcome">Current MT sustainable product availability. Call your local food hub to order today!</string>
     <string name="restaurant_fragment_title">Restaurants</string>
-    <string name="restaurant_fragment_welcome">All these restaurants buy MT sustainable foods.  Choose one to find out who your farmer is!</string>
+    <string name="restaurant_fragment_welcome">All these regional restaurants buy MT sustainable foods.  Choose one to find out more!</string>
     <string name="producer_fragment_title">Producers</string>
-    <string name="producer_fragment_welcome">All these MT producers have been vetted for sustainability. Thank you for supporting them.</string>
+    <string name="producer_fragment_welcome">All these regional producers have been vetted for sustainability. Thank you for supporting them.</string>
     <string name="producer_detail_welcome">Welcome to Acme Farms</string>
     <string name="restaurant_call_action">Call</string>
     <string name="restaurant_map_action">Map</string>
@@ -44,7 +44,7 @@
         <item>Producers</item>
         <item>Products</item>
     </string-array>
-    <string name="appInitializing">Finding your farmers...</string>
+    <string name="appInitializing">Loading where your food comes from...</string>
     <string name="no_maps_application">A mapping application is not installed on this device</string>
     <string name="no_email_application">An email application is not installed on this device</string>
     <string name="no_phone_application">This device does not have the ability to make phone calls</string>

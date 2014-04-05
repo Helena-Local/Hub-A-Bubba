@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+ */
+
 package org.montanafoodhub.app.product;
 
 
@@ -5,8 +9,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
-import org.montanafoodhub.Helena_Local_Hub.R;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+import org.montanafoodhub.Helena_Hub.R;
 
 import java.util.List;
 

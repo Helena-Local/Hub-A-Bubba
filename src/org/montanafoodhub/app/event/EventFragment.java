@@ -12,14 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import org.montanafoodhub.Helena_Local_Hub.R;
+import org.montanafoodhub.Helena_Hub.R;
 import org.montanafoodhub.app.FragmentBase;
 import org.montanafoodhub.app.HubApplication;
 import org.montanafoodhub.app.restaurant.RestaurantDetailActivity;
+import org.montanafoodhub.app.utils.ImageCache;
 import org.montanafoodhub.base.Ad;
 import org.montanafoodhub.base.HubInit;
 import org.montanafoodhub.base.get.AdHub;
-import org.montanafoodhub.app.utils.ImageCache;
 
 import java.util.Random;
 

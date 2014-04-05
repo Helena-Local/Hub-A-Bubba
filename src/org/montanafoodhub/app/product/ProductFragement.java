@@ -6,22 +6,19 @@ package org.montanafoodhub.app.product;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import org.montanafoodhub.Helena_Local_Hub.R;
+import org.montanafoodhub.Helena_Hub.R;
 import org.montanafoodhub.app.FragmentBase;
 import org.montanafoodhub.base.Hub;
 import org.montanafoodhub.base.HubInit;
 import org.montanafoodhub.base.Item;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ProductFragement extends FragmentBase implements ListView.OnItemClickListener {
 

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+ */
+
 package org.montanafoodhub.app;
 
 import android.content.Intent;
@@ -11,7 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import org.montanafoodhub.Helena_Local_Hub.R;
+import org.montanafoodhub.Helena_Hub.R;
 
 public abstract class NavigationDrawerActionBarActivity extends ActionBarActivity implements ListView.OnItemClickListener {
 

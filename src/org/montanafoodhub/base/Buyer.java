@@ -31,7 +31,7 @@ public class Buyer {
 
     }
 
-    public Buyer(String BID, String name, String contactEmail, String hours, String phone, String websiteUrl, String photoUrl, String location, List certifications, String quote, String iconUrl, String lastOrderDate) {
+    public Buyer(String BID, String name, String contactEmail, String hours, String phone, String websiteUrl, String photoUrl, String location, List <Certification> certifications, String quote, String iconUrl, String lastOrderDate) {
         this.BID = BID;
         this.name = name;
         this.contactEmail = contactEmail;
