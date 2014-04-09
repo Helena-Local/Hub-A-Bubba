@@ -7,9 +7,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:montanafoodhub="http://schemas.android.com/apk/res/org.montanafoodhub.Helena_Hub">
 
-    <item android:id="@+id/refresh"
-          android:title="Refresh"
-          montanafoodhub:showAsAction="ifRoom"
-          android:icon="@drawable/ic_action_refresh"/>
+    <item android:id="@+id/feedback"
+          android:title="Send Feedback"/>
+
+    <item android:id="@+id/crashIt"
+          android:title="Crash It"/>
+
+    <!--<item android:id="@+id/doSomething"-->
+          <!--android:title="Do Something"-->
+          <!--montanafoodhub:showAsAction="ifRoom"-->
+          <!--android:icon="@drawable/ic_do_something"/>-->
 
 </menu>

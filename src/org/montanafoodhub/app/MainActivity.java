@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import org.montanafoodhub.Helena_Hub.R;
@@ -21,6 +24,7 @@ import org.montanafoodhub.app.producer.ProducerFragment;
 import org.montanafoodhub.app.product.ProductFragement;
 import org.montanafoodhub.app.restaurant.RestaurantFragment;
 import org.montanafoodhub.app.test.AsyncTesterTask;
+import org.montanafoodhub.app.utils.Feedback;
 import org.montanafoodhub.app.utils.ViewServer;
 
 public class MainActivity extends NavigationDrawerActionBarActivity {
@@ -47,6 +51,32 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
     @Override
     protected int getHierarchialParent() {
         return EVENT_HOME;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        boolean handled = false;
+
+        if (item.getItemId() == R.id.feedback) {
+            handled = true;
+            Feedback.sendFeedBack(this, getWindow());
+        } else if (item.getItemId() == R.id.crashIt) {
+            handled = true;
+            int xx = 9 / 0;
+        } else {
+            handled = super.onOptionsItemSelected(item);
+        }
+
+
+        return handled;
     }
 
     @Override
