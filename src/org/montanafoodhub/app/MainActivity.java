@@ -12,9 +12,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import org.montanafoodhub.Helena_Hub.R;
@@ -24,7 +21,6 @@ import org.montanafoodhub.app.producer.ProducerFragment;
 import org.montanafoodhub.app.product.ProductFragement;
 import org.montanafoodhub.app.restaurant.RestaurantFragment;
 import org.montanafoodhub.app.test.AsyncTesterTask;
-import org.montanafoodhub.app.utils.Feedback;
 import org.montanafoodhub.app.utils.ViewServer;
 
 public class MainActivity extends NavigationDrawerActionBarActivity {
@@ -37,7 +33,7 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
 
 
     private FragmentBase _currentFrag;
-    private int _lastSelectedFragment = 0;
+    private int _lastSelectedFragment = -1;
     private SharedPreferences.OnSharedPreferenceChangeListener _preferenceChangedListener;
 
     private ProgressDialog _waitScreen;
@@ -52,7 +48,6 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
     protected int getHierarchialParent() {
         return EVENT_HOME;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +74,15 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onResumeFragments() {
+        super.onResumeFragments();
 
         selectItem(_lastSelectedFragment);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         setupFirstAppRun();
         ((HubApplication)getApplication()).startHubThreads();
@@ -186,36 +186,56 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
 
     private void selectItem(int position) {
 
+        boolean newFragment = false;
+
         switch (position) {
             case 0:
-                _currentFrag = new EventFragment();
+                if ((_currentFrag instanceof  EventFragment)  == false) {
+                    _currentFrag = new EventFragment();
+                    newFragment = true;
+                }
                 break;
             case 1:
-                _currentFrag = new CSAFragment();
+                if ((_currentFrag instanceof  CSAFragment)  == false) {
+                    _currentFrag = new CSAFragment();
+                    newFragment = true;
+                }
                 break;
             case 2:
-                _currentFrag = new RestaurantFragment();
+                if ((_currentFrag instanceof  RestaurantFragment)  == false) {
+                    _currentFrag = new RestaurantFragment();
+                    newFragment = true;
+                }
                 break;
             case 3:
-                _currentFrag = new ProducerFragment();
+                if ((_currentFrag instanceof  ProducerFragment)  == false) {
+                    _currentFrag = new ProducerFragment();
+                    newFragment = true;
+                }
                 break;
             case 4:
-                _currentFrag = new ProductFragement();
+                if ((_currentFrag instanceof  ProductFragement)  == false) {
+                    _currentFrag = new ProductFragement();
+                    newFragment = true;
+                }
                 break;
         }
 
-        Bundle args = new Bundle();
-        args.putInt(EXTRA_DRAWER_ITEM_ID, position);
-        _currentFrag.setArguments(args);
+        if (newFragment == true) {
+            Bundle args = new Bundle();
+            args.putInt(EXTRA_DRAWER_ITEM_ID, position);
+            _currentFrag.setArguments(args);
 
-        FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction()
-                .replace(R.id.mainContent, _currentFrag)
-                .commit();
+            FragmentManager fm = getSupportFragmentManager();
+            fm.beginTransaction()
+                    .replace(R.id.mainContent, _currentFrag)
+                    .commit();
 
-        _lastSelectedFragment = position;
-        _drawerListView.setItemChecked(position, true);
-        setTitle(getActivityTitle());
+            _lastSelectedFragment = position;
+            _drawerListView.setItemChecked(position, true);
+
+            setTitle(getActivityTitle());
+        }
     }
 
 
