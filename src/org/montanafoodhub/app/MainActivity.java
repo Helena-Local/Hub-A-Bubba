@@ -53,31 +53,6 @@ public class MainActivity extends NavigationDrawerActionBarActivity {
         return EVENT_HOME;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        boolean handled = false;
-
-        if (item.getItemId() == R.id.feedback) {
-            handled = true;
-            Feedback.sendFeedBack(this, getWindow());
-        } else if (item.getItemId() == R.id.crashIt) {
-            handled = true;
-            int xx = 9 / 0;
-        } else {
-            handled = super.onOptionsItemSelected(item);
-        }
-
-
-        return handled;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -7,11 +7,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:montanafoodhub="http://schemas.android.com/apk/res/org.montanafoodhub.Helena_Hub">
 
-    <item android:id="@+id/feedback"
-          android:title="Send Feedback"/>
-
-    <item android:id="@+id/crashIt"
-          android:title="Crash It"/>
+    <item android:id="@+id/sendFeedback"
+          android:title="@string/feedback_menu_item"/>
 
     <!--<item android:id="@+id/doSomething"-->
           <!--android:title="Do Something"-->

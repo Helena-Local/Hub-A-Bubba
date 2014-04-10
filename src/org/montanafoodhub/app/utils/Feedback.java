@@ -4,55 +4,89 @@
 
 package org.montanafoodhub.app.utils;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.graphics.Bitmap;
-import android.os.Binder;
-import android.os.IBinder;
-import android.os.Parcel;
-import android.os.RemoteException;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import org.montanafoodhub.Helena_Hub.R;
 
-public class Feedback implements ServiceConnection {
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+public class Feedback {
 
     private static final String LogTag = Feedback.class.getSimpleName();
-    private Window _window;
+    private static final String Extension = "png";
 
-    private Feedback(Window window) {
+    private Context _context;
+    private Window _window;
+    private String _filename;
+
+    public Feedback(Context context, Window window) {
+        _context = context;
         _window = window;
     }
 
-    public static void sendFeedBack(Context context, Window window) {
-
-        Feedback fb = new Feedback(window);
-        Intent intent = new Intent(Intent.ACTION_BUG_REPORT);
-
-        context.bindService(intent, fb, Context.BIND_AUTO_CREATE);
+    public void finish() {
+        _context.deleteFile(_filename);
     }
 
-    @Override
-    public void onServiceDisconnected(ComponentName name) {}
+    public Intent getFeedbackIntent() {
+        String uriString = String.format("mailto:%s", _context.getResources().getString(R.string.feedback_email_address));
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse(uriString));
+        intent.putExtra(Intent.EXTRA_SUBJECT, _context.getResources().getString(R.string.feedback_email_subject));
 
-    @Override
-    public void onServiceConnected(ComponentName name, IBinder service) {
-        try {
-            Parcel parcel = Parcel.obtain();
-            Bitmap bitmap = getScreenshot();
-            if (bitmap != null) {
-                bitmap.writeToParcel(parcel, 0);
+        Bitmap bitmap = getScreenshot();
+        if (bitmap != null) {
+            FileOutputStream fileOutStream = null;
+            File pngFile = null;
+
+            // NOTE: MODE_WORLD_READABLE is necessary so that the email application can attach the screen shot.
+            // Yes, MODE_WORLD_READABLE is deprecated due to security concerns however this is just a screen shot. If
+            // there is any concern then we can skip attaching a screen shot.
+
+            try {
+                _filename = generateFilename();
+                fileOutStream = _context.openFileOutput(_filename, Context.MODE_WORLD_READABLE);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutStream);
+                fileOutStream.flush();
+                pngFile = _context.getFileStreamPath(_filename);
+            }
+            catch (Exception e) {
+                Log.w(LogTag, e.toString());
+            }
+            finally {
+                try {
+                    if (fileOutStream != null) {
+                        fileOutStream.close();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.w(LogTag, e.toString());
+                }
             }
 
-            service.transact(Binder.FIRST_CALL_TRANSACTION, parcel, null, 0);
-            parcel.recycle();
-
-        } catch (RemoteException e) {
-            Log.e(LogTag, "RemoteException", e);
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pngFile));
         }
 
+        return intent;
+    }
+
+    private String generateFilename() {
+        // Feedback_YYYY-MM-DD-HH-MM-SS.png
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+        String dateString = dateFormat.format(Calendar.getInstance().getTime());
+
+        String filenameBase = _context.getResources().getString(R.string.feedback_filename_base);
+        String filename = String.format("%s_%s.%s", filenameBase, dateString, Extension);
+
+        return filename;
     }
 
     private Bitmap getScreenshot() {
@@ -70,8 +104,10 @@ public class Feedback implements ServiceConnection {
                 double ratio = Math.min(600 / width, 600 / height);
                 screenShot = Bitmap.createScaledBitmap(bitmap, (int)Math.round(width * ratio), (int)Math.round(height * ratio), true);
             }
+            rootView.setDrawingCacheEnabled(false);
+
         } catch (Exception e) {
-            Log.w(LogTag, "Error getting current screenshot: ", e);
+            Log.w(LogTag, e.toString());
         }
 
         return screenShot;

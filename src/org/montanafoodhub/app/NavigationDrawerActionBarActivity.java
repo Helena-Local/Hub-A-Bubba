@@ -10,12 +10,15 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import org.montanafoodhub.Helena_Hub.R;
+import org.montanafoodhub.app.utils.Feedback;
 
 public abstract class NavigationDrawerActionBarActivity extends ActionBarActivity implements ListView.OnItemClickListener {
 
@@ -26,6 +29,8 @@ public abstract class NavigationDrawerActionBarActivity extends ActionBarActivit
     public static int PRODUCER_HOME = 3;
     public static int PRODUCT_HOME = 4;
 
+    private static final int FeedbackRequestId = 999;
+
     public abstract CharSequence getActivityTitle();
     protected abstract int getHierarchialParent();
 
@@ -34,6 +39,7 @@ public abstract class NavigationDrawerActionBarActivity extends ActionBarActivit
     protected ListView _drawerListView;
 
     private String[] _drawerItems;
+    private Feedback _feedback;
 
     public CharSequence getDrawerTitle() {
         return getResources().getString(R.string.app_name);
@@ -62,6 +68,13 @@ public abstract class NavigationDrawerActionBarActivity extends ActionBarActivit
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         boolean handled = true;
@@ -70,8 +83,11 @@ public abstract class NavigationDrawerActionBarActivity extends ActionBarActivit
                 Intent upIntent = NavUtils.getParentActivityIntent(this);
                 upIntent.putExtra(MainActivity.EXTRA_DRAWER_ITEM_ID, getHierarchialParent());
                 NavUtils.navigateUpTo(this, upIntent);
-            }
-            else {
+            } else if (item.getItemId() == R.id.sendFeedback) {
+                _feedback = new Feedback(this, getWindow());
+                Intent i = _feedback.getFeedbackIntent();
+                startActivityForResult(i, FeedbackRequestId);
+            } else {
                 handled = super.onOptionsItemSelected(item);
             }
         }
@@ -98,5 +114,13 @@ public abstract class NavigationDrawerActionBarActivity extends ActionBarActivit
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         _drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == FeedbackRequestId) {
+            _feedback.finish();
+            _feedback = null;
+        }
     }
 }
