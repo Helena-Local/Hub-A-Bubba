@@ -51,11 +51,11 @@
     <string name="no_web_browser_application">A web browser is not installed on this device</string>
     <string name="unable_to_start_activity">Unable to start activity</string>
     <string name="info_header_dismiss">Got it</string>
-    <string name="csa_header_left_action_text">CSA Info</string>
-    <string name="csa_header_right_action_text">Buy Shares</string>
     <string name="feedback_menu_item">Send Feedback</string>
     <string name="feedback_filename_base">Feedback</string>
     <string name="feedback_email_subject">Feedback - Montana Food Hub Android Application</string>
     <string name="feedback_email_address">info@helenalocal.org</string>
+    <string name="csa_header_date_text">Shares for the week of %s</string>
+    <string name="csa_header_text">CSA members will be receiving the following items in their shares. Enjoy them and contact us if you have questions!</string>
 
 </resources>

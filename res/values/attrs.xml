@@ -5,4 +5,13 @@
 
 <resources>
     <attr name="clickableItemBackground" format="reference"/>
+
+    <declare-styleable name="ActionBar">
+        <attr name="leftActionImage" format="integer"/>
+        <attr name="leftActionText" format="string"/>
+        <attr name="centerActionImage" format="integer"/>
+        <attr name="centerActionText" format="string"/>
+        <attr name="rightActionImage" format="integer"/>
+        <attr name="rightActionText" format="string"/>
+    </declare-styleable>
 </resources>

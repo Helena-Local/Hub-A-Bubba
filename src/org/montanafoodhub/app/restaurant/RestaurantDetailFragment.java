@@ -15,6 +15,7 @@ import android.widget.*;
 import org.montanafoodhub.Helena_Hub.R;
 import org.montanafoodhub.app.FragmentBase;
 import org.montanafoodhub.app.HubApplication;
+import org.montanafoodhub.app.controls.ActionBar;
 import org.montanafoodhub.app.producer.ProducerDetailActivity;
 import org.montanafoodhub.app.utils.ActivityUtils;
 import org.montanafoodhub.app.utils.ImageCache;
@@ -27,9 +28,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class RestaurantDetailFragment extends FragmentBase implements View.OnClickListener {
+public class RestaurantDetailFragment extends FragmentBase implements ActionBar.ActionBarClickListener, View.OnClickListener{
 
-    private static final String LogTag = "RestaurantDetailFragment";
+    private static final String LogTag = RestaurantDetailFragment.class.getSimpleName();
     private Buyer _buyer;
 
     @Override
@@ -48,7 +49,7 @@ public class RestaurantDetailFragment extends FragmentBase implements View.OnCli
         _buyer = Hub.buyerMap.get(buyerId);
 
 
-        // load image
+        // restaurant image
         ImageCache imageCache = ((HubApplication) getActivity().getApplication()).getImageCache();
         ImageView imageView = (ImageView) view.findViewById(R.id.restaurantImageView);
         imageCache.loadImage(imageView, _buyer.getIconUrl(), R.drawable.default_restaurant);
@@ -61,17 +62,8 @@ public class RestaurantDetailFragment extends FragmentBase implements View.OnCli
         textView = (TextView) view.findViewById(R.id.restaurantAddressTextView);
         textView.setText(_buyer.getLocation());
 
-        // call click listener
-        View clickView = view.findViewById(R.id.contactActionLayout);
-        clickView.setOnClickListener(this);
-
-        // map click listener
-        clickView = view.findViewById(R.id.mapActionLayout);
-        clickView.setOnClickListener(this);
-
-        // url click listener
-        clickView = view.findViewById(R.id.urlActionLayout);
-        clickView.setOnClickListener(this);
+        ActionBar actionBar = (ActionBar) view.findViewById(R.id.actionBar);
+        actionBar.setOnClickActionListener(this);
 
         loadCertifications(view);
         loadProducts(view);
@@ -147,24 +139,25 @@ public class RestaurantDetailFragment extends FragmentBase implements View.OnCli
 
     @Override
     public void onClick(View v) {
+        Object tag = v.getTag();
+        if (tag instanceof Certification) {
+            onClickCertification((Certification) tag);
+        }
+        else if (tag instanceof Producer) {
+            onClickProducer((Producer) tag);
+        }
+    }
 
-        if (v.getId() == R.id.contactActionLayout) {
+    @Override
+    public void onActionClicked(ActionBar.Action action) {
+        if (action == ActionBar.Action.Left) {
             onClickCall();
         }
-        else if (v.getId() == R.id.mapActionLayout) {
+        else if (action == ActionBar.Action.Center) {
             onClickMap();
         }
-        else if (v.getId() == R.id.urlActionLayout) {
+        else if (action == ActionBar.Action.Right) {
             onClickUrl();
-        }
-        else {
-            Object tag = v.getTag();
-            if (tag instanceof Certification) {
-                onClickCertification((Certification) tag);
-            }
-            else if (tag instanceof Producer) {
-                onClickProducer((Producer) tag);
-            }
         }
     }
 

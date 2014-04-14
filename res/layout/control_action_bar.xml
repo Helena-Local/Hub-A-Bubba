@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2014. This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License for Helena Local Inc. All rights reseved.
+  -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout style="@style/ActionContainerLeft"
+                  android:id="@+id/leftActionLayout"
+                  android:orientation="horizontal"
+                  android:layout_alignParentLeft="true">
+        <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/action_image_width"
+                android:layout_height="@dimen/action_image_height"
+                android:src="@drawable/ic_action_call"/>
+
+        <TextView style="@style/ActionText"
+                  android:id="@+id/textView"
+                  android:text="Left"/>
+    </LinearLayout>
+
+
+    <LinearLayout style="@style/ActionContainerCenter"
+                  android:id="@+id/centerActionLayout"
+                  android:orientation="horizontal"
+                  android:layout_centerInParent="true">
+        <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/action_image_width"
+                android:layout_height="@dimen/action_image_height"
+                android:src="@drawable/ic_action_map"/>
+
+        <TextView style="@style/ActionText"
+                  android:id="@+id/textView"
+                  android:text="center"/>
+    </LinearLayout>
+
+
+    <LinearLayout style="@style/ActionContainerRight"
+                  android:id="@+id/rightActionLayout"
+                  android:orientation="horizontal"
+                  android:layout_alignParentRight="true">
+        <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/action_image_width"
+                android:layout_height="@dimen/action_image_height"
+                android:src="@drawable/ic_action_web_site"/>
+
+        <TextView style="@style/ActionText"
+                  android:id="@+id/textView"
+                  android:text="right"/>
+    </LinearLayout>
+
+</merge>

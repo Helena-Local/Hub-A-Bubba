@@ -5,6 +5,7 @@
   -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:custom="http://schemas.android.com/apk/res-auto"
             android:id="@+id/scrollView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -60,63 +61,20 @@
                     android:textSize="@dimen/text_size_extra_small"/>
 
 
-            <RelativeLayout
-                    android:id="@+id/actionLayout"
+            <org.montanafoodhub.app.controls.ActionBar
+                    android:id="@+id/actionBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/restaurantImageView"
                     android:layout_below="@+id/restaurantImageView"
-                    android:layout_marginTop="5dp">
-
-                <LinearLayout style="@style/ActionContainerLeft"
-                        android:id="@+id/contactActionLayout"
-                        android:orientation="horizontal"
-                        android:layout_alignParentLeft="true">
-                    <ImageView
-                            android:id="@+id/contactImageView"
-                            android:layout_width="@dimen/action_image_width"
-                            android:layout_height="@dimen/action_image_height"
-                            android:src="@drawable/ic_action_call_blue"/>
-
-                    <TextView style="@style/ActionText"
-                            android:id="@+id/contactTextView"
-                            android:text="@string/restaurant_call_action"/>
-                </LinearLayout>
-
-
-                <LinearLayout style="@style/ActionContainerCenter"
-                        android:id="@+id/mapActionLayout"
-                        android:orientation="horizontal"
-                        android:layout_centerInParent="true">
-                    <ImageView
-                            android:id="@+id/mapImageView"
-                            android:layout_width="@dimen/action_image_width"
-                            android:layout_height="@dimen/action_image_height"
-                            android:src="@drawable/ic_action_map_blue"/>
-
-                    <TextView style="@style/ActionText"
-                            android:id="@+id/mapTextView"
-                            android:text="@string/restaurant_map_action"/>
-                </LinearLayout>
-
-
-                <LinearLayout style="@style/ActionContainerRight"
-                        android:id="@+id/urlActionLayout"
-                        android:orientation="horizontal"
-                        android:layout_alignParentRight="true">
-                    <ImageView
-                            android:id="@+id/urlImageView"
-                            android:layout_width="@dimen/action_image_width"
-                            android:layout_height="@dimen/action_image_height"
-                            android:src="@drawable/ic_action_web_site_blue"/>
-
-                    <TextView style="@style/ActionText"
-                            android:id="@+id/urlTextView"
-                            android:text="@string/restaurant_website_action"/>
-                </LinearLayout>
-
-            </RelativeLayout>
-
+                    android:layout_marginTop="5dp"
+                    custom:leftActionText="@string/restaurant_call_action"
+                    custom:leftActionImage="@drawable/ic_action_call_blue"
+                    custom:centerActionText="@string/restaurant_map_action"
+                    custom:centerActionImage="@drawable/ic_action_map_blue"
+                    custom:rightActionText="@string/restaurant_website_action"
+                    custom:rightActionImage="@drawable/ic_action_web_site_blue">
+            </org.montanafoodhub.app.controls.ActionBar>
 
         </RelativeLayout>
 

@@ -5,6 +5,7 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:custom="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -27,7 +28,7 @@
 
     <TextView
             android:id="@+id/textViewBody"
-            android:text="CSA members will be receiving the following items in their shares. Enjoy them and contact us if you have questions!"
+            android:text="@string/csa_header_text"
             android:autoLink="web"
             android:textSize="14sp"
             android:fontFamily="sans-serif-light"
@@ -38,24 +39,19 @@
 
     <View style="@style/horizontalDivider"/>
 
-    <RelativeLayout
-            android:id="@+id/actionLayout"
+
+    <org.montanafoodhub.app.controls.ActionBar
+            android:id="@+id/actionBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
-
-        <TextView style="@style/ActionContainerLeft"
-                android:id="@+id/infoTextView"
-                android:textColor="@color/helena_local_blue"
-                android:text="@string/csa_header_left_action_text"/>
-
-        <TextView style="@style/ActionContainerRight"
-                android:id="@+id/buyTextView"
-                android:textColor="@color/helena_local_blue"
-                android:text="@string/csa_header_right_action_text"
-                android:layout_alignParentRight="true"/>
-
-    </RelativeLayout>
+            android:layout_marginTop="8dp"
+            custom:leftActionText="@string/restaurant_call_action"
+            custom:leftActionImage="@drawable/ic_action_call_blue"
+            custom:centerActionText="@string/restaurant_map_action"
+            custom:centerActionImage="@drawable/ic_action_map_blue"
+            custom:rightActionText="@string/restaurant_website_action"
+            custom:rightActionImage="@drawable/ic_action_web_site_blue">
+    </org.montanafoodhub.app.controls.ActionBar>
 
 </LinearLayout>
 

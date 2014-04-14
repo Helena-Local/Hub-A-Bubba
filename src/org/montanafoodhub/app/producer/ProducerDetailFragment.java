@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import org.montanafoodhub.Helena_Hub.R;
 import org.montanafoodhub.app.HubApplication;
+import org.montanafoodhub.app.controls.ActionBar;
 import org.montanafoodhub.app.utils.ActivityUtils;
 import org.montanafoodhub.app.utils.ImageCache;
 import org.montanafoodhub.base.Certification;
@@ -27,9 +28,9 @@ import org.montanafoodhub.base.Producer;
 
 import java.net.URLEncoder;
 
-public class ProducerDetailFragment extends Fragment implements View.OnClickListener {
+public class ProducerDetailFragment extends Fragment implements ActionBar.ActionBarClickListener, View.OnClickListener {
 
-    private static final String LogTag = "ProducerDetailFragment";
+    private static final String LogTag = ProducerDetailFragment.class.getSimpleName();
     private Producer _producer;
 
     @Override
@@ -54,27 +55,14 @@ public class ProducerDetailFragment extends Fragment implements View.OnClickList
         textView = (TextView) view.findViewById(R.id.producerAddressTextView);
         textView.setText(_producer.getLocation());
 
-        // phone / email action - default is email.
-        if (hasEmail(_producer) == false) {
-            imageView = (ImageView) view.findViewById(R.id.contactImageView);
-            imageView.setImageResource(R.drawable.ic_action_call_blue);
+        ActionBar actionBar = (ActionBar) view.findViewById(R.id.actionBar);
+        actionBar.setOnClickActionListener(this);
 
-            textView = (TextView) view.findViewById(R.id.contactTextView);
-            textView.setText(getResources().getText(R.string.producer_call_action));
+        // phone / email action - default is call.
+        if (hasEmail(_producer) == true) {
+            actionBar.setLeftActionText(getResources().getString(R.string.producer_email_action));
+            actionBar.setLeftActionImage(getResources().getDrawable(R.drawable.ic_action_email_blue));
         }
-
-
-        // contact click listener
-        View actionView = view.findViewById(R.id.contactActionLayout);
-        actionView.setOnClickListener(this);
-
-        // map click listener
-        actionView = view.findViewById(R.id.mapActionLayout);
-        actionView.setOnClickListener(this);
-
-        // url click listener
-        actionView = view.findViewById(R.id.urlActionLayout);
-        actionView.setOnClickListener(this);
 
 
         // quote
@@ -126,24 +114,25 @@ public class ProducerDetailFragment extends Fragment implements View.OnClickList
         return producer.getContactEmail().contains("@");
     }
 
+    @Override
+    public void onActionClicked(ActionBar.Action action) {
+        if (action == ActionBar.Action.Left) {
+            onClickContact();
+        }
+        else if (action == ActionBar.Action.Center) {
+            onClickMap();
+        }
+        else if (action == ActionBar.Action.Right) {
+            onClickUrl();
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
-
-        if (v.getId() == R.id.contactActionLayout) {
-            onClickContact();
-        }
-        else if (v.getId() == R.id.mapActionLayout) {
-            onClickMap();
-        }
-        else if (v.getId() == R.id.urlActionLayout) {
-            onClickUrl();
-        }
-        else {
-            Object tag = v.getTag();
-            if (tag instanceof Certification) {
-                onClickCertification((Certification) tag);
-            }
+        Object tag = v.getTag();
+        if (tag instanceof Certification) {
+            onClickCertification((Certification) tag);
         }
     }
 
@@ -169,7 +158,7 @@ public class ProducerDetailFragment extends Fragment implements View.OnClickList
             //            PackageInfo pInfo = getActivity().getPackageManager().getPackageInfo("com.google.android.apps.maps", PackageManager.GET_ACTIVITIES);
             //            Intent i = getActivity().getPackageManager().getLaunchIntentForPackage("com.google.android.apps.maps");
 
-            // vaious ways to check if there is an activity that can handle the desired intent. Either an empty list (queryIntentActivities)
+            // various ways to check if there is an activity that can handle the desired intent. Either an empty list (queryIntentActivities)
             // or null (resolveActivity) wil be returned
             //            List<ResolveInfo> l = getActivity().getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
             //            ResolveInfo r = getActivity().getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);

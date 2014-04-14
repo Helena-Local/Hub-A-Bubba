@@ -5,6 +5,7 @@
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:custom="http://schemas.android.com/apk/res-auto"
             android:id="@+id/scrollView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -58,66 +59,21 @@
                     android:layout_alignLeft="@+id/producerNameTextView"
                     android:textSize="@dimen/text_size_extra_small"/>
 
-            <RelativeLayout
-                    android:id="@+id/actionLayout"
+            <org.montanafoodhub.app.controls.ActionBar
+                    android:id="@+id/actionBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/producerImageView"
                     android:layout_below="@+id/producerImageView"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    custom:leftActionText="@string/producer_call_action"
+                    custom:leftActionImage="@drawable/ic_action_call_blue"
+                    custom:centerActionText="@string/producer_map_action"
+                    custom:centerActionImage="@drawable/ic_action_map_blue"
+                    custom:rightActionText="@string/producer_website_action"
+                    custom:rightActionImage="@drawable/ic_action_web_site_blue">
+            </org.montanafoodhub.app.controls.ActionBar>
 
-                <LinearLayout style="@style/ActionContainerLeft"
-                        android:id="@+id/contactActionLayout"
-                        android:orientation="horizontal"
-                        android:layout_alignParentLeft="true"
-                        android:gravity="center">
-
-                    <ImageView
-                            android:id="@+id/contactImageView"
-                            android:layout_width="@dimen/action_image_width"
-                            android:layout_height="@dimen/action_image_height"
-                            android:src="@drawable/ic_action_email_blue"/>
-
-                    <TextView style="@style/ActionText"
-                            android:id="@+id/contactTextView"
-                            android:text="@string/producer_email_action"/>
-                </LinearLayout>
-
-                <LinearLayout style="@style/ActionContainerCenter"
-                        android:id="@+id/mapActionLayout"
-                        android:orientation="horizontal"
-                        android:layout_centerInParent="true"
-                        android:gravity="center">
-
-                    <ImageView
-                            android:id="@+id/mapImageView"
-                            android:layout_width="@dimen/action_image_width"
-                            android:layout_height="@dimen/action_image_height"
-                            android:src="@drawable/ic_action_map_blue"/>
-
-                    <TextView style="@style/ActionText"
-                            android:id="@+id/mapTextView"
-                            android:text="@string/producer_map_action"/>
-                </LinearLayout>
-
-                <LinearLayout style="@style/ActionContainerRight"
-                        android:id="@+id/urlActionLayout"
-                        android:orientation="horizontal"
-                        android:layout_alignParentRight="true"
-                        android:gravity="center">
-
-                    <ImageView
-                            android:id="@+id/urlImageView"
-                            android:layout_width="@dimen/action_image_width"
-                            android:layout_height="@dimen/action_image_height"
-                            android:src="@drawable/ic_action_web_site_blue"/>
-
-                    <TextView style="@style/ActionText"
-                            android:id="@+id/urlTextView"
-                            android:text="@string/producer_website_action"/>
-                </LinearLayout>
-
-            </RelativeLayout>
 
         </RelativeLayout>
 
