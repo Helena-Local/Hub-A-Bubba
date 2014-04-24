@@ -70,8 +70,11 @@ public class EventFragment extends FragmentBase {
             }
         }
 
-        TextView textView = (TextView) v.findViewById(R.id.msgTextView);
+        TextView textView = (TextView) v.findViewById(R.id.primaryMsgTextView);
         textView.setText(R.string.event_fragment_welcome);
+
+        textView = (TextView) v.findViewById(R.id.secondaryMsgTextView);
+        textView.setVisibility(View.GONE);
 
         View view = v.findViewById(R.id.dismissContainer);
         view.setVisibility(View.GONE);

@@ -17,7 +17,9 @@ import org.montanafoodhub.app.FragmentBase;
 import org.montanafoodhub.base.Hub;
 import org.montanafoodhub.base.HubInit;
 import org.montanafoodhub.base.Item;
+import org.montanafoodhub.base.get.ItemHub;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ProductFragement extends FragmentBase implements ListView.OnItemClickListener {
@@ -58,8 +60,12 @@ public class ProductFragement extends FragmentBase implements ListView.OnItemCli
 
 
         // these items are contained in the 'included' info header
-        TextView textView = (TextView) getActivity().findViewById(R.id.msgTextView);
+        TextView textView = (TextView) getActivity().findViewById(R.id.primaryMsgTextView);
         textView.setText(R.string.product_fragment_welcome);
+
+        textView = (TextView) getActivity().findViewById(R.id.secondaryMsgTextView);
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM d");
+        textView.setText(String.format(getActivity().getResources().getString(R.string.secondary_header_text_product), sdf.format(ItemHub.getLastRefreshTS().getTime())));
 
         View view = getActivity().findViewById(R.id.dismissContainer);
         view.setVisibility(View.GONE);

@@ -24,7 +24,7 @@
 
 
         <TextView
-                android:id="@+id/msgTextView"
+                android:id="@+id/primaryMsgTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -32,6 +32,14 @@
                 android:text="Put some sorta text here about something more relevant that what is here now."
                 android:layout_margin="10dp"/>
 
+        <TextView
+                android:id="@+id/secondaryMsgTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorSecondaryInverse"
+                android:fontFamily="sans-serif-light"
+                android:layout_margin="10dp"
+                android:text="Secondary Message Text"/>
 
         <LinearLayout
                 android:id="@+id/dismissContainer"

@@ -32,8 +32,11 @@ public class InfoHeaderItem extends ListItem implements View.OnClickListener{
 
     @Override
     public void loadView(View view) {
-        TextView textView = (TextView) view.findViewById(R.id.msgTextView);
+        TextView textView = (TextView) view.findViewById(R.id.primaryMsgTextView);
         textView.setText(_messageId);
+
+        textView = (TextView) view.findViewById(R.id.secondaryMsgTextView);
+        textView.setVisibility(View.GONE);
 
         if (_listener == null) {
             View dismissView = view.findViewById(R.id.dismissContainer);
