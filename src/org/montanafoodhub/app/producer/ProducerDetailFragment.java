@@ -12,10 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.*;
 import org.montanafoodhub.Helena_Hub.R;
 import org.montanafoodhub.app.HubApplication;
 import org.montanafoodhub.app.controls.ActionBar;
@@ -176,12 +173,16 @@ public class ProducerDetailFragment extends Fragment implements ActionBar.Action
     }
 
     private void onClickUrl() {
-        try {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(_producer.getWebsiteUrl()));
-            ActivityUtils.startImplicitActivity(getActivity(), intent, R.string.no_web_browser_application, LogTag);
-        }
-        catch (Exception e) {
-            Log.w(LogTag, e.toString());
+
+        if (_producer.getWebsiteUrl().isEmpty() == true) {
+            Toast.makeText(getActivity(), String.format(getActivity().getResources().getString(R.string.website_not_registered), _producer.getName()), Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(_producer.getWebsiteUrl()));
+                ActivityUtils.startImplicitActivity(getActivity(), intent, R.string.no_web_browser_application, LogTag);
+            } catch (Exception e) {
+                Log.w(LogTag, e.toString());
+            }
         }
     }
 

@@ -57,5 +57,6 @@
     <string name="feedback_email_address">info@helenalocal.org</string>
     <string name="csa_header_date_text">Shares for the week of %s</string>
     <string name="csa_header_text">CSA members will be receiving the following items in their shares. Enjoy them and contact us if you have questions!</string>
+    <string name="website_not_registered">We currently do not have a web site registered for %s</string>
 
 </resources>

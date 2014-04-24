@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import org.montanafoodhub.Helena_Hub.R;
 import org.montanafoodhub.app.ListItem;
 import org.montanafoodhub.app.controls.ActionBar;
@@ -85,8 +86,12 @@ public class MarqueeItem extends ListItem implements ActionBar.ActionBarClickLis
     }
 
     private void onClickUrl() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(_buyer.getWebsiteUrl()));
-        ActivityUtils.startImplicitActivity(_context, intent, R.string.no_web_browser_application, LogTag);
+        if (_buyer.getWebsiteUrl().isEmpty() == true) {
+            Toast.makeText(_context, String.format(_context.getResources().getString(R.string.website_not_registered), _buyer.getName()), Toast.LENGTH_LONG).show();
+        } else {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(_buyer.getWebsiteUrl()));
+            ActivityUtils.startImplicitActivity(_context, intent, R.string.no_web_browser_application, LogTag);
+        }
     }
 }

@@ -179,9 +179,14 @@ public class RestaurantDetailFragment extends FragmentBase implements ActionBar.
     }
 
     private void onClickUrl() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(_buyer.getWebsiteUrl()));
-        ActivityUtils.startImplicitActivity(getActivity(), intent, R.string.no_web_browser_application, LogTag);
+        if (_buyer.getWebsiteUrl().isEmpty() == true) {
+            Toast.makeText(getActivity(), String.format(getActivity().getResources().getString(R.string.website_not_registered), _buyer.getName()), Toast.LENGTH_LONG).show();
+        } else {
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(_buyer.getWebsiteUrl()));
+            ActivityUtils.startImplicitActivity(getActivity(), intent, R.string.no_web_browser_application, LogTag);
+        }
     }
 
     private void onClickCertification(Certification cert) {
